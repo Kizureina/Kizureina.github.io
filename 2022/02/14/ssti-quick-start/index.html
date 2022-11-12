@@ -19,25 +19,31 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="无聊的前言前几天溜阿松有点多，心血来潮想到一个有意思的炒作点子。但要实现需要几十个视频封面，虽然F12找图片直链很容易，但一个一个下实在有点麻烦，刚好在学python的requests库，就想写个爬虫全爬下来。 爬虫基本思路爬虫有很多写法，Java，JavaScript，Python都可以，但python的requests库很方便，最常用的明显是python爬虫。在具体代码实现层面，大多数爬虫都有">
+    <meta name="description" content="最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。 Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如: 12345678910from flask import Flaskapp &#x3D; Flask(__name__) @app.route(&amp;#x27;&#x2F;&amp;#x27;)# route装饰器将url与下面的函数链接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python-spider-starting">
-<meta property="og:url" content="http://example.com/2022/01/04/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:title" content="SSTI——flask模板注入漏洞入门">
+<meta property="og:url" content="http://example.com/2022/02/14/ssti-quick-start/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="无聊的前言前几天溜阿松有点多，心血来潮想到一个有意思的炒作点子。但要实现需要几十个视频封面，虽然F12找图片直链很容易，但一个一个下实在有点麻烦，刚好在学python的requests库，就想写个爬虫全爬下来。 爬虫基本思路爬虫有很多写法，Java，JavaScript，Python都可以，但python的requests库很方便，最常用的明显是python爬虫。在具体代码实现层面，大多数爬虫都有">
+<meta property="og:description" content="最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。 Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如: 12345678910from flask import Flaskapp &#x3D; Flask(__name__) @app.route(&amp;#x27;&#x2F;&amp;#x27;)# route装饰器将url与下面的函数链接">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://files.catbox.moe/3xpren.jpg">
-<meta property="article:published_time" content="2022-01-04T05:19:14.000Z">
-<meta property="article:modified_time" content="2022-11-12T12:39:52.571Z">
+<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta property="article:published_time" content="2022-02-14T12:53:14.000Z">
+<meta property="article:modified_time" content="2022-11-12T13:15:53.335Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="python">
+<meta property="article:tag" content="SSTI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://files.catbox.moe/3xpren.jpg">
+<meta name="twitter:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Python-spider-starting · Kizureina&#39;s Blog</title>
+    <title>SSTI——flask模板注入漏洞入门 · Kizureina&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -262,7 +268,7 @@
                 <a href="/">Kizureina&#39;s Blog</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">Python-spider-starting</a>
+                <a href="#" class="post-name">SSTI——flask模板注入漏洞入门</a>
             </div>
         </div>
     
@@ -308,7 +314,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                Python-spider-starting
+                SSTI——flask模板注入漏洞入门
             <!-- 404 -->
             
         </h1>
@@ -330,18 +336,20 @@
     
         <a class="post-tag" href="javascript:void(0);" data-tags="python">python</a>
     
+        <a class="post-tag" href="javascript:void(0);" data-tags="SSTI">SSTI</a>
+    
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">835</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/01/04</span>
+                    <span class="post-intro-time">2022/02/14</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -496,38 +504,39 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h4 id="无聊的前言"><a href="#无聊的前言" class="headerlink" title="无聊的前言"></a>无聊的前言</h4><p>前几天溜阿松有点多，心血来潮想到一个有意思的炒作点子。但要实现需要几十个视频封面，虽然F12找图片直链很容易，但一个一个下实在有点麻烦，刚好在学python的requests库，就想写个爬虫全爬下来。</p>
-<h2 id="爬虫基本思路"><a href="#爬虫基本思路" class="headerlink" title="爬虫基本思路"></a>爬虫基本思路</h2><p>爬虫有很多写法，Java，JavaScript，Python都可以，但python的requests库很方便，最常用的明显是python爬虫。在具体代码实现层面，大多数爬虫都有非常相似的结构:</p>
-<ol>
-<li>分析网页结构，找出有规律的接口</li>
-<li>利用requests库发起请求</li>
-</ol>
-<p>这两个过程是通用的，但对下面的操作，静态网页与动态网页不同:</p>
-<p>对静态网页，利用beautifulsoup库解析页面抓取内容<br>对动态网页，利用json库解析得到的json数据<br>静态网页即在浏览网页过程中没有浏览器与服务器交互的网页，此时Ctrl+u与F12审查元素得到的源码相同，直接发起请求，再用bs4库解析网页源码内容即可.</p>
-<p>bs4库也是非常好用的python解析库，对于爬虫，找到需要爬取部分的网页源码，然后注意其周围唯一的元素名或class名再用find_all()具体解析即可。</p>
-<p>例如:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">url</span>):</span><br><span class="line">    web = requests.get(url, headers=headers)</span><br><span class="line">    <span class="comment"># 发起请求</span></span><br><span class="line">    html = web.content.decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    <span class="comment"># 取得網頁內容</span></span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">&quot;lxml&quot;</span>)</span><br><span class="line">    <span class="comment"># 轉換成標籤樹 找頁面内DOM參數</span></span><br><span class="line">    lis = soup.find_all(<span class="string">&#x27;li&#x27;</span>, class_=<span class="string">&quot;small-item fakeDanmu-item&quot;</span>)</span><br><span class="line">    <span class="comment"># class为python保留字，故需要用class_</span></span><br><span class="line">    <span class="comment"># small-item fakeDanmu-item为页面内唯一的class名</span></span><br><span class="line">    url0 = lis[<span class="number">1</span>].a.img[<span class="string">&#x27;src&#x27;</span>]</span><br><span class="line">    img_url = <span class="string">&#x27;http://&#x27;</span>+url0</span><br><span class="line">    <span class="keyword">return</span> img_url</span><br></pre></td></tr></table></figure>
+        <p>最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。</p>
+<h2 id="Flask搭建后端服务"><a href="#Flask搭建后端服务" class="headerlink" title="Flask搭建后端服务"></a>Flask搭建后端服务</h2><p>众所周知python也可用用来写后端，最简单的框架就是Flask，例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"> </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="comment"># route装饰器将url与下面的函数链接起来</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;helloworld!&#x27;</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># host为0.0.0.0则为暴露在公网，可从任意IP访问</span></span><br></pre></td></tr></table></figure>
 
-<p>但静态网页没有网页交互，且需要一次性加载出所有内容，较为不便。动态网页则没有这种劣势，动态网页利用Ajax不断发起对服务器的请求，无需刷新页面即可完成内容更新。</p>
-<h2 id="实战-爬取B站个人主页视频封面"><a href="#实战-爬取B站个人主页视频封面" class="headerlink" title="实战:爬取B站个人主页视频封面"></a>实战:爬取B站个人主页视频封面</h2><p>本来准备用bs4解析页面，结果发现请求后找不到内容😓，才发现B站个人主页是Ajax动态网页</p>
-<p>主页里的投稿列表是通过一个XHR(即Ajax的json请求)获取的，因此动态页面爬取反而更简单，只需要分析页面找到对应的api，对这个api发起请求获取json数据，再用json库转成python字典，就能轻松找到封面直链url。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find_url</span>(<span class="params">url0, num0</span>):</span><br><span class="line">    web = requests.get(url0)</span><br><span class="line">    data = json.loads(web.text)</span><br><span class="line">    <span class="comment"># 处理json数据</span></span><br><span class="line">    pic_url = data[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;list&quot;</span>][<span class="string">&quot;vlist&quot;</span>][num0][<span class="string">&quot;pic&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> pic_url</span><br></pre></td></tr></table></figure>
+<p>上面的python文件运行时会在5000端口<strong>跑web服务</strong>，访问<a target="_blank" rel="noopener" href="https://ip:5000/">https://IP:5000/</a> 返回hello world!的字符串。</p>
+<p>上面的例子为返回简单的字符串，也可用模板渲染html源码在浏览器显示:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    html = <span class="string">&#x27;&lt;h1&gt;hello world!&lt;/h1&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> render_template_string(html)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-<p>上面这个函数的参数num0为变量，可以利用这个循环爬取内容，这样就取得了封面图片直链，下一步是将其下载至指定目录</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">download</span>(<span class="params">url1, download_num</span>):</span><br><span class="line">    jpg = requests.get(url1, headers=headers)</span><br><span class="line">    <span class="comment"># 請求頁面</span></span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&quot;azusa&quot;</span> + <span class="built_in">str</span>(download_num) + <span class="string">&quot;.jpg&quot;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">    <span class="comment"># 新建一个.jpg文件，文件名为azusa+数字(str函数将数组转为字符串)</span></span><br><span class="line">    f.write(jpg.content)</span><br><span class="line">    <span class="comment"># 写入页面内容</span></span><br><span class="line">    f.close()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Pic saved!&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在浏览器中访问显示如下:</p>
+<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_79164fa43a7eaba03eb9f3637fa91e47.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
+<p>即html字符串中的<strong>标签被模板渲染</strong>并显示在浏览器中。</p>
+<h2 id="Flask模板注入漏洞原理"><a href="#Flask模板注入漏洞原理" class="headerlink" title="Flask模板注入漏洞原理"></a>Flask模板注入漏洞原理</h2><p>而当字符串中的具体<strong>参数可控</strong>时，就可能存在模板注入漏洞:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,url_for,redirect,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">code</span>():</span><br><span class="line">    code = request.args.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获取get传参的参数</span></span><br><span class="line">    html = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;%s&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span>%(code)</span><br><span class="line">    <span class="comment"># 三引号作用与引号没区别，常用于大段字符串</span></span><br><span class="line">    <span class="keyword">return</span> render_template_string(html)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-<p>再在主函数里写入循环调用这两个函数即可，完整爬虫源码如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># MyfirstPyScript</span></span><br><span class="line"><span class="comment"># coded by Yo1uk0</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># from bs4 import BeautifulSoup</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"> </span><br><span class="line">path = <span class="string">&quot;/mnt/c/workplace&quot;</span></span><br><span class="line"><span class="comment"># 写入文件的目录</span></span><br><span class="line">url = <span class="string">&quot;https://api.bilibili.com/x/space/arc/search?mid=231590&amp;ps=30&amp;tid=0&amp;pn=1&amp;keyword=&amp;order=click&amp;jsonp=jsonp&quot;</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &#x27;</span></span><br><span class="line">                  <span class="string">&#x27;Chrome/96.0.4664.110 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;referer&#x27;</span>: <span class="string">&#x27;https://space.bilibili.com/231590/video&#x27;</span>&#125;</span><br><span class="line"><span class="comment"># 有些页面有反爬措施，加正常浏览器的请求头可以一定程度反反爬</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_url</span>(<span class="params">url0, num0</span>):</span><br><span class="line">    web = requests.get(url0,headers=headers)</span><br><span class="line">    data = json.loads(web.text)</span><br><span class="line">    pic_url = data[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;list&quot;</span>][<span class="string">&quot;vlist&quot;</span>][num0][<span class="string">&quot;pic&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> pic_url</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">download</span>(<span class="params">url1, download_num</span>):</span><br><span class="line">    jpg = requests.get(url1, headers=headers)</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&quot;azusa&quot;</span> + <span class="built_in">str</span>(download_num) + <span class="string">&quot;.jpg&quot;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">    f.write(jpg.content)</span><br><span class="line">    f.close()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Pic saved!&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">        url1 = find_url(url, num)</span><br><span class="line">        download(url1, num)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;all pics are saved!&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-<p><img src="https://files.catbox.moe/3xpren.jpg" alt="img"><br>大功告成。</p>
+<p>而构造<strong>js代码</strong>就可能造成XSS攻击</p>
+<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_275d35a8c19ba1c7c44a9ae6d7e849c9.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
+<p>此时传参的code直接插入字符串中，并被render_template_string渲染而触发SSTI。</p>
+<p>只要换种写法就能避免:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,url_for,redirect,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">code</span>():</span><br><span class="line">    code = request.args.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(<span class="string">&#x27;&lt;h2&gt;&#123;&#123;code&#125;&#125;&lt;/h2&gt;&#x27;</span>,code=code)</span><br><span class="line">    <span class="comment"># &#123;&#123;&#125;&#125;为Jinja2模板引擎中的变量包裹标识符</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_0f83095f0a522087532d31544656e292.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>这是因为模板引擎一般都默认<strong>对渲染的变量值进行编码转义</strong>，因此用户控制的不是模板而是变量，并不会得到渲染产生SSTI。</p>
+<h2 id="基于SSTI的攻击"><a href="#基于SSTI的攻击" class="headerlink" title="基于SSTI的攻击"></a>基于SSTI的攻击</h2><p>jinja2模板引擎会对{{}}内的内容进行渲染，也可执行一些表达式：<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_4e12a4cf38e92e7e4cf3c5fca8430a05.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>或查看全局常量:<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_b5ce7555ff169652e3b7d79070c7ab2f.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>可见表达式和命令都被执行了，由此可<strong>构造文件包含漏洞</strong></p>
+<p>与反序列化类似，同样需要利用魔术方法构造漏洞链，常用魔术方法：<br>- <strong>class</strong> 返回类型所属的对象<br>- <strong>mro</strong> 返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。<br>- <strong>base</strong> 返回该对象所继承的基类<br>- __base__和__mro__都是用来寻找基类的<br>- <strong>subclasses</strong> 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表<br>- <strong>init</strong> 类的初始化方法<br>- <strong>globals</strong> 对包含函数全局变量的字典的引用</p>
+<p>思路一般为先用{{''.__**class__**}}(注：此处不是双引号而是两个单引号)找类型所属对象，然后{{''.__**class__**.__**mro__**}}查找所有基类<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_2b8ab4707f90b433d1b2112a814c3d12.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>然后即可查找所有可用的类</p>
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">Kizurena</a>
-            <p>Link：<a href="http://example.com/2022/01/04/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/">http://example.com/2022/01/04/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/</a>
-            <p>Publish date：<a href="http://example.com/2022/01/04/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/">January 4th 2022, 1:19:14 pm</a>
-            <p>Update date：<a href="http://example.com/2022/01/04/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/">November 12th 2022, 8:39:52 pm</a>
+            <p>Link：<a href="http://example.com/2022/02/14/ssti-quick-start/">http://example.com/2022/02/14/ssti-quick-start/</a>
+            <p>Publish date：<a href="http://example.com/2022/02/14/ssti-quick-start/">February 14th 2022, 8:53:14 pm</a>
+            <p>Update date：<a href="http://example.com/2022/02/14/ssti-quick-start/">November 12th 2022, 9:15:53 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -536,12 +545,17 @@
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/11/09/hello-world/" title="Hello World——My first Hexo Blog">
-                    <div class="nextTitle">Hello World——My first Hexo Blog</div>
+                <a href="/2022/03/01/javascript-report-in-bili/" title="简单的JS插件编写——检索Bilibili评论并举办">
+                    <div class="nextTitle">简单的JS插件编写——检索Bilibili评论并举办</div>
                 </a>
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/01/30/qqbot-y2b-pusher/" title="QQbot油管开播推送API编写逻辑">
+                    <div class="prevTitle">QQbot油管开播推送API编写逻辑</div>
+                </a>
             
         </li>
     </ul>
@@ -669,7 +683,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E8%81%8A%E7%9A%84%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">无聊的前言</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%AC%E8%99%AB%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-number"></span> <span class="toc-text">爬虫基本思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98-%E7%88%AC%E5%8F%96B%E7%AB%99%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E8%A7%86%E9%A2%91%E5%B0%81%E9%9D%A2"><span class="toc-number"></span> <span class="toc-text">实战:爬取B站个人主页视频封面</span></a>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flask%E6%90%AD%E5%BB%BA%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">Flask搭建后端服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">Flask模板注入漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ESSTI%E7%9A%84%E6%94%BB%E5%87%BB"><span class="toc-number">3.</span> <span class="toc-text">基于SSTI的攻击</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -693,7 +707,52 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
     
@@ -702,7 +761,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 2
+        Total : 7
         </div>
         <!-- search  -->
         
@@ -724,8 +783,47 @@
     
         
         <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span>
+            <a class="archive-post-title" href="/2022/03/01/javascript-report-in-bili/">简单的JS插件编写——检索Bilibili评论并举办</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/ssti-quick-start/">SSTI——flask模板注入漏洞入门</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span>
+            <a class="archive-post-title" href="/2022/01/30/qqbot-y2b-pusher/">QQbot油管开播推送API编写逻辑</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span>
+            <a class="archive-post-title" href="/2022/01/18/nonebot2-pulgin-coding/">基于nonebot2框架的插件编写——开播信息推送</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
             <span class="archive-post-date">01/04</span>
-            <a class="archive-post-title" href="/2022/01/04/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/">Python-spider-starting</a>
+            <a class="archive-post-title" href="/2022/01/04/Python-spder-starting/">Python爬虫入门</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/21</span>
+            <a class="archive-post-title" href="/2021/12/21/simple-shell-script/">简单的Shell脚本实战</a>
         </li>
     
     </div>
@@ -737,6 +835,26 @@
             <span class="sidebar-tag-name" data-tags="python">
                 <span class="iconfont-archer">&#xe606;</span>
                 python
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="JavaScript">
+                <span class="iconfont-archer">&#xe606;</span>
+                JavaScript
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="SSTI">
+                <span class="iconfont-archer">&#xe606;</span>
+                SSTI
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Linux">
+                <span class="iconfont-archer">&#xe606;</span>
+                Linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="web">
+                <span class="iconfont-archer">&#xe606;</span>
+                web
             </span>
         
     </div>
