@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/JavaScript/index.html">
+<meta property="og:url" content="http://example.com/tags/RCE/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Kizurena">
@@ -428,23 +428,19 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2022/09/28/Java-Web-learning-Note/">
+            <a class="abstract-title" href="/2022/12/20/log4j-RCE/">
                 
-                <span class="abstract-title-text">Java Web学习笔记v3</span>
+                <span class="abstract-title-text">Log4j2 RCE本地复现</span>
             </a>
             <div class="abstract-content">
-                Java WebJDBC
-JDBC驱动连接Mysql数据库8.0MySQL 8.0 以上版本的数据库连接有所不同：
-
-1、MySQL 8.0 以上版本驱动包版本 mysql-connector-java-8.0.16.jar。
-2、*...
+                0x00 引言Log4j2 RCE恐怕是今年最严重也影响最广的漏洞，log4j2作为最流行的Java开源日志框架之一，应用极广，而该RCE又非常容易被利用，因此非常危险。去年这个时候拜他所赐相当热闹，实际上复现不算困难，本文从头开始在...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/28</span>
+                <div class="abstract-date" title="Last updated: 2022/12/21">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/20</span>
                 </div>
                 <!-- tags -->
                 
@@ -453,45 +449,7 @@ JDBC驱动连接Mysql数据库8.0MySQL 8.0 以上版本的数据库连接有所�
     
         <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/03/01/javascript-report-in-bili/">
-                
-                <span class="abstract-title-text">简单的JS插件编写——检索Bilibili评论并举办</span>
-            </a>
-            <div class="abstract-content">
-                前言最近刚开学比较闲，想写个简单的js插件练练手，刚好看某些评论区低能评论太多，举办侠又有限，就想写个脚本匹配关键字批量举办
-基本思路通过B站页面的INITAL_STATE方法获取视频av号，再通过Ajax对api接口发起请求获取评论...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="RCE">RCE</a>
     
 </div>
 
