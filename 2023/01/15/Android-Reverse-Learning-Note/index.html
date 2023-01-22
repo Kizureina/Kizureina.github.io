@@ -19,18 +19,26 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/Linux/index.html">
+    <meta name="description" content="鼓捣半天才发现，安卓逆向同样很偏重对工具的使用，尤其是反编译必备的MT管理器&#x2F;NP管理器。而具体的逻辑修改需要Java和汇编基础（当然安卓源码实际上是smali）。 Apk文件结构APK实际上是一种压缩文件，将后缀改为rar就能轻松解压。 很明显，其中最重要的是作为Java源码的classes.dex，查看和修改都需要经过反编译。而resource文件则提供高效的资源索引，使逆向中的关键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓逆向入门">
+<meta property="og:url" content="http://example.com/2023/01/15/Android-Reverse-Learning-Note/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="鼓捣半天才发现，安卓逆向同样很偏重对工具的使用，尤其是反编译必备的MT管理器&#x2F;NP管理器。而具体的逻辑修改需要Java和汇编基础（当然安卓源码实际上是smali）。 Apk文件结构APK实际上是一种压缩文件，将后缀改为rar就能轻松解压。 很明显，其中最重要的是作为Java源码的classes.dex，查看和修改都需要经过反编译。而resource文件则提供高效的资源索引，使逆向中的关键">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://files.catbox.moe/778k77.png">
+<meta property="og:image" content="https://files.catbox.moe/0lwklt.png">
+<meta property="article:published_time" content="2023-01-15T12:53:14.000Z">
+<meta property="article:modified_time" content="2023-01-22T13:09:48.697Z">
 <meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://files.catbox.moe/778k77.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Kizureina&#39;s Blog</title>
+    <title>安卓逆向入门 · Kizureina&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -217,6 +225,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -246,6 +256,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Kizureina&#39;s Blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">安卓逆向入门</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
@@ -272,24 +293,79 @@
 
 
 
+    height:50vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                安卓逆向入门
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Android">Android</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">161</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2023/01/15</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -419,47 +495,68 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/12/21/simple-shell-script/">
-                
-                <span class="abstract-title-text">简单的Shell脚本实战</span>
-            </a>
-            <div class="abstract-content">
-                引言前几天复习C语言，摸鱼了几天之后准备去学校的考试平台上做个题练练手，结果太久没登忘记密码了😓结果发现重置密码只需身份证号，而身份证号这种信息在同学之间几乎完全可见，忍不住想到有意思的事。
-不过有个问题，重置之后受害者发现登陆不了...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/12/21</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Linux">Linux</a>
-    
-</div>
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>鼓捣半天才发现，安卓逆向同样很偏重对工具的使用，尤其是反编译必备的MT管理器&#x2F;NP管理器。<br>而具体的逻辑修改需要Java和汇编基础（当然安卓源码实际上是smali）。</p>
+<h2 id="Apk文件结构"><a href="#Apk文件结构" class="headerlink" title="Apk文件结构"></a>Apk文件结构</h2><p>APK实际上是一种压缩文件，将后缀改为rar就能轻松解压。</p>
+<p><img src="https://files.catbox.moe/778k77.png" alt="apk.png"><br>很明显，其中最重要的是作为Java源码的classes.dex，查看和修改都需要经过反编译。<br>而resource文件则提供高效的资源索引，使逆向中的关键步骤之一定位变得方便。</p>
+<h2 id="逆向基本逻辑"><a href="#逆向基本逻辑" class="headerlink" title="逆向基本逻辑"></a>逆向基本逻辑</h2><p><img src="https://files.catbox.moe/0lwklt.png" alt="logic.png"></p>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    </article>
+    <!-- license -->
     
-    <!-- paginator  -->
+        <div class="license-wrapper">
+            <p>Author：<a href="http://example.com">Kizurena</a>
+            <p>Link：<a href="http://example.com/2023/01/15/Android-Reverse-Learning-Note/">http://example.com/2023/01/15/Android-Reverse-Learning-Note/</a>
+            <p>Publish date：<a href="http://example.com/2023/01/15/Android-Reverse-Learning-Note/">January 15th 2023, 8:53:14 pm</a>
+            <p>Update date：<a href="http://example.com/2023/01/15/Android-Reverse-Learning-Note/">January 22nd 2023, 9:09:48 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/12/27/From-RCE-to-getShell/" title="从RCE到getShell——Log4j2进阶利用">
+                    <div class="prevTitle">从RCE到getShell——Log4j2进阶利用</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
     
 </main>
 
@@ -539,6 +636,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Apk%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">Apk文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%86%E5%90%91%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text">逆向基本逻辑</span></a></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -970,6 +1084,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
         
         <!-- mermaid -->
         
