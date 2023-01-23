@@ -19,31 +19,23 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。 Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如: 12345678910from flask import Flaskapp &#x3D; Flask(__name__) @app.route(&amp;#x27;&#x2F;&amp;#x27;)# route装饰器将url与下面的函数链接">
+    <meta name="description" content="最近几年最有名的漫画家非藤本树莫属，而且大概当之无愧。我总感觉一话尽的短篇更适合他的风格，长篇连载总要受太多无聊的因素影响，让最后的结尾很难完美，但读切则自由得多。《再见绘梨》绝对是藤本树最优秀的漫画之一，实在太有趣了！藤本树以天马行空的奇幻设定和神经病般的故事发展出名，其实我倒感觉他在描绘真实细腻的感情与真实的世界上同样出色。炎拳也好，电锯人也好，都找不出一个标签化单纯的人物，每个人的感情都是如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSTI——flask模板注入漏洞入门">
-<meta property="og:url" content="http://example.com/2022/02/14/ssti-quick-start/index.html">
+<meta property="og:title" content="《再见绘梨》随想">
+<meta property="og:url" content="http://example.com/2023/01/23/Thinking-of-Sayonara-Eri/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。 Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如: 12345678910from flask import Flaskapp &#x3D; Flask(__name__) @app.route(&amp;#x27;&#x2F;&amp;#x27;)# route装饰器将url与下面的函数链接">
+<meta property="og:description" content="最近几年最有名的漫画家非藤本树莫属，而且大概当之无愧。我总感觉一话尽的短篇更适合他的风格，长篇连载总要受太多无聊的因素影响，让最后的结尾很难完美，但读切则自由得多。《再见绘梨》绝对是藤本树最优秀的漫画之一，实在太有趣了！藤本树以天马行空的奇幻设定和神经病般的故事发展出名，其实我倒感觉他在描绘真实细腻的感情与真实的世界上同样出色。炎拳也好，电锯人也好，都找不出一个标签化单纯的人物，每个人的感情都是如">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="article:published_time" content="2022-02-14T12:53:14.000Z">
-<meta property="article:modified_time" content="2022-11-12T13:15:53.335Z">
+<meta property="article:published_time" content="2023-01-23T13:13:15.000Z">
+<meta property="article:modified_time" content="2023-01-23T14:15:47.768Z">
 <meta property="article:author" content="Kizurena">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="SSTI">
+<meta property="article:tag" content="Comic">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>SSTI——flask模板注入漏洞入门 · Kizureina&#39;s Blog</title>
+    <title>《再见绘梨》随想 · Kizureina&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -268,7 +260,7 @@
                 <a href="/">Kizureina&#39;s Blog</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">SSTI——flask模板注入漏洞入门</a>
+                <a href="#" class="post-name">《再见绘梨》随想</a>
             </div>
         </div>
     
@@ -314,7 +306,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                SSTI——flask模板注入漏洞入门
+                《再见绘梨》随想
             <!-- 404 -->
             
         </h1>
@@ -334,22 +326,20 @@
                     <div class= post-intro-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="python">python</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="SSTI">SSTI</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Comic">Comic</a>
     
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">835</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/02/14</span>
+                    <span class="post-intro-time">2023/01/23</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -504,39 +494,16 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。</p>
-<h2 id="Flask搭建后端服务"><a href="#Flask搭建后端服务" class="headerlink" title="Flask搭建后端服务"></a>Flask搭建后端服务</h2><p>众所周知python也可用用来写后端，最简单的框架就是Flask，例如:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"> </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="comment"># route装饰器将url与下面的函数链接起来</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;helloworld!&#x27;</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># host为0.0.0.0则为暴露在公网，可从任意IP访问</span></span><br></pre></td></tr></table></figure>
-
-<p>上面的python文件运行时会在5000端口<strong>跑web服务</strong>，访问<a target="_blank" rel="noopener" href="https://ip:5000/">https://IP:5000/</a> 返回hello world!的字符串。</p>
-<p>上面的例子为返回简单的字符串，也可用模板渲染html源码在浏览器显示:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    html = <span class="string">&#x27;&lt;h1&gt;hello world!&lt;/h1&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> render_template_string(html)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在浏览器中访问显示如下:</p>
-<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_79164fa43a7eaba03eb9f3637fa91e47.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
-<p>即html字符串中的<strong>标签被模板渲染</strong>并显示在浏览器中。</p>
-<h2 id="Flask模板注入漏洞原理"><a href="#Flask模板注入漏洞原理" class="headerlink" title="Flask模板注入漏洞原理"></a>Flask模板注入漏洞原理</h2><p>而当字符串中的具体<strong>参数可控</strong>时，就可能存在模板注入漏洞:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,url_for,redirect,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">code</span>():</span><br><span class="line">    code = request.args.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获取get传参的参数</span></span><br><span class="line">    html = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;%s&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span>%(code)</span><br><span class="line">    <span class="comment"># 三引号作用与引号没区别，常用于大段字符串</span></span><br><span class="line">    <span class="keyword">return</span> render_template_string(html)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<p>而构造<strong>js代码</strong>就可能造成XSS攻击</p>
-<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_275d35a8c19ba1c7c44a9ae6d7e849c9.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
-<p>此时传参的code直接插入字符串中，并被render_template_string渲染而触发SSTI。</p>
-<p>只要换种写法就能避免:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,url_for,redirect,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">code</span>():</span><br><span class="line">    code = request.args.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(<span class="string">&#x27;&lt;h2&gt;&#123;&#123;code&#125;&#125;&lt;/h2&gt;&#x27;</span>,code=code)</span><br><span class="line">    <span class="comment"># &#123;&#123;&#125;&#125;为Jinja2模板引擎中的变量包裹标识符</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_0f83095f0a522087532d31544656e292.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>这是因为模板引擎一般都默认<strong>对渲染的变量值进行编码转义</strong>，因此用户控制的不是模板而是变量，并不会得到渲染产生SSTI。</p>
-<h2 id="基于SSTI的攻击"><a href="#基于SSTI的攻击" class="headerlink" title="基于SSTI的攻击"></a>基于SSTI的攻击</h2><p>jinja2模板引擎会对{{}}内的内容进行渲染，也可执行一些表达式：<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_4e12a4cf38e92e7e4cf3c5fca8430a05.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>或查看全局常量:<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_b5ce7555ff169652e3b7d79070c7ab2f.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>可见表达式和命令都被执行了，由此可<strong>构造文件包含漏洞</strong></p>
-<p>与反序列化类似，同样需要利用魔术方法构造漏洞链，常用魔术方法：<br>- <strong>class</strong> 返回类型所属的对象<br>- <strong>mro</strong> 返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。<br>- <strong>base</strong> 返回该对象所继承的基类<br>- __base__和__mro__都是用来寻找基类的<br>- <strong>subclasses</strong> 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表<br>- <strong>init</strong> 类的初始化方法<br>- <strong>globals</strong> 对包含函数全局变量的字典的引用</p>
-<p>思路一般为先用{{''.__**class__**}}(注：此处不是双引号而是两个单引号)找类型所属对象，然后{{''.__**class__**.__**mro__**}}查找所有基类<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_2b8ab4707f90b433d1b2112a814c3d12.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>然后即可查找所有可用的类</p>
+        <p>最近几年最有名的漫画家非藤本树莫属，而且大概当之无愧。我总感觉一话尽的短篇更适合他的风格，长篇连载总要受太多无聊的因素影响，让最后的结尾很难完美，但读切则自由得多。《再见绘梨》绝对是藤本树最优秀的漫画之一，实在太有趣了！<br>藤本树以天马行空的奇幻设定和神经病般的故事发展出名，其实我倒感觉他在描绘真实细腻的感情与真实的世界上同样出色。炎拳也好，电锯人也好，都找不出一个标签化单纯的人物，每个人的感情都是如此复杂，在荒诞奇幻的设定与脱线剧情发展的外表下，藤本树其实很擅长用简洁的篇幅讲述很有情感密度的故事，这让他笔下的人物和故事都如此有魅力。<br>再见绘梨最大的特点是全篇居然几乎都由电影般的分镜组成，以第一人称而非客观的角度看待故事，这让故事有着无与伦比的现实感。例如优太在天台上自杀时，画面先是探到栅栏外看到地面，然后又犹豫地缩回天台的地面，只用几个分镜就让人感觉到死亡就在眼前。有大量分镜背景不动，只有人物小幅度的动作或者表情变化，让故事中的时间流逝如此真实。很有特点的大量重复分镜也很有趣，例如绘梨和优太父亲争吵前，有十几个一言不发的吃饭画面，让人感觉气氛相当压抑，给后面优太父亲情感爆发做了很好的铺垫。绘梨坠海前的分镜一直在摇晃，画面中绘梨的形象神秘模糊又浪漫，伸出手后坠海的画面美得让人窒息。第二次电影放映最后，大量分镜只有重复的四十五度角背景和话语，重复的画面能让人对之后的画面更有期待，使后面所接跨页的电影放映现场更让人印象深刻，类似这种的处理实在很有意思。<br>第一人称的视角除了让故事如此真实之外，也限制了读者所知的信息，这种限制也就更容易让作者玩叙述性诡计，实现藤本树最喜欢的反转。老实说优太妈妈形象的反转略显牵强，但解释了优太为什么会在第一次电影的最后逃走和出现爆炸。第二次电影放映后绘梨朋友与优太的对话又是绘梨形象的反转，但实际上也不算反转，前面读者所见的绘梨不就是以自我为中心拉优太去看电影，动不动就对优太发脾气的女生吗？炎拳里尤达对阿格尼说人能成为想成为的任何人，但现实却是要成为任何人都很困难，阿格尼扮演过露娜的哥哥，导演的主角，桑的神，德玛女儿的家人，却没有一次是称职的角色。因此退进求其次地改变他人对自己的回忆，在电影中成为自己想成为的人，也不错吧？但这不只是自我满足吗？自我究竟是什么？人的记忆构筑了自我意识，他人记忆中的自我，或许就是真正的自我也说不定。说到底什么是真实？封面上手机挡住绘梨的脸，又映出绘梨的脸，朋友口中的绘梨与优太电影中的绘梨，究竟哪个才是真实的绘梨？或许真实本来就不存在，人本来就是如此复杂，人活在世界中，却又同时活在现实与幻想中，每一个都是真实的绘梨。<br>绘梨死后的剧情我觉得是全篇精华，正如绘梨所说以恋人死亡为结尾的电影太老套了，读者也觉得不够有趣吧？如何面对死亡的现实，才是再见绘梨的核心。第二次电影放映完，优太却没有像故事中一样因为拍到了绘梨死亡的影像振作起来，反倒更加闭门不出沉浸在过去拍摄的影像中，其实与母亲死后的优太区别不大，但拜绘梨所赐他没有在死亡面前逃跑，也有勇气继续活下去。之后平凡的学习，工作，生活，但优太却从未真正接受绘梨的死亡，不断地剪辑却总觉得少了点什么。就这样平凡的生活，直到车祸又夺走他所有亲人的生命。<br>优太又一次来到了镜头前，他发现母亲死亡时也好，绘梨死亡时也好，自己总是以镜头的视角看待死亡，将自己从主观的视角抽离到电影般客观的视角，他只能通过镜头来面对现实，而当现实又一次夺走他的亲人，而这一次死亡没留给他拍摄电影的余裕，突如其来的悲剧让他无法像过去一样自我安慰着逃避了，优太再一次决定自杀，而且是在充满和绘梨看电影回忆的废墟中。<br>全篇从开头到这里为止一直都是如此真实，没有一丝一毫非现实的元素，但经历多次失去所爱痛苦的普通人决定选择死亡，藤本树用他拿手的奇幻色彩完成完美的结尾。当优太来到曾经熟悉的房间，却发现自己的电影在荧幕播放，与前述相似，大量暗色调分镜的压抑后，绘梨在跨页漂亮地再次出场，坐在沙发熟悉位置的绘梨依然像过去一样年轻，一样美。<br>优太惊慌失措，与奇幻的绘梨形成现实的鲜明反差。与上一次一样，再次出场的绘梨同样在评价优太的电影，上一次正是绘梨的肯定让优太有了活下去的勇气，这一次绘梨的评价同样脱线：明明没有奇幻的设定，因为我本来就是吸血鬼嘛！话说回来，绘梨真的是吸血鬼吗？现在发生的对话是真实的吗？谁知道呢，其实这是无所谓的事。无论是现实还是幻想，现在在优太面前说话的一定是绘梨，这点不会错。明明所有人都会先你死去，明明不得不一次又一次面对残酷的现实，你为什么要活下去？优太问绘梨，当然也是在问自己。<br>“活下去”，这炎拳中如同诅咒一般的话语再次出现了，同样出现的是存在主义式的困惑，现实如此残酷，活着没有任何意义，一切都归于虚无，究竟为什么要活下去？绘梨给出了很浪漫的回答，因为有这部记录了绘梨与优太一切的电影，无论死去多少次，都能再次与优太相遇，这是件很美好的事吧？在永恒的轮回中，无论重来多少次，都能毫不犹豫地做出一样的选择，这就是尼采的命运之爱吧。人不会失忆，也当然不会像吸血鬼一样无数次复活，绘梨口中的电影实际上就是人的记忆，电影与记忆一样，都是对发生的事做出蒙太奇般的剪辑，然后连续拼接起来构筑起自我意识，或构筑起对他人的印象。</p>
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">Kizurena</a>
-            <p>Link：<a href="http://example.com/2022/02/14/ssti-quick-start/">http://example.com/2022/02/14/ssti-quick-start/</a>
-            <p>Publish date：<a href="http://example.com/2022/02/14/ssti-quick-start/">February 14th 2022, 8:53:14 pm</a>
-            <p>Update date：<a href="http://example.com/2022/02/14/ssti-quick-start/">November 12th 2022, 9:15:53 pm</a>
+            <p>Link：<a href="http://example.com/2023/01/23/Thinking-of-Sayonara-Eri/">http://example.com/2023/01/23/Thinking-of-Sayonara-Eri/</a>
+            <p>Publish date：<a href="http://example.com/2023/01/23/Thinking-of-Sayonara-Eri/">January 23rd 2023, 9:13:15 pm</a>
+            <p>Update date：<a href="http://example.com/2023/01/23/Thinking-of-Sayonara-Eri/">January 23rd 2023, 10:15:47 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -544,17 +511,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2022/03/01/javascript-report-in-bili/" title="简单的JS插件编写——检索Bilibili评论并举办">
-                    <div class="nextTitle">简单的JS插件编写——检索Bilibili评论并举办</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/01/30/qqbot-y2b-pusher/" title="QQbot油管开播推送API编写逻辑">
-                    <div class="prevTitle">QQbot油管开播推送API编写逻辑</div>
+                <a href="/2023/01/22/Tatsuki-Fujimoto-s-reality-and-fiction/" title="藤本树的奇幻色彩与现实底色">
+                    <div class="prevTitle">藤本树的奇幻色彩与现实底色</div>
                 </a>
             
         </li>
@@ -683,7 +645,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flask%E6%90%AD%E5%BB%BA%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">Flask搭建后端服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">Flask模板注入漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ESSTI%E7%9A%84%E6%94%BB%E5%87%BB"><span class="toc-number">3.</span> <span class="toc-text">基于SSTI的攻击</span></a></li></ol>
+                
             </div>
         
         <!-- sidebar -->
