@@ -30,7 +30,7 @@
 <meta property="og:image" content="c:\Users\Yoruko\AppData\Roaming\Typora\typora-user-images\image-20230228195459985.png">
 <meta property="og:image" content="c:\Users\Yoruko\AppData\Roaming\Typora\typora-user-images\image-20230228201038026.png">
 <meta property="article:published_time" content="2023-02-12T11:00:45.000Z">
-<meta property="article:modified_time" content="2023-02-28T13:31:23.799Z">
+<meta property="article:modified_time" content="2023-02-28T14:16:46.196Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -337,7 +337,7 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2.7k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3k</span>Reading time: <span class="post-count reading-time">13 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -680,7 +680,12 @@
 <li>使用按名称装配时（byName）必须保障容器中具有指定名称的bean，因变量名与配置耦合，不推荐使用</li>
 <li>自动装配优先级低于setter注入与构造器注入，同时出现时自动装配配置失效</li>
 </ol>
-<h3 id="集合注入"><a href="#集合注入" class="headerlink" title="集合注入"></a>集合注入</h3>
+<h3 id="集合注入"><a href="#集合注入" class="headerlink" title="集合注入"></a>集合注入</h3><p>与之前的引用类型，基本类型没多少区别。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>200<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>300<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>200<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>300<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;set&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>200<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>ABC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>ABC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;map&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;探路者&quot;</span> <span class="attr">value</span>=<span class="string">&quot;马文&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;次元游记兵&quot;</span> <span class="attr">value</span>=<span class="string">&quot;恶灵&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;易位窃贼&quot;</span> <span class="attr">value</span>=<span class="string">&quot;罗芭&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;properties&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;暴雷&quot;</span>&gt;</span>沃尔特·菲茨罗伊<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;寻血猎犬&quot;</span>&gt;</span>布洛特·亨德尔<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;命脉&quot;</span>&gt;</span>阿杰·切<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Spring管理第三方数据源"><a href="#Spring管理第三方数据源" class="headerlink" title="Spring管理第三方数据源"></a>Spring管理第三方数据源</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.msql&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
     </article>
     <!-- license -->
     
@@ -688,7 +693,7 @@
             <p>Author：<a href="http://example.com">Kizurena</a>
             <p>Link：<a href="http://example.com/2023/02/12/Note-of-Spring-learning/">http://example.com/2023/02/12/Note-of-Spring-learning/</a>
             <p>Publish date：<a href="http://example.com/2023/02/12/Note-of-Spring-learning/">February 12th 2023, 7:00:45 pm</a>
-            <p>Update date：<a href="http://example.com/2023/02/12/Note-of-Spring-learning/">February 28th 2023, 9:31:23 pm</a>
+            <p>Update date：<a href="http://example.com/2023/02/12/Note-of-Spring-learning/">February 28th 2023, 10:16:46 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -830,7 +835,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">Spring核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOC-%E2%80%93-%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="toc-number">1.0.1.</span> <span class="toc-text">IOC – 控制反转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DI-%E2%80%93-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">1.0.2.</span> <span class="toc-text">DI – 依赖注入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="toc-number">2.</span> <span class="toc-text">控制反转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">Bean基础配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">Bean实例化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">2.3.</span> <span class="toc-text">Bean的生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#setter%E6%B3%A8%E5%85%A5"><span class="toc-number">3.1.</span> <span class="toc-text">setter注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A5"><span class="toc-number">3.2.</span> <span class="toc-text">构造器注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E9%80%89%E6%8B%A9%E2%80%94%E2%80%94%E8%87%AA%E5%B7%B1%E5%86%99%E5%A4%9A%E7%94%A8setter%E6%B3%A8%E5%85%A5"><span class="toc-number">3.3.</span> <span class="toc-text">依赖注入选择——自己写多用setter注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="toc-number">3.4.</span> <span class="toc-text">自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.4.1.</span> <span class="toc-text">按类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0"><span class="toc-number">3.4.2.</span> <span class="toc-text">按名称</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%B3%A8%E5%85%A5"><span class="toc-number">3.5.</span> <span class="toc-text">集合注入</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">Spring核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IOC-%E2%80%93-%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="toc-number">1.0.1.</span> <span class="toc-text">IOC – 控制反转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DI-%E2%80%93-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">1.0.2.</span> <span class="toc-text">DI – 依赖注入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="toc-number">2.</span> <span class="toc-text">控制反转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">Bean基础配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">Bean实例化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">2.3.</span> <span class="toc-text">Bean的生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#setter%E6%B3%A8%E5%85%A5"><span class="toc-number">3.1.</span> <span class="toc-text">setter注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A5"><span class="toc-number">3.2.</span> <span class="toc-text">构造器注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E9%80%89%E6%8B%A9%E2%80%94%E2%80%94%E8%87%AA%E5%B7%B1%E5%86%99%E5%A4%9A%E7%94%A8setter%E6%B3%A8%E5%85%A5"><span class="toc-number">3.3.</span> <span class="toc-text">依赖注入选择——自己写多用setter注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="toc-number">3.4.</span> <span class="toc-text">自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.4.1.</span> <span class="toc-text">按类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0"><span class="toc-number">3.4.2.</span> <span class="toc-text">按名称</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%B3%A8%E5%85%A5"><span class="toc-number">3.5.</span> <span class="toc-text">集合注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-number">3.6.</span> <span class="toc-text">Spring管理第三方数据源</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -945,6 +950,16 @@
         
         
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1227,16 +1242,6 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="Android">
-                <span class="iconfont-archer">&#xe606;</span>
-                Android
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="web">
-                <span class="iconfont-archer">&#xe606;</span>
-                web
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="java">
                 <span class="iconfont-archer">&#xe606;</span>
                 java
@@ -1252,19 +1257,29 @@
                 Reverse shell
             </span>
         
+            <span class="sidebar-tag-name" data-tags="Android">
+                <span class="iconfont-archer">&#xe606;</span>
+                Android
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="web">
+                <span class="iconfont-archer">&#xe606;</span>
+                web
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="JavaScript">
                 <span class="iconfont-archer">&#xe606;</span>
                 JavaScript
             </span>
         
-            <span class="sidebar-tag-name" data-tags="python">
-                <span class="iconfont-archer">&#xe606;</span>
-                python
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Comic">
                 <span class="iconfont-archer">&#xe606;</span>
                 Comic
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="python">
+                <span class="iconfont-archer">&#xe606;</span>
+                python
             </span>
         
             <span class="sidebar-tag-name" data-tags="嵌入式">
