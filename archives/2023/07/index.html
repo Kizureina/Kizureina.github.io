@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:url" content="http://example.com/archives/2023/07/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Kizurena">
@@ -217,10 +217,8 @@
         }
     </script>
     
-        <body class="home-body">
-    
         <!-- header -->
-        <header class="header header-mobile index-header">
+        <header class="header header-mobile">
     <!-- top read progress line -->
     <div class="header-element">
         <div class="read-progress"></div>
@@ -251,7 +249,7 @@
 </header>
 
         <!-- fixed footer -->
-        <footer class="footer-fixed index-footer-fixed">
+        <footer class="footer-fixed">
     <!-- back to top button -->
     <div class="footer-fixed-element">
         
@@ -274,34 +272,21 @@
 
 
 
-    height:50vh;
-
 ">
     
     <!-- 主页  -->
-    
-        
-    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                Kizureina's Blog
-            <!-- 文章页  -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
-            
-                
-                    I know nothing except the fact of my ignorance.
-                
-            <!-- 文章页  -->
             
         </p>
         <!-- 文章页 meta -->
@@ -443,360 +428,27 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2022/12/20/log4j-RCE/">
+            <a class="abstract-title" href="/2023/07/07/The-exp-of-Redis-unauthorized/">
                 
-                <span class="abstract-title-text">Log4j2 RCE漏洞复现</span>
+                <span class="abstract-title-text">Redis未授权访问原理及利用</span>
             </a>
             <div class="abstract-content">
-                0x00 引言Log4j2 RCE恐怕是近几年最严重也影响最广的漏洞，log4j2作为最流行的Java开源日志框架之一，应用极广，而该RCE又非常容易被利用，因此非常危险。去年这个时候拜他所赐相当热闹，实际上复现不算困难，本文从头开始...
+                0x00 前言最近终于挖到个有点意思的漏洞，比之前卵用没有的信息泄露好点。可惜因为是Windows Server，最后没搞到shell，不过也学到点东西吧。
+Redis是最流行的非关系型即key-value数据库，通常用来做缓存。我之...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/20</span>
+                <div class="abstract-date" title="Last updated: 2023/07/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/07/07</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="RCE">RCE</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/12/08/from-0-to-1-EE-Learning-Note/">
-                
-                <span class="abstract-title-text">从零开始的电子学习之路</span>
-            </a>
-            <div class="abstract-content">
-                前言对于0并无正负之分，之前我都对电子一无所知，因此也谈不上感兴趣与否。自这学期的电分模电开始才第一次对EE有了印象，感觉还蛮有意思。
-十月份某日，Java老师提到他的网站是跑在作为服务器的树莓派上的，说者无心听者有意，我那时不知道脑...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="嵌入式">嵌入式</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="硬件">硬件</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/11/18/Java-web-file-manger-cloud-online/">
-                
-                <span class="abstract-title-text">基于JavaWeb的文件管理系统+OrangePi+内网穿透实现不限速大容量网盘</span>
-            </a>
-            <div class="abstract-content">
-                0x00 前言今年四月某日，我正写完大部分python qqbot插件，为该做什么发愁。刚好那时有社团展示，我百无聊赖在银杏大道散步闲逛时遇到了一个有趣的web开发向实验室。和摆摊的学长聊天之后，我才发现之前自己写的插件实际上就是we...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/11">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/18</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/11/09/hello-world/">
-                
-                <span class="abstract-title-text">Hello World——My first Hexo Blog</span>
-            </a>
-            <div class="abstract-content">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/09</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/28/Java-Web-learning-Note/">
-                
-                <span class="abstract-title-text">Java Web学习笔记v3</span>
-            </a>
-            <div class="abstract-content">
-                Java WebJDBC
-JDBC驱动连接Mysql数据库8.0MySQL 8.0 以上版本的数据库连接有所不同：
-
-1、MySQL 8.0 以上版本驱动包版本 mysql-connector-java-8.0.16.jar。
-2、*...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/28</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/08/Java-learning-Note-v-3/">
-                
-                <span class="abstract-title-text">Java学习笔记</span>
-            </a>
-            <div class="abstract-content">
-                Java leraning Note v.3多线程创建线程
-
-123456789101112131415161718public class threadDemo &#123;    public static void main(S...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/06/17/Java-learning-Note-v-2/">
-                
-                <span class="abstract-title-text">Java学习笔记v2</span>
-            </a>
-            <div class="abstract-content">
-                Java learning Note v.2集合嵌套在Map集合中再放List集合：
-123456789101112131415161718192021222324252627package com.D2;import java.ut...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/06/17</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/04/14/Note%20of%20Java%20Learning/">
-                
-                <span class="abstract-title-text">Java学习笔记v1</span>
-            </a>
-            <div class="abstract-content">
-                Note of Java LearningJava 语法基础引用Java中有引用的概念，类似于C语言的指针。
-例如改变指向数组指针（引用数组）的值：
-
-数组也好，字符串通过地址引用也好，都与指针如出一辙嘛。
-for each12345...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/03/01/javascript-report-in-bili/">
-                
-                <span class="abstract-title-text">简单的JS插件编写——检索Bilibili评论并举办</span>
-            </a>
-            <div class="abstract-content">
-                前言最近刚开学比较闲，想写个简单的js插件练练手，刚好看某些评论区低能评论太多，举办侠又有限，就想写个脚本匹配关键字批量举办
-基本思路通过B站页面的INITAL_STATE方法获取视频av号，再通过Ajax对api接口发起请求获取评论...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/02/14/ssti-quick-start/">
-                
-                <span class="abstract-title-text">SSTI——flask模板注入漏洞入门</span>
-            </a>
-            <div class="abstract-content">
-                最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。
-Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如:
-12345678910from flas...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="python">python</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="SSTI">SSTI</a>
     
 </div>
 
@@ -807,87 +459,9 @@ Flask搭建后端服务众所周知python也可用用来写后端，最简单的
     
     <!-- paginator  -->
     
-        <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">NEXT &gt;</a>
-        </nav>
-    
 </main>
 
                 <!-- profile -->
-                
-                    <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/saber.png />
-    <div class="profile-name">Kizureina</div>
-    
-        <div class="profile-signature">
-            witness me
-        </div>
-    
-    
-        <div class="profile-social">
-            
-    
-        
-            
-                <a href="mailto:tsukinomito@mailfence.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/Kizureina" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-
-        </div>
-    
-    
-    
-        <div class="profile-link-item">
-            <a href="/about" class="about-me">
-                
-                ABOUT ME
-            </a>
-        </div>
-    
-    
-    
-</div>
-
                 
             </div>
             <footer class="footer footer-unloaded">

