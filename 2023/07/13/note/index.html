@@ -11,24 +11,19 @@
   <meta charset="utf-8">
   
   
-  <title>安卓逆向入门 | Kizureina&#39;s Blog</title>
+  <title>Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="鼓捣半天才发现，安卓逆向同样很偏重对工具的使用，尤其是反编译必备的MT管理器&#x2F;NP管理器。而具体的逻辑修改需要Java和汇编基础（当然安卓源码实际上是smali）。 Apk文件结构APK实际上是一种压缩文件，将后缀改为rar就能轻松解压。具体分析：很明显，其中最重要的是作为Java源码的classes.dex，查看和修改都需要经过反编译。而resource文件则提供高效的资源索引，使逆向">
+  <meta name="description" content="I know nothing except the fact of my ignorance.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安卓逆向入门">
-<meta property="og:url" content="https://kizureina.github.io/2023/01/15/Android-Reverse-Learning-Note/index.html">
+<meta property="og:title" content="Kizureina&#39;s Blog">
+<meta property="og:url" content="https://kizureina.github.io/2023/07/13/note/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="鼓捣半天才发现，安卓逆向同样很偏重对工具的使用，尤其是反编译必备的MT管理器&#x2F;NP管理器。而具体的逻辑修改需要Java和汇编基础（当然安卓源码实际上是smali）。 Apk文件结构APK实际上是一种压缩文件，将后缀改为rar就能轻松解压。具体分析：很明显，其中最重要的是作为Java源码的classes.dex，查看和修改都需要经过反编译。而resource文件则提供高效的资源索引，使逆向">
+<meta property="og:description" content="I know nothing except the fact of my ignorance.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://files.catbox.moe/ef13xv.png">
-<meta property="og:image" content="https://files.catbox.moe/778k77.png">
-<meta property="og:image" content="https://files.catbox.moe/0lwklt.png">
-<meta property="article:published_time" content="2023-01-15T12:53:14.000Z">
-<meta property="article:modified_time" content="2023-03-02T04:41:34.742Z">
+<meta property="article:published_time" content="2023-07-12T23:25:43.890Z">
+<meta property="article:modified_time" content="2023-07-12T23:24:55.848Z">
 <meta property="article:author" content="Kizurena">
-<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://files.catbox.moe/ef13xv.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -286,7 +281,7 @@
     <div id="content-body">
        
 
-<article id="post-Android-Reverse-Learning-Note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -299,7 +294,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        安卓逆向入门
+        无标题
       </h1>
     
   
@@ -307,7 +302,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2023-01-15T12:53:14.000Z" itemprop="datePublished">2023-01-15</time>
+  <time class="dt-published" datetime="2023-07-12T23:25:43.890Z" itemprop="datePublished">2023-07-13</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -318,22 +313,14 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            438 词 
+            0 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>鼓捣半天才发现，安卓逆向同样很偏重对工具的使用，尤其是反编译必备的MT管理器&#x2F;NP管理器。<br>而具体的逻辑修改需要Java和汇编基础（当然安卓源码实际上是smali）。</p>
-<h2 id="Apk文件结构"><a href="#Apk文件结构" class="headerlink" title="Apk文件结构"></a>Apk文件结构</h2><p>APK实际上是一种压缩文件，将后缀改为rar就能轻松解压。<br><img src="https://files.catbox.moe/ef13xv.png" alt="apkexp.png"><br>具体分析：<br><img src="https://files.catbox.moe/778k77.png" alt="apk.png"><br>很明显，其中最重要的是作为Java源码的classes.dex，查看和修改都需要经过反编译。<br>而resource文件则提供高效的资源索引，使逆向中的关键步骤之一定位变得方便。</p>
-<h2 id="逆向基本逻辑"><a href="#逆向基本逻辑" class="headerlink" title="逆向基本逻辑"></a>逆向基本逻辑</h2><p>下图是汉化的流程，其实逻辑一样。<br><img src="https://files.catbox.moe/0lwklt.png" alt="logic.png"><br>………..<br>为什么这就没了？感觉用集成工具的话需要做笔记的地方不多，而且很麻烦。<br>更重要的是藤本树的漫画太有趣不想花时间鼓捣这个了wwww</p>
-<h2 id="随想"><a href="#随想" class="headerlink" title="随想"></a>随想</h2><p>最近想搞下学校跑步软件的安卓逆向，才明白汇编是拿来干啥的。</p>
-<p>经过编译打包后的软件只有二进制机器码，但<strong>机器码与汇编代码一一对应</strong>，因此二进制机器码可以无损转为汇编，反过来当然也一样，因此可以通过修改汇编代码的方式直接逆向修改软件，而其他所有语言都做不到，也就是说汇编真正厉害的无损转机器码。</p>
-<p>当然直接分析汇编太折磨，先分析通过反编译生成C语言或者Java代码的<strong>逻辑</strong>，再逆向去思考汇编如何修改即可。对于安卓来说，汇编就是Smali，反编译可以用jadx-gui。</p>
-
+          
         
       </div>
 
@@ -345,27 +332,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2023/01/22/Tatsuki-Fujimoto-s-reality-and-fiction/"
-      title="藤本树的奇幻色彩与现实底色"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        藤本树的奇幻色彩与现实底色
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2022/12/27/From-RCE-to-getShell/"
-      title="从RCE到getShell——Log4j2进阶利用"
+      href="/2023/07/07/The-exp-of-Redis-unauthorized/"
+      title="Redis未授权访问原理及利用"
      >
 
     <p class="title-text">
       
-        从RCE到getShell——Log4j2进阶利用
+        Redis未授权访问原理及利用
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
