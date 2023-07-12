@@ -1,1567 +1,1044 @@
 <!DOCTYPE html>
-<html lang="en">
-    <!-- title -->
 
 
-    
-
-<!-- keywords -->
-
-
-
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="Kizurena">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="Kizurena">
-    
-        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
-    
-    <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta charset="utf-8">
+  
+  
+  <title>Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kizureina&#39;s Blog">
 <meta property="og:url" content="https://kizureina.github.io/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Kizurena">
 <meta name="twitter:card" content="summary">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" href="/assets/favicon.ico">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
     
-    <title>Kizureina&#39;s Blog</title>
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-    (function (w) {
-        'use strict'
-        // rel=preload support test
-        if (!w.loadCSS) {
-            w.loadCSS = function () {}
-        }
-        // define on the loadCSS obj
-        var rp = (loadCSS.relpreload = {})
-        // rel=preload feature support test
-        // runs once and returns a function for compat purposes
-        rp.support = (function () {
-            var ret
-            try {
-                ret = w.document.createElement('link').relList.supports('preload')
-            } catch (e) {
-                ret = false
-            }
-            return function () {
-                return ret
-            }
-        })()
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-        // then change that media back to its intended value on load
-        rp.bindMediaToggle = function (link) {
-            // remember existing media attr for ultimate state, or default to 'all'
-            var finalMedia = link.media || 'all'
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-            function enableStylesheet() {
-                link.media = finalMedia
-            }
-
-            // bind load handlers to enable media
-            if (link.addEventListener) {
-                link.addEventListener('load', enableStylesheet)
-            } else if (link.attachEvent) {
-                link.attachEvent('onload', enableStylesheet)
-            }
-
-            // Set rel and non-applicable media type to start an async request
-            // note: timeout allows this to happen async to let rendering continue in IE
-            setTimeout(function () {
-                link.rel = 'stylesheet'
-                link.media = 'only x'
-            })
-            // also enable media after 3 seconds,
-            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-            setTimeout(enableStylesheet, 3000)
-        }
-
-        // loop through link elements in DOM
-        rp.poly = function () {
-            // double check this to prevent external calls from running
-            if (rp.support()) {
-                return
-            }
-            var links = w.document.getElementsByTagName('link')
-            for (var i = 0; i < links.length; i++) {
-                var link = links[i]
-                // qualify links to those with rel=preload and as=style attrs
-                if (
-                    link.rel === 'preload' &&
-                    link.getAttribute('as') === 'style' &&
-                    !link.getAttribute('data-loadcss')
-                ) {
-                    // prevent rerunning on link
-                    link.setAttribute('data-loadcss', true)
-                    // bind listeners to toggle media back
-                    rp.bindMediaToggle(link)
-                }
-            }
-        }
-
-        // if unsupported, run the polyfill
-        if (!rp.support()) {
-            // run once at least
-            rp.poly()
-
-            // rerun poly on an interval until onload
-            var run = w.setInterval(rp.poly, 500)
-            if (w.addEventListener) {
-                w.addEventListener('load', function () {
-                    rp.poly()
-                    w.clearInterval(run)
-                })
-            } else if (w.attachEvent) {
-                w.attachEvent('onload', function () {
-                    rp.poly()
-                    w.clearInterval(run)
-                })
-            }
-        }
-
-        // commonjs
-        if (typeof exports !== 'undefined') {
-            exports.loadCSS = loadCSS
-        } else {
-            w.loadCSS = loadCSS
-        }
-    })(typeof global !== 'undefined' ? global : this)
-</script>
-
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
-    }
-
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-</style>
-
-    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
-    <link rel="stylesheet" href="/css/dark.css">
-    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
-    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
-    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
-    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
-    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
-    <!-- algolia -->
-    
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ == undefined) {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js" />')
-        }
-    </script>
+<body>
+  
+  
     
-        <body class="home-body">
+<div id="banner" class=" is_home ">
+  <img src="/assets/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=" is_home "  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
     
-        <!-- header -->
-        <header class="header header-mobile index-header">
-    <!-- top read progress line -->
-    <div class="header-element">
-        <div class="read-progress"></div>
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
     </div>
-    <!-- sidebar menu button -->
-    <div class="header-element">
-        
-            <div class="header-sidebar-menu">
-        
-            
-                <div style="padding-left: 1px;">&#xe775;</div>
-            
-        </div>
-    </div>
-    <!-- header actions -->
-    <div class="header-actions">
-        <!-- theme mode switch button -->
-        <span class="header-theme-btn header-element">
-            <i class="fas fa-adjust"></i>
-        </span>
-        <!-- back to home page text -->
-        <span class="home-link header-element">
-            <a href=/>Kizureina's Blog</a>
-        </span>
-    </div>
-    <!-- toggle banner for post layout -->
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
     
-</header>
-
-        <!-- fixed footer -->
-        <footer class="footer-fixed index-footer-fixed">
-    <!-- back to top button -->
-    <div class="footer-fixed-element">
-        
-            <div class="back-top back-top-hidden">
-        
-        
-            <div>&#xe639;</div>
-        
-        </div>
-    </div>
-</footer>
-
-        <!-- wrapper -->
-        <div class="wrapper">
-            <div class="site-intro" style="
-
-
-
-
-
-
-
-    height:50vh;
-
-">
+      <a class="nav-dropdown-link" href="/">Home</a>
     
-    <!-- 主页  -->
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
     
-        
-    <!-- 文章页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-                Kizureina's Blog
-            <!-- 文章页  -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-                
-                    I know nothing except the fact of my ignorance.
-                
-            <!-- 文章页  -->
-            
-        </p>
-        <!-- 文章页 meta -->
-        
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
     </div>
 </div>
-
-            <script>
-  // get user agent
-  function getBrowserVersions() {
-    var u = window.navigator.userAgent
-    return {
-      userAgent: u,
-      trident: u.indexOf('Trident') > -1, //IE内核
-      presto: u.indexOf('Presto') > -1, //opera内核
-      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-      iPad: u.indexOf('iPad') > -1, //是否为iPad
-      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
-    }
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
   }
-  var browser = {
-    versions: getBrowserVersions(),
-  }
-  console.log('userAgent: ' + browser.versions.userAgent)
-
-  // callback
-  function fontLoaded() {
-    console.log('font loaded')
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document
-        .getElementsByClassName('intro-title')[0]
-        .classList.add('intro-fade-in')
-      document
-        .getElementsByClassName('intro-subtitle')[0]
-        .classList.add('intro-fade-in')
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in')
-      }
-    }
-  }
-
-  // UC不支持跨域，所以直接显示
-  function asyncCb() {
-    if (browser.versions.uc) {
-      console.log('UCBrowser')
-      fontLoaded()
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular'],
-        },
-        loading: function () {
-          // 所有字体开始加载
-          // console.log('font loading');
-        },
-        active: function () {
-          // 所有字体已渲染
-          fontLoaded()
-        },
-        inactive: function () {
-          // 字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout')
-          fontLoaded()
-        },
-        timeout: 5000, // Set the timeout to two seconds
-      })
-    }
-  }
-
-  function asyncErr() {
-    console.warn('script load from CDN failed, will load local script')
-  }
-
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document,
-      t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0]
-    o.src = u
-    if (cb) {
-      o.addEventListener(
-        'load',
-        function (e) {
-          cb(null, e)
-        },
-        false
-      )
-    }
-    if (err) {
-      o.addEventListener(
-        'error',
-        function (e) {
-          err(null, e)
-        },
-        false
-      )
-    }
-    s.parentNode.insertBefore(o, s)
-  }
-
-  var asyncLoadWithFallBack = function (arr, success, reject) {
-    var currReject = function () {
-      reject()
-      arr.shift()
-      if (arr.length) async(arr[0], success, currReject)
-    }
-
-    async(arr[0], success, currReject)
-  }
-
-  asyncLoadWithFallBack(
-    [
-      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
-      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
-      "/lib/webfontloader.min.js",
-    ],
-    asyncCb,
-    asyncErr
-  )
 </script>
-
-            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-            <div class="container container-unloaded">
-                <main class="main index-page">
-    
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
         
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/12/20/log4j-RCE/">
-                
-                <span class="abstract-title-text">Log4j2 RCE漏洞复现</span>
-            </a>
-            <div class="abstract-content">
-                0x00 引言Log4j2 RCE恐怕是近几年最严重也影响最广的漏洞，log4j2作为最流行的Java开源日志框架之一，应用极广，而该RCE又非常容易被利用，因此非常危险。去年这个时候拜他所赐相当热闹，实际上复现不算困难，本文从头开始...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/20</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="RCE">RCE</a>
-    
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
 </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+  
+  <div class="sticky">
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/12/08/from-0-to-1-EE-Learning-Note/">
-                
-                <span class="abstract-title-text">从零开始的电子学习之路</span>
-            </a>
-            <div class="abstract-content">
-                前言对于0并无正负之分，之前我都对电子一无所知，因此也谈不上感兴趣与否。自这学期的电分模电开始才第一次对EE有了印象，感觉还蛮有意思。
-十月份某日，Java老师提到他的网站是跑在作为服务器的树莓派上的，说者无心听者有意，我那时不知道脑...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
+      
+
+
+
     
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SSTI/" rel="tag">SSTI</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java-RCE/" rel="tag">java RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="嵌入式">嵌入式</a>
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="硬件">硬件</a>
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2023/07/07/The-exp-of-Redis-unauthorized/">Redis未授权访问原理及利用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/">Java安全入门：命令执行，反射与反序列化</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/22/Note-of-SpringBoot-learning/">SpringBoot学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/12/Note-of-SpringMVC-learning/">SpringMVC学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/12/Note-of-Spring-learning/">Spring学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
     
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+      
+   
+
+<article id="post-log4j-RCE" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/12/20/log4j-RCE/">Log4j2 RCE漏洞复现</a>
+      </h1>
+    
+  
 </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-12-20T12:53:14.000Z" itemprop="datePublished">2022-12-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.7k 词 
+          </div>
+        </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
         
+          <div class="truncate-text">
+            0x00 引言Log4j2 RCE恐怕是近几年最严重也影响最广的漏洞，log4j2作为最流行的Java开源日志框架之一，应用极广，而该RCE又非常容易被利用，因此非常危险。去年这个时候拜他所赐相当热闹，实际上复现不算困难，本文从头开始在本地搭建Java Web环境并复现log4j2 RCE漏洞。另外先提醒，复现中搭环境最重要也最麻烦的是JRE版本必须仔细选择，不然会出很多麻烦。
+1. 漏洞描述Log4j(log for Java)是最常用的两个Java日志管理开源框架之一，由Apache维护。由于 Apache Log4j2 某些功能存在递归解析功能，攻击者可直接构造恶意请求，触发远程代码执行漏洞。
+实际受影响范围如下：Apache Log4j 2.x &lt; 2.15.0-rc2
+CVE官方描述：
+
+Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log mess...  
+          </div>
         
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/12/20/log4j-RCE/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-from-0-to-1-EE-Learning-Note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
         
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/11/18/Java-web-file-manger-cloud-online/">
-                
-                <span class="abstract-title-text">基于JavaWeb的文件管理系统+OrangePi+内网穿透实现不限速大容量网盘</span>
-            </a>
-            <div class="abstract-content">
-                0x00 前言今年四月某日，我正写完大部分python qqbot插件，为该做什么发愁。刚好那时有社团展示，我百无聊赖在银杏大道散步闲逛时遇到了一个有趣的web开发向实验室。和摆摊的学长聊天之后，我才发现之前自己写的插件实际上就是we...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/12/11">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/18</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
     
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/12/08/from-0-to-1-EE-Learning-Note/">从零开始的电子学习之路</a>
+      </h1>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
+  
 </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-12-08T12:53:14.000Z" itemprop="datePublished">2022-12-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.5k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            前言对于0并无正负之分，之前我都对电子一无所知，因此也谈不上感兴趣与否。自这学期的电分模电开始才第一次对EE有了印象，感觉还蛮有意思。
+十月份某日，Java老师提到他的网站是跑在作为服务器的树莓派上的，说者无心听者有意，我那时不知道脑子怎么一抽，对树莓派突然来了兴趣。那时我在写基于原生JavaWeb+Mybatis+Vue+ElementUI的文件管理系统，让我想到一个非常有意思的想法，如果有足够稳定的内网穿透服务，实现的效果会比组NAS更好而成本也低得多。在花了一点功夫之后，我成功用裸板149r的orangepi几乎完美实现了上述功能，具体细节参见上篇Blog。
+玩过orangePi之后，对它几十个GPIO接口自然也有了兴趣，渐渐也对更底层的东西感到好奇。刚好那时学校里的电子爱好者协会在招新培训，再加上游园会上又在ICEC的摊子上焊接过双闪灯，经过一阵子的纠结，还是决定报名去参加了。
+写到这里，想起来去年这时候也去参加安全相关实验室的培训了，果然我多半是个一事无成的人，发现有趣的事就忍不住去做。回想过去自己也一直是随性而为，不过我是不会后悔的，无论结果如何，都决不后悔自己经过思...  
+          </div>
+        
+      </div>
+
+         
+    </div>
     
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/12/08/from-0-to-1-EE-Learning-Note/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Java-web-file-manger-cloud-online" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
         
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/11/09/hello-world/">
-                
-                <span class="abstract-title-text">Hello World——My first Hexo Blog</span>
-            </a>
-            <div class="abstract-content">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/09</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
     
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/11/18/Java-web-file-manger-cloud-online/">基于JavaWeb的文件管理系统+OrangePi+内网穿透实现不限速大容量网盘</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-11-18T08:53:14.000Z" itemprop="datePublished">2022-11-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5.2k 词 
+          </div>
+        </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
         
+          <div class="truncate-text">
+            0x00 前言今年四月某日，我正写完大部分python qqbot插件，为该做什么发愁。刚好那时有社团展示，我百无聊赖在银杏大道散步闲逛时遇到了一个有趣的web开发向实验室。和摆摊的学长聊天之后，我才发现之前自己写的插件实际上就是web后端开发，而开发或许是比安全更有趣的领域，和他聊了好久之后，我回宿舍开始学Java，直到这学期开始写JavaWeb项目加入了他们实验室。总体还是很有趣的经历。在写文件管理系统项目的时候，有了如下的想法和经历。
+0x01 思路十月份某日，Java老师提到他的网站是跑在作为服务器的树莓派上的，说者无心听者有意，我那时不知道脑子怎么一抽，对树莓派突然来了兴趣。刚好那时我在写基于原生JavaWeb+Mybatis+Vue+ElementUI的文件管理系统，如果能和基于树莓派的服务器结合，就能解决租借服务器硬盘容量太少的问题，实现不限速的大容量网盘（如果在同一内网内，网速仅取决于硬盘的IO读写极限，而容量限制也可以通过硬盘阵列解决）。这个想法实在非常非常有趣，如果有足够稳定的内网穿透服务，实现的效果会比组NAS更好而成本也低得多。
+在花了一点功夫之后，我成功...  
+          </div>
         
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/11/18/Java-web-file-manger-cloud-online/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
         
-            
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/11/09/hello-world/">Hello World——My first Hexo Blog</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-11-09T05:11:02.108Z" itemprop="datePublished">2022-11-09</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            90 词 
+          </div>
+        </div>
         
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/28/Java-Web-learning-Note/">
-                
-                <span class="abstract-title-text">Java Web学习笔记v3</span>
-            </a>
-            <div class="abstract-content">
-                Java WebJDBCJDBC驱动连接Mysql数据库8.0MySQL 8.0 以上版本的数据库连接有所不同：
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+
+More info: Writing
+Run server1$ hexo server
+
+More info: Server
+Generate static files1$ hexo generate
+
+More info: Generating
+Deploy to remote sites1$ hexo deploy
+
+More info: Deployment
+Push to the Github Pages123$ hexo clean$ hexo g$ hexo...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/11/09/hello-world/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Java-Web-learning-Note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/09/28/Java-Web-learning-Note/">Java Web学习笔记v3</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-09-28T12:53:14.000Z" itemprop="datePublished">2022-09-28</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5.2k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            Java WebJDBCJDBC驱动连接Mysql数据库8.0MySQL 8.0 以上版本的数据库连接有所不同：
 
 1、MySQL 8.0 以上版本驱动包版本 mysql-connector-java-8.0.16.jar。
-2、*c...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/07/10">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/28</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
+2、*com.mysql.jdbc.Driver 更换为 com.mysql.cj.jdbc.Driver。*
+MySQL 8.0 以上版本不需要建立 SSL 连接的，需要显示关闭。
+allowPublicKeyRetrieval&#x3D;true 允许客户端从服务器获取公钥。
+最后还需要设置 CST。
+url &#x3D; “jdbc:mysql:&#x2F;&#x2F;&#x2F;teaching?useSSL&#x3D;false&amp;serverTimezone&#x3D;UTC&amp;allowPublicKeyRetrieval&#x3D;true”
+
+1234567891011121314151617181920212223public class jdbcdmo &#123;    public static void main(St...  
+          </div>
+        
+      </div>
+
+         
+    </div>
     
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/09/28/Java-Web-learning-Note/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Java-learning-Note-v-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/09/08/Java-learning-Note-v-3/">Java学习笔记</a>
+      </h1>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="web">web</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
+  
 </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-09-08T12:53:14.000Z" itemprop="datePublished">2022-09-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            6.8k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            Java leraning Note v.3多线程创建线程
+123456789101112131415161718public class threadDemo &#123;    public static void main(String[] args) &#123;        Thread t = new MyThread();        **t.start();				// 启动线程执行**        for (int i = 0; i &lt; 5; i++) &#123;            System.out.println(&quot;主线程执行&quot; + i);        &#125;    &#125;&#125;class MyThread extends Thread&#123;    @Override    public void run() &#123;        for (int i = 0; i &lt;5; i++) &#123;            System.out.println(&quot;子线程执行输...  
+          </div>
+        
+      </div>
+
+         
+    </div>
     
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/09/08/Java-learning-Note-v-3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Java-learning-Note-v-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
         
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/08/Java-learning-Note-v-3/">
-                
-                <span class="abstract-title-text">Java学习笔记</span>
-            </a>
-            <div class="abstract-content">
-                Java leraning Note v.3多线程创建线程
-123456789101112131415161718public class threadDemo &#123;    public static void main(St...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/07/10">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
     
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/06/17/Java-learning-Note-v-2/">Java学习笔记v2</a>
+      </h1>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
+  
 </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-06-17T12:53:14.000Z" itemprop="datePublished">2022-06-17</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.6k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            集合嵌套在Map集合中再放List集合：
+123456789101112131415161718192021222324252627package com.D2;import java.util.*;/** * 统计投票人数 ***/public class MapTest &#123;    public static void main(String[] args) &#123;        **Map&lt;String, List&lt;String&gt;&gt; data = new HashMap&lt;&gt;();**        //存入学生数据        List&lt;String&gt; selects = new ArrayList&lt;&gt;();        Collections.addAll(selects,&quot;A&quot;,&quot;C&quot;);        data.put(&quot;luoyong&quot;,selects);        List&lt;String&gt; selects2 = ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
     
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/06/17/Java-learning-Note-v-2/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Note of Java Learning" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
         
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/06/17/Java-learning-Note-v-2/">
-                
-                <span class="abstract-title-text">Java学习笔记v2</span>
-            </a>
-            <div class="abstract-content">
-                集合嵌套在Map集合中再放List集合：
-123456789101112131415161718192021222324252627package com.D2;import java.util.*;/** * 统计投票人数 ***/...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/07/10">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/06/17</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
     
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/04/14/Note%20of%20Java%20Learning/">Java学习笔记v1</a>
+      </h1>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
+  
 </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-04-14T12:53:14.000Z" itemprop="datePublished">2022-04-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            7.1k 词 
+          </div>
+        </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
         
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/04/14/Note%20of%20Java%20Learning/">
-                
-                <span class="abstract-title-text">Java学习笔记v1</span>
-            </a>
-            <div class="abstract-content">
-                Note of Java LearningJava 语法基础引用Java中有引用的概念，类似于C语言的指针。
+          <div class="truncate-text">
+            Note of Java LearningJava 语法基础引用Java中有引用的概念，类似于C语言的指针。
 例如改变指向数组指针（引用数组）的值：
 
 数组也好，字符串通过地址引用也好，都与指针如出一辙嘛。
-for each12345...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2023/07/10">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
-    
-</div>
+for each12345678public class Main &#123;    public static void main(String[] args) &#123;        int[] ns = &#123; 1, 4, 9, 16, 25 &#125;;        for (**int n : ns**) &#123;            System.out.println(n);        &#125;    &#125;&#125;
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
+int n定义变量，“**:**”用于遍历数组。
+此时n直接拿到数组的元素，无需索引，若用ns[i]这种形式存在索引。
+输入输出123456789101112Scanner scanner = new Scanner(System.in);// 创建Scanner对象System.out.print(&qu...  
+          </div>
         
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/03/01/javascript-report-in-bili/">
-                
-                <span class="abstract-title-text">简单的JS插件编写——检索Bilibili评论并举办</span>
-            </a>
-            <div class="abstract-content">
-                前言最近刚开学比较闲，想写个简单的js插件练练手，刚好看某些评论区低能评论太多，举办侠又有限，就想写个脚本匹配关键字批量举办
-基本思路通过B站页面的INITAL_STATE方法获取视频av号，再通过Ajax对api接口发起请求获取评论...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JavaScript">JavaScript</a>
-    
-</div>
+      </div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/02/14/ssti-quick-start/">
-                
-                <span class="abstract-title-text">SSTI——flask模板注入漏洞入门</span>
-            </a>
-            <div class="abstract-content">
-                最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。
-Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如:
-12345678910from flas...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="python">python</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="SSTI">SSTI</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-    <!-- paginator  -->
-    
-        <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">NEXT &gt;</a>
-        </nav>
-    
-</main>
-
-                <!-- profile -->
-                
-                    <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/saber.png />
-    <div class="profile-name">Kizureina</div>
-    
-        <div class="profile-signature">
-            witness me
-        </div>
-    
-    
-        <div class="profile-social">
-            
-    
-        
-            
-                <a href="mailto:tsukinomito@mailfence.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/Kizureina" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-
-        </div>
-    
-    
-    
-        <div class="profile-link-item">
-            <a href="/about" class="about-me">
-                
-                ABOUT ME
-            </a>
-        </div>
-    
-    
-    
-</div>
-
-                
-            </div>
-            <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-        <div class="social">
-            
-    
-        
-            
-                <a href="mailto:tsukinomito@mailfence.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/Kizureina" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-
-        </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+         
     </div>
-    <!-- website approve for Chinese user -->
     
-    <!-- 不蒜子  -->
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/04/14/Note%20of%20Java%20Learning/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-javascript-report-in-bili" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
     
-        <div class="busuanzi-container">
-            
-             
-                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-            
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/03/01/javascript-report-in-bili/">简单的JS插件编写——检索Bilibili评论并举办</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-03-01T12:55:19.000Z" itemprop="datePublished">2022-03-01</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            864 词 
+          </div>
         </div>
-    	
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            前言最近刚开学比较闲，想写个简单的js插件练练手，刚好看某些评论区低能评论太多，举办侠又有限，就想写个脚本匹配关键字批量举办
+基本思路通过B站页面的INITAL_STATE方法获取视频av号，再通过Ajax对api接口发起请求获取评论列表，遍历后将评论aid存到数组，最后循环举办。
+关键功能函数为获取评论列表和批量举办，都是发起Ajax请求的函数。
+懒得具体写函数的编写过程了，都是很清楚的思路，也就用了JQuery的$.ajax()函数和异步执行的sleep()函数比较新鲜吧。
+具体源码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210310410510610710810911011111211311411511611711811912...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/03/01/javascript-report-in-bili/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-ssti-quick-start" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2022/02/14/ssti-quick-start/">SSTI——flask模板注入漏洞入门</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-02-14T12:53:14.000Z" itemprop="datePublished">2022-02-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            766 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSTI/" rel="tag">SSTI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。
+Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如:
+12345678910from flask import Flaskapp = Flask(__name__) @app.route(&#x27;/&#x27;)# route装饰器将url与下面的函数链接起来def hello_world():    return &#x27;helloworld!&#x27;if __name__ == &#x27;__main__&#x27;:    app.run(host=&#x27;0.0.0.0&#x27;,port=5000,debug=True)    # host为0.0.0.0则为暴露在公网，可从任意IP访问
+
+上面的python文件运行时会在5000端口跑web服务，访问https://IP:5000/ 返回hello world!的字符串。
+上面的例子为返回简单的字符串，也可用模板渲染html源码在浏览器显示:
+123456789...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2022/02/14/ssti-quick-start/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+
+  <nav id="page-nav">
+    <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
+    <a id="prev-btn" class="page-nav-btn " href=" /  ">
+      <span class="material-symbols-rounded">navigate_before</span>
+    </a>
+    <div id="num-bar">
+      <a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a>  
+    </div>
+    <a id="next-btn" class="page-nav-btn " href="/page/3/">
+      <span class="material-symbols-rounded">navigate_next</span>
+    </a>
+  </nav>
+
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
 </footer>
 
-        </div>
-        <!-- toc -->
-        
-        <!-- sidebar -->
-        <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-        <div class="sidebar-panel-archives">
-    <!-- 在 ejs 中将 archive 按照时间排序 -->
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 24
-        </div>
-        <!-- search  -->
-        
     </div>
-    
-    <div class="post-archive">
-    
-        
-            
-            
-            <div class="archive-year"> 2023 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/07</span>
-            <a class="archive-post-title" href="/2023/07/07/The-exp-of-Redis-unauthorized/">Redis未授权访问原理及利用</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span>
-            <a class="archive-post-title" href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/">Java安全入门：命令执行，反射与反序列化</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/22</span>
-            <a class="archive-post-title" href="/2023/03/22/Note-of-SpringBoot-learning/">SpringBoot学习笔记</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/12</span>
-            <a class="archive-post-title" href="/2023/03/12/Note-of-SpringMVC-learning/">SpringMVC学习笔记</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/12</span>
-            <a class="archive-post-title" href="/2023/02/12/Note-of-Spring-learning/">Spring学习笔记</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/30</span>
-            <a class="archive-post-title" href="/2023/01/30/Getting-start-of-Docker/">Docker入门</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/23</span>
-            <a class="archive-post-title" href="/2023/01/23/Thinking-of-Sayonara-Eri/">《再见绘梨》随想</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/22</span>
-            <a class="archive-post-title" href="/2023/01/22/Tatsuki-Fujimoto-s-reality-and-fiction/">藤本树的奇幻色彩与现实底色</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span>
-            <a class="archive-post-title" href="/2023/01/15/Android-Reverse-Learning-Note/">安卓逆向入门</a>
-        </li>
-    
-        
-            
-            
-                
-                </ul>
-            
-            <div class="archive-year"> 2022 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/27</span>
-            <a class="archive-post-title" href="/2022/12/27/From-RCE-to-getShell/">从RCE到getShell——Log4j2进阶利用</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/20</span>
-            <a class="archive-post-title" href="/2022/12/20/log4j-RCE/">Log4j2 RCE漏洞复现</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/08</span>
-            <a class="archive-post-title" href="/2022/12/08/from-0-to-1-EE-Learning-Note/">从零开始的电子学习之路</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/18</span>
-            <a class="archive-post-title" href="/2022/11/18/Java-web-file-manger-cloud-online/">基于JavaWeb的文件管理系统+OrangePi+内网穿透实现不限速大容量网盘</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/09</span>
-            <a class="archive-post-title" href="/2022/11/09/hello-world/">Hello World——My first Hexo Blog</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span>
-            <a class="archive-post-title" href="/2022/09/28/Java-Web-learning-Note/">Java Web学习笔记v3</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/08</span>
-            <a class="archive-post-title" href="/2022/09/08/Java-learning-Note-v-3/">Java学习笔记</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/17</span>
-            <a class="archive-post-title" href="/2022/06/17/Java-learning-Note-v-2/">Java学习笔记v2</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/14</span>
-            <a class="archive-post-title" href="/2022/04/14/Note%20of%20Java%20Learning/">Java学习笔记v1</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/01</span>
-            <a class="archive-post-title" href="/2022/03/01/javascript-report-in-bili/">简单的JS插件编写——检索Bilibili评论并举办</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/14</span>
-            <a class="archive-post-title" href="/2022/02/14/ssti-quick-start/">SSTI——flask模板注入漏洞入门</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/30</span>
-            <a class="archive-post-title" href="/2022/01/30/qqbot-y2b-pusher/">QQbot油管开播推送API编写逻辑</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/18</span>
-            <a class="archive-post-title" href="/2022/01/18/nonebot2-pulgin-coding/">基于nonebot2框架的插件编写——开播信息推送</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span>
-            <a class="archive-post-title" href="/2022/01/04/Python-spder-starting/">Python爬虫入门</a>
-        </li>
-    
-        
-            
-            
-                
-                </ul>
-            
-            <div class="archive-year"> 2021 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/21</span>
-            <a class="archive-post-title" href="/2021/12/21/simple-shell-script/">简单的Shell脚本实战</a>
-        </li>
-    
-    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
 </div>
 
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-        
-            <span class="sidebar-tag-name" data-tags="Android">
-                <span class="iconfont-archer">&#xe606;</span>
-                Android
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="RCE">
-                <span class="iconfont-archer">&#xe606;</span>
-                RCE
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Reverse shell">
-                <span class="iconfont-archer">&#xe606;</span>
-                Reverse shell
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="web">
-                <span class="iconfont-archer">&#xe606;</span>
-                web
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="JavaScript">
-                <span class="iconfont-archer">&#xe606;</span>
-                JavaScript
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="python">
-                <span class="iconfont-archer">&#xe606;</span>
-                python
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java RCE">
-                <span class="iconfont-archer">&#xe606;</span>
-                java RCE
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Comic">
-                <span class="iconfont-archer">&#xe606;</span>
-                Comic
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="嵌入式">
-                <span class="iconfont-archer">&#xe606;</span>
-                嵌入式
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="硬件">
-                <span class="iconfont-archer">&#xe606;</span>
-                硬件
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Linux">
-                <span class="iconfont-archer">&#xe606;</span>
-                Linux
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="SSTI">
-                <span class="iconfont-archer">&#xe606;</span>
-                SSTI
-            </span>
-        
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-
-    </div>
-</div>
-
-        <!-- site-meta -->
-        <script>
-    var siteMetaRoot = "/"
-    if (siteMetaRoot === "undefined") {
-        siteMetaRoot = '/'
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
     }
-    var siteMeta = {
-        url: "https://kizureina.github.io",
-        root: siteMetaRoot,
-        author: "Kizurena"
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
     }
 </script>
 
-        <!-- import experimental options here -->
-        <!-- Custom Font -->
-
-
-        <!-- main func -->
-        <script src="/scripts/main.js?v=20211217"></script>
-        <!-- dark mode -->
-        <script src="/scripts/dark.js?v=20211217"></script>
-        <!-- fancybox -->
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
-        <!-- algolia -->
-        
-        <!-- busuanzi -->
-        
-            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-        
-        <!-- CNZZ -->
-        
-        <!-- async load share.js -->
-        
-        <!-- mermaid -->
-        
-    </body>
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
 </html>
