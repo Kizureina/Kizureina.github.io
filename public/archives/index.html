@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
 <head>
   <meta charset="utf-8">
   
   
-  <title>Archives | Hexo</title>
+  <title>归档 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+  <meta name="description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kizureina&#39;s Blog">
+<meta property="og:url" content="https://kizureina.github.io/archives/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Kizurena">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
   
   
     
@@ -28,160 +44,485 @@
 <link rel="stylesheet" href="/css/style.css">
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/assets/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
       </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
     </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-  
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
     
     
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
       
+        <image src=/assets/avatar.png></image>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/08/hello-world/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-11-08T14:03:10.250Z" itemprop="datePublished">Nov 8</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-</section>
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
         
-          <aside id="sidebar">
-  
-    
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
 
   
+  <div class="sticky">
     
+      
 
-  
+
+
     
-  
-    
+      
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li></ul>
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SSTI/" rel="tag">SSTI</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java-RCE/" rel="tag">java RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
     </div>
   </div>
 
 
-  
     
+      
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
       <ul>
         
           <li>
-            <a href="/2022/11/08/hello-world/">Hello World</a>
+            <a href="/2023/07/13/note/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/07/The-exp-of-Redis-unauthorized/">Redis未授权访问原理及利用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/">Java安全入门：命令执行，反射与反序列化</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/22/Note-of-SpringBoot-learning/">SpringBoot学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/12/Note-of-SpringMVC-learning/">SpringMVC学习笔记</a>
           </li>
         
       </ul>
     </div>
   </div>
 
-  
-</aside>
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<div class="archive-main-card">
+    <div class="archive-top">
+      <div class="main-title-bar">
+        <div class="main-title-dot"></div>
+        <h1 class="article-title">Archive</h1>
+      </div>    
+    </div>
+    
+    
+      
+      
         
-      </div>
+        <div class="year-line">
+            <div class="year-num">2023</div>
+            <div class="dot-wrapper">
+                <div class="dot"></div>
+            </div>
+        </div>
+      
+      <a class="archive-article-link" href="/2023/07/13/note/" title="">
+        <div class="date">07-13</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    无标题
+                
+            </div>
+        </div>
+        <div class="tags">
+            
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/07/07/The-exp-of-Redis-unauthorized/" title="Redis未授权访问原理及利用">
+        <div class="date">07-07</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    Redis未授权访问原理及利用
+                
+            </div>
+        </div>
+        <div class="tags">
+            #web
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/" title="Java安全入门：命令执行，反射与反序列化">
+        <div class="date">06-05</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    Java安全入门：命令执行，反射与反序列化
+                
+            </div>
+        </div>
+        <div class="tags">
+            #java RCE
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/03/22/Note-of-SpringBoot-learning/" title="SpringBoot学习笔记">
+        <div class="date">03-22</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    SpringBoot学习笔记
+                
+            </div>
+        </div>
+        <div class="tags">
+            #java
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/03/12/Note-of-SpringMVC-learning/" title="SpringMVC学习笔记">
+        <div class="date">03-12</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    SpringMVC学习笔记
+                
+            </div>
+        </div>
+        <div class="tags">
+            #java
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/02/12/Note-of-Spring-learning/" title="Spring学习笔记">
+        <div class="date">02-12</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    Spring学习笔记
+                
+            </div>
+        </div>
+        <div class="tags">
+            #java
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/01/30/Getting-start-of-Docker/" title="Docker入门">
+        <div class="date">01-30</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    Docker入门
+                
+            </div>
+        </div>
+        <div class="tags">
+            #web
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/01/23/Thinking-of-Sayonara-Eri/" title="《再见绘梨》随想">
+        <div class="date">01-23</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    《再见绘梨》随想
+                
+            </div>
+        </div>
+        <div class="tags">
+            #Comic
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/01/22/Tatsuki-Fujimoto-s-reality-and-fiction/" title="藤本树的奇幻色彩与现实底色">
+        <div class="date">01-22</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    藤本树的奇幻色彩与现实底色
+                
+            </div>
+        </div>
+        <div class="tags">
+            #Comic
+        </div>
+      </a>
+    
+      
+      
+      <a class="archive-article-link" href="/2023/01/15/Android-Reverse-Learning-Note/" title="安卓逆向入门">
+        <div class="date">01-15</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    安卓逆向入门
+                
+            </div>
+        </div>
+        <div class="tags">
+            #Android
+        </div>
+      </a>
+    
+  </div>
+    </div>
+    <div id="footer-wrapper">
       <footer id="footer">
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
   </div>
 </footer>
 
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
 
   </div>
+  <script src="/js/light-dark-switch.js"></script>
 </body>
 </html>

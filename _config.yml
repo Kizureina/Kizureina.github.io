@@ -3,17 +3,35 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: Kizureina's Blog
+subtitle: 'I know nothing except the fact of my ignorance.'
+description: 'I know nothing except the fact of my ignorance.'
 keywords:
-author: John Doe
-language: en
+author: Kizurena
+language: zh-CN
 timezone: ''
 
+jsonContent:
+  meta: true
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: true
+    excerpt: false
+    categories: true
+    tags: true
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://kizureina.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -66,7 +84,7 @@ index_generator:
   order_by: -date
 
 # Category & Tag
-default_category: uncategorized
+default_category: 
 category_map:
 tag_map:
 
@@ -81,7 +99,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+updated_option: mtime
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -97,9 +115,13 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: vivia
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repository: git@github.com:Kizureina/Kizureina.github.io.git
+  branch: main
+  token: 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
+  message: Blog updated
