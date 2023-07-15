@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>气象运算模式WRF使用教程 | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="出于一些麻烦的原因，我最近开始给老师跑WRF算法，用于做相当复杂的气象运算。说实话，编译一次需要用gcc和gfortran两个编译器并行跑四十分钟才能完成的代码真是第一次见。单是第一步的生成可执行文件就花了不少功夫，所以记录下来好了。不管怎么说，也算是有趣的经验吧，虽然快把我累死了。  首先给读者讲两个常识：  如果你从来没有了解过你将要上手的软件，最好不要随手搜一个教程跟着做，尤其不要搜中文教">
+<meta property="og:type" content="article">
+<meta property="og:title" content="气象运算模式WRF使用教程">
+<meta property="og:url" content="https://kizureina.github.io/2023/07/13/Kit-of-using-WRF-module-for-prediction/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="出于一些麻烦的原因，我最近开始给老师跑WRF算法，用于做相当复杂的气象运算。说实话，编译一次需要用gcc和gfortran两个编译器并行跑四十分钟才能完成的代码真是第一次见。单是第一步的生成可执行文件就花了不少功夫，所以记录下来好了。不管怎么说，也算是有趣的经验吧，虽然快把我累死了。  首先给读者讲两个常识：  如果你从来没有了解过你将要上手的软件，最好不要随手搜一个教程跟着做，尤其不要搜中文教">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pCh2l3n.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pCh2a4J.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pCh2XCj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pChRHQ1.png">
+<meta property="article:published_time" content="2023-07-13T06:54:55.000Z">
+<meta property="article:modified_time" content="2023-07-13T09:12:16.599Z">
+<meta property="article:author" content="Kizurena">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2023/07/13/pCh2l3n.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/assets/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分类</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">14</div>
+            </a>
+        
+            <a class="category-link" href="/categories/WebSec/">
+                WebSec
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MISC/">
+                MISC
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/ACG/">
+                ACG
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/EE/">
+                EE
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java-RCE/" rel="tag">java RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2023/07/13/Kit-of-using-WRF-module-for-prediction/">气象运算模式WRF使用教程</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/07/The-exp-of-Redis-unauthorized/">Redis未授权访问原理及利用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/">Java安全入门：命令执行，反射与反序列化</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/22/Note-of-SpringBoot-learning/">SpringBoot学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/12/Note-of-SpringMVC-learning/">SpringMVC学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Kit-of-using-WRF-module-for-prediction" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        气象运算模式WRF使用教程
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-07-13T06:54:55.000Z" itemprop="datePublished">2023-07-13</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/MISC/">MISC</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.5k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <blockquote>
+<p>出于一些麻烦的原因，我最近开始给老师跑WRF算法，用于做相当复杂的气象运算。说实话，编译一次需要用gcc和gfortran两个编译器并行跑四十分钟才能完成的代码真是第一次见。单是第一步的生成可执行文件就花了不少功夫，所以记录下来好了。不管怎么说，也算是有趣的经验吧，虽然快把我累死了。</p>
+</blockquote>
+<p>首先给读者讲两个常识：</p>
+<ol>
+<li>如果你从来没有了解过你将要上手的软件，最好不要随手搜一个教程跟着做，尤其不要搜中文教程，因为这些教程可能本身就有错误，或者早已经过时。最高效的方法是去找官方网站找官方文档，或者Github官方仓库去找README。</li>
+<li>遇到模式编译或运行中的错误，<strong>千万</strong>不要在国内网站上浪费时间，把遇到的问题用英文描述出来去官方论坛搜，找不到就去Github对应的项目搜issue，再不行就Google一下，把时间花在CSDN之类的网站上只会让你更迷惑。</li>
+</ol>
+<p>以下是与WRF相关非常重要的参考URL:</p>
+<ol>
+<li><p>WRF构建详细过程的官方教程：<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">How to Compile WRF: The Complete Process</a></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCh2l3n"><img src="https://s1.ax1x.com/2023/07/13/pCh2l3n.png" alt="pCh2l3n.png"></a></p>
+</li>
+<li><p>WRF运行官方教程：<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/">WRF–ARW Online Tutorial</a></p>
+<p>其中包含详细配置参数解释和运行命令指南。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCh2a4J"><img src="https://s1.ax1x.com/2023/07/13/pCh2a4J.png" alt="pCh2a4J.png"></a></p>
+</li>
+<li><p>WRF官方论坛：<a target="_blank" rel="noopener" href="https://forum.mmm.ucar.edu/">WRF &amp; MPAS-A Support Forum</a></p>
+<p>绝大多数问题都能搜索到答案。</p>
+</li>
+</ol>
+<h2 id="WRF简介"><a href="#WRF简介" class="headerlink" title="WRF简介"></a>WRF简介</h2><p>WRF（Weather Research and Forecasting）是一个先进的开源天气预报模型系统，由美国国家大气研究中心（NCAR）、美国国家海洋和大气管理局（NOAA）、其他大学和研究机构的科学家们共同开发。WRF模型系统被广泛用于天气和气候研究、天气预报、气候模拟等领域。</p>
+<p>WRF模型是一个多尺度、多分辨率的大气模型系统，可以模拟全球范围内的天气现象，也可以以更高的空间分辨率针对特定地区进行详细的天气模拟。它融合了动力学、物理过程、辐射传输等多个方面的数值模拟技术，能够准确地描述大气中的各种物理过程，如动力学、热力学、湍流、辐射、陆面过程等。</p>
+<p>WRF模型系统具有以下特点和优势：</p>
+<ol>
+<li><p>多尺度模拟能力：WRF模型可以在不同的水平分辨率下运行，从全球范围到小尺度的局地区域模拟，适用于不同尺度的气象研究和预报需求。</p>
+</li>
+<li><p>可配置性和可扩展性：WRF模型系统具有丰富的配置选项，可以根据用户需求选择不同的物理参数方案、边界条件和模拟设置，同时也支持与其他模型和数据源进行耦合和扩展。</p>
+</li>
+<li><p>开源和共享：WRF模型以开源方式发布，用户可以自由访问和使用，同时科学家们通过开放的交流和共享社区不断改进和优化模型系统。</p>
+</li>
+<li><p>多用途应用：WRF模型可用于天气预报、气候研究、环境模拟等多个领域。它被广泛应用于国内外的气象预报业务、科学研究机构和大学中，在气候变化、极端天气事件等领域发挥了重要作用。</p>
+</li>
+</ol>
+<p>总之，WRF模型是一个功能强大、灵活可配置的大气模型系统，提供高分辨率的天气模拟和预报能力，被广泛应用于天气和气候研究以及气象预报业务中。</p>
+<p>简而言之，WRF用于输入静态地理数据和初始参数，来预测之后或之间的详细预测数据，WRF是开源软件，可以很容易的获取。</p>
+<h2 id="WRF构建"><a href="#WRF构建" class="headerlink" title="WRF构建"></a>WRF构建</h2><p>WRF构建相当复杂，主要流程如下：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCh2XCj"><img src="https://s1.ax1x.com/2023/07/13/pCh2XCj.png" alt="pCh2XCj.png"></a></p>
+<p>或者说：依赖库配置&#x3D;&#x3D;&gt;依赖库测试&#x3D;&#x3D;&gt;WRF编译构建&#x3D;&#x3D;&gt;WPS编译构建&#x3D;&#x3D;&gt;静态地理数据下载配置&#x3D;&#x3D;&gt;模式选择</p>
+<p>如果你对WRF的构建一无所知，又英语苦手，可以先看下主要流程，参考下随便就能搜到的<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42372313/article/details/121878090">中文教程</a>即可，但实际操作构建编译最好还是按照官方来。</p>
+<h3 id="依赖库安装"><a href="#依赖库安装" class="headerlink" title="依赖库安装"></a>依赖库安装</h3><p>WRF需要下面五个主要依赖：<br><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/netcdf-c-4.7.2.tar.gz">netcdf-c-4.7.2</a><br><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/netcdf-fortran-4.5.2.tar.gz">netcdf-fortran-4.5.2</a><br><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz">Jasper-1.900.1</a><br><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/libpng-1.2.50.tar.gz">libpng-1.2.50</a><br><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/zlib-1.2.11.tar.gz">zlib-1.2.11</a></p>
+<p>另外需要一个并行计算的依赖：</p>
+<p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/mpich-3.0.4.tar.gz">mpich-3.0.4</a></p>
+<p>装依赖库看起来容易，但一旦出问题很难解决。这几个库里最重要的是用于气象数据格式化的<em>netcdf</em>，再比较早的版本里netcdf(for c)和netcdff(for fortran)是合在一个库里的，但这种会导致版本较新的WRF V4.0报错：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pChRHQ1"><img src="https://s1.ax1x.com/2023/07/13/pChRHQ1.png" alt="pChRHQ1.png"></a></p>
+<p>而且因为编译不会中止，所以非常浪费时间，所以依赖库一定要确保不出问题。</p>
+<p>另外mpich如果不安装，则在WPS和WRF的编译选项里都要选择<strong>串行编译</strong>。</p>
+<h3 id="WRF编译"><a href="#WRF编译" class="headerlink" title="WRF编译"></a>WRF编译</h3><p>编译的流程是先做配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
+<p>有非常多选项可选，需要安装你的依赖和配置做选择，例如编译器gcc+gfrotran的话就用GNU，有mpich就用并行编译。注意，这里的选项很重要，如果有问题必定编译出错。</p>
+<p>然后编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./compile case_name &gt;&amp; log.compile</span><br></pre></td></tr></table></figure>
+
+<p>case_name是编译命令接收的参数，其实这行命令是把编译的所有日志重定向到log里。</p>
+<p>一般使用真实数据都用<code>./compile em_real</code></p>
+<p>编译完成后，如果成功会显示Successfully Build，并且会生成可执行文件：</p>
+<blockquote>
+<p>wrf.exe (model executable)<br>real.exe (real data initialization)<br>ndown.exe (one-way nesting)<br>tc.exe (for tc bogusing–serial only)</p>
+</blockquote>
+<p>使用下面这条命令即可验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -<span class="built_in">ls</span> main/*.exe</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果编译失败了，重新编译时需要先用<code>./clean</code>清除原本配置。</p>
+<h3 id="WPS编译"><a href="#WPS编译" class="headerlink" title="WPS编译"></a>WPS编译</h3>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/07/07/The-exp-of-Redis-unauthorized/"
+      title="Redis未授权访问原理及利用"
+     >
+
+    <p class="title-text">
+      
+        Redis未授权访问原理及利用
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
