@@ -24,8 +24,14 @@
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pCh2a4J.png">
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pCh2XCj.png">
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pChRHQ1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/19/pCTxxzQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/19/pCTzFoV.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/19/pC7kZrD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/19/pC7kQPI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/19/pC7kTsO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pChRHQ1.png">
 <meta property="article:published_time" content="2023-07-13T06:54:55.000Z">
-<meta property="article:modified_time" content="2023-07-13T09:12:16.599Z">
+<meta property="article:modified_time" content="2023-07-19T06:42:09.727Z">
 <meta property="article:author" content="Kizurena">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2023/07/13/pCh2l3n.png">
@@ -160,6 +166,11 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
+                <div class="category-count">1</div>
+            </a>
+        
             <a class="category-link" href="/categories/Web/">
                 Web
                 <div class="category-count">14</div>
@@ -168,11 +179,6 @@
             <a class="category-link" href="/categories/WebSec/">
                 WebSec
                 <div class="category-count">5</div>
-            </a>
-        
-            <a class="category-link" href="/categories/Reverse/">
-                Reverse
-                <div class="category-count">1</div>
             </a>
         
             <a class="category-link" href="/categories/MISC/">
@@ -355,7 +361,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.5k 词 
+            2.8k 词 
           </div>
         </div>
         
@@ -419,14 +425,96 @@
 <p>case_name是编译命令接收的参数，其实这行命令是把编译的所有日志重定向到log里。</p>
 <p>一般使用真实数据都用<code>./compile em_real</code></p>
 <p>编译完成后，如果成功会显示Successfully Build，并且会生成可执行文件：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCTxxzQ"><img src="https://s1.ax1x.com/2023/07/19/pCTxxzQ.png" alt="pCTxxzQ.png"></a></p>
 <blockquote>
 <p>wrf.exe (model executable)<br>real.exe (real data initialization)<br>ndown.exe (one-way nesting)<br>tc.exe (for tc bogusing–serial only)</p>
 </blockquote>
 <p>使用下面这条命令即可验证：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -<span class="built_in">ls</span> main/*.exe</span><br></pre></td></tr></table></figure>
 
+<p>编译这步耗时很长，按照官方文档说至少也要半小时，而且很容易出错。</p>
 <p>注意：如果编译失败了，重新编译时需要先用<code>./clean</code>清除原本配置。</p>
-<h3 id="WPS编译"><a href="#WPS编译" class="headerlink" title="WPS编译"></a>WPS编译</h3>
+<h3 id="WPS编译"><a href="#WPS编译" class="headerlink" title="WPS编译"></a>WPS编译</h3><p>首先设置环境变量，如何与WRF一样配置<code>./configure</code></p>
+<p>同样有很多选项，选择对应的即可。</p>
+<p>然后运行命令<code>./compile &gt;&amp; log.compile</code>编译即可。</p>
+<p>WPS编译相比之下要快的多，而且不那么容易出错，成功之后应该有如下几个可执行文件：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCTzFoV"><img src="https://s1.ax1x.com/2023/07/19/pCTzFoV.png" alt="pCTzFoV.png"></a></p>
+<p>至此就完成了WPS编译。</p>
+<h3 id="静态地理数据下载"><a href="#静态地理数据下载" class="headerlink" title="静态地理数据下载"></a>静态地理数据下载</h3><p>这一步没什么好说的，看文档就可以了，注意一定要下载完整，而且留出足够的存储。</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="http://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html">http://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html</a></p>
+<p>另外路径需要注意与WPS默认配置对应，WPS的namelist.wps默认为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geog_data_path = ´path_to_directory/Build_WRF/WPS_GEOG´</span><br></pre></td></tr></table></figure>
+
+<h3 id="输入数据下载和模式选择"><a href="#输入数据下载和模式选择" class="headerlink" title="输入数据下载和模式选择"></a>输入数据下载和模式选择</h3><p>输入数据在<a target="_blank" rel="noopener" href="https://rda.ucar.edu/datasets/ds084.1/dataaccess/">这个网站</a>下载，如果GFS的话文件名格式应该是类似与<code>gfs.0p25.2022061312.f000.grib2</code>。这个文件名是说这个数据是20220613的12时的第0时次，也就是12点的数据。</p>
+<p>注意f000是指预测多少时次，也就是往后推多少时次，例如<code>gfs.0p25.2022061306.f003.grib2</code>是6时的第3时次，需要后推三个时次，也就是<strong>9点</strong>的数据。</p>
+<p>这个信息在写输入配置时非常重要。</p>
+<p>然后选择em_real模式来跑真实数据，就可以开始正式跑WRF了。</p>
+<h2 id="WRF预处理：运行WPS"><a href="#WRF预处理：运行WPS" class="headerlink" title="WRF预处理：运行WPS"></a>WRF预处理：运行WPS</h2><p>但实际上，现在还不能跑WRF，因为WRF输入数据是nc格式，但是GFS输入数据是grib2，所以需要<strong>对数据做预处理</strong>（貌似类似于LAPS和RAMS的关系）。</p>
+<p>跑WPS实际上就是运行刚才编译出来的三个exe文件，关键在于写namelist.wps的输入配置。</p>
+<p>具体WPS流程是：</p>
+<ol>
+<li>geogrid.exe处理静态地理数据</li>
+<li>ungrib.exe处理输入的GFS数据，用于转换格式</li>
+<li>metgrib.exe将前两个输出文件做运算处理，输出WRF的输入文件。</li>
+</ol>
+<p>关键在于写namelist.wps配置，具体参数解释可详见<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/namelist_best_prac_wps.html">官方文档</a>。</p>
+<p>其实可以分为几个部分，各自是对应可执行文件的配置，其中公用的是&amp;share部分：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&amp;share</span><br><span class="line">wrf_core = &#x27;ARW&#x27;,</span><br><span class="line">max_dom = 1,</span><br><span class="line">start_date = &#x27;2022-06-13_09:00:00&#x27;,</span><br><span class="line">end_date = &#x27;2022-06-13_12:00:00&#x27;, </span><br><span class="line">interval_seconds = 10800,</span><br><span class="line">io_form_geogrid = 2, </span><br></pre></td></tr></table></figure>
+
+<p>起始时间和结束时间是输入数据的起止点，中间的数据由WRF算法算出来。</p>
+<p>interval_seconds是间隔，最后是配置输出格式为nc。</p>
+<h3 id="处理静态地理数据–geogrid-exe"><a href="#处理静态地理数据–geogrid-exe" class="headerlink" title="处理静态地理数据–geogrid.exe"></a>处理静态地理数据–geogrid.exe</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&amp;geogrid</span><br><span class="line"> parent_id         =   1,</span><br><span class="line"> parent_grid_ratio =   1,</span><br><span class="line"> i_parent_start    =   1,</span><br><span class="line"> j_parent_start    =   1,</span><br><span class="line"> e_we              =  100,</span><br><span class="line"> e_sn              =  100,</span><br><span class="line"> !</span><br><span class="line"> !!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line"> ! The default datasets used to produce the MAXSNOALB and ALBEDO12M</span><br><span class="line"> ! fields have changed in WPS v4.0. These fields are now interpolated</span><br><span class="line"> ! from MODIS-based datasets.</span><br><span class="line"> !</span><br><span class="line"> ! To match the output given by the default namelist.wps in WPS v3.9.1,</span><br><span class="line"> ! the following setting for geog_data_res may be used:</span><br><span class="line"> !</span><br><span class="line"> ! geog_data_res = &#x27;maxsnowalb_ncep+albedo_ncep+default&#x27;, &#x27;maxsnowalb_ncep+albedo_ncep+default&#x27;, </span><br><span class="line"> !</span><br><span class="line"> !!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line"> !</span><br><span class="line"> geog_data_res = &#x27;default&#x27;,&#x27;default&#x27;,</span><br><span class="line"> dx = 100,</span><br><span class="line"> dy = 100,</span><br><span class="line"> map_proj = &#x27;lambert&#x27;,</span><br><span class="line"> ref_lat   =  25.09,</span><br><span class="line"> ref_lon   =  102.92,</span><br><span class="line"> truelat1  =  30.0,</span><br><span class="line"> truelat2  =  60.0,</span><br><span class="line"> stand_lon =  120.0,</span><br><span class="line"> geog_data_path = &#x27;/public/home/demo_cuit/hck/Build_WRF/WPS/WPS_GEOG/&#x27;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+
+<p>这个是处理静态地理数据的配置，其中有好几个需要仔细配置的地方。</p>
+<p>e_we和e_sn是网格东西和南北尺寸，即WRF算法的计算<strong>网格范围</strong>，官方文档建议不应小于100*100。</p>
+<p>dx和dy是x和y方向上的网格距离或分辨率，实际上就是WRF<strong>输入数据的分辨率</strong>。</p>
+<p>ref_lat和ref_lon是输入数据的经纬度。</p>
+<p>geog_data_path是静态地理数据的路径。</p>
+<p>配置好就可以跑geogrid.exe了。</p>
+<p>直接一行命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./geogrid.exe &gt;&amp; log.geogrid</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理输入数据–ungrib-exe"><a href="#处理输入数据–ungrib-exe" class="headerlink" title="处理输入数据–ungrib.exe"></a>处理输入数据–ungrib.exe</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;ungrib</span><br><span class="line"> out_format = &#x27;WPS&#x27;,</span><br><span class="line"> prefix = &#x27;FILE&#x27;,</span><br></pre></td></tr></table></figure>
+
+<p>这个部分的namelist很简单，也没什么要修改的。</p>
+<p>但跑数据前需要配置输入数据的格式(这里是配置为GFS)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf ungrib/Variable_Tables/Vtable.GFS Vtable</span><br></pre></td></tr></table></figure>
+
+<p>然后把你的GFS输入数据链接过来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./link_grib.csh path_where_you_placed_GFS_files</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以跑了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ungrib.exe</span><br></pre></td></tr></table></figure>
+
+<p>成功运行会输出如下信息</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC7kZrD"><img src="https://s1.ax1x.com/2023/07/19/pC7kZrD.png" alt="pC7kZrD.png"></a></p>
+<p>并且生成前缀为<code>FILE</code>的文件。</p>
+<h3 id="整合数据–metgrid-exe"><a href="#整合数据–metgrid-exe" class="headerlink" title="整合数据–metgrid.exe"></a>整合数据–metgrid.exe</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;metgrid</span><br><span class="line"> fg_name = &#x27;FILE&#x27;</span><br><span class="line"> io_form_metgrid = 2,</span><br></pre></td></tr></table></figure>
+
+<p>运行成功显示如下信息：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC7kQPI"><img src="https://s1.ax1x.com/2023/07/19/pC7kQPI.png" alt="pC7kQPI.png"></a></p>
+<p>生成前缀为<code>met_em*</code>的文件。</p>
+<p>然后就可以作为输入文件跑WRF了。</p>
+<h2 id="运行WRF"><a href="#运行WRF" class="headerlink" title="运行WRF"></a>运行WRF</h2><p>WRF运行需要跑两个程序，如果是真实数据，则都在<code>WRF/test/em_real</code>目录下。</p>
+<p>首先将WPS输出的met_em*文件链接到当前目录下(当然直接复制也没问题)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf ../../../WPS/met_em* .</span><br></pre></td></tr></table></figure>
+
+<p>然后再配置当前目录下的namelist.input。</p>
+<p>这里比WPS更复杂，而且需要对参数有更正确的理解才能正确输出数据，因此先略过了。</p>
+<p>配置好之后跑real.exe:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpirun -np 1 ./real.exe</span><br></pre></td></tr></table></figure>
+
+<p>如果没装mpirun，直接用<code>./real.exe</code>应该也可以。</p>
+<p>如果输出如下则说明成功运行：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC7kTsO"><img src="https://s1.ax1x.com/2023/07/19/pC7kTsO.png" alt="pC7kTsO.png"></a></p>
+<p>之后就是WRF真正的可执行程序了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpirun -np 8 ./wrf.exe</span><br></pre></td></tr></table></figure>
+
+<p>输出的<code>wrfout*</code>文件就是WRF输出文件了，虽然没有后缀名，但实际上就是NC格式的。</p>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h3 id="WRF编译失败"><a href="#WRF编译失败" class="headerlink" title="WRF编译失败"></a>WRF编译失败</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pChRHQ1"><img src="https://s1.ax1x.com/2023/07/13/pChRHQ1.png" alt="pChRHQ1.png"></a></p>
+<p>这种报错是netcdf这个依赖存在，但与编译不匹配，因此是版本问题。</p>
+<p>升级netcdf版本，然后修改对应环境变量即可。</p>
+
         
       </div>
 
