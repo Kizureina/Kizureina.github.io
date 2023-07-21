@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/19/pC7kTsO.png">
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/13/pChRHQ1.png">
 <meta property="article:published_time" content="2023-07-13T06:54:55.000Z">
-<meta property="article:modified_time" content="2023-07-21T08:17:23.101Z">
+<meta property="article:modified_time" content="2023-07-21T08:23:05.611Z">
 <meta property="article:author" content="Kizurena">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2023/07/13/pCh2l3n.png">
@@ -170,11 +170,31 @@
       <div class="category-box">
             <a class="category-link" href="/categories/Web/">
                 Web
-                <div class="category-count">1</div>
+                <div class="category-count">14</div>
             </a>
         
             <a class="category-link" href="/categories/Reverse/">
                 Reverse
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MISC/">
+                MISC
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/ACG/">
+                ACG
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/WebSec/">
+                WebSec
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/EE/">
+                EE
                 <div class="category-count">1</div>
             </a>
         </div>
@@ -343,7 +363,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.6k 词 
+            3.7k 词 
           </div>
         </div>
         
@@ -498,6 +518,10 @@
 <p>在典型情况下，建议使用 5-6xDX 值（以公里为单位）。如果使用多个垂直层和&#x2F;或地图比例因子远大于 1，则需要使用更小的时间步长。如果出现导致运行停止的 CFL 错误，这意味着运行变得不稳定，您可能需要将该值减小到约 4xDX（甚至 3xDX）。如果您使用的时间步长与历史时间间隔相等，那么输出时间的间隔也会相等。</p>
 </blockquote>
 <p>也就是说一般使用5Dx或6Dx，但老师要求我跑100m分辨率的数据（即Dx为100m），所以一开始用500，之后一直改到100都不行，一直报错CFL。请教了专家才知道，<strong>当分辨率远远小于一公里时，需要将time_step设置为0.1</strong>(比我想象的还小的多啊！)，就可以正常运行了。</p>
+<p>另外设置时间步长设置0.1是不能直接设置time_step的，而且应该写成这种形式：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">time_step                           = <span class="number">0</span>,</span><br><span class="line">time_step_fract_num                 = <span class="number">1</span>,</span><br><span class="line">time_step_fract_den                 = <span class="number">10</span>,</span><br></pre></td></tr></table></figure>
+
+<p>time_step_fract_num是分子，time_step_fract_den 是分母。</p>
 <p>其他与CFL相关的报错可以参考这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42487488/article/details/119703861">原因和解决合集</a>。</p>
 <p>e_we和e_sn是网格范围，dx和dy是分辨率，这两个不但参数名与WPS相同，配置的值也<strong>需要与WPS中配置相同</strong>，否则会在.&#x2F;read.exe时报错：</p>
 <p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCbuVUK"><img src="https://s1.ax1x.com/2023/07/21/pCbuVUK.png" alt="pCbuVUK.png"></a></p>
