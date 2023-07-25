@@ -11,16 +11,19 @@
   <meta charset="utf-8">
   
   
-  <title>标签: Linux | Kizureina&#39;s Blog</title>
+  <title>基于STM32+HC05实现蓝牙键盘 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="I know nothing except the fact of my ignorance.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kizureina&#39;s Blog">
-<meta property="og:url" content="https://kizureina.github.io/tags/Linux/index.html">
+  <meta name="description" content="前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。 一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？ 简单想下必要的键位有：  Enter or KeyDo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于STM32+HC05实现蓝牙键盘">
+<meta property="og:url" content="https://kizureina.github.io/2023/07/25/BLE-KeyBoard-based-STM32/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:description" content="前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。 一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？ 简单想下必要的键位有：  Enter or KeyDo">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-25T08:39:27.000Z">
+<meta property="article:modified_time" content="2023-07-25T10:48:54.700Z">
 <meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="嵌入式">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
@@ -316,43 +319,106 @@
     <div id="content-body">
        
 
-<div class="archive-main-card">
-    <div class="archive-top">
-      <div class="main-title-bar">
-        <div class="main-title-dot"></div>
-        <h1 class="article-title">Archive</h1>
-      </div>    
+<article id="post-BLE-KeyBoard-based-STM32" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        基于STM32+HC05实现蓝牙键盘
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-07-25T08:39:27.000Z" itemprop="datePublished">2023-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/EE/">EE</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            590 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近拜<a href="https://kizureina.github.io/2023/07/24/Thinking-of-Sakura-no-Uta/">樱之诗</a>所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。</p>
+<p>一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？</p>
+<p>简单想下必要的键位有：</p>
+<ul>
+<li><strong>Enter</strong> or <strong>KeyDown</strong> : next</li>
+<li><strong>Ctrl</strong> : skip</li>
+<li><strong>KeyUp</strong> : backlog</li>
+</ul>
+<p>除此之外，我喜欢<strong>在有意思的情节或优秀的CG处截图</strong>，所以使用Snipaste配置的快捷键截图，并保存到指定目录的功能必不可少，因此需要一个键能一次完成下列键盘操作：</p>
+<ul>
+<li><strong>Alt</strong> + <strong>Shift</strong> + <strong>S</strong> : 快捷键截图</li>
+<li><strong>Enter</strong>：选择保存目录</li>
+<li><strong>Enter</strong>：保存至指定目录</li>
+</ul>
+<p>这样想来，只需要四个键位即可，刚好也还在一手能拿过来的范围内，就开搞吧。</p>
+<h2 id="ESP32主控"><a href="#ESP32主控" class="headerlink" title="ESP32主控"></a>ESP32主控</h2><p>所谓的机械键盘，实际上就是一堆开关轴+PCB板，因此主要的难度在主控上。</p>
+<p>那么主控该用什么呢？理所当然的，我一开始打算用宇宙第一IoT芯片ESP32来做。ESP32名气很大，但对IoT一无所知的我是从<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1W84y1q7eX/">莎普蕾的单片机教程</a>才知道的。</p>
+<p>选用ESP32的原因很简单，开发板自带蓝牙+WIFI，丰富良好的开源社区，低廉的价格，方便的烧录方案。说起来最近我打算玩树莓派Pico，却发现各方面都被ESP32吊打，真搞不懂树莓派基金会搞这个是为了什么。</p>
+<p>当然还有一个更重要的原因，ESP32有个非常不错的开源蓝牙键盘库，即<a target="_blank" rel="noopener" href="https://github.com/T-vK/ESP32-BLE-Keyboard">ESP32-BLE-Keyboard</a>，而且兼容Arduino IDE。我之前没搞过单片机的时候觉得Arduino逼格很高，但玩过STM32之后对它不怎么感兴趣了，主要是不能看到底层代码有点麻烦。</p>
+<p>但是蓝牙协议栈相当复杂，如果能封装为库直接调用接口，肯定要简单很多，因此打算用Arduino IDE作为ESP32的主要开发工具了。</p>
+
+        
+      </div>
+
+         
     </div>
     
-    
-      
-      
-        
-        <div class="year-line">
-            <div class="year-num">2021</div>
-            <div class="dot-wrapper">
-                <div class="dot"></div>
-            </div>
-        </div>
-      
-      <a class="archive-article-link" href="/2021/12/21/simple-shell-script/" title="简单的Shell脚本实战">
-        <div class="date">12-21</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    简单的Shell脚本实战
-                
-            </div>
-        </div>
-        <div class="tags">
-            #web #Linux
-        </div>
-      </a>
-    
+     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/07/24/Thinking-of-Sakura-no-Uta/"
+      title="《樱之诗》随想"
+     >
+
+    <p class="title-text">
+      
+        《樱之诗》随想
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
