@@ -286,7 +286,7 @@
       <ul>
         
           <li>
-            <a href="/2023/07/25/BLE-KeyBoard-based-STM32/">基于STM32+HC05实现蓝牙键盘</a>
+            <a href="/2023/07/25/BLE-KeyBoard-based-STM32/">手搓蓝牙机械键盘——基于ESP32、STM32、CH573</a>
           </li>
         
           <li>
@@ -328,7 +328,7 @@
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/07/25/BLE-KeyBoard-based-STM32/">基于STM32+HC05实现蓝牙键盘</a>
+        <a class="p-name article-title" href="/2023/07/25/BLE-KeyBoard-based-STM32/">手搓蓝牙机械键盘——基于ESP32、STM32、CH573</a>
       </h1>
     
   
@@ -347,7 +347,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            590 词 
+            4.1k 词 
           </div>
         </div>
         
@@ -357,13 +357,13 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。
-一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？
+            前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推Gal是很累的，所以在研究更优雅的解决方案。
+一个明显的事实是，绝大部分Galgame只需要很少几个键，除去开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？
 简单想下必要的键位有：
 
-Enter or KeyDown : next
+Enter or Down : next
 Ctrl : skip
-KeyUp : backlog
+Up : backlog
 
 除此之外，我喜欢在有意思的情节或优秀的CG处截图，所以使用Snipaste配置的快捷键截图，并保存到指定目录的功能必不可少，因此需要一个键能一次完成下列键盘操作：
 
@@ -372,8 +372,8 @@ Enter：选择保存目录
 Enter：保存至指定目录
 
 这样想来，只需要四个键位即可，刚好也还在一手能拿过来的范围内，就开搞吧。
-ESP32主控所谓的机械键盘，实际上就是一堆开关轴+PCB板，因此主要的难度在主控上。
-那么主控该用什么呢？理所当然的，我一开始打算用宇宙第一IoT芯片ESP32来做。ES...  
+主控所谓的机械键盘，实际上就是一堆开关轴+PCB板，因此主要的难度在主控上。
+基本逻辑其实很简单，单片机读取GPIO电平，当出现上升沿或下降沿时将对应键位的编码发送至上位机。实际...  
           </div>
         
       </div>

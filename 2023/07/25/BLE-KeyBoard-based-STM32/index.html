@@ -11,20 +11,28 @@
   <meta charset="utf-8">
   
   
-  <title>基于STM32+HC05实现蓝牙键盘 | Kizureina&#39;s Blog</title>
+  <title>手搓蓝牙机械键盘——基于ESP32、STM32、CH573 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。 一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？ 简单想下必要的键位有：  Enter or KeyDo">
+  <meta name="description" content="前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推Gal是很累的，所以在研究更优雅的解决方案。 一个明显的事实是，绝大部分Galgame只需要很少几个键，除去开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？ 简单想下必要的键位有：  Enter or Do">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于STM32+HC05实现蓝牙键盘">
+<meta property="og:title" content="手搓蓝牙机械键盘——基于ESP32、STM32、CH573">
 <meta property="og:url" content="https://kizureina.github.io/2023/07/25/BLE-KeyBoard-based-STM32/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。 一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？ 简单想下必要的键位有：  Enter or KeyDo">
+<meta property="og:description" content="前言最近拜樱之诗所赐对Galgame又有了兴趣，但长时间高强度推Gal是很累的，所以在研究更优雅的解决方案。 一个明显的事实是，绝大部分Galgame只需要很少几个键，除去开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？ 简单想下必要的键位有：  Enter or Do">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvGTqP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/26/pCj0Ymd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/26/pCjBObj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvJERJ.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvJKZ6.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvW3Hf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvfhWQ.jpg">
 <meta property="article:published_time" content="2023-07-25T08:39:27.000Z">
-<meta property="article:modified_time" content="2023-07-25T10:48:54.700Z">
+<meta property="article:modified_time" content="2023-07-29T12:17:26.422Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="嵌入式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2023/07/27/pCvGTqP.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -289,7 +297,7 @@
       <ul>
         
           <li>
-            <a href="/2023/07/25/BLE-KeyBoard-based-STM32/">基于STM32+HC05实现蓝牙键盘</a>
+            <a href="/2023/07/25/BLE-KeyBoard-based-STM32/">手搓蓝牙机械键盘——基于ESP32、STM32、CH573</a>
           </li>
         
           <li>
@@ -332,7 +340,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        基于STM32+HC05实现蓝牙键盘
+        手搓蓝牙机械键盘——基于ESP32、STM32、CH573
       </h1>
     
   
@@ -351,7 +359,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            590 词 
+            4.1k 词 
           </div>
         </div>
         
@@ -360,26 +368,111 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近拜<a href="https://kizureina.github.io/2023/07/24/Thinking-of-Sakura-no-Uta/">樱之诗</a>所赐对Galgame又有了兴趣，但长时间高强度推是很累的，所以在研究更优雅的解决方案。</p>
-<p>一个明显的事实是，绝大部分Galgame只需要很少几个键，除了开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？</p>
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近拜<a href="https://kizureina.github.io/2023/07/24/Thinking-of-Sakura-no-Uta/">樱之诗</a>所赐对Galgame又有了兴趣，但长时间高强度推Gal是很累的，所以在研究更优雅的解决方案。</p>
+<p>一个明显的事实是，绝大部分Galgame只需要很少几个键，除去开始的Load和结束的Save，鼠标更是几乎完全用不到，所以如果可以做一个只有几个键位的蓝牙键盘，把手臂从桌面上解放出来，就能轻松很多。而如果做成机械键盘，用起来或许还蛮有趣的？</p>
 <p>简单想下必要的键位有：</p>
 <ul>
-<li><strong>Enter</strong> or <strong>KeyDown</strong> : next</li>
+<li><strong>Enter</strong> or <strong>Down</strong> : next</li>
 <li><strong>Ctrl</strong> : skip</li>
-<li><strong>KeyUp</strong> : backlog</li>
+<li><strong>Up</strong> : backlog</li>
 </ul>
 <p>除此之外，我喜欢<strong>在有意思的情节或优秀的CG处截图</strong>，所以使用Snipaste配置的快捷键截图，并保存到指定目录的功能必不可少，因此需要一个键能一次完成下列键盘操作：</p>
-<ul>
+<ol>
 <li><strong>Alt</strong> + <strong>Shift</strong> + <strong>S</strong> : 快捷键截图</li>
 <li><strong>Enter</strong>：选择保存目录</li>
 <li><strong>Enter</strong>：保存至指定目录</li>
-</ul>
+</ol>
 <p>这样想来，只需要四个键位即可，刚好也还在一手能拿过来的范围内，就开搞吧。</p>
-<h2 id="ESP32主控"><a href="#ESP32主控" class="headerlink" title="ESP32主控"></a>ESP32主控</h2><p>所谓的机械键盘，实际上就是一堆开关轴+PCB板，因此主要的难度在主控上。</p>
-<p>那么主控该用什么呢？理所当然的，我一开始打算用宇宙第一IoT芯片ESP32来做。ESP32名气很大，但对IoT一无所知的我是从<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1W84y1q7eX/">莎普蕾的单片机教程</a>才知道的。</p>
-<p>选用ESP32的原因很简单，开发板自带蓝牙+WIFI，丰富良好的开源社区，低廉的价格，方便的烧录方案。说起来最近我打算玩树莓派Pico，却发现各方面都被ESP32吊打，真搞不懂树莓派基金会搞这个是为了什么。</p>
+<h1 id="主控"><a href="#主控" class="headerlink" title="主控"></a>主控</h1><p>所谓的机械键盘，实际上就是一堆开关轴+PCB板，因此主要的难度在主控上。</p>
+<p>基本逻辑其实很简单，<strong>单片机读取GPIO电平，当出现上升沿或下降沿时将对应键位的编码发送至上位机</strong>。实际的键盘主要技术在如何用较少的GPIO读取大量键位，也就是使用<strong>矩阵扫描</strong>来避免诸如鬼影之类的键盘问题。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCvGTqP"><img src="https://s1.ax1x.com/2023/07/27/pCvGTqP.png" alt="pCvGTqP.png"></a></p>
+<p>当然，对于我这种如同手柄的键盘来讲，倒是不存在这个问题。</p>
+<p>综上所述，问题的关键在于如何方便地<strong>让微处理器作为HID设备与上位机做蓝牙通信</strong>，这就主要属于IoT的领域了，因此主控选择非常重要。</p>
+<h2 id="ESP32主控"><a href="#ESP32主控" class="headerlink" title="ESP32主控"></a>ESP32主控</h2><p>那么主控该用什么呢？理所当然的，我一开始打算使用宇宙第一IoT芯片ESP32。ESP32名气很大，但对IoT一无所知的我是从<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1W84y1q7eX/">莎普蕾的单片机教程</a>才知道的。</p>
+<p>选用ESP32的原因很简单，开发板自带蓝牙+WIFI，丰富良好的开源社区，低廉的价格，方便的烧录方案，以及使用老师的公费可以随便买相关模块。说起来最近我本打算玩树莓派Pico，却发现各方面都被ESP32吊打，完全提不起兴趣，真搞不懂树莓派基金会搞这个是为了什么。</p>
 <p>当然还有一个更重要的原因，ESP32有个非常不错的开源蓝牙键盘库，即<a target="_blank" rel="noopener" href="https://github.com/T-vK/ESP32-BLE-Keyboard">ESP32-BLE-Keyboard</a>，而且兼容Arduino IDE。我之前没搞过单片机的时候觉得Arduino逼格很高，但玩过STM32之后对它不怎么感兴趣了，主要是不能看到底层代码有点麻烦。</p>
-<p>但是蓝牙协议栈相当复杂，如果能封装为库直接调用接口，肯定要简单很多，因此打算用Arduino IDE作为ESP32的主要开发工具了。</p>
+<p>但是蓝牙协议栈相当复杂，如果能封装为库直接调用接口，肯定要简单很多，因此打算用Arduino IDE作为ESP32的主要开发工具。其实ESP32官方开发工具是ESP-IDF，全命令行操作，功能非常强大，但不容易上手，方便起见就用Arduino IDE入门了。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>Arduino IDE开发ESP32需要下载对于的配置包和依赖库，ESP32需要下面这个：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCj0Ymd"><img src="https://s1.ax1x.com/2023/07/26/pCj0Ymd.png" alt="pCj0Ymd.png"></a></p>
+<p>要安装这个库，需要先在开发板管理器网址导入ESP32官方依赖URL：<a target="_blank" rel="noopener" href="https://espressif.github.io/arduino-esp32/package_esp32_index.json">https://espressif.github.io/arduino-esp32/package_esp32_index.json</a></p>
+<p>但很可惜，即便配置了这个URL，上面的库八成是仍然下不动的，原因很简单，乐鑫的依赖大多托管于Github，国内下很不方便(诡异的是，即便我配了全局代理仍然下不动)，所以我在安装库时直接断网：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCjBObj"><img src="https://s1.ax1x.com/2023/07/26/pCjBObj.png" alt="pCjBObj.png"></a></p>
+<p><strong>根据报错给出的URL一个一个把对应依赖下好</strong>，然后放在这个目录即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\用户名\AppData\Local\Arduino15\staging\packages</span><br></pre></td></tr></table></figure>
+
+<p>然后点灯之类就很容易了。</p>
+<h3 id="ESP32蓝牙键盘库使用"><a href="#ESP32蓝牙键盘库使用" class="headerlink" title="ESP32蓝牙键盘库使用"></a>ESP32蓝牙键盘库使用</h3><p>这里再说下配置蓝牙键盘的外部依赖库，去上面的项目仓库下库文件压缩包，然后在项目-导入库-添加ZIP库即可，导入后能看到给出的蓝牙键盘例程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This example turns the ESP32 into a Bluetooth LE keyboard that writes the words, presses Enter, presses a media key and then Ctrl+Alt+Delete</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;BleKeyboard.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">()</span> &#123;</span><br><span class="line">  Serial.begin(<span class="number">115200</span>);</span><br><span class="line">  Serial.println(<span class="string">&quot;Starting BLE work!&quot;</span>);</span><br><span class="line">  Keyboard.begin();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(bleDevice.isConnected()) &#123;</span><br><span class="line">    Serial.println(<span class="string">&quot;Sending &#x27;Hello world&#x27;...&quot;</span>);</span><br><span class="line">    Keyboard.print(<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line"></span><br><span class="line">    delay(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    Serial.println(<span class="string">&quot;Sending Enter key...&quot;</span>);</span><br><span class="line">    Keyboard.write(KEY_RETURN);</span><br><span class="line"></span><br><span class="line">    delay(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    Serial.println(<span class="string">&quot;Sending Play/Pause media key...&quot;</span>);</span><br><span class="line">    Keyboard.write(KEY_MEDIA_PLAY_PAUSE);</span><br><span class="line"></span><br><span class="line">    delay(<span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Serial.println(<span class="string">&quot;Waiting 5 seconds...&quot;</span>);</span><br><span class="line">  delay(<span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很简单明了的接口用法，实际上这个外部库是根据Arduino本身板子的USB HID库函数照着写的，所以直接去查Arudino官方的API文档就可以直接用。</p>
+<p>然后依照这个例程，写个读取指定GPIO电平状态的功能模拟键盘也就很容易了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This example turns the ESP32 into a Bluetooth LE keyboard that writes the words, presses Enter, presses a media key and then Ctrl+Alt+Delete</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USE_NIBLE</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;BleKeyboard.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN 23</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED 2</span></span><br><span class="line">BleKeyboard bleKeyboard;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">()</span> &#123;</span><br><span class="line">  pinMode(PIN,INPUT_PULLUP);</span><br><span class="line">  pinMode(LED, OUTPUT);</span><br><span class="line">  Serial.begin(<span class="number">115200</span>);</span><br><span class="line">  Serial.println(<span class="string">&quot;Starting BLE work!&quot;</span>);</span><br><span class="line">  bleKeyboard.begin();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line">  digitalWrite(LED,LOW);</span><br><span class="line">  <span class="keyword">if</span>(bleKeyboard.isConnected())&#123;</span><br><span class="line">    digitalWrite(LED,HIGH);</span><br><span class="line">    <span class="keyword">if</span>(!digitalRead(PIN))&#123;</span><br><span class="line">      Serial.println(<span class="string">&quot;Start Sending...&quot;</span>);</span><br><span class="line">      bleKeyboard.write(KEY_RETURN);</span><br><span class="line">      delay(<span class="number">1500</span>);</span><br><span class="line">      bleKeyboard.print(<span class="string">&quot;*******&quot;</span>);</span><br><span class="line">      delay(<span class="number">600</span>);</span><br><span class="line">      Serial.println(<span class="string">&quot;Sending Enter key...&quot;</span>);</span><br><span class="line">      bleKeyboard.write(KEY_RETURN);</span><br><span class="line"></span><br><span class="line">      delay(<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Serial.println(&quot;Sending Play/Pause media key...&quot;);</span></span><br><span class="line">    <span class="comment">// bleKeyboard.write(KEY_MEDIA_PLAY_PAUSE);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// delay(1000);</span></span><br><span class="line">    </span><br><span class="line">   <span class="comment">//</span></span><br><span class="line">   <span class="comment">// Below is an example of pressing multiple keyboard modifiers </span></span><br><span class="line">   <span class="comment">// which by default is commented out. </span></span><br><span class="line">   <span class="comment">// </span></span><br><span class="line">   <span class="comment">/* Serial.println(&quot;Sending Ctrl+Alt+Delete...&quot;);</span></span><br><span class="line"><span class="comment">    bleKeyboard.press(KEY_LEFT_CTRL);</span></span><br><span class="line"><span class="comment">    bleKeyboard.press(KEY_LEFT_ALT);</span></span><br><span class="line"><span class="comment">    bleKeyboard.press(KEY_DELETE);</span></span><br><span class="line"><span class="comment">    delay(100);</span></span><br><span class="line"><span class="comment">    bleKeyboard.releaseAll();</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里还顺手写了个连接成功蓝牙后常亮LED的功能，刚好买的ESP32最便宜开发板上LED是蓝色的，然后烧进代码测试，这里没按键就用杜邦线跳线了，发现<strong>很顺利地完成了按键检测和键盘操作</strong>，用来输锁屏密码之类的真是相当方便，消抖就直接用长时间delay了。</p>
+<p>结果麻烦来了，这个优秀的蓝牙键盘库有个致命的问题：<em>已经配对过也连接过的蓝牙，在重新上电后无法连接，只能删掉之前的配置再重新配置才能连接。</em></p>
+<p>这下就很不妙了，如果每次连接都要删掉再重新配对，那实在太麻烦了，老实说每次烧录都重新配对还能忍受，每次上电都不行就太不优雅了。直接调API的麻烦来了，看不到底层，自己修改当然不靠谱。没办法只能去原项目看issues，果然有不少人和我一样遇到这个麻烦。仔细翻了下，居然发现有人给出了一个他<a target="_blank" rel="noopener" href="https://github.com/alexz006/ESP32-BLE-Combo">修改过的项目fork</a>，而且耐心指导开issue的开发者删去之前的库，安装他修改后的依赖。真是完美的开源精神！具体issue参见<a target="_blank" rel="noopener" href="https://github.com/T-vK/ESP32-BLE-Keyboard/issues/233">这里</a>。</p>
+<p>而且惊人的是，我按照这哥们的教程装上之后，居然<strong>完美解决了之前所有问题</strong>，真是非常厉害！</p>
+<p>不过点进去一看，他的fork只有三个star，把几千star的项目最大bug解决，居然只有这么点star，让人唏嘘啊。</p>
+<p>言归正传，修改后的程序代码其实差不太多：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This example turns the ESP32 into a Bluetooth LE keyboard &amp; mouse.</span></span><br><span class="line"><span class="comment"> * Writes the words, presses Enter, presses a media key.</span></span><br><span class="line"><span class="comment"> * In the end showcase the mouse functions.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;BleKeyboard.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN 23</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">()</span> &#123;</span><br><span class="line">  pinMode(PIN, INPUT_PULLUP);</span><br><span class="line"></span><br><span class="line">  bleDevice.setName(<span class="string">&quot;ESP32 Combo&quot;</span>);  <span class="comment">//call before any of the begin functions to change the device name.</span></span><br><span class="line"></span><br><span class="line">  Keyboard.begin();</span><br><span class="line">  delay(<span class="number">2000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (bleDevice.isConnected()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!digitalRead(PIN)) &#123;</span><br><span class="line">      Keyboard.write(KEY_RETURN);</span><br><span class="line">      delay(<span class="number">500</span>);</span><br><span class="line">      Keyboard.print(<span class="string">&quot;*******&quot;</span>);</span><br><span class="line">      delay(<span class="number">600</span>);</span><br><span class="line">      Keyboard.write(KEY_RETURN);</span><br><span class="line">      delay(<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Left click&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_LEFT);</span></span><br><span class="line">    <span class="comment">// delay(500);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Right click&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_RIGHT);</span></span><br><span class="line">    <span class="comment">// delay(500);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Scroll wheel click&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_MIDDLE);</span></span><br><span class="line">    <span class="comment">// delay(500);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Back button click&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_BACK);</span></span><br><span class="line">    <span class="comment">// delay(500);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Forward button click&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_FORWARD);</span></span><br><span class="line">    <span class="comment">// delay(500);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Click left+right mouse button at the same time&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_LEFT | MOUSE_RIGHT);</span></span><br><span class="line">    <span class="comment">// delay(500);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serial.println(&quot;Click left+right mouse button and scroll wheel at the same time&quot;);</span></span><br><span class="line">    <span class="comment">// Mouse.click(MOUSE_LEFT | MOUSE_RIGHT | MOUSE_MIDDLE);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// unsigned long currentMillis = millis();</span></span><br><span class="line">    <span class="comment">// if(BatteryLevel&gt;=4 &amp;&amp; currentMillis - previousMillisBattery &gt;= 3000) &#123; // gradual discharge of the battery</span></span><br><span class="line">    <span class="comment">//   previousMillisBattery = currentMillis;</span></span><br><span class="line">    <span class="comment">//   BatteryLevel = BatteryLevel - 1;</span></span><br><span class="line">    <span class="comment">//   bleDevice.setBatteryLevel(BatteryLevel);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实例程代码里还有一些其他设备电量之类的蓝牙设备配置，但没什么具体作用我就删去了。</p>
+<h3 id="硬件测试"><a href="#硬件测试" class="headerlink" title="硬件测试"></a>硬件测试</h3><p>至此软件部分就完全搞定了，非常简单而且效果很不赖。我觉得已经很完美，所以开始花功夫做硬件部分，我手头有一个废旧蓝牙耳机，拆下其中的电源部分拿到了600mAh&#x2F;3.7V的锂电池，但3.7V不足以给ESP32供电，而且锂电池电压会随电量变化而不稳定，所以需要有个升压稳压的<strong>DC-DC电源模块</strong>。</p>
+<p>电源设计在硬件中是最复杂的部分，我也花功夫从莎普蕾的视频学了下Bark电源和开关稳压电源设计，但贴片元件手焊太累，用嘉立创的SMT又太贵，综合考量最廉价方便的选择就是干脆买块电源板，锂电池充放一体升压稳压电源板在淘宝大概五块包邮，而且很小巧方便。</p>
+<p>既然直接用了成品模块，我想干脆也不画PCB，直接用洞洞板焊锡走线好了。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCvJERJ"><img src="https://s1.ax1x.com/2023/07/27/pCvJERJ.jpg" alt="pCvJERJ.jpg"></a></p>
+<p>焊接水平很差，而且因为九块九买的便宜烙铁太难用，最后还丢人的飞线了，成品大概这样：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCvJKZ6"><img src="https://s1.ax1x.com/2023/07/27/pCvJKZ6.jpg" alt="pCvJKZ6.jpg"></a></p>
+<p>按键是从捡来的荧光棒拆下来的，用来代替洞洞板插不上的机械键盘轴体，简单用万用表测下就知道四个引脚分别对应什么了。</p>
+<p>简单测试下供电正常，也能正常用type-c给锂电池充电，供电后很快就能连接上蓝牙，按下按键也能正常发送HID键盘数据，可以说一切正常相当不错。</p>
+<p>但拿这玩意玩了会樱之诗之后，发现了致命的问题：ESP32发热惊人，<strong>功耗实在太高了</strong>。600mAh的锂电池充满电，用不了几十分钟就没电了，当然好消息是稳压模块确实供电没问题。</p>
+<p>只能续航这么短时间，而且板子上几个IC烫的要命（简直让我怀疑开发板主控的ESP32是不是引脚有短路），实在让人汗颜，当然是不能接受的，硬件当然没办法改，但程序代码是可以优化的，实际上上面的代码简单粗暴，问题很多，改下说不定能改善。</p>
+<p>最明显的问题是高频率（当然是我猜的高频率）调用<code>digitalRead()</code>这个函数，改下每次循环的延迟时间，明显感觉到发热有差别，大概这个读取电平状态的函数功耗非常高。但优化很容易，不如说读取按键的一般思路就是<strong>外部中断</strong>，但麻烦的地方又来了，写了半天不习惯的Arduino写法的外部中断，仍然和蓝牙键盘库不兼容，最后好不容易搞定了，感觉发热也没有明显改善，功耗也是依旧高得惊人。最后上Github又找了个别人编译好的ESP32蓝牙键盘固件烧进去，仍然是难以接受的高功耗。</p>
+<p>没办法，如此高的功耗当然不行，只能放弃ESP32主控了。宇宙第一IoT MCU功耗这么拉跨，让人有点失望，当然也有可能是我买的便宜开发板的问题，总之只能换主控了。</p>
+<h2 id="STM32主控"><a href="#STM32主控" class="headerlink" title="STM32主控"></a>STM32主控</h2><h3 id="HC-05化身蓝牙HID设备"><a href="#HC-05化身蓝牙HID设备" class="headerlink" title="HC-05化身蓝牙HID设备"></a>HC-05化身蓝牙HID设备</h3><p>放弃ESP32以后，我重新开始考虑之前最熟悉的MCU STM32。STM32设计之初就严谨地考虑了功耗问题，而且我几乎没感觉工作时IC有什么发热的问题。</p>
+<p>刚好，之前搞远程开关灯的时候买过一个蓝牙模块，即HC-05，当时十几块不觉得有什么，现在想想比不少开发板还贵，放着吃灰也太浪费了。</p>
+<p>然而上网查了下才发现，HC-05模块是串口蓝牙，其中没有内置HID协议，没办法直接拿来做蓝牙键盘，但手写实现蓝牙HID协议栈又太麻烦了点，所以本打算放弃了。</p>
+<p>不过转念一想，如果能<strong>在上位机开一个监听串口的服务，然后通过解析串口数据在本地操作HID数据</strong>呢？</p>
+<p>这样一来岂不是就把串口数据在上位机转为HID数据了？</p>
+<p>听起来很不赖，刚好操作HID数据这个需求我马上想到了python的pyautogui库，可以完美操作键盘鼠标，非常强大。随手搜了下又发现python居然还有直接操作串口的库pySerial，不得不说python真是太好用了。直接pip安装即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pyserial</span><br></pre></td></tr></table></figure>
+
+<p>具体的接口可以参见这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/bryanwang_3099/article/details/120493736">API简单介绍</a>。</p>
+<h3 id="MCU端开发"><a href="#MCU端开发" class="headerlink" title="MCU端开发"></a>MCU端开发</h3><p>当然，在写python之前，得把STM32的功能实现才行。实际上也很容易，HC05的蓝牙协议对单片机来说，只是一个于一般UART完全一样的串口而已，直接写串口通信就可以。</p>
+<p>此外，检测按键的外部中断也不难——本以为如此，但写了才发现消抖不像听起来那么容易。</p>
+<p>软件消抖就是直接HAL_Delay()，听起来很容易，但延迟太高会阻塞浪费性能，太低又起不到消抖的作用，总之有点麻烦。</p>
+<p>言归正传，又回到我熟悉的STM32CubeMX+Keil的开发环境，果然还是比Arduino IDE舒服不少啊。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCvW3Hf"><img src="https://s1.ax1x.com/2023/07/27/pCvW3Hf.png" alt="pCvW3Hf.png"></a></p>
+<p>只有一个键位的话，CubeMX配置如上图。</p>
+<p>其实用到的GPIO很少：</p>
+<ul>
+<li>系统时钟</li>
+<li>STLink调试</li>
+<li>蓝牙串口通信</li>
+<li>按键中断</li>
+<li>LED</li>
+</ul>
+<p>对了，有个地方忘记提到了，这里的STM32主控是用的学长那里继承来的核心板<strong>Black Pill</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pCvfhWQ"><img src="https://s1.ax1x.com/2023/07/27/pCvfhWQ.jpg" alt="pCvfhWQ.jpg"></a></p>
+<p>虽说是最常见的STM32F103C8T6，但板子上的丝印却很不清楚，整体布局也和网上搜到的原理图不同，例如板载LED不是PC13，试了半天也没找到到底哪个GPIO是连LED的，诸如此类的问题让人很迷惑。不过这板子相当小，比一般的Blue&#x2F;Black Pill核心板还要小，倒也算有点优势吧。</p>
+<p>言归正传，按键中断虽然简单，只要写好中断回调函数，配置好初始化函数即可。但消抖却不那么容易，简单想下MCU读取按键的逻辑：</p>
+<ul>
+<li>按下键盘轴 </li>
+<li>对应GPIO电平拉底</li>
+<li>触发按键中断</li>
+<li>进入中断回调——<strong>此时需要关闭中断，防止因抖动导致多次进入中断回调，同时又需要在执行完发送键盘编码数据后再开中断</strong></li>
+<li>发送对应键位的编码数据</li>
+</ul>
+<p>最麻烦的地方在关中断，因为单片机执行速度很快，如果按下时出现抖动，很有可能导致<strong>多次触发中断</strong>，因此需要在软件层在出现中断时进入main函数执行具体逻辑代码，同时关闭中断。仔细想下果然需要用设置标志位的办法实现<strong>读取下降沿电平</strong>的逻辑：</p>
+<blockquote>
+<p>在中断回调函数中，利用<code>HAL_GPIO_ReadPin()</code>对<code>rising_falling_flag</code>进行赋值，从而判断触发中断的是上升沿还是下降沿。</p>
+<p>在主循环中，首先通过边沿检测标志<code>rising_falling_flag</code>来判断按键是处于按下还是松开的边沿，如果是下降的边沿<code>(rising_falling_flag == GPIO_PIN_RESET)</code>则将LED灯熄灭，如果是如果是上升的边沿<code>(rising_falling_flag == GPIO_PIN_SET)</code>则将LED灯点亮。为了防止误触发，通过边沿检测的判断之后，程序还会再对电平进行一次读取，确认下降沿后跟随的是低电平或者上升沿后跟随的是高电平，如果不是则不切换LED状态。</p>
+<p>使用<code>exit_flag</code>来实现主循环和中断回调函数之间的互斥，保证中断处理函数中的功能（判断上升&#x2F;下降沿）只在主循环完成判断之后进行，或者主循环的判断只在中断处理函数运行（即检测到了一次上升沿或者下降沿）之后再进行。</p>
+</blockquote>
+<p>逻辑想明白，代码实现就很清晰了：</p>
+<p>中断回调函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">HAL_GPIO_EXTI_Callback</span><span class="params">(<span class="type">uint16_t</span> GPIO_Pin)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (GPIO_Pin == GPIO_PIN_0)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (exit_flag == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            exit_flag = <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 关中断</span></span><br><span class="line">            rising_falling_flag = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         
       </div>
