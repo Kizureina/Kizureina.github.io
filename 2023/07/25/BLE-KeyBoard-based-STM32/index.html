@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvW3Hf.png">
 <meta property="og:image" content="https://s1.ax1x.com/2023/07/27/pCvfhWQ.jpg">
 <meta property="article:published_time" content="2023-07-25T08:39:27.000Z">
-<meta property="article:modified_time" content="2023-07-30T10:18:22.442Z">
+<meta property="article:modified_time" content="2023-07-30T23:25:57.401Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="嵌入式">
 <meta name="twitter:card" content="summary">
@@ -166,12 +166,32 @@
       <div class="category-box">
             <a class="category-link" href="/categories/WebSec/">
                 WebSec
-                <div class="category-count">1</div>
+                <div class="category-count">6</div>
             </a>
         
             <a class="category-link" href="/categories/Web/">
                 Web
+                <div class="category-count">14</div>
+            </a>
+        
+            <a class="category-link" href="/categories/EE/">
+                EE
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
                 <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MISC/">
+                MISC
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/ACG/">
+                ACG
+                <div class="category-count">3</div>
             </a>
         </div>
     </div>
@@ -197,7 +217,7 @@
       
         <a class="archive-link" href="/archives/2023/07 ">
           七月 2023 
-          <div class="archive-count">4 </div>
+          <div class="archive-count">5 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/06 ">
@@ -277,6 +297,10 @@
       <ul>
         
           <li>
+            <a href="/2023/07/31/Record-of-Web-Sec-s-practice/">安恒大运会安服实习总结</a>
+          </li>
+        
+          <li>
             <a href="/2023/07/25/BLE-KeyBoard-based-STM32/">手搓蓝牙机械键盘——基于ESP32、STM32、CH573</a>
           </li>
         
@@ -290,10 +314,6 @@
         
           <li>
             <a href="/2023/07/07/The-exp-of-Redis-unauthorized/">Redis未授权访问原理及利用</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/05/Start-of-Java-Sec-command-execute-and-reflection/">Java安全入门：命令执行，反射与反序列化</a>
           </li>
         
       </ul>
@@ -460,7 +480,9 @@
 <h3 id="Python上位机开发"><a href="#Python上位机开发" class="headerlink" title="Python上位机开发"></a>Python上位机开发</h3><p>这个部分没什么技术含量：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyautogui</span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"><span class="keyword">import</span> serial.tools.list_ports</span><br><span class="line"><span class="keyword">import</span> keyboard,time</span><br><span class="line"><span class="keyword">import</span> bluetooth</span><br><span class="line"><span class="comment"># import ctypes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># whnd = ctypes.windll.kernel32.GetConsoleWindow()</span></span><br><span class="line"><span class="comment"># if whnd != 0:</span></span><br><span class="line">    <span class="comment"># ctypes.windll.user32.ShowWindow(whnd, 0)</span></span><br><span class="line">    <span class="comment"># ctypes.windll.kernel32.CloseHandle(whnd)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">list_serial</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;正在连接蓝牙串口.........&quot;</span>)</span><br><span class="line">    ports_list = <span class="built_in">list</span>(serial.tools.list_ports.comports())</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(ports_list) &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;无串口设备。&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;可用的串口设备如下：&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> comport <span class="keyword">in</span> ports_list:</span><br><span class="line">            <span class="built_in">print</span>(<span class="built_in">list</span>(comport)[<span class="number">0</span>], <span class="built_in">list</span>(comport)[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">discover_bluetooth_devices</span>():</span><br><span class="line">    nearby_devices = bluetooth.discover_devices(duration=<span class="number">8</span>, lookup_names=<span class="literal">True</span>, lookup_class=<span class="literal">False</span>, device_id=-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> nearby_devices</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取附近的蓝牙设备和名称</span></span><br><span class="line">    bluetooth_devices = discover_bluetooth_devices()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印设备名称和MAC地址</span></span><br><span class="line">    <span class="keyword">for</span> addr, name <span class="keyword">in</span> bluetooth_devices:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;设备名称: <span class="subst">&#123;name&#125;</span>, MAC地址: <span class="subst">&#123;addr&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_ble_key</span>():</span><br><span class="line">    ser = serial.Serial(<span class="string">&quot;COM14&quot;</span>, <span class="number">9600</span>, <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">if</span> ser.isOpen():  <span class="comment"># 判断串口是否成功打开</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;打开串口成功！&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(ser.name)  <span class="comment"># 输出串口号</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            com_input = ser.read(<span class="number">4</span>)</span><br><span class="line">            <span class="keyword">if</span> com_input:  <span class="comment"># 如果读取结果非空，则输出</span></span><br><span class="line">                send_key(com_input)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;打开串口失败。&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_scan_code_to_key</span>(<span class="params">scan_code</span>):</span><br><span class="line">    keys = keyboard.key_to_scan_codes(scan_code)</span><br><span class="line">    <span class="keyword">if</span> keys:</span><br><span class="line">        <span class="keyword">return</span> keys[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_key</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="built_in">print</span>(key)</span><br><span class="line">    <span class="comment"># pyautogui.keyDown(&#x27;ctrl&#x27;)</span></span><br><span class="line">    <span class="comment"># pyautogui.keyDown(&#x27;c&#x27;)</span></span><br><span class="line">    <span class="comment"># pyautogui.keyUp(&#x27;c&#x27;)</span></span><br><span class="line">    <span class="comment"># pyautogui.keyUp(&#x27;ctrl&#x27;)</span></span><br><span class="line">    <span class="keyword">if</span> key == <span class="string">b&#x27;0001&#x27;</span>:</span><br><span class="line">        pyautogui.keyDown(<span class="string">&#x27;alt&#x27;</span>)</span><br><span class="line">        pyautogui.keyDown(<span class="string">&#x27;shift&#x27;</span>)</span><br><span class="line">        pyautogui.keyDown(<span class="string">&#x27;s&#x27;</span>)</span><br><span class="line">        pyautogui.keyUp(<span class="string">&#x27;alt&#x27;</span>)</span><br><span class="line">        pyautogui.keyUp(<span class="string">&#x27;shift&#x27;</span>)</span><br><span class="line">        pyautogui.keyUp(<span class="string">&#x27;s&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        pyautogui.press(<span class="string">&quot;enter&quot;</span>)</span><br><span class="line">        pyautogui.press(<span class="string">&quot;enter&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    list_serial()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            get_ble_key()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="硬件测试-1"><a href="#硬件测试-1" class="headerlink" title="硬件测试"></a>硬件测试</h3>
+<h3 id="硬件测试-1"><a href="#硬件测试-1" class="headerlink" title="硬件测试"></a>硬件测试</h3><p>待续</p>
+<h2 id="CH573主控"><a href="#CH573主控" class="headerlink" title="CH573主控"></a>CH573主控</h2><p>待续</p>
+
         
       </div>
 
@@ -472,10 +494,15 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2023/07/31/Record-of-Web-Sec-s-practice/"
+      title="安恒大运会安服实习总结"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        安恒大运会安服实习总结
         
     </p>
   </a>
