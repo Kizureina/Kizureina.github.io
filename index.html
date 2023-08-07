@@ -153,34 +153,14 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/WebSec/">
-                WebSec
-                <div class="category-count">6</div>
-            </a>
-        
-            <a class="category-link" href="/categories/Web/">
-                Web
-                <div class="category-count">14</div>
-            </a>
-        
-            <a class="category-link" href="/categories/EE/">
-                EE
-                <div class="category-count">2</div>
-            </a>
-        
             <a class="category-link" href="/categories/Reverse/">
                 Reverse
                 <div class="category-count">1</div>
             </a>
         
-            <a class="category-link" href="/categories/MISC/">
-                MISC
+            <a class="category-link" href="/categories/EE/">
+                EE
                 <div class="category-count">1</div>
-            </a>
-        
-            <a class="category-link" href="/categories/ACG/">
-                ACG
-                <div class="category-count">3</div>
             </a>
         </div>
     </div>
@@ -347,7 +327,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 词 
+            2.7k 词 
           </div>
         </div>
         
@@ -357,7 +337,19 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-              
+            实习总结没想到这么快就要结束了，虽然很有不少蛋疼的地方，但还是让人难忘的经历吧。
+本来想在正赛开始时写，结果现在都要闭幕式了。事物只要有开始就会有终结，漫长的实习里，一旦比赛开始就意味着尾声接近了。所以希腊人才喜欢说最好的人生是从未出生，因为没有开始就没有结束，非生非死。非始非终，所以才叫终之空吧(不对，我在说什么)。
+不爽的地方很多，但最不爽的是妹子太少，早知道去做志愿者和西南民大的妹子相亲相爱了。除此之外，工作还算轻松，就是技术含量一般，比较无聊。
+资产收集&#x2F;漏洞扫描虽然是做渗透，其实大部分工作是拿工具直接做漏洞扫描，但想想一个网段内这么多资产，这样确实是最高效的办法：
+1ppap.exe -hf -ping 10.txt -p 1-65535 -o result.txt
+
+但半天只用一行命令跑fscan然后盯着命令行的黑框等跑完，还是很无聊。
+不过fsan实在是神器，无论找网段内的资产还是简单的漏洞测试都很不错，尤其是能把网段内大部分资产给出来实在很方便：
+
+但有些资产扫不出来，漏洞更是几乎都扫不出来。
+在漏扫上用goby明显更好：
+
+当然经过配置插件之类还能更好...  
           </div>
         
       </div>
