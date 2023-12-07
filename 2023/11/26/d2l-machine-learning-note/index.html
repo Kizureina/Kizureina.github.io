@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>深度学习入门笔记 | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="动手深度学习1. 预备知识1.1 数据操作1.1.1 基础数据操作的基础：  获取数据 将数据读入计算机后存储  数据操作的核心：张量(tensor), 即n维数组。 一维张量称为向量(vector), 二维张量称为矩阵(matrix) Pytorch提供了tensor类做张量操作： 1234import torchx &#x3D; torch.arange(12)print(x)# tensor([ 0,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习入门笔记">
+<meta property="og:url" content="https://kizureina.github.io/2023/11/26/d2l-machine-learning-note/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="动手深度学习1. 预备知识1.1 数据操作1.1.1 基础数据操作的基础：  获取数据 将数据读入计算机后存储  数据操作的核心：张量(tensor), 即n维数组。 一维张量称为向量(vector), 二维张量称为矩阵(matrix) Pytorch提供了tensor类做张量操作： 1234import torchx &#x3D; torch.arange(12)print(x)# tensor([ 0,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z1.ax1x.com/2023/12/01/pir7MLV.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/12/01/pir71dU.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/12/01/pir73oF.png">
+<meta property="article:published_time" content="2023-11-26T12:40:44.000Z">
+<meta property="article:modified_time" content="2023-12-07T08:44:28.850Z">
+<meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/12/01/pir7MLV.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/assets/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分类</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/EE/">
+                EE
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">14</div>
+            </a>
+        
+            <a class="category-link" href="/categories/WebSec/">
+                WebSec
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/ACG/">
+                ACG
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MISC/">
+                MISC
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java-RCE/" rel="tag">java RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2023/11/26/d2l-machine-learning-note/">深度学习入门笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/04/Thinking-of-Yusuteia/">《秽翼的尤斯蒂娅》随想</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/25/Thinking-of-Ever17/">《Ever17 -the out of infinity-》随想</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/31/Record-of-Web-Sec-s-practice/">安恒大运会安服实习总结</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/BLE-KeyBoard-based-STM32/">手搓蓝牙机械键盘——基于ESP32、STM32、CH573</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-d2l-machine-learning-note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        深度学习入门笔记
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-11-26T12:40:44.000Z" itemprop="datePublished">2023-11-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/python/">python</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            4.9k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="动手深度学习"><a href="#动手深度学习" class="headerlink" title="动手深度学习"></a>动手深度学习</h1><h2 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h2><h3 id="1-1-数据操作"><a href="#1-1-数据操作" class="headerlink" title="1.1 数据操作"></a>1.1 数据操作</h3><h4 id="1-1-1-基础"><a href="#1-1-1-基础" class="headerlink" title="1.1.1 基础"></a>1.1.1 基础</h4><p>数据操作的基础：</p>
+<ol>
+<li>获取数据</li>
+<li>将数据读入计算机后存储</li>
+</ol>
+<p>数据操作的核心：<strong>张量</strong>(<em>tensor</em>), 即<strong>n维数组</strong>。</p>
+<p>一维张量称为<strong>向量(vector)</strong>, 二维张量称为<strong>矩阵(matrix)</strong></p>
+<p>Pytorch提供了tensor类做张量操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.arange(<span class="number">12</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment"># tensor([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])</span></span><br></pre></td></tr></table></figure>
+
+<p>可以用tensor类建立任意张量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">torch.zeros((<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">tensor([[[0., 0., 0., 0.],</span></span><br><span class="line"><span class="string">[0., 0., 0., 0.],</span></span><br><span class="line"><span class="string">[0., 0., 0., 0.]],</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[[0., 0., 0., 0.],</span></span><br><span class="line"><span class="string">[0., 0., 0., 0.],</span></span><br><span class="line"><span class="string">[0., 0., 0., 0.]]])</span></span><br><span class="line"><span class="string">即三维，分别为2 3 4的张量</span></span><br><span class="line"><span class="string">点号代表都为浮点数即0.0</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>torch.reshape((3,1))</code>可以将原始张量转为3*1的矩阵，且可以写成(3,-1)的简写。</p>
+<p>也可以从<strong>随机化初始值</strong>:  其中的 每个元素都从均值为0、标准差为1的标准高斯分布（正态分布）中随机采样。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.randn(<span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以直接用嵌套列表赋值：最外层的列表对应于轴0（即<strong>行</strong>），内层的列表对应于轴1（即<strong>列</strong>）。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">torch.tensor([[<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">tensor([[2, 1, 4, 3],</span></span><br><span class="line"><span class="string">[1, 2, 3, 4],</span></span><br><span class="line"><span class="string">[4, 3, 2, 1]])</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-2-运算符"><a href="#1-1-2-运算符" class="headerlink" title="1.1.2 运算符"></a>1.1.2 运算符</h3><p>对于任意具有相同形状的张量，常见的标准算术运算符（+、-、*、&#x2F;和**）都可以被升级为按元素单独运算。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">1.0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>])</span><br><span class="line">y = torch.tensor([<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>])</span><br><span class="line">x + y, x - y, x * y, x / y, x ** y <span class="comment"># **运算符是求幂运算</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">(tensor([ 3., 4., 6., 10.]),</span></span><br><span class="line"><span class="string">tensor([-1., 0., 2., 6.]),</span></span><br><span class="line"><span class="string">tensor([ 2., 4., 8., 16.]),</span></span><br><span class="line"><span class="string">tensor([0.5000, 1.0000, 2.0000, 4.0000]),</span></span><br><span class="line"><span class="string">tensor([ 1., 4., 16., 64.]))</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们也可以把多个张量<strong>连结</strong>（concatenate）在一起，把它们端对端地叠起来形成一个更大的张量。我们只需 要提供张量列表，并给出沿哪个轴连结。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">X = torch.arange(<span class="number">12</span>, dtype=torch.float32).reshape((<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">Y = torch.tensor([[<span class="number">2.0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line">torch.cat((X, Y), dim=<span class="number">0</span>), torch.cat((X, Y), dim=<span class="number">1</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">dim=0即指明沿轴0连接</span></span><br><span class="line"><span class="string">(tensor([[ 0., 1., 2., 3.],</span></span><br><span class="line"><span class="string">[ 4., 5., 6., 7.],</span></span><br><span class="line"><span class="string">[ 8., 9., 10., 11.],</span></span><br><span class="line"><span class="string">[ 2., 1., 4., 3.],</span></span><br><span class="line"><span class="string">[ 1., 2., 3., 4.],</span></span><br><span class="line"><span class="string">[ 4., 3., 2., 1.]]),</span></span><br><span class="line"><span class="string">tensor([[ 0., 1., 2., 3., 2., 1., 4., 3.],</span></span><br><span class="line"><span class="string">[ 4., 5., 6., 7., 1., 2., 3., 4.],</span></span><br><span class="line"><span class="string">[ 8., 9., 10., 11., 4., 3., 2., 1.]]))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-3-广播机制"><a href="#1-1-3-广播机制" class="headerlink" title="1.1.3 广播机制"></a>1.1.3 广播机制</h3><p>我们可以在相同形状的张量做元素操作，但不同形状的张量也可以通过<strong>广播</strong>机制执行元素操作：</p>
+<ol>
+<li>通过适当复制元素来扩展一个或两个数组，以便在转换之后，两个张量具有相同的形状； </li>
+<li>对生成的数组执行按元素操作。</li>
+</ol>
+<p>沿着数组中长度为1的轴进行广播：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a = torch.arange(<span class="number">3</span>).reshape((<span class="number">3</span>, <span class="number">1</span>))</span><br><span class="line">b = torch.arange(<span class="number">2</span>).reshape((<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">a + b</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">a:</span></span><br><span class="line"><span class="string">(tensor([[0],</span></span><br><span class="line"><span class="string">[1],</span></span><br><span class="line"><span class="string">[2]]),</span></span><br><span class="line"><span class="string">b:</span></span><br><span class="line"><span class="string">tensor([[0, 1]]))</span></span><br><span class="line"><span class="string">a + b:</span></span><br><span class="line"><span class="string">tensor([[0, 1],</span></span><br><span class="line"><span class="string">[1, 2],</span></span><br><span class="line"><span class="string">[2, 3]])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>矩阵a将<strong>复制</strong>列（即0 - 1 - 2变成0,0 - 1,1 - 2,2），矩阵b将<strong>复制</strong>行，然后再按元素相加。</p>
+<h3 id="1-1-4-索引和切片"><a href="#1-1-4-索引和切片" class="headerlink" title="1.1.4 索引和切片"></a>1.1.4 索引和切片</h3><p>就像在任何其他Python数组中一样，张量中的元素可以通过索引访问。与任何Python数组一样：第一个元素 的索引是0，最后一个元素索引是‐1；可以指定范围以包含第一个元素和最后一个之前的元素。</p>
+<p>如果我们想为多个元素赋值相同的值，我们只需要索引所有元素，然后为它们赋值。例如，<code>[0:2, :]</code>访问 第1行和第2行，其中“:”代表沿轴1（列）的所有元素。虽然我们讨论的是矩阵的索引，但这也适用于向量 和超过2个维度的张量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">X[<span class="number">0</span>:<span class="number">2</span>, :] = <span class="number">12</span></span><br><span class="line"><span class="comment"># 0:2代表0到1，即从0开始数两个元素</span></span><br><span class="line">X</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">tensor([[12., 12., 12., 12.],</span></span><br><span class="line"><span class="string">[12., 12., 12., 12.],</span></span><br><span class="line"><span class="string">[ 8., 9., 10., 11.]])</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-5-x-x3D-y比x-x3D-x-y更节省内存"><a href="#1-1-5-x-x3D-y比x-x3D-x-y更节省内存" class="headerlink" title="1.1.5 x +&#x3D; y比x &#x3D; x + y更节省内存"></a>1.1.5 x +&#x3D; y比x &#x3D; x + y更节省内存</h3><p>如果在后续计算中没有重复使用X，我们也可以使用<code>X[:] = X + Y</code>或<code>X += Y</code>来减少操作的内存开销。</p>
+<p>因为可以实现原地操作，而不会新开辟内存空间。</p>
+<h3 id="1-1-6-转换为其他Python对象"><a href="#1-1-6-转换为其他Python对象" class="headerlink" title="1.1.6 转换为其他Python对象"></a>1.1.6 转换为其他Python对象</h3><p>将深度学习框架定义的张量转换为<code>NumPy</code>张量（<code>ndarray</code>）很容易，反之也同样容易。torch张量和numpy数 组将共享它们的底层内存，就地操作更改一个张量也会同时更改另一个张量。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A = X.numpy() </span><br><span class="line">B = torch.tensor(A) </span><br><span class="line"><span class="built_in">type</span>(A), <span class="built_in">type</span>(B)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">(numpy.ndarray, torch.Tensor)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>要将大小为1的张量转换为Python标量，我们可以调用item函数或Python的内置函数强制转换。</p>
+<h3 id="1-2-预处理"><a href="#1-2-预处理" class="headerlink" title="1.2 预处理"></a>1.2 预处理</h3><p> • pandas软件包是Python中常用的数据分析工具（可用于读取各种数据, 例如.csv），pandas可以与张量兼容。</p>
+<p> • 用pandas处理缺失的数据(NaN)时，我们可根据情况选择用插值法和删除法。</p>
+<p>pandas转为张量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">inputs = pd.get_dummies(inputs, dummy_na=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">X = torch.tensor(inputs.to_numpy(dtype=<span class="built_in">float</span>))</span><br><span class="line">y = torch.tensor(outputs.to_numpy(dtype=<span class="built_in">float</span>))</span><br><span class="line">X, y</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-线性代数"><a href="#1-3-线性代数" class="headerlink" title="1.3 线性代数"></a>1.3 线性代数</h3><h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p>向量只是一个<strong>数字数组</strong>，就像每个数组都有一个长度一样，每个向量也是如此。在数学表示法中，如果我们想 说一个向量x由n个实值标量组成，可以将其表示为x ∈ R n。向量的长度通常称为向量的维度（dimension）。</p>
+<p>请注意，维度（dimension）这个词在不同上下文时往往会有不同的含义，这经常会使人感到困惑。为了清楚 起见，我们在此明确一下：向量或轴的维度被用来表示向量或轴的长度，即向量或轴的元素数量。然而，张 量的维度用来表示张量具有的轴数。在这个意义上，张量的某个轴的维数就是这个轴的长度。</p>
+<h4 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A = torch.arange(<span class="number">20</span>).reshape(<span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line"><span class="comment"># 矩阵转置</span></span><br><span class="line">A.T</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过行索引（i）和列索引（j）来访问矩阵中的标量元素.</p>
+<p>矩阵是有用的数据结构：它们允许我们组织具有不同模式的数据。例如，我们矩阵中的行可能对应于不同的 房屋（数据样本），而列可能对应于不同的属性。曾经使用过电子表格软件或已阅读过 2.2节的人，应该对此 很熟悉。因此，尽管单个向量的默认方向是列向量，但在表示表格数据集的矩阵中，将每个数据样本作为矩 阵中的行向量更为常见。后面的章节将讲到这点，这种约定将支持常见的深度学习实践。例如，沿着张量的 最外轴，我们可以访问或遍历小批量的数据样本。</p>
+<h4 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h4><p>矩阵是向量的推广一样，我们可以构建具有更多轴的数据结构。张量（本小节中的 “张量”指代数对象）是描述具有任意数量轴的n维数组的通用方法。例如，向量是一阶张量，矩阵是二阶张 量。张量用特殊字体的大写字母表示（例如，X、Y和Z），它们的索引机制与矩阵类似。 </p>
+<p>当我们开始处理图像时，张量将变得更加重要，图像以n维数组形式出现，其中3个轴对应于高度、宽度，以 及一个<strong>通道（channel）轴</strong>，用于表示颜色通道（红色、绿色和蓝色）。现在先将高阶张量暂放一边，而是专 注学习其基础知识。</p>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><p>两个矩阵的按元素乘法称为Hadamard积（Hadamard product）</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pir7MLV"><img src="https://z1.ax1x.com/2023/12/01/pir7MLV.png" alt="pir7MLV.png"></a></p>
+<h4 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h4><p>默认情况下，调用<em>求和</em>函数会<strong>沿所有的轴降低张量的维度</strong>，使它变为一个标量。</p>
+<p>我们还可以指定张量沿<strong>哪一个轴</strong>来通过求和降低维度。以矩阵为例，为了通过求和所有行的元素来降维（轴0），可以在调用函数时指 定axis&#x3D;0。由于输入矩阵沿0轴降维以生成输出向量，因此输入轴0的维数在输出形状中消失。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A_sum_axis0 = A.<span class="built_in">sum</span>(axis=<span class="number">0</span>)</span><br><span class="line">A_sum_axis0, A_sum_axis0.shape</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">torch.Size([5, 4]), tensor(190.) ==&gt; (tensor([40., 45., 50., 55.]), torch.Size([4]))</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>沿着行和列对矩阵求和，等价于对矩阵的所有元素进行求和。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.<span class="built_in">sum</span>(axis=[<span class="number">0</span>, <span class="number">1</span>]) <span class="comment"># 结果和A.sum()相同</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="非降维求和"><a href="#非降维求和" class="headerlink" title="非降维求和"></a>非降维求和</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sum_A = A.<span class="built_in">sum</span>(axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">sum_A</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">tensor([[ 6.],</span></span><br><span class="line"><span class="string">[22.],</span></span><br><span class="line"><span class="string">[38.],</span></span><br><span class="line"><span class="string">[54.],</span></span><br><span class="line"><span class="string">[70.]])</span></span><br><span class="line"><span class="string">否则正常会降维成为：</span></span><br><span class="line"><span class="string">(tensor([ 6., 22., 38., 54., 70.]), torch.Size([5]))</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果我们想沿某个轴计算A元素的累积总和，比如axis&#x3D;0（按行计算），可以调用<code>cumsum</code>函数。此函数不会沿 任何轴降低输入张量的维度。</p>
+<h4 id="点积"><a href="#点积" class="headerlink" title="点积"></a>点积</h4><p>给定两个向量x, y ∈ R d，它 们的点积（dot product）⟨x, y⟩，是相同位置的按元素乘积的和。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = torch.ones(<span class="number">4</span>, dtype = torch.float32)</span><br><span class="line">x, y, torch.dot(x, y)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">(tensor([0., 1., 2., 3.]), tensor([1., 1., 1., 1.]), tensor(6.))</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，我们可以通过执行按元素乘法，然后进行求和来表示两个向量的点积：<code>torch.sum(x * y)</code></p>
+<p>点积在很多场合都很有用。例如，给定一组由向量x ∈ R d表示的值，和一组由w ∈ R d表示的<strong>权重</strong>。</p>
+<p>x 中的值 根据权重w的加权和，可以表示为点积x ⊤w。当权重为非负数且和为1时，点积表示<strong>加权平均</strong>（weighted average）。将两个向量规范化得到单位长度后，<strong>点积表示它们夹角的余弦</strong>。本节后面的内 容将正式介绍<strong>长度</strong>（length）的概念。</p>
+<h4 id="矩阵-向量积"><a href="#矩阵-向量积" class="headerlink" title="矩阵-向量积"></a>矩阵-向量积</h4><p>在代码中使用张量表示矩阵‐向量积，我们使用<code>mv</code>函数。当我们为矩阵A和向量x调用<code>torch.mv(A, x)</code>时，会执 行矩阵‐向量积。注意，<strong>A的列维数（沿轴1的长度）必须与x的维数（其长度）相同</strong>。</p>
+<p>我们可以把一个矩阵A ∈ R m×n乘法看作一个从R n到R m向量的转换。</p>
+<p>这些转换是非常有用的，例如可以用<strong>方阵的乘法来表示旋转</strong>。后续章节将讲到，我们也可以使用矩阵‐向量积来描述在给定前一层的值时，求解神经网络每一层所需的复杂计算。</p>
+<h4 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h4><p>我们可以将矩阵‐矩阵乘法AB看作简单地执行m次矩阵‐向量积，并将结果拼接在一起，形成一个n × m矩阵。 在下面的代码中，我们在A和B上执行矩阵乘法。这里的A是一个5行4列的矩阵，B是一个4行3列的矩阵。两者 相乘后，我们得到了一个5行3列的矩阵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">B = torch.ones(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">torch.mm(A, B)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">tensor([[ 6., 6., 6.],</span></span><br><span class="line"><span class="string">[22., 22., 22.],</span></span><br><span class="line"><span class="string">[38., 38., 38.],</span></span><br><span class="line"><span class="string">[54., 54., 54.],</span></span><br><span class="line"><span class="string">[70., 70., 70.]])</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="范数"><a href="#范数" class="headerlink" title="范数"></a>范数</h4><p>向量的<strong>范数</strong>是表示一个向量有多大。这里考虑的大小（size）概念不涉及维度，而是<strong>分量的大小</strong>。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pir71dU"><img src="https://z1.ax1x.com/2023/12/01/pir71dU.png" alt="pir71dU.png"></a></p>
+<p>范数听起来很像距离的度量。欧几里得距离和毕达哥拉斯定理中的非负性概念和三角不等式可能会给出一些 启发。事实上，欧几里得距离是一个<strong>L2范数</strong>：</p>
+<p>假设n维向量x中的元素是x_1, . . . , x_n，其L2范数是<strong>向量元素平方和的平方根</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u = torch.tensor([<span class="number">3.0</span>, -<span class="number">4.0</span>])</span><br><span class="line">torch.norm(u)</span><br><span class="line"><span class="comment"># tensor(5.)</span></span><br><span class="line"><span class="comment"># 即exp( 3*3 + (-4)*(-4) )</span></span><br></pre></td></tr></table></figure>
+
+<p>深度学习中更经常地使用L2范数的平方，也会经常遇到<strong>L1范数</strong>，它表示为<strong>向量元素的绝对值之和</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">torch.<span class="built_in">abs</span>(u).<span class="built_in">sum</span>()</span><br><span class="line"><span class="comment"># tensor(7.)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-微积分"><a href="#1-4-微积分" class="headerlink" title="1.4 微积分"></a>1.4 微积分</h3><p>在深度学习中，我们“训练”模型，不断更新它们，使它们在看到越来越多的数据时变得越来越好。通常情况下，变得更好意味着最小化一个损失函数（loss function），即一个衡量“模型有多糟糕”这个问题的分数。 </p>
+<p>最终，我们真正关心的是生成一个模型，它能够在从未见过的数据上表现良好。但“训练”模型<strong>只能将模型与我们实际能看到的数据相拟合</strong>。因此，我们可以将拟合模型的任务分解为两个关键问题：</p>
+<p> • 优化（optimization）：用模型拟合观测数据的过程；</p>
+<p> • 泛化（generalization）：数学原理和实践者的智慧，能够指导我们生成出有效性超出用于训练的数据集本身的模型。</p>
+<h4 id="梯度-重要"><a href="#梯度-重要" class="headerlink" title="梯度(重要)"></a>梯度(重要)</h4><p>我们可以连结一个多元函数对其所有变量的<strong>偏导数</strong>，以得到该函数的<strong>梯度（gradient）向量</strong>。</p>
+<p>梯度是一个<strong>向量</strong>，它表示<strong>函数在某一点上的变化率和方向</strong>。在机器学习和优化中，梯度广泛应用于求解函数的最小值或最大值。</p>
+<p>对于一个多元函数，其梯度由偏导数组成。例如，对于一个具有 n 个自变量（输入变量）的函数 f(x₁, x₂, …, xₙ)，其梯度向量 ∇f 表示为 (∂f&#x2F;∂x₁, ∂f&#x2F;∂x₂, …, ∂f&#x2F;∂xₙ)。梯度的<strong>每个分量表示函数在相应自变量方向上的变化率</strong>。</p>
+<p>梯度的方向指向函数在该点上的最陡增长方向，而梯度的大小表示变化率的强度。梯度越大，函数在该点上的变化越快。</p>
+<p>在机器学习中，梯度在训练神经网络等模型时起着重要的作用。<em>通过<strong>计算损失函数对模型参数的梯度，我们可以使用梯度下降等优化算法来更新参数，以使损失函数最小化</strong>。</em>梯度指导了参数更新的方向，使模型能够朝着更好的方向进行调整。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pir73oF"><img src="https://z1.ax1x.com/2023/12/01/pir73oF.png" alt="pir73oF.png"></a></p>
+<p>当我们计算一个张量的梯度时，需要执行以下步骤：</p>
+<ol>
+<li>在进行反向传播之前，将计算图的梯度缓存清零。可以使用<code>optimizer.zero_grad()</code>或者直接调用张量的<code>zero_()</code>方法来实现。</li>
+<li>对于想要计算梯度的张量，通过调用其<code>backward()</code>方法进行反向传播。这将根据计算图自动计算梯度。</li>
+<li>访问张量的<code>grad</code>属性，即可获得计算得到的梯度值。</li>
+</ol>
+<p>例如，假设有一个张量<code>x</code>，并且已经定义了一个损失函数<code>loss</code>。我们可以按照以下方式计算<code>x</code>的梯度：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.tensor([<span class="number">2.0</span>, <span class="number">3.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = x.<span class="built_in">sum</span>()</span><br><span class="line">loss = y**<span class="number">2</span></span><br><span class="line"><span class="comment"># 即y的平方 &quot;**&quot;=&quot;^&quot;</span></span><br><span class="line"></span><br><span class="line">loss.backward()  <span class="comment"># 执行反向传播</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x.grad)  <span class="comment"># 输出张量x的梯度值</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，我们首先设置了<code>x</code>的<code>requires_grad</code>属性为<code>True</code>，以便PyTorch跟踪其梯度。然后，我们定义了计算图中的一系列操作，并计算了<code>loss</code>。通过调用<code>backward()</code>方法，我们执行了反向传播计算梯度。最后，我们通过访问<code>x.grad</code>属性获取了张量<code>x</code>的梯度值。</p>
+<p>需要注意的是，只有具有<code>requires_grad=True</code>属性的张量才会计算梯度并存储在<code>grad</code>属性中。如果不需要计算某个张量的梯度，可以将其设置为<code>requires_grad=False</code>，以节省计算和内存资源。此外，在每次反向传播前都需要将梯度缓存清零，以避免梯度累积的影响。</p>
+<h3 id="1-5-自动微分-重要"><a href="#1-5-自动微分-重要" class="headerlink" title="1.5 自动微分(重要)"></a>1.5 自动微分(重要)</h3><p>深度学习框架通过自动计算导数，即自动微分（automatic differentiation）来加快求导。</p>
+<p>实际中，根据设计好的模型，系统会构建一个<strong>计算图</strong>（computational graph），来跟踪<strong>计算是哪些数据通过哪些操作组合起来</strong>产生输出。自动微分使系统能够随后反向传播梯度。这里，反向传播（back propagate）意味着<strong>跟踪整个计算图，填充关于每个参数的偏导数</strong>。</p>
+<p>例如，在我们计算y关于x的梯度之前，需要一个地方来存储梯度。重要的是，我们不会在每次对一个参数求导时都分配<strong>新的内存</strong>。因为我们经常会成千上万次地更新相同的参数，每次都分配新的内存可能很快就会将内存耗 尽。注意，一个标量函数关于向量x的梯度是向量，并且与x具有相同的形状。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.arange(<span class="number">4.0</span>)</span><br><span class="line">x.requires_grad_(<span class="literal">True</span>) <span class="comment"># 等价于x=torch.arange(4.0,requires_grad=True)</span></span><br><span class="line">x.grad <span class="comment"># 默认值是None</span></span><br></pre></td></tr></table></figure>
+
+<p>现在计算y。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="number">2</span> * torch.dot(x, x)</span><br><span class="line"><span class="comment"># tensor(28., grad_fn=&lt;MulBackward0&gt;)</span></span><br></pre></td></tr></table></figure>
+
+<p>x是一个长度为4的向量，计算x和x的点积，得到了我们赋值给y的<strong>标量输出</strong>。接下来，通过调用<strong>反向传播函数</strong>来自动计算<strong>y关于x每个分量的梯度</strong>，并打印这些梯度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y.backward()</span><br><span class="line">x.grad</span><br><span class="line"><span class="comment"># tensor([ 0., 4., 8., 12.])</span></span><br></pre></td></tr></table></figure>
+
+<p>即反向传播函数查询到y的数据操作引用了x，因此计算出y关于x张量的每个分量梯度。</p>
+<p>注意：在默认情况下，PyTorch会累积梯度，我们需要清除之前的值 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x.grad.zero_()</span><br><span class="line">y = x.<span class="built_in">sum</span>()</span><br><span class="line">y.backward()</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
+
+<h4 id="非标量变量的反向传播"><a href="#非标量变量的反向传播" class="headerlink" title="非标量变量的反向传播"></a>非标量变量的反向传播</h4><p>当y不是标量时，向量y关于向量x的导数的最自然解释是一个<strong>矩阵</strong>。对于高阶和高维的y和x，求导的结果可以 是一个高阶张量。</p>
+<p> 然而，虽然这些更奇特的对象确实出现在高级机器学习中（包括深度学习中），但当调用向量的反向计算时， 我们通常会试图<strong>计算一批训练样本中每个组成部分的损失函数的导数</strong>。这里，我们的目的不是计算微分矩阵， 而是单独计算批量中每个样本的偏导数之和。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对非标量调用backward需要传入一个gradient参数，该参数指定微分函数关于self的梯度。</span></span><br><span class="line"><span class="comment"># 本例只想求偏导数的和，所以传递一个1的梯度是合适的</span></span><br><span class="line">x.grad.zero_()</span><br><span class="line">y = x * x</span><br><span class="line"><span class="comment"># 等价于y.backward(torch.ones(len(x)))</span></span><br><span class="line">y.<span class="built_in">sum</span>().backward()</span><br><span class="line">x.grad</span><br><span class="line"><span class="comment"># tensor([0., 2., 4., 6.])</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分离计算"><a href="#分离计算" class="headerlink" title="分离计算"></a>分离计算</h4><p>有时，我们希望将某些计算移动到记录的计算图之外。</p>
+<p>例如，假设y是作为x的函数计算的，而z则是作为y和x的 函数计算的。想象一下，我们想计算z关于x的梯度，但由于某种原因，希望将y视为一个常数，并且只考虑 到x在y被计算后发挥的作用。 </p>
+<p>这里可以分离y来返回一个新变量u，该变量与y具有<strong>相同的值</strong>(<em>仅有值是相同的，但不具有y的计算属性</em>)，但丢弃计算图中如何计算y的任何信息。换句话说，<strong>梯度不会向后流经u到x</strong>。因此，下面的反向传播函数计算z&#x3D;u*x关于x的偏导数，同时将u作为常数处理， 而不是z&#x3D;x*x*x关于x的偏导数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x.grad.zero_()</span><br><span class="line">y = x * x</span><br><span class="line">u = y.detach()</span><br><span class="line"></span><br><span class="line">z = u * x</span><br><span class="line">z.<span class="built_in">sum</span>().backward()</span><br><span class="line"><span class="comment"># z.sum()用于将z转为输出的标量，便于计算梯度</span></span><br><span class="line">x.grad == u</span><br><span class="line"><span class="comment"># tensor([True, True, True, True])</span></span><br></pre></td></tr></table></figure>
+
+<p>由于记录了y的计算结果，我们可以随后在y上调用反向传播，得到y&#x3D;x*x关于的x的导数，即2*x。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x.grad.zero_()</span><br><span class="line">y.<span class="built_in">sum</span>().backward()</span><br><span class="line">x.grad == <span class="number">2</span> * x</span><br><span class="line"><span class="comment"># tensor([True, True, True, True])</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Python控制流的梯度计算"><a href="#Python控制流的梯度计算" class="headerlink" title="Python控制流的梯度计算"></a>Python控制流的梯度计算</h4><p>即使构建函数的计算图需要通过Python控制流（例如，条件、循环或任意函数调用），我们仍然可以计算得到的变量的梯度。在下面的代码中，while循环的迭代次数和if语句的结果都取决于输入a的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">a</span>):</span><br><span class="line">    b = a * <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> b.norm() &lt; <span class="number">1000</span>:</span><br><span class="line">    b = b * <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> b.<span class="built_in">sum</span>() &gt; <span class="number">0</span>:</span><br><span class="line">    c = b</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    c = <span class="number">100</span> * b</span><br><span class="line">    <span class="keyword">return</span> c</span><br></pre></td></tr></table></figure>
+
+<p>计算梯度：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = torch.randn(size=(), requires_grad=<span class="literal">True</span>)</span><br><span class="line">d = f(a)</span><br><span class="line">d.backward()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-线性神经网络"><a href="#2-线性神经网络" class="headerlink" title="2. 线性神经网络"></a>2. 线性神经网络</h2>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/10/04/Thinking-of-Yusuteia/"
+      title="《秽翼的尤斯蒂娅》随想"
+     >
+
+    <p class="title-text">
+      
+        《秽翼的尤斯蒂娅》随想
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
