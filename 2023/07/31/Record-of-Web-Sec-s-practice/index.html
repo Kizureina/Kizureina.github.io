@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2023/08/07/pPE4Qz9.png">
 <meta property="og:image" content="https://s1.ax1x.com/2023/08/07/pPEIpcj.png">
 <meta property="article:published_time" content="2023-07-30T23:31:52.000Z">
-<meta property="article:modified_time" content="2023-08-07T15:07:13.066Z">
+<meta property="article:modified_time" content="2024-01-01T16:09:57.613Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
@@ -159,13 +159,13 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/Reverse/">
-                Reverse
+            <a class="category-link" href="/categories/ACG/">
+                ACG
                 <div class="category-count">1</div>
             </a>
         
-            <a class="category-link" href="/categories/EE/">
-                EE
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
                 <div class="category-count">1</div>
             </a>
         </div>
@@ -192,7 +192,7 @@
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
@@ -292,6 +292,10 @@
       <ul>
         
           <li>
+            <a href="/2023/12/31/Code-and-lonely-and-galgame/">代码与孤独与Galgame</a>
+          </li>
+        
+          <li>
             <a href="/2023/12/18/Anime-and-reality/">动画与现实</a>
           </li>
         
@@ -305,10 +309,6 @@
         
           <li>
             <a href="/2023/09/25/Thinking-of-Ever17/">《Ever17 -the out of infinity-》随想</a>
-          </li>
-        
-          <li>
-            <a href="/2023/07/31/Record-of-Web-Sec-s-practice/">安恒大运会安服实习总结</a>
           </li>
         
       </ul>
@@ -354,7 +354,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.7k 词 
+            3k 词 
           </div>
         </div>
         
@@ -398,6 +398,13 @@
 <p>可以做很方便的漏洞利用。</p>
 <p>在扫描场馆自建的信息发布网即大屏网，发现了这个漏洞。但经过仔细测试，是写不了shell的。最麻烦的原因是信息发布网服务器是Windows sever，没法利用Linux的操作。</p>
 <p>当然漏洞也报上去，很快修复了。</p>
+<h4 id="其他杂项"><a href="#其他杂项" class="headerlink" title="其他杂项"></a>其他杂项</h4><p>年终回顾才想起来还有一些值得写一下，当时居然偷懒了。</p>
+<h5 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h5><p>有一次EDR报暴力破解，但目标网段明显在内网内，而且不是登录，只是身份验证。</p>
+<p>稍微看了下就清楚不是外部攻击，但原因比较让人迷惑。</p>
+<p>仔细分析了暴力破解的请求头，似乎是某种流媒体传输协议，想了想应该是某个设备需要连接某个网段实现流媒体传输，但配置出来问题，导致始终无法通过身份验证，而这种协议如果无法连接，会自动重连，导致这种重连请求被EDR检测到告警了。</p>
+<p>最后让负责设备的同事把这个请求的网段封了。</p>
+<h5 id="ARP扫描"><a href="#ARP扫描" class="headerlink" title="ARP扫描"></a>ARP扫描</h5><p>还有一次在正赛时，告警ARP扫描，一旦某个主机接入G网（场馆内网），就会告警ARP扫描攻击。这个也比较迷惑，虽然能猜到并非外部攻击，但还是很奇怪。</p>
+<p>ARP协议在获取不到MAC地址时，会向网段内所有IP发送请求，这个应该就是告警扫描的原因，但为什么获取不到MAC，而且请求的是某个没有使用的IP，让人有点困惑。</p>
 
         
       </div>
@@ -448,7 +455,7 @@
   
   <div id="footer-info" class="inner">
     
-    &copy; 2023 Kizureina<br>
+    &copy; 2024 Kizureina<br>
     Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
   </div>
 </footer>
