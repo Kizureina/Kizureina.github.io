@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>代码与孤独与Galgame | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 引言Galgame是美丽而独特的游戏形式，我一直如此相信着。但长文本时代已经日薄西山，Galgame业界江河日下。优秀的作品减少，爱好者和社区自然也凋零。对中国阿宅来说，更重要的是汉化组不像以往那样百花齐放了。而Galgame汉化，又比动画漫画轻小说更复杂，除了需要懂日语的人，还需要程序员，从解包到汉化到校对到封包，是件相当麻烦的事。 很凑巧的是，我刚好了解与Galgame逆向相关的知识，所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码与孤独与Galgame">
+<meta property="og:url" content="https://kizureina.github.io/2024/01/03/Code-and-lonely-and-galgame/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="1. 引言Galgame是美丽而独特的游戏形式，我一直如此相信着。但长文本时代已经日薄西山，Galgame业界江河日下。优秀的作品减少，爱好者和社区自然也凋零。对中国阿宅来说，更重要的是汉化组不像以往那样百花齐放了。而Galgame汉化，又比动画漫画轻小说更复杂，除了需要懂日语的人，还需要程序员，从解包到汉化到校对到封包，是件相当麻烦的事。 很凑巧的是，我刚好了解与Galgame逆向相关的知识，所">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/pivZsGn.png">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/pivZy2q.png">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/pivZ6x0.png">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/pivZfZF.png">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/pivZLqO.png">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/pivZjde.png">
+<meta property="og:image" content="https://s11.ax1x.com/2024/01/03/piveSJA.png">
+<meta property="article:published_time" content="2024-01-03T13:53:44.228Z">
+<meta property="article:modified_time" content="2024-01-03T13:53:44.228Z">
+<meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Galgame">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s11.ax1x.com/2024/01/03/pivZsGn.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/assets/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分类</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/EE/">
+                EE
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Anime/" rel="tag">Anime</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java-RCE/" rel="tag">java RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          一月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          十二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2024/01/03/Code-and-lonely-and-galgame/">代码与孤独与Galgame</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/18/Anime-and-reality/">动画与现实</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/26/d2l-machine-learning-note/">深度学习入门笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/04/Thinking-of-Yusuteia/">《秽翼的尤斯蒂娅》随想</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/25/Thinking-of-Ever17/">《Ever17 -the out of infinity-》随想</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Code-and-lonely-and-galgame" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        代码与孤独与Galgame
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-03T13:53:44.228Z" itemprop="datePublished">2024-01-03</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/ACG/">ACG</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h1><p>Galgame是美丽而独特的游戏形式，我一直如此相信着。但长文本时代已经日薄西山，Galgame业界江河日下。优秀的作品减少，爱好者和社区自然也凋零。对中国阿宅来说，更重要的是汉化组不像以往那样百花齐放了。而Galgame汉化，又比动画漫画轻小说更复杂，除了需要懂日语的人，还需要程序员，从解包到汉化到校对到封包，是件相当麻烦的事。</p>
+<p>很凑巧的是，我刚好了解与Galgame逆向相关的知识，所以希望自己能为社区建设贡献微小的力量，因此仿照<a target="_blank" rel="noopener" href="https://github.com/hanmin0822/MisakaHookFinder">MisakaHookerFinder</a>的功能写了类似的文本提取器。经过测试，在某些游戏上（例如秽翼的尤斯蒂娅），有更好的效果。但当然Bug更多，如果有人对inline Hook或者Win32编程感兴趣，可以看下下文的实现原理介绍，代码中我也写了详细的注释。</p>
+<p>Have fun:)</p>
+<h1 id="2-相关技术简介"><a href="#2-相关技术简介" class="headerlink" title="2. 相关技术简介"></a>2. 相关技术简介</h1><h2 id="2-1-Win32-API"><a href="#2-1-Win32-API" class="headerlink" title="2.1 Win32 API"></a>2.1 Win32 API</h2><p>Windows是Windows操作系统，也是一个应用程序，Windows 提供了不同的服务，这些服务通过一些特定的方式进行调用、使用；这些服务可能是 开启一个窗口、打开一个应用程序、通过一个方法设置系统的休眠时间等；这些不同的服务，做成了接口的方式使用。</p>
+<p>简而言之,Windows API的作用就是调用WIndows提供的服务，详细的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/api/">API文档可以参见微软官网</a></p>
+<p>也可以用中文版本，但机翻比较难看懂。</p>
+<h2 id="2-2-API-Hook"><a href="#2-2-API-Hook" class="headerlink" title="2.2 API Hook"></a>2.2 API Hook</h2><p>API Hook是一种技术，可以拦截目标程序调用的函数，并将其重定向到自定义的函数中，从而实现对程序行为的监视、干预和修改。</p>
+<p>具体来说，API Hook的实现过程大致包括以下几个步骤：</p>
+<ol>
+<li>找到目标函数：API hook需要先找到目标程序中需要拦截的函数。通常可以通过静态分析、动态调试等方法来获取目标函数的地址或名称。</li>
+<li>替换函数指针：通过修改目标程序的数据段，将目标函数的指针替换为自定义函数的指针。这样，当程序调用目标函数时，会自动跳转到自定义函数中执行。</li>
+<li>处理参数和返回值：自定义函数需要处理目标函数的参数和返回值，并在必要时对其进行修改。这可以通过获取目标函数的参数列表和返回值类型，并在自定义函数中进行相应的处理来实现。</li>
+<li>恢复原始函数：在完成自定义函数的操作后，需要将目标函数的指针恢复为原始的函数指针，以确保程序正常运行。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pivZsGn"><img src="https://s11.ax1x.com/2024/01/03/pivZsGn.png" alt="pivZsGn.png"></a></p>
+<p>当然Windows操作系统也提供了类似功能的钩子函数，即SetWindowHookEx这种，但本次设计使用更灵活的修改目标函数地址的机器码的inline Hook方式实现。</p>
+<h2 id="2-3-DLL注入"><a href="#2-3-DLL注入" class="headerlink" title="2.3 DLL注入"></a>2.3 DLL注入</h2><p>使用Hook可以实现监控<strong>本进程</strong>的Win32 API，但是不能监控其他进程的Win32 API。因为其他进程调用的函数，实际上是将系统提供函数<strong>映射到进程私有的内存空间</strong>，不能被其他进程修改。</p>
+<p>因此要实现Hook其他进程，还需要用到DLL注入，将Hook代码写成动态链接库，然后让目标进程加载该DLL。既然目标进程加载的，自然可以随意操作目标进程的内存空间了。所以问题就转变为如何让目标进程加载我们构造好的动态链接库了。</p>
+<p>本项目使用 Windows 远程线程机制实现DLL注入，在本地进程中通过 <strong>CreateRemoteThread()<strong>函数在其他进程中开启并运行一个</strong>线程</strong>。<code>CreateRemoteThread</code>函数原型如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE WINAPI <span class="title">CreateRemoteThread</span> <span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	HANDLE                  hProcess,	<span class="comment">// 远程进程句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">	LPSECURITY_ATTRIBUTES  	lpThreadAttributes,	<span class="comment">// 线程的安全属性</span></span></span></span><br><span class="line"><span class="params"><span class="function">	SIZE_T                  dwStackSize,		<span class="comment">// 线程栈的大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">	LPTHREAD_START_ROUTINE	lpStartAddress, <span class="comment">// 线程入口函数的起始地址</span></span></span></span><br><span class="line"><span class="params"><span class="function">	LPVOID                  lpParameter, 	<span class="comment">// 传递给线程函数的参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">	DWORD                   dwCreationFlags,	<span class="comment">// 线程是否立即启动</span></span></span></span><br><span class="line"><span class="params"><span class="function">	LPDWORD                 lpThreadId    <span class="comment">// 用于保存内核分配给线程的ID</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span>；</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+
+<p>主要关注三个参数：<em>hProcess</em>、<em>lpStartAddress</em>和<em>lpParameter</em>。<code>hProcess</code>是要执行线程的目标进程句柄；<code>lpStartAddress </code>是线程函数的起始地址，且该函数必须位于目标进程内；<code>lpParameter </code>是传递给线程函数的参数。</p>
+<p>为了使远程线程加载DLL，把 <code>LoadLibrary </code>函数作为 <code>CreateRemoteThread</code>的线程函数，然后加载的 DLL 路径作为线程函数的参数即可。</p>
+<h1 id="3-系统设计实现"><a href="#3-系统设计实现" class="headerlink" title="3. 系统设计实现"></a>3. 系统设计实现</h1><h2 id="3-1-整体设计"><a href="#3-1-整体设计" class="headerlink" title="3.1 整体设计"></a>3.1 整体设计</h2><p>理解了上面三个技术的基础，就可以开始设计整体Hook流程了。</p>
+<p>很明显，系统应该分为两个部分：</p>
+<ol>
+<li><p>将DLL注入到目标进程的主窗口程序：这是Windows API编程的部分，我使用原生Win32 API完成。主要包括对进程的查找和操作，以及对进程通信和消息处理；</p>
+</li>
+<li><p>注入到目标进程的动态链接库：其中包含对目标进程的API Hook代码。因为是在目标进程中加载调用，所以可以直接使用当前进程句柄开发即可。这是系统设计的核心，所有hook操作和进程通信都在动态链接库中完成.</p>
+</li>
+</ol>
+<h2 id="3-2-主窗口程序"><a href="#3-2-主窗口程序" class="headerlink" title="3.2 主窗口程序"></a>3.2 主窗口程序</h2><h3 id="3-2-1-GUI窗口实现"><a href="#3-2-1-GUI窗口实现" class="headerlink" title="3.2.1 GUI窗口实现"></a>3.2.1 GUI窗口实现</h3><p>   Win32设计窗口比较复杂，但流程很固定：</p>
+<ol>
+<li><p>调用 <strong>WinMain</strong> 函数，注册窗口类，创建主窗口并显示。</p>
+</li>
+<li><p>创建窗口过程函<code>LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)</code>。窗口过程函数是一个回调函数，用于处理窗口消息和事件。</p>
+</li>
+<li><p>创建消息循环，等待事件的发生。</p>
+</li>
+<li><p>当一个事件发生时，系统将该事件打包成一个消息，并发送到应用程序的消息队列中。</p>
+</li>
+<li><p>从消息队列中取出消息，并根据消息类型调用相应的窗口过程函数进行处理。</p>
+</li>
+<li><p>处理完消息后，返回到消息循环，继续等待事件的发生。</p>
+</li>
+</ol>
+<p>大部分代码用在消息处理中，有一个大的switch将获取到的各种消息分发到函数，在逆向窗口程序时也很常见到。我的窗口UI设计比较简洁，因为Win32设计UI比较麻烦，就算用VS2022也没办法用资源管理器轻松设计窗口，所以主要创建了四个窗口：主窗口、<code>ListBox</code>控件、文本框控件和按钮控件。然后根据效果调整了UI布局，最后效果如下图：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pivZy2q"><img src="https://s11.ax1x.com/2024/01/03/pivZy2q.png" alt="pivZy2q.png"></a></p>
+<p>主窗口UI如上，在打开窗口时对进程拍摄快照，获取进程名称和PID，然后鼠标选中进程即可查看详细信息，以便确认是否是想要hook的进程（可以使用微软官方的<code>process explorer</code>选中要hook的进程查看PID）：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pivZ6x0"><img src="https://s11.ax1x.com/2024/01/03/pivZ6x0.png" alt="pivZ6x0.png"></a></p>
+<p><code>	</code>窗口选中要Hook的进程后，点击[API Hooking!]按键，开始DLL注入进程。</p>
+<h3 id="3-2-1-DLL注入实现"><a href="#3-2-1-DLL注入实现" class="headerlink" title="3.2.1 DLL注入实现"></a>3.2.1 DLL注入实现</h3><p>DLL注入有很多种方式，其中最成熟也最方便的方法是建立远程线程的方式加载动态链接库，本项目使用这种方式完成DLL注入。</p>
+<ol>
+<li>通过建立远程线程的方式注入DLL主要有如下流程：</li>
+<li>使用<code>OpenProcess()</code>打开目标进程；</li>
+<li>在目标进程中使用<code>VirtualAllocEX()</code>分配内存空间；</li>
+<li>用<code>WriteProcessMemory</code>将DLL路径写入进程内存空间；</li>
+<li>获取<code>LoadLibrary</code>函数地址：因为这个函数原型在<code>Kernel32.dll</code>中，所有进程都会将内核模块加载进内存，所以<code>LoadLibrary</code>的地址偏移量是可以确定的；</li>
+<li>在目标进程创建远程线程执行<code>LoadLibrary</code>：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HANDLE hRemoteThread = <span class="built_in">CreateRemoteThread</span>(hProcess, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;LPTHREAD_START_ROUTINE&gt;(pLoadLibrary), pRemoteMemory, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+<p>此时如果正常执行，我们建立的Dll会加载进目标进程中，可以使用<code>OpenArk</code>或者<code>Process Explorer</code>工具查看验证，我这里使用OpenArk<code>查看</code>HookDll.dll是否加载进目标进程模块：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pivZfZF"><img src="https://s11.ax1x.com/2024/01/03/pivZfZF.png" alt="pivZfZF.png"></a></p>
+<h2 id="3-3-HookAPI动态链接库"><a href="#3-3-HookAPI动态链接库" class="headerlink" title="3.3 HookAPI动态链接库"></a>3.3 HookAPI动态链接库</h2><p>这部分是本项目核心代码，即Hook具体功能的实现以及与主窗口的进程间通信。如前所述，本项目使用inline Hook方式实现对API的监听，那么主要流程如下：</p>
+<ol>
+<li><strong>使用getLibraryProcAddress获取目标API函数在目标模块中的地址指针</strong>：因为无论映射到哪个进程，模块库中函数的相对地址都是一样的：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pFunction = <span class="built_in">getLibraryProcAddress</span>(moduleName, functionName);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>ReadProcessMemory将目标进程中，目标函数地址的第一条指令读取出来存储在字节数组中</strong>：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ReadProcessMemory</span>(<span class="built_in">GetCurrentProcess</span>(), pFunction, messageBoxOriginalBytes, <span class="number">6</span>, &amp;bytesRead);</span><br></pre></td></tr></table></figure>
+
+<p>这是为了方便unhook，在完成我们写好的操作后，再修改回原本的指令</p>
+<ol start="3">
+<li><strong>构造覆盖目标函数地址的第一条指令的机器码</strong></li>
+</ol>
+<p>这一步是核心，因为只有正确构造<strong>跳转指令</strong>，才能将对API函数的调用转到我们定义的HookedAPI函数。说到跳转，很容易想到的是jmp指令，但因为jmp指令指向的地址是相对的偏移量，因此还要获取基址，算起来比较麻烦，所以本项目采用堆栈实现类似的跳转操作。</p>
+<p>构造的HookCode形式为：<code>push 0x12345678 ret</code></p>
+<p>即将我们构造的函数地址压栈，然后ret将其作为返回地s址。实际上和jmp完成的跳转是一样的。</p>
+<p>Push和ret各为1个字节的指令，因为要注入的是x86架构的32位进程，所以地址为4位，因此要构造的HookCode长度为6个字节：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> patch[<span class="number">6</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"><span class="built_in">memcpy_s</span>(patch, <span class="number">1</span>, <span class="string">&quot;\x68&quot;</span>, <span class="number">1</span>); <span class="comment">//push</span></span><br><span class="line"><span class="built_in">memcpy_s</span>(patch + <span class="number">1</span>, <span class="number">4</span>, &amp;hookedMessageBoxAddress, <span class="number">4</span>); <span class="comment">//32位地址为4字节长度</span></span><br><span class="line"><span class="built_in">memcpy_s</span>(patch + <span class="number">5</span>, <span class="number">1</span>, <span class="string">&quot;\xC3&quot;</span>, <span class="number">1</span>); <span class="comment">//ret\</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意这段写法只能适用于<strong>32位</strong>，如果是64位的宽字符要修改不少地方。</p>
+<ol start="4">
+<li><strong>将构造好的机器码写入目标函数第一条指令的地址：</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">WriteProcessMemory</span>(<span class="built_in">GetCurrentProcess</span>(), (LPVOID)pFunction, patch, <span class="built_in">sizeof</span>(patch), &amp;bytesWritten)</span><br></pre></td></tr></table></figure>
+
+<p>此时已经完成对目标函数的Hook，可以调试看下是否正常将指令覆盖掉了：</p>
+<p>这是<code>MessageBoxA</code>原本的机器码：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pivZLqO"><img src="https://s11.ax1x.com/2024/01/03/pivZLqO.png" alt="pivZLqO.png"></a></p>
+<p>完成Hook后再查看：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pivZjde"><img src="https://s11.ax1x.com/2024/01/03/pivZjde.png" alt="pivZjde.png"></a></p>
+<p>发现已经正确完成覆盖了，此时目标进程调用<code>MessageBoxA</code>时，就会被重定向到我们的函数地址了。那么下面就是设计我们的<code>HookedAPI</code>函数了，需要注意的是这个函数必须有与原API函数相同的签名，否则会出现<strong>堆栈不平衡</strong>，影响后续程序执行。</p>
+<ol start="5">
+<li><strong>设计Hooked函数</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __stdcall <span class="title">HookedMessageBoxA</span><span class="params">(HWND hwnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">UnHook</span>();</span><br><span class="line">    <span class="comment">/*========通过向指定窗口进程发送消息实现进程通信(Work) =========*/</span></span><br><span class="line">    <span class="built_in">SendCustomMessage</span>(lpText);</span><br><span class="line">    <span class="comment">// call the original MessageBoxA</span></span><br><span class="line">    <span class="type">int</span> result = <span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, lpText, lpCaption, uType);</span><br><span class="line">    <span class="built_in">HookAPI</span>(<span class="string">&quot;user32.dll&quot;</span>, <span class="string">&quot;MessageBoxA&quot;</span>, &amp;HookedMessageBoxA);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这个函数是<code>MessageBoxA</code>，所以字符指针是<code>LPCSTR</code>，如果是<code>MessageBoxW</code>则需要用长指针<code>LPCWSTR</code>。因为不能干扰目标进程正常执行，所以还需要<code>UnHook()</code>将指令修改回来，但是为了<strong>持久化Hook以监听每一次API调用</strong>，还要在函数返回前再调用一次Hook函数。此时已经完成了Hook的基本操作，但我们前面设计的主窗口没有收到消息，用户也无从知道API函数被调用，所以需要做进程通信。</p>
+<ol start="6">
+<li><strong>向目标窗口发送自定义消息，进程通信</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendCustomMessage</span><span class="params">(LPCSTR lpText)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HWND targetHwnd = <span class="built_in">FindWindow</span>(<span class="literal">NULL</span>, <span class="string">L&quot;ProcessHooker&quot;</span>); <span class="comment">// 根据窗口标题查找目标窗口句柄</span></span><br><span class="line">    <span class="keyword">if</span> (targetHwnd != <span class="literal">NULL</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// WCHAR buffer[] = L&quot;Hello world&quot;;</span></span><br><span class="line">        <span class="comment">// 将Hook到的数据写入剪切板（x86字符）</span></span><br><span class="line">        <span class="built_in">CopyTextToClipboard</span>(lpText);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">SendMessage</span>(targetHwnd, WM_HOOKED_MESSAGE, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 发送消息</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>进程通信有很多实现方式，可以用共享内存、管道或者直接用消息(但操作系统不允许<code>SenMessage</code>传递指针)，本项目使用最稳妥的剪切板实现。发送消息到主窗口后，主窗口进程会读取到数据，并数据和调试信息显示在文本框中，此时完成全部过程:</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/piveSJA"><img src="https://s11.ax1x.com/2024/01/03/piveSJA.png" alt="piveSJA.png"></a></p>
+<h1 id="5-系统调试与测试"><a href="#5-系统调试与测试" class="headerlink" title="5. 系统调试与测试"></a>5. 系统调试与测试</h1><p>因为大部分代码在动态链接库中完成，所以调试是件比较头疼的事。甚至主窗口程序在原生Win32实现下，也不好显示调试信息。所以就出现一个问题：如果Hook没有正常完成，可能是注入有问题，也可能是注入的DLL代码有问题，让问题难以定位。</p>
+<p>因此本次项目开发中用到了开源工具<a target="_blank" rel="noopener" href="https://github.com/BlackINT3/OpenArk/">OpenArk</a>的DLL注入功能，大大便利了DLL注入的过程，让我可以安心开发Hook程序，虽然后面实现DLL注入后不需要了，但对调试确实很便利，而且有丰富的进程操作工具。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/12/18/Anime-and-reality/"
+      title="动画与现实"
+     >
+
+    <p class="title-text">
+      
+        动画与现实
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
