@@ -11,16 +11,19 @@
   <meta charset="utf-8">
   
   
-  <title>归档: 2023/1 | Kizureina&#39;s Blog</title>
+  <title>Windows逆向进阶 - Gal汉化入门 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="I know nothing except the fact of my ignorance.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kizureina&#39;s Blog">
-<meta property="og:url" content="https://kizureina.github.io/archives/2023/01/index.html">
+  <meta name="description" content="Hook基础Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。 两种Hook方式Hook的方式有inline和address两种。 inline Hook即内联Hook，直接在要Hook的函数处修改机器码，让程序执行跳转到我们写好的地址，来执行我们的函数，执行完后再跳转回到原函数处执行。 address Hook即通过修改call的地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows逆向进阶 - Gal汉化入门">
+<meta property="og:url" content="https://kizureina.github.io/2024/01/11/galgame-reverse-learning-note/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:description" content="Hook基础Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。 两种Hook方式Hook的方式有inline和address两种。 inline Hook即内联Hook，直接在要Hook的函数处修改机器码，让程序执行跳转到我们写好的地址，来执行我们的函数，执行完后再跳转回到原函数处执行。 address Hook即通过修改call的地">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-11T06:55:04.000Z">
+<meta property="article:modified_time" content="2024-01-11T10:05:03.413Z">
 <meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Galgame">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
@@ -346,100 +349,125 @@
     <div id="content-body">
        
 
-<div class="archive-main-card">
-    <div class="archive-top">
-      <div class="main-title-bar">
-        <div class="main-title-dot"></div>
-        <h1 class="article-title">Archive</h1>
-      </div>    
+<article id="post-galgame-reverse-learning-note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Windows逆向进阶 - Gal汉化入门
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-11T06:55:04.000Z" itemprop="datePublished">2024-01-11</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/ACG/">ACG</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            795 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="Hook基础"><a href="#Hook基础" class="headerlink" title="Hook基础"></a>Hook基础</h1><p>Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。</p>
+<h2 id="两种Hook方式"><a href="#两种Hook方式" class="headerlink" title="两种Hook方式"></a>两种Hook方式</h2><p>Hook的方式有inline和address两种。</p>
+<h4 id="inline-Hook"><a href="#inline-Hook" class="headerlink" title="inline Hook"></a>inline Hook</h4><p>即内联Hook，<strong>直接在要Hook的函数处修改机器码</strong>，让程序执行跳转到我们写好的地址，来执行我们的函数，执行完后再跳转回到原函数处执行。</p>
+<h4 id="address-Hook"><a href="#address-Hook" class="headerlink" title="address Hook"></a>address Hook</h4><p>即通过<strong>修改call的地址实现Hook</strong>。然后修改地址处的代码，执行完我们写好的代码后再跳转回到原本的函数。</p>
+<p>实际上两种方式是一样的。</p>
+<h2 id="两种跳转JMP-E9-与CALL-E8-的区别"><a href="#两种跳转JMP-E9-与CALL-E8-的区别" class="headerlink" title="两种跳转JMP(E9)与CALL(E8)的区别"></a>两种跳转JMP(E9)与CALL(E8)的区别</h2><p>Hook的基础是跳转，有两种汇编指令实现，分别是jmp与call。</p>
+<h4 id="Call"><a href="#Call" class="headerlink" title="Call"></a>Call</h4><p>call在执行时会改变ESP和EIP寄存器的值，并将call指令的下一条指令的地址压入栈中。</p>
+<p>如果使用call，因为会改变栈，所以有两种解决：</p>
+<ol>
+<li>直接在call完后加一条popad指令，将入栈的地址弹出</li>
+<li>在call之前对栈指针ESP做操作，加一条<code>ADD esp,4</code>(32位地址)，就可以将ESP指针修改回来。</li>
+</ol>
+<h4 id="Jmp"><a href="#Jmp" class="headerlink" title="Jmp"></a>Jmp</h4><p>jmp更简单粗暴，跳转对寄存器没有改变。</p>
+<p>但要注意的是：<strong>jmp后的参数跳转地址都是相对地址</strong>(RVA)，需要计算。</p>
+<p>例如<code>jmp 0x09</code>，即向下跳转到九个字节后的地址，如果是负值则向上跳转，例如<code>jmp 0xF9FFFFFF</code>。</p>
+<h5 id="jmp参数相对地址计算"><a href="#jmp参数相对地址计算" class="headerlink" title="jmp参数相对地址计算"></a>jmp参数相对地址计算</h5><p>跳转地址计算一般可以使用这个公式：</p>
+<blockquote>
+<p>目标地址 - 当前地址 - 5</p>
+<p>为什么会减五呢？其实是减去你写的跳转代码的长度，即<code>jmp 0x12345678</code>长度为五个字节。</p>
+</blockquote>
+<p>使用OD或者x32dbg会帮你计算，所以用地址就可以，但如果写成代码需要自己写好。</p>
+<h4 id="其他跳转方式"><a href="#其他跳转方式" class="headerlink" title="其他跳转方式"></a>其他跳转方式</h4><p>也可以用栈实现跳转：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push 0x12345678</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+
+<p>这种方式不会改变栈和寄存器，很常用。</p>
+<h2 id="栈平衡"><a href="#栈平衡" class="headerlink" title="栈平衡"></a>栈平衡</h2><p>我们hook后的函数必须要实现栈平衡，否则会影响原程序正常执行。</p>
+<p>栈平衡有多种策略，取决于函数调用约定，常用的有三种：</p>
+<ol>
+<li><p>cdecl(<strong>C&#x2F;C++默认调用约定</strong>)</p>
+<p>（1）参数从右向左依次压入堆栈.<br>（2）由调用者恢复堆栈，称为手动清栈。<br>（3）函数名自动加前导下划线。</p>
+</li>
+<li><p>stdcall(<strong>Windows API默认方式)</strong></p>
+<p>（1）参数从右向左依次压入堆栈.<br>（2）由被<strong>调用函数</strong>自己来恢复堆栈，称为自动清栈。<br>（3）函数名自动加前导下划线，后面紧跟着一个@，其后紧跟着参数的大小。</p>
+</li>
+<li><p>fastcall</p>
+<p>通过 CPU 寄存器来传递参数。此方式的函数的第一个和第二个DWORD参数通过ecx和edx传递，后面的参数从右向左的顺序压入栈。被调用函数清理堆栈。</p>
+</li>
+</ol>
+<p>Hook的目标函数，与你写好的Hooked函数必须调用约定一致，否则会造成栈不平衡。</p>
+
+        
+      </div>
+
+         
     </div>
     
-    
-      
-      
-        
-        <div class="year-line">
-            <div class="year-num">2023</div>
-            <div class="dot-wrapper">
-                <div class="dot"></div>
-            </div>
-        </div>
-      
-      <a class="archive-article-link" href="/2023/01/30/Getting-start-of-Docker/" title="Docker入门">
-        <div class="date">01-30</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    Docker入门
-                
-            </div>
-        </div>
-        <div class="tags">
-            
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/01/23/Thinking-of-Sayonara-Eri/" title="《再见绘梨》随想">
-        <div class="date">01-23</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    《再见绘梨》随想
-                
-            </div>
-        </div>
-        <div class="tags">
-            #Comic
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/01/22/Tatsuki-Fujimoto-s-reality-and-fiction/" title="藤本树的奇幻色彩与现实底色">
-        <div class="date">01-22</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    藤本树的奇幻色彩与现实底色
-                
-            </div>
-        </div>
-        <div class="tags">
-            #Comic
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/01/15/Android-Reverse-Learning-Note/" title="安卓逆向入门">
-        <div class="date">01-15</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    安卓逆向入门
-                
-            </div>
-        </div>
-        <div class="tags">
-            #Android
-        </div>
-      </a>
-    
+     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/01/01/Code-and-lonely-and-galgame/"
+      title="代码与孤独与Galgame"
+     >
+
+    <p class="title-text">
+      
+        代码与孤独与Galgame
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
