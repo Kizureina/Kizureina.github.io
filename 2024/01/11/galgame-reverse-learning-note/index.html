@@ -21,7 +21,7 @@
 <meta property="og:description" content="Hook基础Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。 两种Hook方式Hook的方式有inline和address两种。 inline Hook即内联Hook，直接在要Hook的函数处修改机器码，让程序执行跳转到我们写好的地址，来执行我们的函数，执行完后再跳转回到原函数处执行。 address Hook即通过修改call的地">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-11T06:55:04.000Z">
-<meta property="article:modified_time" content="2024-01-11T10:05:03.413Z">
+<meta property="article:modified_time" content="2024-01-12T11:28:54.051Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Galgame">
 <meta name="twitter:card" content="summary">
@@ -163,31 +163,6 @@
         
             <a class="category-link" href="/categories/ACG/">
                 ACG
-                <div class="category-count">8</div>
-            </a>
-        
-            <a class="category-link" href="/categories/WebSec/">
-                WebSec
-                <div class="category-count">6</div>
-            </a>
-        
-            <a class="category-link" href="/categories/Web/">
-                Web
-                <div class="category-count">14</div>
-            </a>
-        
-            <a class="category-link" href="/categories/EE/">
-                EE
-                <div class="category-count">2</div>
-            </a>
-        
-            <a class="category-link" href="/categories/MISC/">
-                MISC
-                <div class="category-count">1</div>
-            </a>
-        
-            <a class="category-link" href="/categories/python/">
-                python
                 <div class="category-count">1</div>
             </a>
         </div>
@@ -381,7 +356,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            795 词 
+            1.2k 词 
           </div>
         </div>
         
@@ -429,6 +404,21 @@
 </li>
 </ol>
 <p>Hook的目标函数，与你写好的Hooked函数必须调用约定一致，否则会造成栈不平衡。</p>
+<h1 id="Hook任意位置"><a href="#Hook任意位置" class="headerlink" title="Hook任意位置"></a>Hook任意位置</h1><h2 id="改写Hook点"><a href="#改写Hook点" class="headerlink" title="改写Hook点"></a>改写Hook点</h2><p>首先需要修改内存属性，由可读可执行改为可读可写可执行：一般使用<code>VirtulProtect()</code></p>
+<p>写入内存一般有两种方式：<code>memcpy()</code>和<code>WriteProcessMemory()</code></p>
+<p>注意的Hook流程如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">VirtualProtect</span>((LPVOID)orgAddr, <span class="number">0x5</span>, PAGE_EXECUTE_READWRITE, &amp;oldProtect);</span><br><span class="line"></span><br><span class="line">DWORD rvaAddr = tarAddr - orgAddr - <span class="number">0x5</span>;</span><br><span class="line"></span><br><span class="line">BYTE code[<span class="number">5</span>] = &#123; <span class="number">0xE9</span>, <span class="number">0x90</span>, <span class="number">0x90</span>, <span class="number">0x90</span>, <span class="number">0x90</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">memcpy</span>(&amp;code[<span class="number">1</span>], &amp;rvaAddr, <span class="number">0x4</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memcpy</span>((<span class="type">void</span>*)orgAddr, code, <span class="number">0x5</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;test.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> WINAPI <span class="title">myTest</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> __declspec(naked) <span class="built_in">My_fun</span>()</span><br><span class="line">&#123;</span><br><span class="line">	__asm mov eax, eax</span><br><span class="line">	__asm ret</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">DWORD orgAddr = <span class="number">0x0041247E</span>; <span class="comment">// 0x0041243E;</span></span><br><span class="line">DWORD retAddr = <span class="number">0x00412483</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> __declspec(naked) <span class="built_in">MyHook</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 需要注意栈平衡</span></span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">MessageBoxW</span>(<span class="literal">NULL</span>, <span class="string">L&quot;Hello!&quot;</span>, <span class="string">L&quot;this is a test box&quot;</span>, MB_OK);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 注意push和pop顺序</span></span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	__asm push <span class="number">0xF1F4</span></span><br><span class="line">	__asm jmp retAddr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">WriteHookCode</span><span class="params">(DWORD tarAddr, DWORD orgAddr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	DWORD oldProtect = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">VirtualProtect</span>((LPVOID)orgAddr, <span class="number">0x5</span>, PAGE_EXECUTE_READWRITE, &amp;oldProtect);</span><br><span class="line"></span><br><span class="line">	DWORD rvaAddr = tarAddr - orgAddr - <span class="number">0x5</span>;</span><br><span class="line"></span><br><span class="line">	BYTE code[<span class="number">5</span>] = &#123; <span class="number">0xE9</span>, <span class="number">0x90</span>, <span class="number">0x90</span>, <span class="number">0x90</span>, <span class="number">0x90</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memcpy</span>(&amp;code[<span class="number">1</span>], &amp;rvaAddr, <span class="number">0x4</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将hook代码写入目标地址</span></span><br><span class="line">	<span class="built_in">memcpy</span>((<span class="type">void</span>*)orgAddr, code, <span class="number">0x5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">WriteHookCode</span>((DWORD)MyHook, orgAddr);</span><br><span class="line">	<span class="built_in">RunMethod1</span>();</span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Hello, world!\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路其实很清楚，用vs或者x32dbg调一下也能搞明白。</p>
+<p>注意：如果要直接写好RVA地址做Hook的话，必须把<strong>地址随机化修改掉</strong>，在Visual Studio项目属性-&gt;链接器-&gt;高级的编译选项中修改即可，否则每次编译都是不同的ImageBase。</p>
+<p>但是有点奇怪的是这里：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DWORD orgAddr = <span class="number">0x0041247E</span>; <span class="comment">// 0x0041243E;</span></span><br><span class="line">DWORD retAddr = <span class="number">0x00412483</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Hook点的地址会根据<code>MyHook()</code>中内容改变，多半是MyHook函数写好的汇编代码，会占一部分内存空间导致的。</p>
+<p>retAddr实际上就是orgAddr + 0x5，Hook点之后的五个字节，即修改为jmp 0xXXXXXXXX后的下一条指令。</p>
+<p>另外：x32dbg 原来调试程序还方便的，如果直接用vs调试，需要先清理再重新生成，否则可能地址对不上。</p>
 
         
       </div>
