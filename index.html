@@ -13,14 +13,15 @@
   
   <title>Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="I know nothing except the fact of my ignorance.">
+  <meta name="description" content="关于计算机技术、ACG文化的个人博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kizureina&#39;s Blog">
 <meta property="og:url" content="https://kizureina.github.io/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="I know nothing except the fact of my ignorance.">
+<meta property="og:description" content="关于计算机技术、ACG文化的个人博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
@@ -51,7 +52,7 @@
   
     
 <div id="banner" class=" is_home ">
-  <img src="/assets/banner.png" itemprop="image">
+  <img src="/banner.png" itemprop="image">
   <div id="banner-dim"></div>
 </div>
  
@@ -153,13 +154,13 @@
     <div class="widget">
       <h3 class="widget-title">分类</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/Reverse/">
-                Reverse
+            <a class="category-link" href="/categories/EE/">
+                EE
                 <div class="category-count">1</div>
             </a>
         
-            <a class="category-link" href="/categories/ACG/">
-                ACG
+            <a class="category-link" href="/categories/Reverse/">
+                Reverse
                 <div class="category-count">1</div>
             </a>
         </div>
@@ -362,7 +363,8 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            Hook基础Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。
+            
+Hook基础Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。
 两种Hook方式Hook的方式有inline和address两种。
 inline Hook即内联Hook，直接在要Hook的函数处修改机器码，让程序执行跳转到我们写好的地址，来执行我们的函数，执行完后再跳转回到原函数处执行。
 address Hook即通过修改call的地址实现Hook。然后修改地址处的代码，执行完我们写好的代码后再跳转回到原本的函数。
@@ -375,7 +377,7 @@ Callcall在执行时会改变ESP和EIP寄存器的值，并将call指令的下�
 在call之前对栈指针ESP做操作，加一条ADD esp,4(32位地址)，就可以将ESP指针修改回来。
 
 Jmpjmp更简单粗暴，跳转对寄存器没有改变。
-但...  
+...  
           </div>
         
       </div>
