@@ -10,6 +10,17 @@
 <head>
   <meta charset="utf-8">
   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'true');
+</script>
+<!-- End Google Analytics -->
+
   
   <title>SSTI——flask模板注入漏洞入门 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -155,28 +166,6 @@
 
   
   <div class="sticky">
-    
-      
-
-
-  <div class="widget-wrap">
-    <div class="widget">
-      <h3 class="widget-title">分类</h3>
-      <div class="category-box">
-            <a class="category-link" href="/categories/EE/">
-                EE
-                <div class="category-count">1</div>
-            </a>
-        
-            <a class="category-link" href="/categories/Reverse/">
-                Reverse
-                <div class="category-count">1</div>
-            </a>
-        </div>
-    </div>
-  </div>
-
-
     
       
   <div class="widget-wrap">
@@ -439,6 +428,22 @@
   
 </article>
 
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({
+          el: '#vcomments',
+          appId: "j9YBSIHTlRyfuvPQqY50ARfV-gzGzoHsz",
+          appKey: "Q7s9zRzne9zaSVrroDR2wgO8"
+      })
+  </script>
  
     </div>
     <div id="footer-wrapper">
