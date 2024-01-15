@@ -20,16 +20,16 @@
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
 <meta property="og:description" content="Hook基础Hook的概念无需多言，简单来讲就是监听某个API函数，来对这个函数做相关操作，之后再跳转回到原本的函数继续执行。 两种Hook方式Hook的方式有inline和address两种。 inline Hook即内联Hook，直接在要Hook的函数处修改机器码，让程序执行跳转到我们写好的地址，来执行我们的函数，执行完后再跳转回到原函数处执行。 address Hook即通过修改call的地">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s11.ax1x.com/2024/01/14/pFPj7Is.png">
-<meta property="og:image" content="https://s11.ax1x.com/2024/01/14/pFiCs61.png">
-<meta property="og:image" content="https://s11.ax1x.com/2024/01/14/pFiCg0K.png">
-<meta property="og:image" content="https://files.catbox.moe/vx1nnk.png">
+<meta property="og:image" content="https://kizureina.github.io/images/Snipaste_2024-01-14_16-49-38.png">
+<meta property="og:image" content="https://kizureina.github.io/images/Snipaste_2024-01-14_17-51-56.png">
+<meta property="og:image" content="https://kizureina.github.io/images/Snipaste_2024-01-14_17-53-29.png">
+<meta property="og:image" content="https://kizureina.github.io/images/Snipaste_2024-01-15_17-28-35.png">
 <meta property="article:published_time" content="2024-01-11T06:55:04.000Z">
-<meta property="article:modified_time" content="2024-01-15T09:50:45.133Z">
+<meta property="article:modified_time" content="2024-01-15T16:10:22.868Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Galgame">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s11.ax1x.com/2024/01/14/pFPj7Is.png">
+<meta name="twitter:image" content="https://kizureina.github.io/images/Snipaste_2024-01-14_16-49-38.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -163,36 +163,11 @@
       <div class="category-box">
             <a class="category-link" href="/categories/Reverse/">
                 Reverse
-                <div class="category-count">3</div>
+                <div class="category-count">1</div>
             </a>
         
             <a class="category-link" href="/categories/ACG/">
                 ACG
-                <div class="category-count">6</div>
-            </a>
-        
-            <a class="category-link" href="/categories/EE/">
-                EE
-                <div class="category-count">2</div>
-            </a>
-        
-            <a class="category-link" href="/categories/WebSec/">
-                WebSec
-                <div class="category-count">6</div>
-            </a>
-        
-            <a class="category-link" href="/categories/Web/">
-                Web
-                <div class="category-count">14</div>
-            </a>
-        
-            <a class="category-link" href="/categories/MISC/">
-                MISC
-                <div class="category-count">1</div>
-            </a>
-        
-            <a class="category-link" href="/categories/python/">
-                python
                 <div class="category-count">1</div>
             </a>
         </div>
@@ -506,7 +481,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push ebp</span><br><span class="line">mov ebp,esp</span><br></pre></td></tr></table></figure>
 
 <p>这两行是<code>MessageBoxA</code>原函数中被我们覆盖掉的五个字节中的三个字节，这个函数在user32.dll中的实现最开头三行如下：</p>
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pFPj7Is"><img src="https://s11.ax1x.com/2024/01/14/pFPj7Is.png" alt="pFPj7Is.png"></a></p>
+<p><img src="/../images/Snipaste_2024-01-14_16-49-38.png" alt="pFPj7Is.png"></p>
 <p>但<code>move esi,esi</code>是编译器优化的占位符，实际上<strong>无操作</strong>(所以x32dbg这里标成了灰色)，所以不需要恢复。</p>
 <p><code>push ebp</code> 和 <code>mov ebp, esp</code> 组合起来用于建立函数的调用帧，保存并设置函数的基址指针，以便函数能够正确地访问栈上的数据。这是典型的函数开头的常见操作。所以必须恢复，否则后面继续执行栈会出问题。</p>
 <blockquote>
@@ -532,9 +507,9 @@
 
 <p>注意：这个函数的原型是<code>MessageBoxTimeoutW</code>，其中的out的o是小写，这里不能错一点，否则获取不到之前的函数地址。</p>
 <p>到x32dbg里查看，发现甚至都没有加载user32.dll：</p>
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pFiCs61"><img src="https://s11.ax1x.com/2024/01/14/pFiCs61.png" alt="pFiCs61.png"></a></p>
+<p><img src="/../images/Snipaste_2024-01-14_17-51-56.png" alt="pFiCs61.png"></p>
 <p>因为没有在导入表中引入，而且我们手动加载的，在函数执行时会看到加载进来了：</p>
-<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pFiCg0K"><img src="https://s11.ax1x.com/2024/01/14/pFiCg0K.png" alt="pFiCg0K.png"></a></p>
+<p><img src="/../images/Snipaste_2024-01-14_17-53-29.png" alt="pFiCg0K.png"></p>
 <p>获取到地址后，再执行正常的hook就可以了。</p>
 <p>完整Hook代码如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">DWORD orgMsgBoxAddr;</span><br><span class="line">DWORD retMsgBoxAddr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(WINAPI* pMessageBoxTimeoutW)</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	IN HWND hWnd,</span></span></span><br><span class="line"><span class="params"><span class="function">	IN LPCWSTR lppText,</span></span></span><br><span class="line"><span class="params"><span class="function">	IN LPCWSTR lpCaption,</span></span></span><br><span class="line"><span class="params"><span class="function">	IN UINT uType,</span></span></span><br><span class="line"><span class="params"><span class="function">	IN WORD wLanguageId,</span></span></span><br><span class="line"><span class="params"><span class="function">	IN DWORD dwMilliseconds)</span></span>;</span><br><span class="line">pMessageBoxTimeoutW orgMessageBoxTimeoutW;</span><br><span class="line"><span class="function">DWORD <span class="title">GetProcAddr</span><span class="params">(LPCWSTR dllName, LPCSTR procName)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HMODULE hDll = <span class="built_in">LoadLibraryW</span>(dllName);</span><br><span class="line">	<span class="keyword">if</span> (hDll == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> FALSE;</span><br><span class="line">	&#125;</span><br><span class="line">	FARPROC addr = <span class="built_in">GetProcAddress</span>(hDll, procName);</span><br><span class="line">	<span class="keyword">if</span> (addr == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">FreeLibrary</span>(hDll);</span><br><span class="line">	<span class="keyword">return</span> (DWORD)addr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">WriteHookCode</span><span class="params">(DWORD tarAddr, DWORD orgAddr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	DWORD oldProtect = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">VirtualProtect</span>((LPVOID)orgAddr, <span class="number">0x5</span>, PAGE_EXECUTE_READWRITE, &amp;oldProtect);</span><br><span class="line">	DWORD rvaAddr = tarAddr - orgAddr - <span class="number">0x5</span>;</span><br><span class="line">	BYTE code[<span class="number">5</span>] = &#123; <span class="number">0xE9</span>, <span class="number">0x90</span>, <span class="number">0x90</span>, <span class="number">0x90</span>, <span class="number">0x90</span> &#125;;</span><br><span class="line">	<span class="built_in">memcpy</span>(&amp;code[<span class="number">1</span>], &amp;rvaAddr, <span class="number">0x4</span>);</span><br><span class="line">	<span class="built_in">memcpy</span>((<span class="type">void</span>*)orgAddr, code, <span class="number">0x5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">VOID __declspec(naked) <span class="built_in">MyMessageBoxTimeout</span>(_In_opt_ HWND hWnd,</span><br><span class="line">	_In_opt_ LPCWSTR lpText,</span><br><span class="line">	_In_opt_ LPCWSTR lpCaption,</span><br><span class="line">	_In_ UINT uType)</span><br><span class="line">&#123;</span><br><span class="line">	__asm push ebp</span><br><span class="line">	__asm mov ebp, esp</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">	&#125;</span><br><span class="line">	lpText = <span class="string">L&quot;MyHook&quot;</span>;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		jmp retMsgBoxAddr</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">VOID <span class="title">Hook</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	retMsgBoxAddr = (DWORD)orgMessageBoxTimeoutW + <span class="number">0x5</span>;</span><br><span class="line">	<span class="built_in">WriteHookCode</span>((DWORD)MyMessageBoxTimeout, (DWORD)orgMessageBoxTimeoutW);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	orgMessageBoxTimeoutW = (pMessageBoxTimeoutW)<span class="built_in">GetProcAddr</span>(<span class="string">L&quot;user32.dll&quot;</span>, <span class="string">&quot;MessageBoxTimeoutW&quot;</span>);</span><br><span class="line">	<span class="built_in">Hook</span>();</span><br><span class="line">	<span class="built_in">orgMessageBoxTimeoutW</span>(<span class="literal">NULL</span>, <span class="string">L&quot;hello&quot;</span>, <span class="string">L&quot;test&quot;</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="number">5000</span>);</span><br><span class="line">    </span><br><span class="line">	<span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;Yoruko&quot;</span>, <span class="string">&quot;hello-A&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="built_in">MessageBoxW</span>(<span class="literal">NULL</span>, <span class="string">L&quot;Yoruko&quot;</span>, <span class="string">L&quot;hello-W&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -577,7 +552,7 @@
 </blockquote>
 <p>我们可以通过写好Dll后，再重建目标程序的IAT表，把我们的函数注入进去。</p>
 <p>可以通过CFF Explorer重建IAT表。</p>
-<p><img src="https://files.catbox.moe/vx1nnk.png" alt="IAT injection"></p>
+<p><img src="/../images/Snipaste_2024-01-15_17-28-35.png" alt="IAT injection"></p>
 <p>这种方式就是直接修改静态的PE结构。</p>
 <p>当然还有一种不直接修改IAT表的方式：就是在真正的程序执行前，<strong>写好一个loader</strong>，把我们写好的注入当作内存补丁，来在loader中创建真正的程序线程，然后再修改内存中IAT表。这种方式明显更好，但要复杂一些。</p>
 <h3 id="DLL劫持"><a href="#DLL劫持" class="headerlink" title="DLL劫持"></a>DLL劫持</h3>
