@@ -24,18 +24,26 @@
   
   <title>等价无穷小替换的本质 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="等价无穷小替换的本质所有学过高数的大学生都知道，如果在极限式中出现了乘除形式的等价无穷小（其实加减形式也可以用，但有条件），可以非常方便地直接替换化简。不过究竟是为什么呢？ 课本上的描述很形象，因为两个无穷小在趋近于0时表现相同，所以可以替换，但让人更加迷惑，什么是表现相同呢？说到底，无穷小的阶到底是什么？更关键的问题在于：究竟如何求得一个表达式的等价无穷小。 等价无穷小的证明很容易：$$\lim">
+  <meta name="description" content="所有学过高数的大学生都知道，如果在极限式中出现了乘除形式的等价无穷小（其实加减形式也可以用，但有条件），可以非常方便地直接替换化简。不过究竟是为什么呢？ 课本上的描述很形象，因为两个无穷小在趋近于0时表现相同，所以可以替换，但让人更加迷惑，什么是表现相同呢？说到底，无穷小的阶到底是什么？更关键的问题在于：究竟如何求得一个表达式的等价无穷小。 等价无穷小的证明很容易： $$\lim\limits_{">
 <meta property="og:type" content="article">
 <meta property="og:title" content="等价无穷小替换的本质">
 <meta property="og:url" content="https://kizureina.github.io/2024/04/17/The-essence-of-equivalent-infinitesimal-substitution/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="等价无穷小替换的本质所有学过高数的大学生都知道，如果在极限式中出现了乘除形式的等价无穷小（其实加减形式也可以用，但有条件），可以非常方便地直接替换化简。不过究竟是为什么呢？ 课本上的描述很形象，因为两个无穷小在趋近于0时表现相同，所以可以替换，但让人更加迷惑，什么是表现相同呢？说到底，无穷小的阶到底是什么？更关键的问题在于：究竟如何求得一个表达式的等价无穷小。 等价无穷小的证明很容易：$$\lim">
+<meta property="og:description" content="所有学过高数的大学生都知道，如果在极限式中出现了乘除形式的等价无穷小（其实加减形式也可以用，但有条件），可以非常方便地直接替换化简。不过究竟是为什么呢？ 课本上的描述很形象，因为两个无穷小在趋近于0时表现相同，所以可以替换，但让人更加迷惑，什么是表现相同呢？说到底，无穷小的阶到底是什么？更关键的问题在于：究竟如何求得一个表达式的等价无穷小。 等价无穷小的证明很容易： $$\lim\limits_{">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001708285.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001728563.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001737149.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001750366.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001807910.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001757312.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240429001802125.png">
 <meta property="article:published_time" content="2024-04-17T04:42:20.000Z">
-<meta property="article:modified_time" content="2024-04-17T08:21:28.545Z">
+<meta property="article:modified_time" content="2024-04-28T16:18:40.718Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20240429001708285.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -182,7 +190,7 @@
       
         <a class="archive-link" href="/archives/2024/04 ">
           四月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/03 ">
@@ -302,6 +310,10 @@
       <ul>
         
           <li>
+            <a href="/2024/04/29/A-bug-of-Bilibili-Web-Danmaku-about-font/">Bilibili网页端视频弹幕Bug</a>
+          </li>
+        
+          <li>
             <a href="/2024/04/17/The-essence-of-equivalent-infinitesimal-substitution/">等价无穷小替换的本质</a>
           </li>
         
@@ -315,10 +327,6 @@
         
           <li>
             <a href="/2024/02/16/BangDream-toujin-culture-and-narcissu/">幻想与现实的光影：邦多利、水仙与同人文化</a>
-          </li>
-        
-          <li>
-            <a href="/2024/01/11/galgame-reverse-learning-note/">Windows逆向进阶</a>
           </li>
         
       </ul>
@@ -364,7 +372,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            626 词 
+            630 词 
           </div>
         </div>
         
@@ -373,16 +381,23 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h1 id="等价无穷小替换的本质"><a href="#等价无穷小替换的本质" class="headerlink" title="等价无穷小替换的本质"></a>等价无穷小替换的本质</h1><p>所有学过高数的大学生都知道，如果在极限式中出现了乘除形式的等价无穷小（其实加减形式也可以用，但有条件），可以非常方便地直接替换化简。不过究竟是为什么呢？</p>
+          <p>所有学过高数的大学生都知道，如果在极限式中出现了乘除形式的等价无穷小（其实加减形式也可以用，但有条件），可以非常方便地直接替换化简。不过究竟是为什么呢？</p>
 <p>课本上的描述很形象，因为两个无穷小在趋近于0时表现相同，所以可以替换，但让人更加迷惑，什么是表现相同呢？说到底，无穷小的<em>阶</em>到底是什么？更关键的问题在于：<strong>究竟如何求得一个表达式的等价无穷小</strong>。</p>
-<p>等价无穷小的证明很容易：<br>$$<br>\lim\limits_{x\to0}\frac{u(x)}{v(x)}&#x3D;1<br>$$<br>求出这个比值极限，为1则说明是等价无穷小。例如：<br>$$<br>\lim\limits_{x\to0}\frac{\sin\x}{x} &#x3D; 1<br>$$</p>
+<p>等价无穷小的证明很容易：</p>
+<p><img src="/../images/image-20240429001708285.png" alt="image-20240429001708285"><br>$$<br>\lim\limits_{x\to0}\frac{u(x)}{v(x)}&#x3D;1<br>$$<br>求出这个比值极限，为1则说明是等价无穷小。例如：</p>
+<p><img src="/../images/image-20240429001728563.png" alt="image-20240429001728563"><br>$$<br>\lim\limits_{x\to0}\frac{\sin\x}{x} &#x3D; 1<br>$$</p>
 <p>$$<br>\lim\limits_{x\to0}\frac{1-\cos\x}{\frac{1}{2} \times x^2} &#x3D; 1<br>$$</p>
-<p>也可写作：<br>$$<br>x\thicksim\arctan x \thicksim \sin\ x \thicksim \tan x \thicksim \ln{(x+1)} \thicksim e^x-1 \thicksim \arcsin x \thicksim \ln{(x+\sqrt{1+x^2})}<br>$$<br>注意最后一个很常用。</p>
+<p>也可写作：</p>
+<p><img src="/../images/image-20240429001737149.png" alt="image-20240429001737149"><br>$$<br>x\thicksim\arctan x \thicksim \sin\ x \thicksim \tan x \thicksim \ln{(x+1)} \thicksim e^x-1 \thicksim \arcsin x \thicksim \ln{(x+\sqrt{1+x^2})}<br>$$<br>注意最后一个很常用。</p>
 <p>但如果给出任意一个函数表达式，如何计算它的等价无穷小呢？</p>
 <p>高数书上其实也已经给出了答案，就是用<strong>泰勒展开式</strong>计算。</p>
 <p>所谓无穷小的<em>阶</em>，实际上是泰勒公式的余项精度差异。等价无穷小的定义：<br>$$<br>f(x) &#x3D; g(x) + o(x)<br>$$<br>即无穷小等于其等价无穷小 + 高阶无穷小。移项得，两个等价无穷小相减，得到高阶无穷小，实际上是相同精度的泰勒公式相减得到更高精度的余项。</p>
-<p>例如sinx的泰勒展开式：<br>$$<br>\sin x &#x3D; x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} - …….<br>$$<br>很容易发现，在泰勒公式精度为一阶时，展开为：<br>$$<br>\sin x &#x3D; x + o(x)<br>$$<br>即x + x的高阶无穷小,因此x与sinx为同阶无穷小。</p>
-<p>而在在同阶无穷小相减时，例如：<br>$$<br>x - \sin x &#x3D; \frac{x^3}{6} +o(x^3)\qquad \qquad \quad \ \ \arcsin x&#x3D;x+\frac{x^3}{6}+o(x^3)<br>$$<br>得到的就是泰勒展开式的下一项，因此有等价无穷小：<br>$$<br>x - \sin\ x \thicksim \frac{x^3}{6}<br>$$<br>所以实际上，<strong>一切等价无穷小替换的题目都可以用泰勒公式展开计算</strong>，而且永远不会碰到0 - 0，因为在等价无穷小中略去的高阶无穷小，都在泰勒展开式的余项中，继续展开计算即可。</p>
+<p>例如sinx的泰勒展开式：</p>
+<p><img src="/../images/image-20240429001750366.png" alt="image-20240429001750366"><br>$$<br>\sin x &#x3D; x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} - …….<br>$$<br>很容易发现，在泰勒公式精度为一阶时，展开为：</p>
+<p><img src="/../images/image-20240429001807910.png" alt="image-20240429001807910"><br>$$<br>\sin x &#x3D; x + o(x)<br>$$<br>即x + x的高阶无穷小,因此x与sinx为同阶无穷小。</p>
+<p>而在在同阶无穷小相减时，例如：</p>
+<p><img src="/../images/image-20240429001757312.png" alt="image-20240429001757312"><br>$$<br>x - \sin x &#x3D; \frac{x^3}{6} +o(x^3)\qquad \qquad \quad \ \ \arcsin x&#x3D;x+\frac{x^3}{6}+o(x^3)<br>$$<br>得到的就是泰勒展开式的下一项，因此有等价无穷小：</p>
+<p><img src="/../images/image-20240429001802125.png" alt="image-20240429001802125"><br>$$<br>x - \sin\ x \thicksim \frac{x^3}{6}<br>$$<br>所以实际上，<strong>一切等价无穷小替换的题目都可以用泰勒公式展开计算</strong>，而且永远不会碰到0 - 0，因为在等价无穷小中略去的高阶无穷小，都在泰勒展开式的余项中，继续展开计算即可。</p>
 
         
       </div>
@@ -395,10 +410,15 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2024/04/29/A-bug-of-Bilibili-Web-Danmaku-about-font/"
+      title="Bilibili网页端视频弹幕Bug"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        Bilibili网页端视频弹幕Bug
         
     </p>
   </a>
