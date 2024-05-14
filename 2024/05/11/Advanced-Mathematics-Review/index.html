@@ -44,8 +44,15 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240512155246231.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240512160112338.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240512171458726.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514132230858.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514175205769.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514193836961.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514194421470.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514194710296.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514200601609.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240514202423708.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-12T09:20:50.141Z">
+<meta property="article:modified_time" content="2024-05-14T12:24:47.443Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -383,7 +390,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.8k 词 
+            3.7k 词 
           </div>
         </div>
         
@@ -496,6 +503,7 @@
 <p><img src="/../images/image-20240511173551932.png" alt="image-20240511173551932"></p>
 <h3 id="有理运算法则"><a href="#有理运算法则" class="headerlink" title="有理运算法则"></a>有理运算法则</h3><p>这个是计算极限的基本，但很容易犯错。</p>
 <p>关键是：如果可以拆成加减或者乘除求极限，拆出来的极限<strong>必须存在</strong>。</p>
+<p>因为如果拆出来的极限存在，而且要计算的极限一定存在，所以被拆之后的部分极限也一定存在。反之就算整体极限存在，其中拆出来的部分不存在，被拆的也有可能不存在 &#x3D;&gt; 此时不能拆开计算。</p>
 <p><img src="/../images/image-20240511174726188.png" alt="image-20240511174726188"></p>
 <p>上面的结论对极限、连续、可导均成立，即只有存在与存在经过加减运算后也存在，其他都不一定。</p>
 <p>推论：</p>
@@ -530,8 +538,24 @@
 <li>第二类间断点：左右极限<em>至少有一个不存在</em></li>
 </ul>
 <p>无穷间断点，震荡间断点(但<strong>不是只有这两种</strong>，例如sin(1&#x2F;x))。</p>
-<h1 id="第二章-导数与微分"><a href="#第二章-导数与微分" class="headerlink" title="第二章 导数与微分"></a>第二章 导数与微分</h1><h2 id="导数"><a href="#导数" class="headerlink" title="导数"></a>导数</h2><p>定义：<img src="/../images/image-20240512160112338.png" alt="image-20240512160112338"></p>
-<p>其中f(x)是动点，不能直接赋值，需要<em>代表达式</em>；f(x_0)是静点，可以直接代值。</p>
+<h1 id="第二章-导数与微分"><a href="#第二章-导数与微分" class="headerlink" title="第二章 导数与微分"></a>第二章 导数与微分</h1><p>难点：</p>
+<ul>
+<li>利用导数定义判断可导性</li>
+<li>求高阶导数</li>
+</ul>
+<h2 id="导数"><a href="#导数" class="headerlink" title="导数"></a>导数</h2><p>定义：<img src="/../images/image-20240512160112338.png" alt="image-20240512160112338"></p>
+<p>其中f(x)是<strong>动点</strong>，不能直接赋值，需要<em>代表达式</em>；f(x_0)是<strong>静点</strong>，可以直接代值。</p>
+<p>注意：由可导可以推出上述定义式，但由定义式还不能直接推出可导，而必须要满足：</p>
+<ol>
+<li>x(或x表达式)趋近于x_0</li>
+<li>x不等于0</li>
+<li>关键：x必须从两个方向趋近于x_0，即要趋近于0+和0-。</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>对数列极限，n趋近于无穷，即n趋近于正无穷。</li>
+<li>如果给出的两个表达式为两个动点，则一定不存在，极限定义必须是一动一静。</li>
+</ol>
 <h3 id="可导"><a href="#可导" class="headerlink" title="可导"></a>可导</h3><ul>
 <li><p>可导 &lt;&#x3D;&gt; 左右导数均存在，且相等。</p>
 </li>
@@ -540,6 +564,9 @@
 <li><p>不可导不一定没有切线。例如根号下x的绝对值，在x&#x3D;0处不可导，但有切线(y轴)，因为两侧导数值刚好为+∞和-∞。</p>
 </li>
 </ul>
+<blockquote>
+<p>对含绝对值函数的常用结论：对f(x)&#x3D;φ(x)|x-a|，若φ(x)在x &#x3D; a处连续，则f(x)在a可导的充要条件是<em>φ(a) &#x3D; 0</em>。</p>
+</blockquote>
 <h4 id="可导抽象函数与洛必达"><a href="#可导抽象函数与洛必达" class="headerlink" title="可导抽象函数与洛必达"></a>可导抽象函数与洛必达</h4><p>注意：已知f(x)有n阶可导，则说明洛必达最多可以对f(x)n-1阶求导，即<em>f(x)n阶可导，推不出f(x)的n阶导函数连续，也推不出f(x)n阶导函数极限存在</em>。例如x^2*sin(1&#x2F;x)，且x &#x3D; 0时为0.这个函数<strong>处处可导</strong>，但导函数在x趋于0时的极限不存在（当然也不连续）。</p>
 <p>但如果已知f(x)有n阶<strong>连续</strong>可导，则f(x)可求n阶导。</p>
 <h3 id="导数性质"><a href="#导数性质" class="headerlink" title="导数性质"></a>导数性质</h3><ul>
@@ -567,6 +594,46 @@
 <li>导数是函数在某点的变化<em>率</em>，微分是函数在某点变化<em>量</em>的近似值。</li>
 <li>几何意义：导数是函数在某点的切线斜率，微分是函数曲线在某点切线上的增量。</li>
 </ol>
+<h2 id="高阶导数"><a href="#高阶导数" class="headerlink" title="高阶导数"></a>高阶导数</h2><p>f(x)在x_0处n阶可导，则函数在x_0的<em>邻域内</em>必然有一切低于n阶的导数。</p>
+<p><img src="/../images/image-20240514132230858.png" alt="image-20240514132230858"></p>
+<p>注意(uv)的n阶导数形式为牛顿二项式，即C(k,n)*u^(k)*v^(n-k)。</p>
+<p>但是一般不会求到k阶，因为如果有u，v中有幂函数，在求到次数+1时为0，此时之后的部分全为0，若求在0的值时，此时公式(例如次数为2时)变成C(a,n)u^(2)*v^(n-2)。</p>
+<blockquote>
+<p>在求高阶导数时，一般要求一阶，二阶，三阶然后找规律：关键在于对复合函数求二阶时，不要忘记乘上对复合内函数所求导数的平方（相当于对一阶导数求导后，再乘内函数的导数再乘之前的乘因子）。</p>
+<p><img src="/../images/image-20240514175205769.png" alt="image-20240514175205769"></p>
+</blockquote>
+<h2 id="相关变化率"><a href="#相关变化率" class="headerlink" title="相关变化率"></a>相关变化率</h2><p>已知一个变化率，求另一个与之相关的变化率。</p>
+<p>关键是建立变量间的联系，然后类似参数方程求导，搞清楚对谁求导即可。</p>
+<h1 id="第三章-微分中值定理及导数应用"><a href="#第三章-微分中值定理及导数应用" class="headerlink" title="第三章 微分中值定理及导数应用"></a>第三章 微分中值定理及导数应用</h1><p><img src="/../images/image-20240514193836961.png" alt="image-20240514193836961"></p>
+<h2 id="微分中值定理"><a href="#微分中值定理" class="headerlink" title="微分中值定理"></a>微分中值定理</h2><p>费马引理：</p>
+<p>f(x)在x_0处可导，且在x_0取得极值，则f(x_0)的导数&#x3D;0。</p>
+<h3 id="三大中值定理"><a href="#三大中值定理" class="headerlink" title="三大中值定理"></a>三大中值定理</h3><p><strong>罗尔定理</strong>：</p>
+<p>条件：</p>
+<ol>
+<li>f(x)在[a,b]连续</li>
+<li>f(x)在(a,b)可导(开区间连续，闭区间可导)</li>
+<li>f(a) &#x3D; f(b)</li>
+</ol>
+<p>则存在a属于(a,b)，使f(a)导数为0。(即存在一点，使该点切线平行于x轴)</p>
+<p><strong>拉格朗日中值定理：</strong></p>
+<p>条件：(开区间连续，闭区间可导)</p>
+<p><img src="/../images/image-20240514194421470.png" alt="image-20240514194421470"></p>
+<p>区间内存在一点，使该点切线平行于端点连线。(即罗尔定理的推广)</p>
+<p><strong>柯西中值定理：</strong></p>
+<p>即参数方程的拉格朗日中值定理：</p>
+<p><img src="/../images/image-20240514194710296.png" alt="image-20240514194710296"></p>
+<h4 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h4><p>建立了函数与导数的联系</p>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>柯西是拉格朗日的推广，拉格朗日是罗尔定理的推广。</p>
+<h3 id="泰勒公式-1"><a href="#泰勒公式-1" class="headerlink" title="泰勒公式"></a>泰勒公式</h3><p>常用于研究f(x)的n阶导数。</p>
+<p><img src="/../images/image-20240514200601609.png" alt="image-20240514200601609"></p>
+<p>意义：使用多项式函数逼近复杂函数；建立函数与高阶导数的关系。</p>
+<p>区别：</p>
+<ol>
+<li>皮亚诺余项为局部泰勒公式，主要<em>研究极限和极值</em>。</li>
+<li>拉格朗日余项研究函数整体。主要<em>研究最值和不等式</em>。</li>
+</ol>
+<p><strong>基本泰勒公式：</strong></p>
+<p><img src="/../images/image-20240514202423708.png" alt="image-20240514202423708"></p>
 
         
       </div>
