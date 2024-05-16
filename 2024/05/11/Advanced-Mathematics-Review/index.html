@@ -55,8 +55,14 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240515125934358.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240515130124503.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240515130519274.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240516164852817.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240516165745046.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240516170853394.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240516172034842.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240516184604849.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240516191246891.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-15T05:16:39.273Z">
+<meta property="article:modified_time" content="2024-05-16T11:13:03.373Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -394,7 +400,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4k 词 
+            4.7k 词 
           </div>
         </div>
         
@@ -628,6 +634,8 @@
 <p><img src="/../images/image-20240514194710296.png" alt="image-20240514194710296"></p>
 <h4 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h4><p>建立了函数与导数的联系</p>
 <h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>柯西是拉格朗日的推广，拉格朗日是罗尔定理的推广。</p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>罗尔定理多用于和零点定理共同处理方程根的存在问题。</p>
+<p>根的<em>个数</em>多用单调性判断。</p>
 <h3 id="泰勒公式-1"><a href="#泰勒公式-1" class="headerlink" title="泰勒公式"></a>泰勒公式</h3><p>常用于研究f(x)的n阶导数。</p>
 <p><img src="/../images/image-20240514200601609.png" alt="image-20240514200601609"></p>
 <p>意义：使用多项式函数逼近复杂函数；建立函数与高阶导数的关系。</p>
@@ -638,7 +646,14 @@
 </ol>
 <p><strong>基本泰勒公式：</strong></p>
 <p><img src="/../images/image-20240514202423708.png" alt="image-20240514202423708"></p>
-<h2 id="导数应用"><a href="#导数应用" class="headerlink" title="导数应用"></a>导数应用</h2><h3 id="单调性"><a href="#单调性" class="headerlink" title="单调性"></a>单调性</h3><p>开区间内导数&gt;0，则函数在闭区间内单调递增；反之则递减。</p>
+<h2 id="导数应用"><a href="#导数应用" class="headerlink" title="导数应用"></a>导数应用</h2><h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><p>判断极值的主要思路：</p>
+<ol>
+<li>求某点的左右极限(左右导数)</li>
+<li>定义判断极值：定义计算某点极限值，再比较两侧邻域</li>
+<li>利用几何意义画图，尤其是多项式函数时</li>
+</ol>
+<p>注意：应用时建模，如果函数很复杂难以求导，可以换种思路(换个自变量建立函数)</p>
+<h3 id="单调性"><a href="#单调性" class="headerlink" title="单调性"></a>单调性</h3><p>开区间内导数&gt;0，则函数在闭区间内单调递增；反之则递减。</p>
 <h3 id="极值"><a href="#极值" class="headerlink" title="极值"></a>极值</h3><p><img src="/../images/image-20240515123606691.png" alt="image-20240515123606691"></p>
 <p>必要条件：若可导函数f(x)在x_0处可导，且在x_0处取到极值 &#x3D;&#x3D;&#x3D;&gt; f(x)` &#x3D; 0</p>
 <p>此时称导数为0的点为“驻点”。</p>
@@ -650,12 +665,48 @@
 <p>极值点只可能在两处存在：驻点和导数不存在的点。</p>
 <h3 id="凹凸性"><a href="#凹凸性" class="headerlink" title="凹凸性"></a>凹凸性</h3><p>二阶导数为大于0，则曲线为凹；二阶导数小于0，则曲线为凸。</p>
 <p>拐点判断与极值点类似。</p>
-<h3 id="渐近线"><a href="#渐近线" class="headerlink" title="渐近线"></a>渐近线</h3><p>水平渐近线：求x趋于无穷的极限</p>
+<h3 id="渐近线"><a href="#渐近线" class="headerlink" title="渐近线"></a>渐近线</h3><p>水平渐近线：求x趋于无穷的极限，为0时有水平渐近线</p>
 <p>垂直渐近线：极限为无穷时，为垂直渐近线</p>
+<p>注意：要特别注意e^x对正无穷和负无穷极限不同，前者为无穷，后者为0(水平渐近线)</p>
 <p>斜渐近线：<img src="/../images/image-20240515125934358.png" alt="image-20240515125934358"></p>
+<blockquote>
+<p>斜渐近线判断：如果函数可以写成一个线性函数加上一个在x趋近于无穷时等于0的函数，则渐近线就是这个线性部分。如果趋近于无穷时极限为常数，则渐近线就为线性部分加这个常数。</p>
+</blockquote>
 <h3 id="曲率"><a href="#曲率" class="headerlink" title="曲率"></a>曲率</h3><p><img src="/../images/image-20240515130124503.png" alt="image-20240515130124503"></p>
 <p>曲率半径：曲率的倒数</p>
 <h3 id="（图一乐）边际函数与边际分析"><a href="#（图一乐）边际函数与边际分析" class="headerlink" title="（图一乐）边际函数与边际分析"></a>（图一乐）边际函数与边际分析</h3><p><img src="/../images/image-20240515130519274.png" alt="image-20240515130519274"></p>
+<h1 id="第四章-不定积分"><a href="#第四章-不定积分" class="headerlink" title="第四章 不定积分"></a>第四章 不定积分</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>原函数存在定理：</p>
+<ol>
+<li>若f(x)在区间上<em>连续</em>，则一定存在原函数。</li>
+<li>有第一类间断点的函数，一定没有原函数</li>
+<li>有第二类间断点的函数，也可以有原函数</li>
+</ol>
+<h2 id="求积分"><a href="#求积分" class="headerlink" title="求积分"></a>求积分</h2><p>三种主要方法：</p>
+<ol>
+<li>第一类换元：凑微分</li>
+<li>第二类换元：<img src="/../images/image-20240516164852817.png" alt="image-20240516164852817"></li>
+</ol>
+<p>注：对含有*sqrt(e^x+1)*形式的积分，也可以直接换元为t。</p>
+<ol start="3">
+<li>分部积分：主要有以下三种分部方式<img src="/../images/image-20240516165745046.png" alt="image-20240516165745046"></li>
+</ol>
+<p>三种对应三种计算方式：</p>
+<ul>
+<li>对幂函数与e^x和三角函数的乘积，需要让幂函数一直降低次数，因此让另一部分作为被积分部分</li>
+<li>对幂函数与lnx和反三角的乘积，后半部分比较容易求导，所以让幂函数作为被积部分</li>
+<li>第三种是最复杂的，但计算最容易，<strong>让两个部分分别作为被积分部分</strong>，然后凑出原本形式解方程即可。</li>
+</ul>
+<h3 id="三种积不出的函数"><a href="#三种积不出的函数" class="headerlink" title="三种积不出的函数"></a>三种积不出的函数</h3><p><img src="/../images/image-20240516170853394.png" alt="image-20240516170853394"></p>
+<p>遇到这种需要换方法，例如二重积分时，遇到要由x型换成y型计算。</p>
+<h3 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h3><h4 id="有理函数求积分"><a href="#有理函数求积分" class="headerlink" title="有理函数求积分"></a>有理函数求积分</h4><p><img src="/../images/image-20240516172034842.png" alt="image-20240516172034842"></p>
+<p>碰到这种复杂有理分式求积分，可以使用<strong>一般方法</strong>分解成几个有理部分：</p>
+<p>分母有两部分，分别是一次的x-1和二次的x^2+x+1，但x-1乘了两次，所以是二重的一次部分。</p>
+<p>所以拆成如上三部分，两个x-1都是一次，所以分子降次为0次，设为常数。x-1出现了两次，所以有一个x-1和一个(x-1)^2，然后二次的分子就是一次式，设为一般式kx+b。</p>
+<h4 id="三角有理式积分"><a href="#三角有理式积分" class="headerlink" title="三角有理式积分"></a>三角有理式积分</h4><p><img src="/../images/image-20240516184604849.png" alt="image-20240516184604849"></p>
+<p>判断积分式相对于sinx和cosx的奇偶性，<strong>整体正负由sinx决定则凑dcosx</strong>，反之则凑dsinx。</p>
+<p>若均为偶则凑dtanx.</p>
+<h4 id="简单无理式积分"><a href="#简单无理式积分" class="headerlink" title="简单无理式积分"></a>简单无理式积分</h4><p>直接<em>整体换元</em>：</p>
+<p><img src="/../images/image-20240516191246891.png" alt="image-20240516191246891"></p>
 
         
       </div>
