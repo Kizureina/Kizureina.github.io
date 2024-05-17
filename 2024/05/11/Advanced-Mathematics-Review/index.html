@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240516184604849.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240516191246891.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-16T11:13:03.373Z">
+<meta property="article:modified_time" content="2024-05-17T09:56:21.359Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -400,7 +400,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.7k 词 
+            4.8k 词 
           </div>
         </div>
         
@@ -698,15 +698,21 @@
 </ul>
 <h3 id="三种积不出的函数"><a href="#三种积不出的函数" class="headerlink" title="三种积不出的函数"></a>三种积不出的函数</h3><p><img src="/../images/image-20240516170853394.png" alt="image-20240516170853394"></p>
 <p>遇到这种需要换方法，例如二重积分时，遇到要由x型换成y型计算。</p>
-<h3 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h3><h4 id="有理函数求积分"><a href="#有理函数求积分" class="headerlink" title="有理函数求积分"></a>有理函数求积分</h4><p><img src="/../images/image-20240516172034842.png" alt="image-20240516172034842"></p>
+<h3 id="三种常见求法"><a href="#三种常见求法" class="headerlink" title="三种常见求法"></a>三种常见求法</h3><h4 id="有理函数求积分"><a href="#有理函数求积分" class="headerlink" title="有理函数求积分"></a>有理函数求积分</h4><p><img src="/../images/image-20240516172034842.png" alt="image-20240516172034842"></p>
 <p>碰到这种复杂有理分式求积分，可以使用<strong>一般方法</strong>分解成几个有理部分：</p>
 <p>分母有两部分，分别是一次的x-1和二次的x^2+x+1，但x-1乘了两次，所以是二重的一次部分。</p>
 <p>所以拆成如上三部分，两个x-1都是一次，所以分子降次为0次，设为常数。x-1出现了两次，所以有一个x-1和一个(x-1)^2，然后二次的分子就是一次式，设为一般式kx+b。</p>
 <h4 id="三角有理式积分"><a href="#三角有理式积分" class="headerlink" title="三角有理式积分"></a>三角有理式积分</h4><p><img src="/../images/image-20240516184604849.png" alt="image-20240516184604849"></p>
 <p>判断积分式相对于sinx和cosx的奇偶性，<strong>整体正负由sinx决定则凑dcosx</strong>，反之则凑dsinx。</p>
 <p>若均为偶则凑dtanx.</p>
-<h4 id="简单无理式积分"><a href="#简单无理式积分" class="headerlink" title="简单无理式积分"></a>简单无理式积分</h4><p>直接<em>整体换元</em>：</p>
+<h4 id="简单无理式积分"><a href="#简单无理式积分" class="headerlink" title="简单无理式积分"></a>简单无理式积分</h4><p>对于根号内为一次多项式，直接<em>整体换元</em>：</p>
 <p><img src="/../images/image-20240516191246891.png" alt="image-20240516191246891"></p>
+<h3 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h3><h4 id="求分段函数不定积分"><a href="#求分段函数不定积分" class="headerlink" title="求分段函数不定积分"></a>求分段函数不定积分</h4><p>需要注意分界点的连续性，一般由两种求法：</p>
+<ol>
+<li>设两边原函数为F(x)+C1和G(x)+C2，然后根据两边在分界点相等求出C</li>
+<li>直接求变上限积分作为原函数</li>
+</ol>
+<h4 id="求一般积分"><a href="#求一般积分" class="headerlink" title="求一般积分"></a>求一般积分</h4><p>(1&#x2F;x^2-1)这个式子经常出现，要注意是可求积分的，原函数是1&#x2F;2 * ln(|x-1|&#x2F;|x+1|)。</p>
 
         
       </div>
