@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html theme="dark" showBanner="true" hasBanner="true" > 
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
 <link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
 <link href="/fontawesome/css/brands.css" rel="stylesheet">
 <link href="/fontawesome/css/solid.css" rel="stylesheet">
@@ -22,27 +22,22 @@
 <!-- End Google Analytics -->
 
   
-  <title>SSTI——flask模板注入漏洞入门 | Kizureina&#39;s Blog</title>
+  <title>AutoBangumi + qbit + plex搭建优雅的追番服务 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。 Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如: 12345678910from flask import Flaskapp &#x3D; Flask(__name__) @app.route(&amp;#x27;&#x2F;&amp;#x27;)# route装饰器将url与下面的函数链接">
+  <meta name="description" content="前言最近很迷少女乐队，之前沉迷了半年的邦邦和mygo，最近又被Girls Band Cry所捕获，甚至为此打破了自己不看未完结动画的原则。 仁菜是复杂的矛盾集合体，但只是不想违背自己的本心而已，实在很可爱。 言归正传，要优雅地追动画，在盗版网站是很没意思的，体验很差。所以打算自己搭一个。 主要架构很简单：AutoBangumi + Qbit + Plex。  AB通过解析RSS将种子交给qbit下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSTI——flask模板注入漏洞入门">
-<meta property="og:url" content="https://kizureina.github.io/2022/02/14/ssti-quick-start/index.html">
+<meta property="og:title" content="AutoBangumi + qbit + plex搭建优雅的追番服务">
+<meta property="og:url" content="https://kizureina.github.io/2024/05/18/AutoBangumi-qbit-and-plex-on-mini-server/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。 Flask搭建后端服务众所周知python也可用用来写后端，最简单的框架就是Flask，例如: 12345678910from flask import Flaskapp &#x3D; Flask(__name__) @app.route(&amp;#x27;&#x2F;&amp;#x27;)# route装饰器将url与下面的函数链接">
+<meta property="og:description" content="前言最近很迷少女乐队，之前沉迷了半年的邦邦和mygo，最近又被Girls Band Cry所捕获，甚至为此打破了自己不看未完结动画的原则。 仁菜是复杂的矛盾集合体，但只是不想违背自己的本心而已，实在很可爱。 言归正传，要优雅地追动画，在盗版网站是很没意思的，体验很差。所以打算自己搭一个。 主要架构很简单：AutoBangumi + Qbit + Plex。  AB通过解析RSS将种子交给qbit下">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="og:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
-<meta property="article:published_time" content="2022-02-14T12:53:14.000Z">
-<meta property="article:modified_time" content="2023-07-13T07:09:12.604Z">
+<meta property="og:image" content="https://kizureina.github.io/2024/05/18/images/image-20240518193610980.png">
+<meta property="article:published_time" content="2024-05-18T11:34:07.000Z">
+<meta property="article:modified_time" content="2024-05-18T12:10:45.100Z">
 <meta property="article:author" content="Kizurena">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://view.moezx.cc/images/2018/05/13/image-404.png">
+<meta name="twitter:image" content="https://kizureina.github.io/2024/05/18/images/image-20240518193610980.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -344,9 +339,19 @@
     <div id="content-body">
        
 
-<article id="post-ssti-quick-start" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-AutoBangumi-qbit-and-plex-on-mini-server" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_clwc2u1qj00096cw92w96fhos">
+        <img src="/../images/image-20240518193610980.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
    
   <div class="article-inner">
     <div class="article-main">
@@ -357,7 +362,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        SSTI——flask模板注入漏洞入门
+        AutoBangumi + qbit + plex搭建优雅的追番服务
       </h1>
     
   
@@ -365,50 +370,61 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2022-02-14T12:53:14.000Z" itemprop="datePublished">2022-02-14</time>
+  <time class="dt-published" datetime="2024-05-18T11:34:07.000Z" itemprop="datePublished">2024-05-18</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
+  <a class="meta-cate-link" href="/categories/ACG/">ACG</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            766 词 
+            1k 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>最近一直在和python打交道，就想顺便学点Flask漏洞，也算打打python后端框架基础吧。</p>
-<h2 id="Flask搭建后端服务"><a href="#Flask搭建后端服务" class="headerlink" title="Flask搭建后端服务"></a>Flask搭建后端服务</h2><p>众所周知python也可用用来写后端，最简单的框架就是Flask，例如:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"> </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="comment"># route装饰器将url与下面的函数链接起来</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;helloworld!&#x27;</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># host为0.0.0.0则为暴露在公网，可从任意IP访问</span></span><br></pre></td></tr></table></figure>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近很迷少女乐队，之前沉迷了半年的邦邦和mygo，最近又被<em>Girls Band Cry</em>所捕获，甚至为此打破了自己不看未完结动画的原则。</p>
+<p>仁菜是复杂的矛盾集合体，但只是不想违背自己的本心而已，实在很可爱。</p>
+<p>言归正传，要优雅地追动画，在盗版网站是很没意思的，体验很差。所以打算自己搭一个。</p>
+<p>主要架构很简单：AutoBangumi + Qbit + Plex。</p>
+<blockquote>
+<p>AB通过解析RSS将种子交给qbit下载，然后对下载完的文件做刮削，再交给Plex作为流媒体平台。</p>
+</blockquote>
+<p>主要参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.autobangumi.org/deploy/quick-start.html">AutoBangumi官方文档</a>，有对大部分配置参数的详细说明</p>
+<p><a target="_blank" rel="noopener" href="https://www.himiku.com/archives/auto-bangumi.html">官方搭建教程</a></p>
+<h2 id="一切环境的根本：docker"><a href="#一切环境的根本：docker" class="headerlink" title="一切环境的根本：docker"></a>一切环境的根本：docker</h2><p>关键是docker-compose.yml的配置文件：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;3.9&#x27;</span></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  ab:</span><br><span class="line">    image: estrellaxd/auto_bangumi:latest</span><br><span class="line">    container_name: ab</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">7892</span>:<span class="number">7892</span></span><br><span class="line">    depends_on:</span><br><span class="line">      - qb</span><br><span class="line">    environment:</span><br><span class="line">      - PUID=<span class="number">1000</span></span><br><span class="line">      - PGID=<span class="number">1000</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./ab/config:/app/config <span class="comment">#不要动</span></span><br><span class="line">      - ./ab/data:/app/data <span class="comment">#不要动</span></span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    dns:  <span class="comment">#可选，指定 dns 服务器</span></span><br><span class="line">      - <span class="number">223.5</span>.<span class="number">5.5</span></span><br><span class="line">      - <span class="number">119.29</span>.<span class="number">29.29</span></span><br><span class="line">      - <span class="string">&quot;2400:3200::1&quot;</span></span><br><span class="line">      - <span class="string">&quot;2402:4e00::&quot;</span></span><br><span class="line"></span><br><span class="line">  qb:</span><br><span class="line">    image: superng6/qbittorrentee:latest</span><br><span class="line">    deploy:</span><br><span class="line">      resources:</span><br><span class="line">        limits:</span><br><span class="line">          memory: <span class="number">600</span>M</span><br><span class="line">    container_name: qb</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">8989</span>:<span class="number">8989</span> <span class="comment">#若需修改，两者应与下方的 QB_WEBUI_PORT 完全一致</span></span><br><span class="line">    environment:</span><br><span class="line">      - PUID=<span class="number">0</span></span><br><span class="line">      - PGID=<span class="number">0</span></span><br><span class="line">      - TZ=Asia/Shanghai</span><br><span class="line">      - WEBUIPORT=<span class="number">8989</span> <span class="comment">#与ports的端口配置应一致</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./qb:/config <span class="comment">#qb配置文件，不要动</span></span><br><span class="line">      - ./bangumi:/bangumi <span class="comment">#qb下载目录，自行修改，注意大小写</span></span><br><span class="line">    restart: no</span><br><span class="line">    dns:  <span class="comment">#可选，指定 dns 服务器</span></span><br><span class="line">      - <span class="number">223.5</span>.<span class="number">5.5</span></span><br><span class="line">      - <span class="number">119.29</span>.<span class="number">29.29</span></span><br><span class="line">      - <span class="string">&quot;2400:3200::1&quot;</span></span><br><span class="line">      - <span class="string">&quot;2402:4e00::&quot;</span></span><br><span class="line">  </span><br><span class="line">  plex:</span><br><span class="line">    image: linuxserver/plex</span><br><span class="line">    container_name: plex</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">32400</span>:<span class="number">32400</span></span><br><span class="line">      - <span class="number">1900</span>:<span class="number">1900</span>/udp</span><br><span class="line">      - <span class="number">3005</span>:<span class="number">3005</span></span><br><span class="line">      - <span class="number">5353</span>:<span class="number">5353</span>/udp</span><br><span class="line">    environment:</span><br><span class="line">      - TZ=Asia/Shanghai</span><br><span class="line">      - PUID=<span class="number">1000</span></span><br><span class="line">      - PGID=<span class="number">1000</span></span><br><span class="line">      - VERSION=docker</span><br><span class="line">      - PLEX_CLAIM=******************* <span class="comment">#optional</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./plex:/config</span><br><span class="line">      - ./bangumi:/media/Bangumi</span><br><span class="line">    restart: unless-stopped</span><br></pre></td></tr></table></figure>
 
-<p>上面的python文件运行时会在5000端口<strong>跑web服务</strong>，访问<a target="_blank" rel="noopener" href="https://ip:5000/">https://IP:5000/</a> 返回hello world!的字符串。</p>
-<p>上面的例子为返回简单的字符串，也可用模板渲染html源码在浏览器显示:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    html = <span class="string">&#x27;&lt;h1&gt;hello world!&lt;/h1&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> render_template_string(html)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>qbit的内存资源限制是因为服务器内存太少做的，如果性能无忧可以去掉</li>
+<li>plex的<code>PLEX_CLAIM</code>很重要，如果不加这个参数会导致plex把你的服务认为是客户端，具体值获取是需要先去官网注册，然后登录(是为了存cookie)，再访问<a target="_blank" rel="noopener" href="https://www.plex.tv/claim/">这个链接</a>即可得到。</li>
+<li>qbit对应的目录需要有下载权限，需要给对应目录.&#x2F;bangumi赋予权限：<code>chmod 777 ./bangumi</code></li>
+</ol>
+<p>然后就是基本的docker使用了，拉取镜像并跑起容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
 
-<p>在浏览器中访问显示如下:</p>
-<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_79164fa43a7eaba03eb9f3637fa91e47.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
-<p>即html字符串中的<strong>标签被模板渲染</strong>并显示在浏览器中。</p>
-<h2 id="Flask模板注入漏洞原理"><a href="#Flask模板注入漏洞原理" class="headerlink" title="Flask模板注入漏洞原理"></a>Flask模板注入漏洞原理</h2><p>而当字符串中的具体<strong>参数可控</strong>时，就可能存在模板注入漏洞:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,url_for,redirect,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">code</span>():</span><br><span class="line">    code = request.args.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获取get传参的参数</span></span><br><span class="line">    html = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;%s&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span>%(code)</span><br><span class="line">    <span class="comment"># 三引号作用与引号没区别，常用于大段字符串</span></span><br><span class="line">    <span class="keyword">return</span> render_template_string(html)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>然后看下运行状况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
 
-<p>而构造<strong>js代码</strong>就可能造成XSS攻击</p>
-<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_275d35a8c19ba1c7c44a9ae6d7e849c9.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a></p>
-<p>此时传参的code直接插入字符串中，并被render_template_string渲染而触发SSTI。</p>
-<p>只要换种写法就能避免:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,url_for,redirect,render_template,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">code</span>():</span><br><span class="line">    code = request.args.get(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(<span class="string">&#x27;&lt;h2&gt;&#123;&#123;code&#125;&#125;&lt;/h2&gt;&#x27;</span>,code=code)</span><br><span class="line">    <span class="comment"># &#123;&#123;&#125;&#125;为Jinja2模板引擎中的变量包裹标识符</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>AutoBangumi和Qbit都有网页图形化界面可以操作，AB默认账户密码是：admin和adminadmin。</p>
+<p>但Qbit是随机生成的密码，需要用下面的命令从日志查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs qb</span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_0f83095f0a522087532d31544656e292.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>这是因为模板引擎一般都默认<strong>对渲染的变量值进行编码转义</strong>，因此用户控制的不是模板而是变量，并不会得到渲染产生SSTI。</p>
-<h2 id="基于SSTI的攻击"><a href="#基于SSTI的攻击" class="headerlink" title="基于SSTI的攻击"></a>基于SSTI的攻击</h2><p>jinja2模板引擎会对{{}}内的内容进行渲染，也可执行一些表达式：<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_4e12a4cf38e92e7e4cf3c5fca8430a05.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>或查看全局常量:<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_b5ce7555ff169652e3b7d79070c7ab2f.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>可见表达式和命令都被执行了，由此可<strong>构造文件包含漏洞</strong></p>
-<p>与反序列化类似，同样需要利用魔术方法构造漏洞链，常用魔术方法：<br>- <strong>class</strong> 返回类型所属的对象<br>- <strong>mro</strong> 返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。<br>- <strong>base</strong> 返回该对象所继承的基类<br>- __base__和__mro__都是用来寻找基类的<br>- <strong>subclasses</strong> 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表<br>- <strong>init</strong> 类的初始化方法<br>- <strong>globals</strong> 对包含函数全局变量的字典的引用</p>
-<p>思路一般为先用{{''.__**class__**}}(注：此处不是双引号而是两个单引号)找类型所属对象，然后{{''.__**class__**.__**mro__**}}查找所有基类<br><a target="_blank" rel="noopener" href="https://kusarinoshojo.space/wp-content/uploads/2022/02/wp_editor_md_2b8ab4707f90b433d1b2112a814c3d12.jpg"><img src="https://view.moezx.cc/images/2018/05/13/image-404.png" alt="img"></a><br>然后即可查找所有可用的类</p>
+<p>注意每次重启docker都会更新，所以最好不要经常重启，因为AB对应的配置也要改。</p>
+<h2 id="标准步骤之外"><a href="#标准步骤之外" class="headerlink" title="标准步骤之外"></a>标准步骤之外</h2><h3 id="AutoBangumi"><a href="#AutoBangumi" class="headerlink" title="AutoBangumi"></a>AutoBangumi</h3><p>添加RSS有两种选项：collect和subscribe，前者会把RSS中现有的全部下载，后者会监听RSS更新。</p>
+<p>番组下载选项里有关<code>番剧补全</code>参数，也可以将之前更新的集数下载，但我试了下还是用的mikani.me那个被墙的域名，所以需要挂代理才能下，不如手动下下来方便。</p>
+<p>另外：手动下的要想让AB刮削，只需要在qb里选择类别为bangumi，再移动到指定目录即可。</p>
+<h3 id="Qbit"><a href="#Qbit" class="headerlink" title="Qbit"></a>Qbit</h3><p>对于性能堪忧的小主机，Qbit有个有点坑的默认选项，就是<code>磁盘缓存</code>：</p>
+<p><img src="/../images/image-20240518200434525.png" alt="image-20240518200434525"></p>
+<p>默认是512M，但我的主机只有1G内存，除去操作系统占用之后，已经不到这个数了。所以在内存占用到达系统限额时，系统会将Qbit进程kill以避免崩溃，而Docker默认会在异常终止后重启Container，导致Qbit这个容器无限重启，甚至SSH都连不上。我试了几次，一直盯着htop的资源管理器才发现这个问题。</p>
+<p>解决也很简单，直接改小即可。还有一种办法就是将硬盘分配给内存，让操作系统将部分内存占用移到这块硬盘区域中进行，Linux中一般使用swap分配空间实现，具体参加<a target="_blank" rel="noopener" href="https://blog.csdn.net/cuichongxin/article/details/106208891">这篇博文</a>。(另外，其实效果并不好，系统调度时仍然会在大部分操作时使用内存而不是swap)</p>
 
         
       </div>
@@ -421,27 +437,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2022/03/01/javascript-report-in-bili/"
-      title="简单的JS插件编写——检索Bilibili评论并举办"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        简单的JS插件编写——检索Bilibili评论并举办
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2022/01/30/qqbot-y2b-pusher/"
-      title="QQbot油管开播推送API编写逻辑"
+      href="/2024/05/11/Advanced-Mathematics-Review/"
+      title="高等数学拾遗"
      >
 
     <p class="title-text">
       
-        QQbot油管开播推送API编写逻辑
+        高等数学拾遗
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
