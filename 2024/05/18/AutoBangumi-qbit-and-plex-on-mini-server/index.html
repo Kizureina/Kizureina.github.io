@@ -33,7 +33,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/2024/05/18/images/image-20240518193610980.png">
 <meta property="article:published_time" content="2024-05-18T11:34:07.000Z">
-<meta property="article:modified_time" content="2024-05-18T12:10:45.100Z">
+<meta property="article:modified_time" content="2024-05-19T11:53:47.854Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -381,7 +381,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1k 词 
+            1.3k 词 
           </div>
         </div>
         
@@ -425,6 +425,19 @@
 <p><img src="/../images/image-20240518200434525.png" alt="image-20240518200434525"></p>
 <p>默认是512M，但我的主机只有1G内存，除去操作系统占用之后，已经不到这个数了。所以在内存占用到达系统限额时，系统会将Qbit进程kill以避免崩溃，而Docker默认会在异常终止后重启Container，导致Qbit这个容器无限重启，甚至SSH都连不上。我试了几次，一直盯着htop的资源管理器才发现这个问题。</p>
 <p>解决也很简单，直接改小即可。还有一种办法就是将硬盘分配给内存，让操作系统将部分内存占用移到这块硬盘区域中进行，Linux中一般使用swap分配空间实现，具体参加<a target="_blank" rel="noopener" href="https://blog.csdn.net/cuichongxin/article/details/106208891">这篇博文</a>。(另外，其实效果并不好，系统调度时仍然会在大部分操作时使用内存而不是swap)</p>
+<h3 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h3><p>更换账户时，记得清除网页缓存。</p>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>重启时莫名其妙把系统搞坏了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(anon):253: 只读文件系统: /tmp/p10k-instant-prompt-output-root-26831</span><br><span class="line"><span class="built_in">mkdir</span>: 无法创建目录<span class="string">&quot;/root/.cache/oh-my-zsh/completions&quot;</span>: 只读文件系统</span><br><span class="line"><span class="built_in">rm</span>: 无法删除<span class="string">&#x27;/root/.zcompdump-test-5.4.2&#x27;</span>: 只读文件系统</span><br><span class="line">(anon):13: 只读文件系统: /tmp/gitstatus.POWERLEVEL9K.0.26831.1716098034.1.lock</span><br><span class="line"></span><br><span class="line">[ERROR]: gitstatus failed to initialize.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  Add the following parameter to ~/.zshrc <span class="keyword">for</span> extra diagnostics on error:</span><br><span class="line"></span><br><span class="line">    GITSTATUS_LOG_LEVEL=DEBUG</span><br><span class="line"></span><br><span class="line">  Restart Zsh to retry gitstatus initialization:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exec</span> zsh</span><br><span class="line">zsh: locking failed <span class="keyword">for</span> /root/.zsh_history: 只读文件系统: reading anyway</span><br></pre></td></tr></table></figure>
+
+<p>再重启始终显示这个报错，docker也跑不了，甚至DNS都解析不了，配置也都是Read Only修改不了。</p>
+<p>查了半天用kill对应挂载目录的进程解决了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p>kill进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -<span class="built_in">mv</span> -k /dev/vda1</span><br></pre></td></tr></table></figure>
+
+<p>好吧，结果还是没解决。。</p>
+<p>update：万万没想到，最后还是解决了，原来是apt报错的问题而已。</p>
 
         
       </div>

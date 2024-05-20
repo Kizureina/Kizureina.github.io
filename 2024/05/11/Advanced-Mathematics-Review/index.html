@@ -61,8 +61,16 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240516172034842.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240516184604849.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240516191246891.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519144121179.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519144824493.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519145337349.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519174725479.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519175841161.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519180319954.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519182818960.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240519182847408.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-17T09:56:21.359Z">
+<meta property="article:modified_time" content="2024-05-19T10:28:49.741Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -400,7 +408,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.8k 词 
+            5.3k 词 
           </div>
         </div>
         
@@ -713,6 +721,41 @@
 <li>直接求变上限积分作为原函数</li>
 </ol>
 <h4 id="求一般积分"><a href="#求一般积分" class="headerlink" title="求一般积分"></a>求一般积分</h4><p>(1&#x2F;x^2-1)这个式子经常出现，要注意是可求积分的，原函数是1&#x2F;2 * ln(|x-1|&#x2F;|x+1|)。</p>
+<h1 id="第五章-定积分"><a href="#第五章-定积分" class="headerlink" title="第五章 定积分"></a>第五章 定积分</h1><p><img src="/../images/image-20240519144121179.png" alt="image-20240519144121179"></p>
+<h2 id="定义与概念"><a href="#定义与概念" class="headerlink" title="定义与概念"></a>定义与概念</h2><p>定积分是和式极限：分，匀，和，精确</p>
+<p>注意：</p>
+<ol>
+<li>定积分定义的区间关键在<strong>任意划分</strong>，所以取极限是λ趋近于0，即划分区间的最大值趋近于0，而不是分成的区间数n趋近于无穷，二者不等价(前者可以推出后者，反之不行)。</li>
+<li>定积分仅与f(x)和[a,b]有关，即函数与区间。</li>
+<li>极限值与区间分法和点取法都无关</li>
+</ol>
+<p>3的推论：因为与分法无关，所以可以取最简单的等分方便计算：</p>
+<p><img src="/../images/image-20240519144824493.png" alt="image-20240519144824493"></p>
+<p>这里与前面凑定积分定义的求极限法一致。</p>
+<h3 id="定积分存在条件"><a href="#定积分存在条件" class="headerlink" title="定积分存在条件"></a>定积分存在条件</h3><p>充分条件：</p>
+<p><img src="/../images/image-20240519145337349.png" alt="image-20240519145337349"></p>
+<p>连续一定可积。</p>
+<p>必要条件：</p>
+<p>可积一定有界，有界不一定可积(例如迪利克雷函数)。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>不等式性质：</p>
+<p><img src="/../images/image-20240519174725479.png" alt="image-20240519174725479"></p>
+<p>其中第二条最常用，即定积分大小介于函数最大值和最小值乘区间大小之间，右边的几何定义很容易说明。</p>
+<h3 id="中值定理"><a href="#中值定理" class="headerlink" title="中值定理"></a>中值定理</h3><p>若f(x)连续</p>
+<p><img src="/../images/image-20240519175841161.png" alt="image-20240519175841161"></p>
+<p>由微积分基本定理和拉格朗日中值定理很容易证明：F(b) - F(a) &#x3D; F`(k)*(b - a)</p>
+<h2 id="积分上限函数"><a href="#积分上限函数" class="headerlink" title="积分上限函数"></a>积分上限函数</h2><p><img src="/../images/image-20240519180319954.png" alt="image-20240519180319954"></p>
+<p>意义：</p>
+<ol>
+<li>联系起微分和积分的运算：互为逆运算</li>
+<li>连续函数一定有原函数</li>
+</ol>
+<p>推论:若f(x)连续</p>
+<ol>
+<li>f(x)为奇函数，则在0到x上的变上限积分为偶函数</li>
+<li>反之f(x)为偶函数，则其变上限积分为奇函数</li>
+</ol>
+<h2 id="定积分计算方法"><a href="#定积分计算方法" class="headerlink" title="定积分计算方法"></a>定积分计算方法</h2><p><img src="/../images/image-20240519182818960.png" alt="image-20240519182818960"></p>
+<p><img src="/../images/image-20240519182847408.png" alt="image-20240519182847408"></p>
 
         
       </div>
