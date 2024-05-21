@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240510010154352.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240510010205868.png">
 <meta property="article:published_time" content="2024-05-08T10:44:07.000Z">
-<meta property="article:modified_time" content="2024-05-09T17:02:58.323Z">
+<meta property="article:modified_time" content="2024-05-20T17:15:26.529Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="硬件">
 <meta name="twitter:card" content="summary">
@@ -376,7 +376,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5k 词 
+            5.1k 词 
           </div>
         </div>
         
@@ -490,7 +490,15 @@
 <p>测试得到的结果相当漂亮，DPA和CPA都成功推断出了正确密钥：</p>
 <p><img src="/../images/image-20240510010154352.png" alt="image-20240510010154352"></p>
 <p><img src="/../images/image-20240510010205868.png" alt="image-20240510010205868"></p>
-<h2 id="Cache分析"><a href="#Cache分析" class="headerlink" title="Cache分析"></a>Cache分析</h2>
+<h2 id="Cache分析"><a href="#Cache分析" class="headerlink" title="Cache分析"></a>Cache分析</h2><p>这个部分最复杂，但也最有意思。</p>
+<p>但是我懒得仔细写了，关键是两个经典的CPU漏洞：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43669969/article/details/106215105">幽灵</a>和熔断。其实是一个<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82302233">原理</a>，核心利用点如下：</p>
+<ol>
+<li>现代处理器的分支预测</li>
+<li>cache命中与失效的差异</li>
+<li>cache更新机制的懒加载</li>
+</ol>
+<p>所以把这个漏洞称为”高性能的代价”相当合适wwww</p>
+
         
       </div>
 
