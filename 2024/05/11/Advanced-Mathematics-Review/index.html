@@ -81,8 +81,19 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240522134247841.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240522143239478.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240522143544390.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523133034933.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523133554845.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523133857320.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523134000173.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523134629800.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523135054108.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523135930212.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523140405645.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523140547842.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523141342564.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240523142516175.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-22T06:37:05.631Z">
+<meta property="article:modified_time" content="2024-05-23T06:31:26.871Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -420,7 +431,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.2k 词 
+            6.9k 词 
           </div>
         </div>
         
@@ -685,9 +696,9 @@
 <p>极值点只可能在两处存在：驻点和导数不存在的点。</p>
 <h3 id="凹凸性"><a href="#凹凸性" class="headerlink" title="凹凸性"></a>凹凸性</h3><p>二阶导数为大于0，则曲线为凹；二阶导数小于0，则曲线为凸。</p>
 <p>拐点判断与极值点类似。</p>
-<h3 id="渐近线"><a href="#渐近线" class="headerlink" title="渐近线"></a>渐近线</h3><p>水平渐近线：求x趋于无穷的极限，为0时有水平渐近线</p>
-<p>垂直渐近线：极限为无穷时，为垂直渐近线</p>
-<p>注意：要特别注意e^x对正无穷和负无穷极限不同，前者为无穷，后者为0(水平渐近线)</p>
+<h3 id="渐近线"><a href="#渐近线" class="headerlink" title="渐近线"></a>渐近线</h3><p>水平渐近线：求x趋于无穷的极限，<strong>极限存在且不为无穷</strong>时有水平渐近线</p>
+<p>垂直渐近线：求x趋近于无穷的极限，极限为无穷时，为垂直渐近线</p>
+<p>注意：要特别注意e^x对正无穷和负无穷极限不同，前者为正无穷，后者为<code>0</code>(水平渐近线)</p>
 <p>斜渐近线：<img src="/../images/image-20240515125934358.png" alt="image-20240515125934358"></p>
 <blockquote>
 <p>斜渐近线判断：如果函数可以写成一个线性函数加上一个在x趋近于无穷时等于0的函数，则渐近线就是这个线性部分。如果趋近于无穷时极限为常数，则渐近线就为线性部分加这个常数。</p>
@@ -761,7 +772,7 @@
 <h3 id="中值定理"><a href="#中值定理" class="headerlink" title="中值定理"></a>中值定理</h3><p>若f(x)连续</p>
 <p><img src="/../images/image-20240519175841161.png" alt="image-20240519175841161"></p>
 <p>由微积分基本定理和拉格朗日中值定理很容易证明：F(b) - F(a) &#x3D; F`(k)*(b - a)</p>
-<h2 id="积分上限函数"><a href="#积分上限函数" class="headerlink" title="积分上限函数"></a>积分上限函数</h2><p><img src="/../images/image-20240519180319954.png" alt="image-20240519180319954"></p>
+<h2 id="积分上限函数"><a href="#积分上限函数" class="headerlink" title="积分上限函数(*)"></a>积分上限函数(*)</h2><p><img src="/../images/image-20240519180319954.png" alt="image-20240519180319954"></p>
 <p>意义：</p>
 <ol>
 <li>联系起微分和积分的运算：互为逆运算</li>
@@ -833,6 +844,50 @@
 <p>与上面类似，都可以用累次积分推得。</p>
 <h3 id="曲线弧长"><a href="#曲线弧长" class="headerlink" title="曲线弧长"></a>曲线弧长</h3><p><img src="/../images/image-20240522143544390.png" alt="image-20240522143544390"></p>
 <p>实际上也是由下面推得：<br>$$<br>ds&#x3D;\sqrt{1+y’^2}·dx<br>$$</p>
+<h2 id="物理应用"><a href="#物理应用" class="headerlink" title="物理应用"></a>物理应用</h2><p>主要有三部分：</p>
+<ol>
+<li>压力</li>
+<li>做功</li>
+<li>引力(很少考)</li>
+</ol>
+<p>关键是利用微元法分析变量，构造x+dx和x的薄片再求定积分。</p>
+<h1 id="第七章-常微分方程"><a href="#第七章-常微分方程" class="headerlink" title="第七章 常微分方程"></a>第七章 常微分方程</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>定义：含有未知函数导数&#x2F;微分的方程称为微分方程</p>
+<p>阶：含有未知函数导数的最高阶</p>
+<p>通解：含有独立任意常数<strong>个数等于微分方程阶数</strong>的解</p>
+<p>特解：通解 + 初始条件可定下通解中的任意常数，此时称为特解</p>
+<p>积分曲线：微分方程的解对应的曲线</p>
+<h2 id="一阶微分方程"><a href="#一阶微分方程" class="headerlink" title="一阶微分方程"></a>一阶微分方程</h2><h3 id="可分离变量的方程"><a href="#可分离变量的方程" class="headerlink" title="可分离变量的方程"></a>可分离变量的方程</h3><p>y&#96;&#x3D;f(x)*g(y)</p>
+<p>即dy&#x2F;dx&#x3D;f(x)g(y) &#x3D;&gt; dy&#x2F;g(y) &#x3D; f(x)dx</p>
+<p>再对两边求积分即可得到解。</p>
+<h3 id="齐次方程"><a href="#齐次方程" class="headerlink" title="齐次方程"></a>齐次方程</h3><p><img src="/../images/image-20240523133034933.png" alt="image-20240523133034933"></p>
+<p>求解时，换元<em>u&#x3D;y&#x2F;x</em>，即可划为可分离变量的方程</p>
+<h3 id="线性方程"><a href="#线性方程" class="headerlink" title="线性方程"></a>线性方程</h3><p>y&#96; + P(x)y &#x3D; Q(x)</p>
+<p>求解时代入通解公式：<img src="/../images/image-20240523133554845.png" alt="image-20240523133554845"></p>
+<h3 id="伯努利方程"><a href="#伯努利方程" class="headerlink" title="伯努利方程"></a>伯努利方程</h3><p><img src="/../images/image-20240523133857320.png" alt="image-20240523133857320"></p>
+<h3 id="全微分方程"><a href="#全微分方程" class="headerlink" title="全微分方程"></a>全微分方程</h3><p><img src="/../images/image-20240523134000173.png" alt="image-20240523134000173"></p>
+<p>求解多用多元微分。</p>
+<h2 id="可降阶方程"><a href="#可降阶方程" class="headerlink" title="可降阶方程"></a>可降阶方程</h2><p><img src="/../images/image-20240523134629800.png" alt="image-20240523134629800"></p>
+<p>第二种形式中，只有二阶导和一阶导而没有y(不显含y)，此时可以将二阶方程转为一阶：令y&#96; &#x3D; P</p>
+<p>不显含x时也可以换元降阶：<img src="/../images/image-20240523135054108.png" alt="image-20240523135054108"></p>
+<blockquote>
+<p>注意：在利用通解和初始条件定特解时，求出一个常数就利用条件定下来，然后再求其他常数比合并常数一起求更方便。</p>
+</blockquote>
+<h2 id="线性微分方程解的结构"><a href="#线性微分方程解的结构" class="headerlink" title="线性微分方程解的结构"></a>线性微分方程解的结构</h2><p><img src="/../images/image-20240523135930212.png" alt="image-20240523135930212"></p>
+<blockquote>
+<p>非齐次方程的通解 &#x3D; 对应齐次方程的通解 + 非齐次方程的特解</p>
+</blockquote>
+<p>如何判断线性无关：<strong>y_1(x)&#x2F;y_x(x) !&#x3D; C</strong></p>
+<h3 id="常系数线性微分方程"><a href="#常系数线性微分方程" class="headerlink" title="常系数线性微分方程"></a>常系数线性微分方程</h3><p>实际上只能求这种的通解。</p>
+<h4 id="齐次"><a href="#齐次" class="headerlink" title="齐次"></a>齐次</h4><p>利用特征方程：<img src="/../images/image-20240523140405645.png" alt="image-20240523140405645"></p>
+<p>此时解有三种情况：<img src="/../images/image-20240523140547842.png" alt="image-20240523140547842"></p>
+<p>当有三阶或四阶时，有更多的根，将所有根对应的方程通解加起来即可。</p>
+<h4 id="非齐次"><a href="#非齐次" class="headerlink" title="非齐次"></a>非齐次</h4><p>利用待定系数法求特解即可。</p>
+<p><img src="/../images/image-20240523141342564.png" alt="image-20240523141342564"></p>
+<p>利用非齐次项，设出待定的<em>特解</em>，再与齐次的通解相机即得非齐次的通解。</p>
+<p>(其中y*为非齐次方程的特解，这个其实直接看出来或者试出来也可以)</p>
+<h2 id="欧拉方程"><a href="#欧拉方程" class="headerlink" title="欧拉方程"></a>欧拉方程</h2><p><img src="/../images/image-20240523142516175.png" alt="image-20240523142516175"></p>
+<p>求x的次方与y的阶数有规律变化的方程根，换元x&#x3D;e^t即可。</p>
+<p>换元成D算子形式后，可直接将D换为r，即得对应齐次微分方程的特征方程。</p>
 
         
       </div>
