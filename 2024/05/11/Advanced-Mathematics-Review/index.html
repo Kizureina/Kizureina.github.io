@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240523141342564.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240523142516175.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-23T14:06:24.027Z">
+<meta property="article:modified_time" content="2024-05-27T09:08:44.057Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -431,7 +431,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7.1k 词 
+            7.4k 词 
           </div>
         </div>
         
@@ -772,7 +772,7 @@
 <h3 id="中值定理"><a href="#中值定理" class="headerlink" title="中值定理"></a>中值定理</h3><p>若f(x)连续</p>
 <p><img src="/../images/image-20240519175841161.png" alt="image-20240519175841161"></p>
 <p>由微积分基本定理和拉格朗日中值定理很容易证明：F(b) - F(a) &#x3D; F`(k)*(b - a)</p>
-<h2 id="积分上限函数"><a href="#积分上限函数" class="headerlink" title="积分上限函数(*)"></a>积分上限函数(*)</h2><p><img src="/../images/image-20240519180319954.png" alt="image-20240519180319954"></p>
+<h2 id="变上限函数-很常考"><a href="#变上限函数-很常考" class="headerlink" title="变上限函数(*很常考)"></a>变上限函数(*很常考)</h2><p><img src="/../images/image-20240519180319954.png" alt="image-20240519180319954"></p>
 <p>意义：</p>
 <ol>
 <li>联系起微分和积分的运算：互为逆运算</li>
@@ -783,11 +783,11 @@
 <li>f(x)为奇函数，则在0到x上的变上限积分为偶函数</li>
 <li>反之f(x)为偶函数，则其变上限积分为奇函数</li>
 </ol>
-<h3 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h3><ul>
+<h3 id="计算方法（重要）"><a href="#计算方法（重要）" class="headerlink" title="计算方法（重要）"></a>计算方法（重要）</h3><ul>
 <li>当dt的变上限积分中出现了x，由两种思路：</li>
 </ul>
 <ol>
-<li>将x作为t的函数中的常数，提取出来单独计算 </li>
+<li>将x作为t的函数中的常数，<strong>提取</strong>出来单独计算 </li>
 <li><em>换元</em>，将x-t换元为u计算，则<code>du = - dt</code></li>
 </ol>
 <ul>
@@ -862,7 +862,7 @@
 <h3 id="齐次方程"><a href="#齐次方程" class="headerlink" title="齐次方程"></a>齐次方程</h3><p>齐次：各项次数相等(例如均为1)</p>
 <p>例如<em>x^2 + y`*x +  y*x &#x3D; y^2</em></p>
 <p><img src="/../images/image-20240523133034933.png" alt="image-20240523133034933"></p>
-<p>求解时，换元<em>u&#x3D;y&#x2F;x</em>，即可划为可分离变量的方程</p>
+<p>求解时，换元<em>u&#x3D;y&#x2F;x</em>，再对将du分解开，即可划为可分离变量的方程</p>
 <h3 id="线性方程"><a href="#线性方程" class="headerlink" title="线性方程"></a>线性方程</h3><p>要求：</p>
 <blockquote>
 <ul>
@@ -873,9 +873,13 @@
 </blockquote>
 <p>y&#96; + P(x)y &#x3D; Q(x)</p>
 <p>求解时代入通解公式：<img src="/../images/image-20240523133554845.png" alt="image-20240523133554845"></p>
+<blockquote>
+<p>注意：当凑不出如上线性形式时，可以将x换为y的形式：<br>$$<br>x’ + P(y)*x&#x3D;Q(y)<br>$$<br>通解公式也是类似形式。</p>
+</blockquote>
 <h3 id="伯努利方程"><a href="#伯努利方程" class="headerlink" title="伯努利方程"></a>伯努利方程</h3><p><img src="/../images/image-20240523133857320.png" alt="image-20240523133857320"></p>
 <h3 id="全微分方程"><a href="#全微分方程" class="headerlink" title="全微分方程"></a>全微分方程</h3><p><img src="/../images/image-20240523134000173.png" alt="image-20240523134000173"></p>
 <p>求解多用多元微分。</p>
+<p>关键在凑微分：一般使用<strong>分组</strong>方式凑，例如可以将ydx+xdy凑为d(xy)，然后划为<em>d(f(x))&#x3D;0 –&gt; f(x) &#x3D; C</em>的形式。</p>
 <h2 id="可降阶方程"><a href="#可降阶方程" class="headerlink" title="可降阶方程"></a>可降阶方程</h2><p><img src="/../images/image-20240523134629800.png" alt="image-20240523134629800"></p>
 <p>第二种形式中，只有二阶导和一阶导而没有y(不显含y)，此时可以将二阶方程转为一阶：令y&#96; &#x3D; P</p>
 <p>不显含x时也可以换元降阶：<img src="/../images/image-20240523135054108.png" alt="image-20240523135054108"></p>
@@ -903,17 +907,23 @@
 </li>
 </ol>
 <p>这样两个解一减就消掉了特解</p>
-<h3 id="常系数线性微分方程"><a href="#常系数线性微分方程" class="headerlink" title="常系数线性微分方程"></a>常系数线性微分方程</h3><p>实际上只能求这种的通解。</p>
+<h3 id="常系数线性微分方程"><a href="#常系数线性微分方程" class="headerlink" title="常系数线性微分方程"></a>常系数线性微分方程</h3><p>实际上只能求这种的通解，很常用(*)。</p>
 <h4 id="齐次"><a href="#齐次" class="headerlink" title="齐次"></a>齐次</h4><p>利用特征方程：<img src="/../images/image-20240523140405645.png" alt="image-20240523140405645"></p>
 <p>此时解有三种情况：<img src="/../images/image-20240523140547842.png" alt="image-20240523140547842"></p>
 <p>当有三阶或四阶时，有更多的根，将所有根对应的方程通解加起来即可。</p>
-<h4 id="非齐次的特解"><a href="#非齐次的特解" class="headerlink" title="非齐次的特解"></a>非齐次的特解</h4><p>利用待定系数法求特解。</p>
+<h4 id="非齐次的特解"><a href="#非齐次的特解" class="headerlink" title="非齐次的特解"></a>非齐次的特解</h4><p>利用待定系数法求特解：<strong>公式中的α和β是上面齐次方程特征根中共轭负根时的两个参数。</strong></p>
 <p><img src="/../images/image-20240523141342564.png" alt="image-20240523141342564"></p>
-<p>利用非齐次项，设出待定的<em>特解</em>，再与齐次的通解相机即得非齐次的通解。</p>
+<blockquote>
+<p>其中P_m(x)代表x的m次多项式，x^k要不要乘，取决于λ：如果λ是齐次方程的k重根，则需要乘x^k，如果为单根，则乘x，如果不是根，则不乘(即x^0)。定好Q_m(x)形式(一般是<strong>ax+b</strong>)后，代入原式即得具体特解。</p>
+<p>第二种，判断x^k取决于α+iβ。如果α+iβ是齐次方程特征方程的一个根，则要乘x.</p>
+</blockquote>
+<p>利用非齐次项，设出待定的<em>特解</em>，再与齐次的通解相加即得非齐次的通解。</p>
 <p>(其中y*为非齐次方程的特解，这个其实直接看出来或者试出来也可以)</p>
 <h2 id="欧拉方程"><a href="#欧拉方程" class="headerlink" title="欧拉方程"></a>欧拉方程</h2><p><img src="/../images/image-20240523142516175.png" alt="image-20240523142516175"></p>
 <p>求x的次方与y的阶数有规律变化的方程根，换元x&#x3D;e^t即可。</p>
 <p>换元成D算子形式后，可直接将D换为r，即得对应齐次微分方程的特征方程。</p>
+<h2 id="积分方程"><a href="#积分方程" class="headerlink" title="积分方程"></a>积分方程</h2><p>两边求导即可化为微分方程。</p>
+<p>若不好求导，可换元为<em>u&#x3D;x-t</em>再求导。</p>
 
         
       </div>
