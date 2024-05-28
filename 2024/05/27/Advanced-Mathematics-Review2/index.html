@@ -31,11 +31,19 @@
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
 <meta property="og:description" content="第七章 多元函数微分多元函数极限与一元的关键区别：  (x,y)可以以*任意方式(即沿任意路径)*逼近(x_0,y_0)，此时满足这个条件才能称为多元函数极限存在。 连续不一定可导，可导也不一定连续  与一元相同：  局部有界 保号性 有理运算法则 极限与无穷小的关系：无穷小乘有界函数还是无穷小很常用 夹逼原理   注意：洛必达不能用于多元极限  求多元极限(一般比较简单)如果是分式极限且x,y均">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528125036626.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528125325011.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528125817817.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528130452405.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528130946948.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528131028662.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240528131320981.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-27T13:04:44.160Z">
+<meta property="article:modified_time" content="2024-05-28T05:15:43.676Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20240528125036626.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -369,7 +377,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            325 词 
+            855 词 
           </div>
         </div>
         
@@ -406,6 +414,35 @@
 <li>分离变量，用无穷小乘有界函数仍然是无穷小</li>
 </ol>
 <h3 id="判断多元极限不存在的方法"><a href="#判断多元极限不存在的方法" class="headerlink" title="判断多元极限不存在的方法"></a>判断多元极限不存在的方法</h3><p>直接取y&#x3D;kx，代入计算极限，化简到最后如果有k，则说明极限随k值选取变化，即多元函数极限不存在。</p>
+<h3 id="多元函数的连续性"><a href="#多元函数的连续性" class="headerlink" title="多元函数的连续性"></a>多元函数的连续性</h3><p>概念：<img src="/../images/image-20240528125036626.png" alt="image-20240528125036626"></p>
+<p>与一元函数不同的<strong>最大值定理</strong>：有界闭区域D(一元是闭区间)上的连续函数，在区域D上必然能取得最大最小值。</p>
+<h2 id="偏导数"><a href="#偏导数" class="headerlink" title="偏导数"></a>偏导数</h2><p>一元函数导数有两种定义：<img src="/../images/image-20240528125325011.png" alt="image-20240528125325011"></p>
+<p>二元函数的偏导数同样有类似的两种定义，根据题目条件选择。</p>
+<p>Δx为自变量的定义：</p>
+<p><img src="/../images/image-20240528125817817.png" alt="image-20240528125817817"></p>
+<p>在要求的点函数不存在&#x2F;不连续时，需要用定义求偏导。</p>
+<p>注意：如果求f(x,y)在(0,0)处对x的偏导，实际上是将y看作常数，求一元导数，因此可以直接将<em>y&#x3D;0代入</em>f(x,y)，方便用定义求偏导。</p>
+<blockquote>
+<p>0极限：对0&#x2F;x，在x趋近于0时，极限仍然为0</p>
+<p>因为0可以看作是最高阶的无穷小，比任何趋近于0的无穷小更高阶，因此为0</p>
+</blockquote>
+<p>偏导数的意义：对x偏导，即f(x,y)在x轴方向上的变化趋势；反之对y求偏导，则是多元函数在y轴方向上的变化趋势。</p>
+<h3 id="高阶偏导"><a href="#高阶偏导" class="headerlink" title="高阶偏导"></a>高阶偏导</h3><p>对高阶偏导，结果与先对x求偏导还是先对y无关：<img src="/../images/image-20240528130452405.png" alt="image-20240528130452405"></p>
+<h2 id="全微分"><a href="#全微分" class="headerlink" title="全微分"></a>全微分</h2><p>定义：若<em>Δz &#x3D; f(x_0+Δx, y_0+Δy) - f(x_0, y_0) &#x3D; AΔx + BΔy + o(p)</em>, p&#x3D;sqrt(x^2+y^2)，则称函数在(x_0,y_0)处<strong>可微</strong>，全微分dz &#x3D; AΔx + BΔy。</p>
+<ul>
+<li>可微的必要条件：偏导数存在</li>
+</ul>
+<p>即函数在某点可微，则该点处的所有偏导数一定存在：<img src="/../images/image-20240528130946948.png" alt="image-20240528130946948"></p>
+<blockquote>
+<p>即与一元函数不同：可微可以推出可导，但<em>可导推不出可微</em>。</p>
+</blockquote>
+<ul>
+<li>可微的充分条件：偏导数存在，且偏导数<em>连续</em></li>
+</ul>
+<p>但是可微也推不出偏导数连续</p>
+<h3 id="定义判断可微性"><a href="#定义判断可微性" class="headerlink" title="定义判断可微性"></a>定义判断可微性</h3><p><img src="/../images/image-20240528131028662.png" alt="image-20240528131028662"></p>
+<h2 id="连续、可偏导与可微的关系"><a href="#连续、可偏导与可微的关系" class="headerlink" title="连续、可偏导与可微的关系"></a>连续、可偏导与可微的关系</h2><p><img src="/../images/image-20240528131320981.png" alt="image-20240528131320981"></p>
+<p>实际上可偏导推不出可微很直观：因为偏导仅仅标识函数在两个方向(x轴和y轴方向)上的变化趋势，但可微要求函数在任意路径上的变化趋势都存在。</p>
 
         
       </div>
