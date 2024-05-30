@@ -43,8 +43,15 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240529164919025.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240529165329308.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240529165717869.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530181547192.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530181712177.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530181745099.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530182355597.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530182622319.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530182914521.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240530183157907.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-05-29T09:04:59.149Z">
+<meta property="article:modified_time" content="2024-05-30T10:32:00.678Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -382,7 +389,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 词 
+            2.1k 词 
           </div>
         </div>
         
@@ -460,7 +467,12 @@
 <h3 id="经典反例"><a href="#经典反例" class="headerlink" title="经典反例"></a>经典反例</h3><p><img src="/../images/image-20240528172023196.png" alt="image-20240528172023196"></p>
 <h2 id="多元函数微分"><a href="#多元函数微分" class="headerlink" title="多元函数微分"></a>多元函数微分</h2><h3 id="复合函数偏导-x2F-全微分"><a href="#复合函数偏导-x2F-全微分" class="headerlink" title="复合函数偏导&#x2F;全微分"></a>复合函数偏导&#x2F;全微分</h3><p>一元函数求复合函数导数很直观：如y&#x3D;f(u),u&#x3D;g(x)均可导，则有<br>$$<br>y_x’ &#x3D; y_u’ u_x’ &#x3D; f’(u) g’(x)<br>$$<br>复合函数求偏导：对多元函数，复合函数要有偏导，需要内层函数可导，且外层函数有<strong>连续偏导</strong>，才能求。(但对一元函数，只需要内外层函数均可导即可)。</p>
 <p><img src="/../images/image-20240528234444155.png" alt="image-20240528234444155"></p>
-<p>画出变量树形图即可。</p>
+<p>首先要确定变量之间的关系，然后画出变量树形图即可。</p>
+<blockquote>
+<p>注意：对于一阶复合偏导很容易，但二阶复合求偏导时，很容易漏项，例如对<br>$$<br>y&#x3D;f(e^x,\cos x)<br>$$<br>求二阶偏导。一阶偏导很容易求：<br>$$<br>\frac{dy}{dx} &#x3D; f_1’<em>e^2+f_2’</em>(-\sin x)<br>$$<br>f_1’为将e^2看作v，再对v相对于y函数，求v的偏导，f_2’类似。</p>
+<p>求二阶偏导时，再对上面的式子相对于x求偏导：<br>$$<br>\frac{d^2y}{dx^2} &#x3D; f_{11}’<em>e^2</em>e^2 + f_1’<em>e^2 + … (</em>)<br>$$<br>此时出错！因为对f_1’*e^2求偏导时，<em>f是e^2和cosx的函数，则f_1’也是这两项的函数</em>，因此对f_1’求导时，也要像一阶时一样，分别对这两项复合求偏导：<br>$$<br>\frac{\part f_{1}’}{\part x} &#x3D; f_{11}’’*e^x + f_{12}’’ * (-\sin x)<br>$$<br>代入上面的(*)式：<br>$$<br>\frac{d^2y}{dx^2} &#x3D; f_{11}’<em>e^2</em>e^2 + f_1’*e^2 + f_{12}’’<em>e^x</em>(-\sin x) + …<br>$$<br>这个才是正解。</p>
+</blockquote>
+<p>另外，在求二阶偏导时，如果形式很复杂，可以在求出一阶偏导之后用“先代后求”简化为一元函数。</p>
 <h3 id="全微分形式不变性"><a href="#全微分形式不变性" class="headerlink" title="全微分形式不变性"></a>全微分形式不变性</h3><p>对一元复合函数，如对y&#x3D;f(u),u&#x3D;g(x)均可导，则有：<br>$$<br>dy &#x3D; y_x’dx &#x3D; y_u’u_x’dx &#x3D; y_u’du<br>$$<br>此时可以发现dy既可以表示为y_x’dx，也可以写为y_u’du，形式相同，因此有<em>微分形式不变性</em>。</p>
 <p>对全微分也有类似结论：<img src="/../images/image-20240529164919025.png" alt="image-20240529164919025"></p>
 <p>但是要保证所有函数都可微，因此条件加强了。</p>
@@ -469,15 +481,50 @@
 <p><img src="/../images/image-20240529165717869.png" alt="image-20240529165717869"></p>
 <p>还有其他方法：</p>
 <ol>
-<li>直接对F(x,y,z) &#x3D; 0两边求导，即可得到</li>
+<li>直接对F(x,y,z) &#x3D; 0<strong>两边求导</strong>，即可得到</li>
 </ol>
 <p>$$<br>F_x’ + F_z’\frac{\part z}{\part x} &#x3D; 0<br>$$</p>
 <ol start="2">
-<li>利用全微分形式不变性：对F(x,y,z)&#x3D;0两边求全微分</li>
+<li>利用全微分形式不变性：对F(x,y,z)&#x3D;0两边<strong>求全微分</strong></li>
 </ol>
 <p>$$<br>F_x’dx+F_y’dy+F_z’dz&#x3D;0<br>$$</p>
 <p>$$<br>dz&#x3D;z_x’dx+z_y’dy<br>$$</p>
 <p>此时求出dz的两个系数即得到函数偏导。</p>
+<p>这种方法的主要优势是不需要分析变量之间的关系，直接求全微分，然后把要求的dz&#x2F;dx形式凑出来即可。</p>
+<blockquote>
+<p>注意：在使用代公式求F_x’和两边求导时，<em>z与x的关系不同</em>。</p>
+<ol>
+<li><p>代公式F_x’&#x2F;F_z’时，z看作<em>常数</em>，即<strong>z’ &#x3D; 1</strong>，因为对F&#x3D;0求x的偏导，只有x一个变量</p>
+</li>
+<li><p>两边求导时，z看作<em>x和y的函数</em>，即出现z时，两边对x求导得:<br> $$<br> z’&#x3D; \frac{\part z}{\part x}<br> $$<br> 同理两边对y求导时：<br> $$<br> z’&#x3D; \frac{\part z}{\part y}<br> $$</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="多元函数极值"><a href="#多元函数极值" class="headerlink" title="多元函数极值"></a>多元函数极值</h2><p><img src="/../images/image-20240530181547192.png" alt="image-20240530181547192"></p>
+<h3 id="无约束极值"><a href="#无约束极值" class="headerlink" title="无约束极值"></a>无约束极值</h3><p>与一元的定义几乎相同：</p>
+<p><img src="/../images/image-20240530181712177.png" alt="image-20240530181712177"></p>
+<h4 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h4><p><img src="/../images/image-20240530181745099.png" alt="image-20240530181745099"></p>
+<p>注意：此时两个偏导均为0时称该点为<em>驻点</em>，但不一定是极值点。</p>
+<blockquote>
+<p>极值点与驻点的关系：没有关系，互相不能推导。</p>
+<p>反例：</p>
+<ol>
+<li>是驻点不是极值点：f(x,y) &#x3D; xy的(0,0)点</li>
+<li>是极值点不是驻点：f(x,y) &#x3D; |x| + |y|的(0,0)点取极小值，但两个偏导都不存在</li>
+</ol>
+</blockquote>
+<p>但对<em>可导</em>函数：极值点一定是驻点。</p>
+<p>可能出现的极值点：</p>
+<ol>
+<li>驻点</li>
+<li>偏导均不存在，或者某个偏导不存在，存在的偏导等于0</li>
+</ol>
+<h4 id="充分条件"><a href="#充分条件" class="headerlink" title="充分条件"></a>充分条件</h4><p><img src="/../images/image-20240530182355597.png" alt="image-20240530182355597"></p>
+<h3 id="条件极值与拉格朗日乘数法"><a href="#条件极值与拉格朗日乘数法" class="headerlink" title="条件极值与拉格朗日乘数法"></a>条件极值与拉格朗日乘数法</h3><p>条件极值：求函数f(x,y)在g(x,y)条件下的极值</p>
+<p>几何意义：<img src="/../images/image-20240530182622319.png" alt="image-20240530182622319"></p>
+<p>原本是在定义区域D内取极值，现在是在曲线(即f与g两个曲面的交线)上取极值。</p>
+<p>拉格朗日乘数法：<img src="/../images/image-20240530182914521.png" alt="image-20240530182914521"></p>
+<h3 id="最大最小值"><a href="#最大最小值" class="headerlink" title="最大最小值"></a>最大最小值</h3><p><img src="/../images/image-20240530183157907.png" alt="image-20240530183157907"></p>
 
         
       </div>
