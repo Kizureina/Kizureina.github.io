@@ -61,8 +61,18 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240531220116870.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240531220142508.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240602174623390.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603174219647.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603170040737.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603170217437.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603172511350.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603172832376.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603172858813.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603172545820.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603173515940.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603174245537.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603174448581.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-02T09:46:26.891Z">
+<meta property="article:modified_time" content="2024-06-03T09:46:39.036Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -400,7 +410,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.7k 词 
+            3.5k 词 
           </div>
         </div>
         
@@ -576,6 +586,7 @@
 </ul>
 <p>主要用在积分区域是圆的情况，如果圆心不在原点或坐标轴，可以<em>先平移</em>再用极坐标。</p>
 <h3 id="利用对称性和奇偶性"><a href="#利用对称性和奇偶性" class="headerlink" title="利用对称性和奇偶性"></a>利用对称性和奇偶性</h3><p><img src="/../images/image-20240531215821783.png" alt="image-20240531215821783"></p>
+<p>即如果区域D关于x轴对称，则看函数是否关于y是奇函数，是则为0，为偶函数则可以用积分区域一半再乘二计算；反之关于y轴对称，则看函数是否关于x有奇偶性。</p>
 <h3 id="利用变量对称性-常用"><a href="#利用变量对称性-常用" class="headerlink" title="利用变量对称性(常用)"></a>利用变量对称性(常用)</h3><p><img src="/../images/image-20240531220116870.png" alt="image-20240531220116870"></p>
 <p>注意：实际上是区域D的对称性</p>
 <p><img src="/../images/image-20240531220142508.png" alt="image-20240531220142508"></p>
@@ -585,8 +596,57 @@
 <p>例如D为圆，积分函数为x^2-y，则对y在D上的二重积分为0，即转化为^2，同时<em>D关于y&#x3D;x对称</em>，因此x^2的二重积分等于y^2，即原式 &#x3D; 1&#x2F;2(x^2 + y^2)的二重积分，再化为极坐标就很容易计算了。</p>
 <p>另外：如果是x&#x2F;(x+y)的类型，也可以转化为1&#x2F;2*(x+y)&#x2F;(x+y)来消掉分母。</p>
 </blockquote>
-<h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><p>|x| + |y| &lt;&#x3D; pi&#x2F;2的图像：<img src="/../images/image-20240602174623390.png" alt="image-20240602174623390"></p>
-
+<h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><p>常用<a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_41922918/article/details/116487973">函数图像</a>。</p>
+<p>|x| + |y| &lt;&#x3D; pi&#x2F;2的图像：<img src="/../images/image-20240602174623390.png" alt="image-20240602174623390"></p>
+<p>还有x^2&#x2F;3 + y^2&#x2F;3 &#x3D; a^2&#x2F;3</p>
+<p>或者写成x &#x3D; acos^3t,y &#x3D; asin^3t，均为星型曲线：<img src="/../images/image-20240603174219647.png" alt="image-20240603174219647"></p>
+<h3 id="含绝对值"><a href="#含绝对值" class="headerlink" title="含绝对值"></a>含绝对值</h3><p>对有绝对值的函数求定积分或者二重积分，要注意分区间计算，即可去掉绝对值号。</p>
+<p>例如如果积分区域有对称性，可以用上面的方法化为正数时计算再乘2或者乘4。</p>
+<h1 id="第十章-无穷级数"><a href="#第十章-无穷级数" class="headerlink" title="第十章 无穷级数"></a>第十章 无穷级数</h1><p><img src="/../images/image-20240603170040737.png" alt="image-20240603170040737"></p>
+<h2 id="常数项级数"><a href="#常数项级数" class="headerlink" title="常数项级数"></a>常数项级数</h2><p>主要考察：常数项级数的<em>敛散性判断</em></p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>定义：<img src="/../images/image-20240603170217437.png" alt="image-20240603170217437"></p>
+<h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><ol>
+<li>若级数u_n收敛于s，则级数ku_n也收敛，并且收敛于ks；</li>
+<li>若u_n于v_n分别收敛于m和n，则其逐项相加与逐项相减得到的级数分别收敛于m+n 和 m-n；</li>
+</ol>
+<p>注意：收敛 ± 发散 &#x3D; 发散；发散 ± 发散 &#x3D; <em>不确定</em></p>
+<ol start="3">
+<li>在级数中去掉、加上或者改变有限项，对级数敛散性不影响(但如果级数收敛，则对收敛的极限有影响)。即前有限项不影响级数敛散性。</li>
+<li>收敛级数加括号仍收敛，且其和不变。</li>
+</ol>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>原本级数收敛 &#x3D;&#x3D;&#x3D;&gt; 级数加括号收敛 (反之不成立,例如1-1+1-1+1…加括号可以收敛，但本身不收敛）</li>
+<li>加括号发散 &#x3D;&#x3D;&#x3D;&#x3D;&gt; 原级数发散</li>
+</ol>
+</blockquote>
+<ol start="5">
+<li>级数收敛的必要条件：当n趋近于无穷时，u_n极限为0</li>
+</ol>
+<p>但反之不成立，u_n极限为0，级数不一定收敛，例如调和级数Σ{1&#x2F;n}就发散。</p>
+<h3 id="判断敛散性原则"><a href="#判断敛散性原则" class="headerlink" title="判断敛散性原则"></a>判断敛散性原则</h3><h4 id="正项级数"><a href="#正项级数" class="headerlink" title="正项级数"></a>正项级数</h4><p>基本定理：正项级数如果收敛，则前n项和s_n一定有界。</p>
+<p>因此可以推出比较判别法：</p>
+<ol>
+<li>大的级数收敛，则小的级数一定收敛</li>
+<li>小的级数发散，则大的级数一定发散</li>
+</ol>
+<p>利用放缩判断即可：已知收敛 &#x3D;&gt; 放大，已知发散 &#x3D;&gt; 缩小。</p>
+<h4 id="比较审敛法极限形式"><a href="#比较审敛法极限形式" class="headerlink" title="比较审敛法极限形式"></a>比较审敛法极限形式</h4><p><img src="/../images/image-20240603172511350.png" alt="image-20240603172511350"></p>
+<h4 id="比值法"><a href="#比值法" class="headerlink" title="比值法"></a>比值法</h4><p>直接做比值求极限，若小于1则收敛，若大于1则发散，等于1则不确定。</p>
+<h4 id="根式法"><a href="#根式法" class="headerlink" title="根式法"></a>根式法</h4><p><img src="/../images/image-20240603172832376.png" alt="image-20240603172832376"></p>
+<h4 id="积分判别法-新增"><a href="#积分判别法-新增" class="headerlink" title="积分判别法(新增)"></a>积分判别法(新增)</h4><p><img src="/../images/image-20240603172858813.png" alt="image-20240603172858813"></p>
+<p>即将级数敛散性与反常积分敛散性联系起来，可以转为求反常积分求解。</p>
+<h3 id="两个常用级数-常用"><a href="#两个常用级数-常用" class="headerlink" title="两个常用级数(常用)"></a>两个常用级数(常用)</h3><p>p级数和等比级数：</p>
+<p><img src="/../images/image-20240603172545820.png" alt="image-20240603172545820"></p>
+<h3 id="交错级数"><a href="#交错级数" class="headerlink" title="交错级数"></a>交错级数</h3><p>即其中的项正负交错的级数。</p>
+<p>判断交错级数敛散性：<img src="/../images/image-20240603173515940.png" alt="image-20240603173515940"></p>
+<p>反之不能成立，即如果交错级数收敛，<em>u_n不一定单调减</em>。</p>
+<h3 id="任意项级数"><a href="#任意项级数" class="headerlink" title="任意项级数"></a>任意项级数</h3><p>若绝对值级数收敛，则级数本身一定收敛，称为绝对收敛。</p>
+<p><img src="/../images/image-20240603174245537.png" alt="image-20240603174245537"></p>
+<p>基本结论：<img src="/../images/image-20240603174448581.png" alt="image-20240603174448581"></p>
+<p>实际上上面的结论2，其实是条件收敛的级数，所有负项级数和所有正项级数都发散。</p>
+<h2 id="幂级数"><a href="#幂级数" class="headerlink" title="幂级数"></a>幂级数</h2><h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2>
         
       </div>
 
