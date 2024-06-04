@@ -71,8 +71,13 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240603173515940.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240603174245537.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240603174448581.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603234850226.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603234948968.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240603235832112.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240604001304403.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240604001435707.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-03T09:46:39.036Z">
+<meta property="article:modified_time" content="2024-06-03T16:16:35.811Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -221,6 +226,11 @@
       <h3 class="widget-title">归档</h3>
       
       
+        <a class="archive-link" href="/archives/2024/06 ">
+          六月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
         <a class="archive-link" href="/archives/2024/05 ">
           五月 2024 
           <div class="archive-count">5 </div>
@@ -348,6 +358,10 @@
       <ul>
         
           <li>
+            <a href="/2024/06/04/Note-of-Compilation-Principle/">程序设计语言编译原理</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/27/Advanced-Mathematics-Review2/">高等数学拾遗(下)</a>
           </li>
         
@@ -361,10 +375,6 @@
         
           <li>
             <a href="/2024/05/08/Side-Channel-Analysis-in-Cryptography/">密码算法侧信道分析</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/01/Saaya-and-Sakiko/">温柔与固执的传承：沙綾与祥子</a>
           </li>
         
       </ul>
@@ -410,7 +420,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.5k 词 
+            3.9k 词 
           </div>
         </div>
         
@@ -632,7 +642,8 @@
 <li>小的级数发散，则大的级数一定发散</li>
 </ol>
 <p>利用放缩判断即可：已知收敛 &#x3D;&gt; 放大，已知发散 &#x3D;&gt; 缩小。</p>
-<h4 id="比较审敛法极限形式"><a href="#比较审敛法极限形式" class="headerlink" title="比较审敛法极限形式"></a>比较审敛法极限形式</h4><p><img src="/../images/image-20240603172511350.png" alt="image-20240603172511350"></p>
+<h4 id="比较审敛法极限形式"><a href="#比较审敛法极限形式" class="headerlink" title="比较审敛法极限形式"></a>比较审敛法极限形式</h4><p>最常用的是第一条：如果n趋近于无穷，则<strong>u_n&#x2F;v_n的极限是常数且不等于0时两个级数同敛散性</strong>。</p>
+<p><img src="/../images/image-20240603172511350.png" alt="image-20240603172511350"></p>
 <h4 id="比值法"><a href="#比值法" class="headerlink" title="比值法"></a>比值法</h4><p>直接做比值求极限，若小于1则收敛，若大于1则发散，等于1则不确定。</p>
 <h4 id="根式法"><a href="#根式法" class="headerlink" title="根式法"></a>根式法</h4><p><img src="/../images/image-20240603172832376.png" alt="image-20240603172832376"></p>
 <h4 id="积分判别法-新增"><a href="#积分判别法-新增" class="headerlink" title="积分判别法(新增)"></a>积分判别法(新增)</h4><p><img src="/../images/image-20240603172858813.png" alt="image-20240603172858813"></p>
@@ -646,7 +657,34 @@
 <p><img src="/../images/image-20240603174245537.png" alt="image-20240603174245537"></p>
 <p>基本结论：<img src="/../images/image-20240603174448581.png" alt="image-20240603174448581"></p>
 <p>实际上上面的结论2，其实是条件收敛的级数，所有负项级数和所有正项级数都发散。</p>
-<h2 id="幂级数"><a href="#幂级数" class="headerlink" title="幂级数"></a>幂级数</h2><h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2>
+<blockquote>
+<p>注意：经常需要将给出的级数拆为交错级数和正项级数方便判断</p>
+<p>另外：在n趋近于无穷大时，n^n&#x2F;(n+1)^不为1，而是为1&#x2F;e</p>
+</blockquote>
+<h3 id="含绝对值的级数"><a href="#含绝对值的级数" class="headerlink" title="含绝对值的级数"></a>含绝对值的级数</h3><p>常用结论：|a_n|级数收敛，则<em>a_n^2</em>级数也收敛。</p>
+<p>原因很容易推导：|a_n|趋近于0，则|a_n|&lt;1，则a_n绝对值一定大于a_n^2。大收敛推出小收敛。</p>
+<p>但如果有a_n级数收敛，推不出a_n^2级数收敛，例如(1)^n&#x2F;sqrt(n)。</p>
+<h2 id="幂级数"><a href="#幂级数" class="headerlink" title="幂级数"></a>幂级数</h2><p><img src="/../images/image-20240603234850226.png" alt="image-20240603234850226"></p>
+<h3 id="收敛半径、收敛区间与收敛域"><a href="#收敛半径、收敛区间与收敛域" class="headerlink" title="收敛半径、收敛区间与收敛域"></a>收敛半径、收敛区间与收敛域</h3><p>定义：<img src="/../images/image-20240603234948968.png" alt="image-20240603234948968"></p>
+<p>称为幂级数。</p>
+<h4 id="阿贝尔定理"><a href="#阿贝尔定理" class="headerlink" title="阿贝尔定理"></a>阿贝尔定理</h4><p>(1) 若a_n*x^n级数在 <em>x&#x3D;x_0(x_0≠0)</em> 时收敛，则在当|x| &lt; |x_0|时幂级数<strong>绝对收敛</strong>。</p>
+<p>(2) 若a_n*x^n级数在 <em>x&#x3D;x_0</em> 时发散，则在当|x| &gt; |x_0|时幂级数<strong>发散</strong>。</p>
+<p>根据阿贝尔定理可以推出一个对称的区间，向内的区间是收敛区间，向外则是发散区间。</p>
+<p>因此将该区间的一半长度称为<strong>收敛半径</strong>。</p>
+<p>再考察收敛半径的<strong>端点</strong>是否收敛，即可判断<strong>收敛域</strong>。</p>
+<p>因此求收敛域的关键就转化为求收敛半径。</p>
+<h4 id="幂级数收敛性的三种情况"><a href="#幂级数收敛性的三种情况" class="headerlink" title="幂级数收敛性的三种情况"></a>幂级数收敛性的三种情况</h4><p><img src="/../images/image-20240603235832112.png" alt="image-20240603235832112"></p>
+<p>实际上对应三种收敛半径：</p>
+<ol>
+<li>R &#x3D; 正无穷</li>
+<li>R &#x3D; 0</li>
+<li>R为常数</li>
+</ol>
+<p><img src="/../images/image-20240604001304403.png" alt="image-20240604001304403"></p>
+<h4 id="求收敛半径"><a href="#求收敛半径" class="headerlink" title="求收敛半径"></a>求收敛半径</h4><p><img src="/../images/image-20240604001435707.png" alt="image-20240604001435707"></p>
+<p>注意只能左推，不能右推。</p>
+<p>实际上都是从前面的敛散性判断推得的。</p>
+<h3 id="性质-2"><a href="#性质-2" class="headerlink" title="性质"></a>性质</h3><h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2>
         
       </div>
 
@@ -658,10 +696,15 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2024/06/04/Note-of-Compilation-Principle/"
+      title="程序设计语言编译原理"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        程序设计语言编译原理
         
     </p>
   </a>
