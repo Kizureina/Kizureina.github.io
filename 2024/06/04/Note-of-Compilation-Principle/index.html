@@ -22,22 +22,23 @@
 <!-- End Google Analytics -->
 
   
-  <title>程序设计语言编译原理 | Kizureina&#39;s Blog</title>
+  <title>编译原理笔记 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="第一章 引论编译与翻译 翻译：是指能把某种语言的源程序，在不改变语义的条件下，转换成另一种程序语言-&gt;目标语言程序。  解释：接受某高级语言的一个语句输入，进行解释并控制计算机执行，马上得到这句的解释结果，然后再接受下一句，关键：不产生目标程序，边解释边运行。  编译：将高级语言转为低级语言，产生目标程序。   编译程序的流程：  词法分析 语法分析 语义分析 中间代码生成 优化 目标代码生">
+  <meta name="description" content="第一章 引论 重点: 翻译程序，编译，解释，源程序，中间代码，目标代码 了解编译的过程，编译程序的构架图（图1.1） 表格管理，遍  编译与翻译 翻译：是指能把某种语言的源程序，在不改变语义的条件下，转换成另一种程序语言-&gt;目标语言程序。  解释：接受某高级语言的一个语句输入，进行解释并控制计算机执行，马上得到这句的解释结果，然后再接受下一句，关键：不产生目标程序，边解释边运行。  编译：将">
 <meta property="og:type" content="article">
-<meta property="og:title" content="程序设计语言编译原理">
+<meta property="og:title" content="编译原理笔记">
 <meta property="og:url" content="https://kizureina.github.io/2024/06/04/Note-of-Compilation-Principle/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="第一章 引论编译与翻译 翻译：是指能把某种语言的源程序，在不改变语义的条件下，转换成另一种程序语言-&gt;目标语言程序。  解释：接受某高级语言的一个语句输入，进行解释并控制计算机执行，马上得到这句的解释结果，然后再接受下一句，关键：不产生目标程序，边解释边运行。  编译：将高级语言转为低级语言，产生目标程序。   编译程序的流程：  词法分析 语法分析 语义分析 中间代码生成 优化 目标代码生">
+<meta property="og:description" content="第一章 引论 重点: 翻译程序，编译，解释，源程序，中间代码，目标代码 了解编译的过程，编译程序的构架图（图1.1） 表格管理，遍  编译与翻译 翻译：是指能把某种语言的源程序，在不改变语义的条件下，转换成另一种程序语言-&gt;目标语言程序。  解释：接受某高级语言的一个语句输入，进行解释并控制计算机执行，马上得到这句的解释结果，然后再接受下一句，关键：不产生目标程序，边解释边运行。  编译：将">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604154014827.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604163305178.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604163700006.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604171938779.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604172933713.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240604191750750.png">
 <meta property="article:published_time" content="2024-06-04T07:37:07.000Z">
-<meta property="article:modified_time" content="2024-06-04T09:40:58.206Z">
+<meta property="article:modified_time" content="2024-06-04T12:05:55.623Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -318,7 +319,7 @@
       <ul>
         
           <li>
-            <a href="/2024/06/04/Note-of-Compilation-Principle/">程序设计语言编译原理</a>
+            <a href="/2024/06/04/Note-of-Compilation-Principle/">编译原理笔记</a>
           </li>
         
           <li>
@@ -361,7 +362,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        程序设计语言编译原理
+        编译原理笔记
       </h1>
     
   
@@ -374,20 +375,26 @@
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-    未分类 
+  <a class="meta-cate-link" href="/categories/Reverse/">Reverse</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.4k 词 
+            3.6k 词 
           </div>
         </div>
         
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="第一章-引论"><a href="#第一章-引论" class="headerlink" title="第一章 引论"></a>第一章 引论</h2><h3 id="编译与翻译"><a href="#编译与翻译" class="headerlink" title="编译与翻译"></a>编译与翻译</h3><ul>
+          <h2 id="第一章-引论"><a href="#第一章-引论" class="headerlink" title="第一章 引论"></a>第一章 引论</h2><blockquote>
+<p>重点:</p>
+<p>翻译程序，编译，解释，源程序，中间代码，目标代码</p>
+<p>了解编译的过程，编译程序的构架图（图1.1）</p>
+<p>表格管理，遍</p>
+</blockquote>
+<h3 id="编译与翻译"><a href="#编译与翻译" class="headerlink" title="编译与翻译"></a>编译与翻译</h3><ul>
 <li><p>翻译：是指能把某种语言的源程序，在不改变语义的条件下，转换成另一种程序语言-&gt;目标语言程序。</p>
 </li>
 <li><p>解释：接受某高级语言的一个语句输入，进行解释并控制计算机执行，马上得到这句的解释结果，然后再接受下一句，关键：不产生目标程序，边解释边运行。</p>
@@ -446,7 +453,14 @@
 <li>目标程序一定是机器语言程序。 （X）</li>
 <li>无论一遍扫描还是多遍扫描，编译器都要对源程序扫描一遍。（O）</li>
 </ul>
-<h2 id="第二章-高级语言及其语法描述"><a href="#第二章-高级语言及其语法描述" class="headerlink" title="第二章 高级语言及其语法描述"></a>第二章 高级语言及其语法描述</h2><h3 id="语法描述"><a href="#语法描述" class="headerlink" title="语法描述"></a>语法描述</h3><p>主要有以下三种结构组成：</p>
+<h2 id="第二章-高级语言及其语法描述"><a href="#第二章-高级语言及其语法描述" class="headerlink" title="第二章 高级语言及其语法描述"></a>第二章 高级语言及其语法描述</h2><blockquote>
+<p>重点：</p>
+<p>CHOMSKY形式语言描述0,1,2,3型文法，重点掌握2型上下文无关文法和正规文法</p>
+<p>程序语言的语法描述：符号表示</p>
+<p>上下文无关文法</p>
+<p>重点：文法识别语言，或者给出语言写出相应文法，最左推导，最右推导</p>
+</blockquote>
+<h3 id="语法描述"><a href="#语法描述" class="headerlink" title="语法描述"></a>语法描述</h3><p>主要有以下三种结构组成：</p>
 <ol>
 <li>字母表（alphabet）</li>
 <li>符号（字符）（symbol）</li>
@@ -485,7 +499,16 @@
 <p><img src="/../images/image-20240604163305178.png" alt="image-20240604163305178"></p>
 <h3 id="语法树与文法二义性"><a href="#语法树与文法二义性" class="headerlink" title="语法树与文法二义性"></a>语法树与文法二义性</h3><p><img src="/../images/image-20240604163700006.png" alt="image-20240604163700006"></p>
 <p>如果某个文法存在句子对应两棵不同的语法树(最左或最右推导)，则称文法是二义性的。</p>
-<h2 id="第三章-词法分析"><a href="#第三章-词法分析" class="headerlink" title="第三章 词法分析"></a>第三章 词法分析</h2><p>词法分析是编译的第一阶段，在单词的级别上分析和翻译源程序。</p>
+<h2 id="第三章-词法分析"><a href="#第三章-词法分析" class="headerlink" title="第三章 词法分析"></a>第三章 词法分析</h2><blockquote>
+<p>重点：</p>
+<p>词法分析的任务，输出形式</p>
+<p>状态转换图，正规式，正规集，正规文法，三者之间的关系</p>
+<p>DFA,NFA</p>
+<p>给出语言写出正规式</p>
+<p>重点3.3节：正规式绘制出NFA,NFA的确定化以及最小化问题</p>
+<p>正规文法与DFA之间的转换（P52）</p>
+</blockquote>
+<p>词法分析是编译的第一阶段，在单词的级别上分析和翻译源程序。</p>
 <p>理论基础:</p>
 <ul>
 <li>有限自动机理论</li>
@@ -540,7 +563,16 @@
 <li>当产生的状态B不属于终态集时：A -&gt; aB（右线性文法时）</li>
 <li><em>B属于终态集时：A -&gt; a | aB</em></li>
 </ol>
-<h2 id="第四章-自上而下的语法分析"><a href="#第四章-自上而下的语法分析" class="headerlink" title="第四章 自上而下的语法分析"></a>第四章 自上而下的语法分析</h2><p>1、语法分析的地位</p>
+<h2 id="第四章-自上而下的语法分析"><a href="#第四章-自上而下的语法分析" class="headerlink" title="第四章 自上而下的语法分析"></a>第四章 自上而下的语法分析</h2><blockquote>
+<p>重点：</p>
+<p>语法分析器的功能，语法分析的方法</p>
+<p>自上而下分析的问题：左递归和回溯，如何消除</p>
+<p>LL（1）文法</p>
+<p>首符集FIRST()，随符集FOLLOW（）</p>
+<p>预测分析表的构造</p>
+<p>利用分析表进行预测分析的步骤</p>
+</blockquote>
+<p>1、语法分析的地位</p>
 <ul>
 <li>是编译程序的核心部分。</li>
 </ul>
@@ -574,13 +606,68 @@
 <li>下推栈的栈初始符号(一般是#)</li>
 <li>各种字母表间的有限子集映射</li>
 </ul>
+<h4 id="PDA的三种状态"><a href="#PDA的三种状态" class="headerlink" title="PDA的三种状态"></a>PDA的三种状态</h4><ol>
+<li>推导：栈顶为非终结符，将其出栈，并将其产生式入栈</li>
+<li>匹配：栈顶与读头均为终结符，则可以匹配成功，一起出栈</li>
+<li><em>回溯</em>：若栈顶与读头均为终结符，但不匹配，则说明推导出错，需要返回上次推导现场。</li>
+</ol>
+<p>若回溯到开始符号S，则此时PDA识别失败。</p>
 <h3 id="不带回溯的自上而下语法分析"><a href="#不带回溯的自上而下语法分析" class="headerlink" title="不带回溯的自上而下语法分析"></a>不带回溯的自上而下语法分析</h3><h4 id="消除左递归"><a href="#消除左递归" class="headerlink" title="消除左递归"></a>消除左递归</h4><p>例如有文法：P -&gt; Pa | b</p>
 <p>消除直接左递归后转为等价式：</p>
 <ol>
 <li>P -&gt; bP’ </li>
 <li>P’ -&gt; aP’ | 空串</li>
 </ol>
-<h2 id="第五章-自下而上的语法分析"><a href="#第五章-自下而上的语法分析" class="headerlink" title="第五章 自下而上的语法分析"></a>第五章 自下而上的语法分析</h2>
+<h4 id="消除回溯"><a href="#消除回溯" class="headerlink" title="消除回溯"></a>消除回溯</h4><p>基本方法：预测和提取左因子</p>
+<p><strong>预测</strong>：根据读头下的字符对应的预测分析表，选择候选式，使其第一个字符与读头下相同，即相对于向前看了一个字符。此时消除回溯（即保证候选式的唯一性）。</p>
+<p>因此需要求非终结符的首符号集First(A)。</p>
+<p>但是会出现非终结符的<em>候选式首符集相交</em>(例如A-&gt;B|C，B和C的首符集可能都含有a)的情况，此时仍然需要回溯，因此需要提取公共左因子。</p>
+<p><strong>提取公共左因子</strong>：<img src="/../images/image-20240604191750750.png" alt="image-20240604191750750"></p>
+<h3 id="预测分析程序与LL-1-文法"><a href="#预测分析程序与LL-1-文法" class="headerlink" title="预测分析程序与LL(1)文法"></a>预测分析程序与LL(1)文法</h3><p>预测分析表：指示非终极符和终结符对应时，需要做哪种推导。</p>
+<p>构造预测分析表需要先构造字母表的<strong>首符集</strong>和<strong>随符集</strong>。</p>
+<h4 id="First-α-集"><a href="#First-α-集" class="headerlink" title="First(α)集"></a>First(α)集</h4><ul>
+<li>对非终极符：</li>
+</ul>
+<p>所有α可能推导出的<strong>第一个</strong>终结符或空串组成的集合。</p>
+<p>如果α经过有限次推导可以得到空串，则将空串加入首符集。</p>
+<ul>
+<li>对终结符：</li>
+</ul>
+<p>终结符的首符集就是本身。</p>
+<h4 id="Follow-α-集"><a href="#Follow-α-集" class="headerlink" title="Follow(α)集"></a>Follow(α)集</h4><blockquote>
+<p>在产生式<em>右端</em>找的α后面的第一个终结符，加入α的随符集。</p>
+<p>如果A可以推导出B，且B后无其他字符(如A-&gt;aB)，则将Follow(A)加入到Follow(B)；</p>
+<p>最后将终止符#加入Follow集。</p>
+</blockquote>
+<h4 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h4><p>若文法G的预测分析表M中不含有多重定义项，则称G为<em>LL(1)文法</em>。</p>
+<p>注意：</p>
+<ol>
+<li><p>LL(1)文法是无二义的，二义文法一定不是LL(1)文法。</p>
+</li>
+<li><p>LL的含义是从左到右扫描输入串，采用最左推导分析句子。</p>
+</li>
+<li><p>数字1表示分析句子时需向前看一个输入符号。</p>
+</li>
+</ol>
+<h4 id="判断是否是LL-1-文法"><a href="#判断是否是LL-1-文法" class="headerlink" title="判断是否是LL(1)文法"></a>判断是否是LL(1)文法</h4><blockquote>
+<ol>
+<li>文法中不含有左递归和公共左因子</li>
+<li>对每一个非终极符A，A的<em>各个产生式的候选首符集</em>两两不相交。</li>
+<li>对于产生式中存在空串的非终极符B，First(B)与Follow(B)不相交。</li>
+</ol>
+</blockquote>
+<h4 id="预测分析表构造"><a href="#预测分析表构造" class="headerlink" title="预测分析表构造"></a>预测分析表构造</h4><p>构造是根据文法的每个产生式：</p>
+<ol>
+<li>如果有A-&gt;α(终结符或非终极符)，则对α的首符集里的每个终结符a..，都把A-&gt;α加入到M[A,a]中；</li>
+<li>如果右端产生式的首符集中有空串，则对左端A的Follow集中所有终结符b..，将产生式加入到M[A,b]中。</li>
+</ol>
+<h2 id="第五章-自下而上的语法分析"><a href="#第五章-自下而上的语法分析" class="headerlink" title="第五章 自下而上的语法分析"></a>第五章 自下而上的语法分析</h2><blockquote>
+<p>重点：</p>
+<p>归约，句柄，规范归约（最左归约），最左素短语，算符优先，LR</p>
+<p>注意：LR(0)，算符优先（FIRSTVT LASTVT）,分析表，给句子出来要会做相应分析</p>
+<p>列出给定文法的LR(0)项目，构造识别活前缀的DFA，根据DFA判断文法是否是LR（0）（关键在项目族内是否是移近-归约冲突，或规约规约冲突），如果没有冲突项，就继续构造它的LR(0)分析表。根据分析表分析某个给定的句子，写出分析过程（符号栈，状态栈，输入串的变化）。</p>
+</blockquote>
+
         
       </div>
 
