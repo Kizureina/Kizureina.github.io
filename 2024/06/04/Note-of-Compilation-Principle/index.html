@@ -37,6 +37,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604171938779.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604172933713.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604191750750.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240605094302253.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604231136689.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604233359525.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604233932181.png">
@@ -44,7 +45,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240605010453816.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240605010504629.png">
 <meta property="article:published_time" content="2024-06-04T07:37:07.000Z">
-<meta property="article:modified_time" content="2024-06-04T17:14:09.722Z">
+<meta property="article:modified_time" content="2024-06-05T01:43:33.589Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -564,7 +565,7 @@
 </ol>
 </blockquote>
 <h4 id="DFA与正规式转换"><a href="#DFA与正规式转换" class="headerlink" title="DFA与正规式转换"></a>DFA与正规式转换</h4><p><img src="/../images/image-20240604171938779.png" alt="image-20240604171938779"></p>
-<p>反过来由正规式写DFA时，比较容易，需要根据下面两条规则：</p>
+<p>反过来由DFA写正规文法时，比较容易，需要根据下面两条规则：</p>
 <ol>
 <li>当产生的状态B不属于终态集时：A -&gt; aB（右线性文法时）</li>
 <li><em>B属于终态集时：A -&gt; a | aB</em></li>
@@ -713,7 +714,8 @@
 </ol>
 <p>(注：即能进一步推导时，优先级更高)</p>
 <p>若G中任何终结符序偶(a,b)<em>至多满足上述关系之一</em>(即不能同时满足几个关系)，则称G为<strong>算符优先文法</strong>(OPG).</p>
-<h3 id="构造优先级表"><a href="#构造优先级表" class="headerlink" title="构造优先级表"></a>构造优先级表</h3><h4 id="FirstVT集和LastVT集"><a href="#FirstVT集和LastVT集" class="headerlink" title="FirstVT集和LastVT集"></a>FirstVT集和LastVT集</h4><p>先求各个非终结符的FirstVT集和LastVT集。</p>
+<h3 id="构造优先级表"><a href="#构造优先级表" class="headerlink" title="构造优先级表"></a>构造优先级表</h3><h4 id="FirstVT集和LastVT集"><a href="#FirstVT集和LastVT集" class="headerlink" title="FirstVT集和LastVT集"></a>FirstVT集和LastVT集</h4><p>先求各个非终结符的FirstVT集和LastVT集:</p>
+<p><img src="/../images/image-20240605094302253.png" alt="image-20240605094302253"></p>
 <p>这两个集合都很容易求，FirstVT即非终结符推导出的第一个终结符，或者经过多次推导得到的首个终结符；LastVT集即经过一步或多步推导得到的最后一个终结符。</p>
 <p>构造完FirstVT集和LastVT集之后，就可以确定优先级关系：</p>
 <p><img src="/../images/image-20240604231136689.png" alt="image-20240604231136689"></p>
