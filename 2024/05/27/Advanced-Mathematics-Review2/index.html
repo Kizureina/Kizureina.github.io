@@ -76,11 +76,23 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240603235832112.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604001304403.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240604001435707.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607114948156.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240605165647570.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240605165714470.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240605165927812.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607164655481.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607164731759.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607165033345.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607165915066.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607170119279.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607170146971.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607170227454.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607172044538.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607172426880.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607172854216.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240607172946946.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-05T09:39:27.541Z">
+<meta property="article:modified_time" content="2024-06-07T09:30:59.601Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -423,7 +435,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.6k 词 
+            5.1k 词 
           </div>
         </div>
         
@@ -712,6 +724,9 @@
 <li>可导：S(x)在(-R,R)【<em>注意区间不包含端点</em>】上可导，且可逐项求导，收敛半径不变。（可以连续使用）</li>
 <li>可积：在收敛域上可积，且逐项可积分，<em>半径不变化</em>。</li>
 </ol>
+<h4 id="和函数与单项的关系"><a href="#和函数与单项的关系" class="headerlink" title="和函数与单项的关系"></a>和函数与单项的关系</h4><p>$$<br>\sum^{\infty}<em>{x&#x3D;1}u</em>{n+1} &#x3D; \sum^{\infty}<em>{x&#x3D;1}u</em>{n} - u_1<br>$$</p>
+<p><img src="/../images/image-20240607114948156.png" alt="image-20240607114948156"></p>
+<p>即u_n+1的和函数从2开始求和，比u_n少了第一项u_1。</p>
 <h3 id="函数的幂级数展开"><a href="#函数的幂级数展开" class="headerlink" title="函数的幂级数展开"></a>函数的幂级数展开</h3><p>f(x)在某点的邻域内，若能展开为幂级数，则其展开式是唯一的，即所谓<strong>泰勒级数</strong>。</p>
 <p>泰勒级数收敛的必要条件：</p>
 <p><img src="/../images/image-20240605165647570.png" alt="image-20240605165647570"></p>
@@ -728,7 +743,61 @@
 <li>要注意项数中包不包括第0项。</li>
 </ol>
 </blockquote>
-<h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2>
+<h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2><p><img src="/../images/image-20240607164655481.png" alt="image-20240607164655481"></p>
+<h3 id="傅里叶系数"><a href="#傅里叶系数" class="headerlink" title="傅里叶系数"></a>傅里叶系数</h3><p><img src="/../images/image-20240607164731759.png" alt="image-20240607164731759"></p>
+<p>a_n,b_n称为傅里叶系数，可构成傅里叶级数——即f(x)展开为三角函数(但不一定可以展开)。</p>
+<h3 id="收敛定理"><a href="#收敛定理" class="headerlink" title="收敛定理"></a>收敛定理</h3><p><img src="/../images/image-20240607165033345.png" alt="image-20240607165033345"></p>
+<p>展开的要求比幂级数展开更低，幂级数要求任意阶可导，傅里叶级数甚至连续都不要求。</p>
+<p>不连续时，函数收敛于<em>“左端点的右极限 与 右端点的左极限”的平均值</em>。</p>
+<h3 id="周期为2pi的函数展开"><a href="#周期为2pi的函数展开" class="headerlink" title="周期为2pi的函数展开"></a>周期为2pi的函数展开</h3><p><img src="/../images/image-20240607165915066.png" alt="image-20240607165915066"></p>
+<h3 id="周期为2l的函数展开"><a href="#周期为2l的函数展开" class="headerlink" title="周期为2l的函数展开"></a>周期为2l的函数展开</h3><p>在[-l,l]上展开：</p>
+<p><img src="/../images/image-20240607170119279.png" alt="image-20240607170119279"></p>
+<p>如果在周期有奇偶性：</p>
+<p><img src="/../images/image-20240607170146971.png" alt="image-20240607170146971"></p>
+<p>奇函数时：只有正弦项；偶函数时：只有余项项。</p>
+<p>在半个周期上展开时：</p>
+<p><img src="/../images/image-20240607170227454.png" alt="image-20240607170227454"></p>
+<p>注意：在用收敛定理时，要先将半个周期扩展为一个周期。</p>
+<h1 id="第十一章-空间解析几何与多元微分的几何应用"><a href="#第十一章-空间解析几何与多元微分的几何应用" class="headerlink" title="第十一章 空间解析几何与多元微分的几何应用"></a>第十一章 空间解析几何与多元微分的几何应用</h1><h2 id="向量代数"><a href="#向量代数" class="headerlink" title="向量代数"></a>向量代数</h2><h3 id="数量积"><a href="#数量积" class="headerlink" title="数量积"></a>数量积</h3><p>得到的是一个<em>数</em></p>
+<ul>
+<li><p>两种表示：代数和几何表示</p>
+</li>
+<li><p>满足交换律与分配率</p>
+</li>
+<li><p>应用：求模、求夹角和判断两向量垂直</p>
+</li>
+</ul>
+<h3 id="向量积"><a href="#向量积" class="headerlink" title="向量积"></a>向量积</h3><p>|a X b| &#x3D; |a|*|b|*sinα 得到的是一个<em>向量</em></p>
+<p>方向：右手法则</p>
+<p>代数表示：<img src="/../images/image-20240607172044538.png" alt="image-20240607172044538"> </p>
+<p>不满足交换律，满足结合律和分配律</p>
+<p>几何应用：</p>
+<ol>
+<li>求同时垂直a和b的向量：aXb</li>
+<li>求以a和b为邻边的平行四边形的面积：S&#x3D;|a X b|</li>
+<li>判断两向量平行：a平行b，则aXb&#x3D;0，且可以反推。</li>
+</ol>
+<h3 id="混合积"><a href="#混合积" class="headerlink" title="混合积"></a>混合积</h3><p>(abc) &#x3D; (aXb)*c</p>
+<p>代数表示：<img src="/../images/image-20240607172426880.png" alt="image-20240607172426880"></p>
+<p>运算规律:</p>
+<ul>
+<li>轮换对称性:(abc) &#x3D; (bca)  &#x3D;(cab)</li>
+<li>交换变号：(abc) &#x3D; -(acb)</li>
+</ul>
+<p>即轮换值不变，交互变负号</p>
+<p>几何应用：</p>
+<ol>
+<li>V_平行六面体 &#x3D; |(abc)|</li>
+<li>判断三向量共面：<em>（abc）&#x3D; 0</em></li>
+</ol>
+<h2 id="空间平面与直线"><a href="#空间平面与直线" class="headerlink" title="空间平面与直线"></a>空间平面与直线</h2><h3 id="平面方程"><a href="#平面方程" class="headerlink" title="平面方程"></a>平面方程</h3><p>主要有三种写法：一般式，点法式，截距式</p>
+<p><img src="/../images/image-20240607172854216.png" alt="image-20240607172854216"></p>
+<p><strong>n</strong>为平面法向量。</p>
+<h3 id="直线方程"><a href="#直线方程" class="headerlink" title="直线方程"></a>直线方程</h3><p>同样有三种：一般式，对称式，参数式</p>
+<p><img src="/../images/image-20240607172946946.png" alt="image-20240607172946946"></p>
+<p>对称式可以写成参数式。</p>
+<h3 id="平面与直线的位置关系"><a href="#平面与直线的位置关系" class="headerlink" title="平面与直线的位置关系"></a>平面与直线的位置关系</h3><p>即主要三种：平行，垂直，夹角</p>
+
         
       </div>
 
