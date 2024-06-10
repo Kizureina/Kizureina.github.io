@@ -180,7 +180,7 @@
       
         <a class="archive-link" href="/archives/2024/06 ">
           六月 2024 
-          <div class="archive-count">2 </div>
+          <div class="archive-count">3 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/05 ">
@@ -310,6 +310,10 @@
       <ul>
         
           <li>
+            <a href="/2024/06/10/Note-of-Local-Address-Net-Security/">内网安全攻防笔记</a>
+          </li>
+        
+          <li>
             <a href="/2024/06/08/Analysis-of-CVE-2024-4577/">古老漏洞的复活：php-cgi命令注入(CVE-2024-4577)漏洞分析</a>
           </li>
         
@@ -325,10 +329,6 @@
             <a href="/2024/05/18/AutoBangumi-qbit-and-plex-on-mini-server/">AutoBangumi + qbit + plex搭建优雅的追番服务</a>
           </li>
         
-          <li>
-            <a href="/2024/05/11/Advanced-Mathematics-Review/">高等数学拾遗(上)</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -339,6 +339,92 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Note-of-Local-Address-Net-Security" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/06/10/Note-of-Local-Address-Net-Security/">内网安全攻防笔记</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-06-10T06:50:14.000Z" itemprop="datePublished">2024-06-10</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            8.1k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            第一章 内网渗透测试基础1.1 内网基础1) 工作组(WorkGroup)概念：最常见最简单最普通的资源管理模式 
+特点:
+
+与域相对 
+不多于10台计算机 
+计算机之间关系是对等的
+
+2) 域(Domain)概念：有安全边界的计算机集合
+域控(DC-Domain Controller)概念：负责每一台联入网络的电脑和用户的验证工作的服务器，类似管理服务器的计算机。
+域控特点：
+
+包含存储所有账户，密码，域内计算机等信息的数据库 
+所有的权限身份验证，网络访问管理在域控上进行 
+可以有多台
+
+域环境父域和子域关系：一个父域包含多个子域，父域子域是相对关系 
+特点：父域与子域的安全策略独立 
+域树概念：是多个域通过建立信任关系组成的集合。 
+格式：用【.】隔开，越靠后越高级，最靠后的成为最高级子域或一级域，每个【.】代表一个层次 
+特点：子域只能以父域的名字作为其域名的后缀，域的名字是连续的，名字越长级别越低 
+域森林概念：多个域树通过建立信任关系组成的集合
+3) 活动目录(Active Dictionary)概念：域环境中提供目录服务的组件 
+存储内容：用于存储有关网络对象（用户...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/06/10/Note-of-Local-Address-Net-Security/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Analysis-of-CVE-2024-4577" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -542,7 +628,7 @@ else没有匹配的if &#x3D;&gt; 语法分析错误
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.1k 词 
+            5.2k 词 
           </div>
         </div>
         
@@ -1068,76 +1154,6 @@ $$x\thicksim\arctan x \thicksim \sin\ x \thicksim \tan x \thicksim \ln{(x+1)} \t
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Thinking-of-Vocaloid-and-producer" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/26/Thinking-of-Vocaloid-and-producer/">VOCALOID随想</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-26T15:01:20.000Z" itemprop="datePublished">2024-03-26</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/ACG/">ACG</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2k 词 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            VOCALOID的灵魂:纯粹与自由VOCALOID是最纯粹最美丽的音乐形式，我一直如此相信。就算在最原教旨主义的阿宅眼中，初音的歌声也是来自另一个次元的，最单纯的二次元之音。
-为什么VOCALOID是最美丽的音乐呢？因为一般的音乐制作，需要从作词作曲到编曲演唱的多个环节，而如果这些环节分为不同的人来完成，最后制作出的是各个创作者的思考相互博弈与妥协调和的结果，而不是最开始想要传达的感情。试想，歌手怎么可能完全理解到编曲者的想法呢？编曲者又如何完全理解作词家的思路呢？
-VOCALOID打破了这一切限制，让每个人都能创作出自己的音乐，而且最后创作出的歌曲，也正是创作者(producer)为未经歪曲的最开始想要传达之物。所以V家的第一个歌姬名叫初音(Hatsune)，创作出真正的初始之音，真是很美的名字。
-VOCALOID的灵魂是同人文化。而这种同人文化作为世纪初的同人三大奇迹之一，与月姬与东方都完全不同的是，其真正的核心却不是丰富多彩的设定与漂亮的人设，而是创作者的纯粹与自由。
-创作者遵循内心的热情，倾注才华与爱创作V曲，而不是迎合大众，是VOCALOID最纯粹的美；而关心无人在意的...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  with-pic  "
-       style="background-image: url(/../images/image-20240327002212973.png)" 
-      href="/2024/03/26/Thinking-of-Vocaloid-and-producer/" 
-    >
-       
-      <div class="overlay">
-        <i class="fa-solid fa-angle-right with-pic"></i>
-      </div>
        
     </a>
      

