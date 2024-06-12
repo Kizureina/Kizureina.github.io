@@ -94,9 +94,11 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240609192217015.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240609192233574.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240609193440673.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240612155646345.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240609201818127.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240612151426250.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-09T12:21:36.735Z">
+<meta property="article:modified_time" content="2024-06-12T08:26:20.689Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -439,7 +441,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.2k 词 
+            5.8k 词 
           </div>
         </div>
         
@@ -762,7 +764,8 @@
 <p>在半个周期上展开时：</p>
 <p><img src="/../images/image-20240607170227454.png" alt="image-20240607170227454"></p>
 <p>注意：在用收敛定理时，要先将半个周期扩展为一个周期。</p>
-<h1 id="第十一章-空间解析几何与多元微分的几何应用"><a href="#第十一章-空间解析几何与多元微分的几何应用" class="headerlink" title="第十一章 空间解析几何与多元微分的几何应用"></a>第十一章 空间解析几何与多元微分的几何应用</h1><h2 id="向量代数"><a href="#向量代数" class="headerlink" title="向量代数"></a>向量代数</h2><h3 id="数量积"><a href="#数量积" class="headerlink" title="数量积"></a>数量积</h3><p>得到的是一个<em>数</em></p>
+<h1 id="第十一章-空间解析几何与多元微分的几何应用"><a href="#第十一章-空间解析几何与多元微分的几何应用" class="headerlink" title="第十一章 空间解析几何与多元微分的几何应用"></a>第十一章 空间解析几何与多元微分的几何应用</h1><h2 id="向量代数"><a href="#向量代数" class="headerlink" title="向量代数"></a>向量代数</h2><h3 id="单位向量"><a href="#单位向量" class="headerlink" title="单位向量"></a>单位向量</h3><p>向量 除以 向量的模。</p>
+<h3 id="数量积"><a href="#数量积" class="headerlink" title="数量积"></a>数量积</h3><p>得到的是一个<em>数</em></p>
 <ul>
 <li><p>两种表示：代数和几何表示</p>
 </li>
@@ -806,10 +809,39 @@
 <h3 id="点到直线距离公式"><a href="#点到直线距离公式" class="headerlink" title="点到直线距离公式"></a>点到直线距离公式</h3><p><img src="/../images/image-20240609192233574.png" alt="image-20240609192233574"></p>
 <h2 id="曲面与空间曲线"><a href="#曲面与空间曲线" class="headerlink" title="曲面与空间曲线"></a>曲面与空间曲线</h2><p>方程表示：</p>
 <p><img src="/../images/image-20240609193440673.png" alt="image-20240609193440673"></p>
-<h3 id="常用曲面"><a href="#常用曲面" class="headerlink" title="常用曲面"></a>常用曲面</h3><p><img src="/../images/image-20240609201818127.png" alt="image-20240609201818127"></p>
+<h3 id="常用曲面"><a href="#常用曲面" class="headerlink" title="常用曲面"></a>常用曲面</h3><h4 id="旋转面"><a href="#旋转面" class="headerlink" title="旋转面"></a>旋转面</h4><p>最常见的是旋转面：</p>
+<p>一条平面上的曲线绕平面上一条直线旋转。</p>
+<p>例如L是yOz上一曲线，方程为f(y,z) &#x3D; 0 &amp;&amp; x &#x3D; 0，则有：</p>
+<ol>
+<li>L绕y轴所得旋转面方程为：f(y, ±sqrt(x^2 + z^2)) &#x3D; 0</li>
+<li>L绕z轴所得方程：f(±sqrt(x^2 + y^2), z) &#x3D; 0</li>
+</ol>
+<p>即绕谁转谁不动，将另一变量换为sqrt(x^2 + ..^)。</p>
+<h4 id="柱面"><a href="#柱面" class="headerlink" title="柱面"></a>柱面</h4><p>平行于定直线，且沿特定曲线移动的直线L形成的轨迹，称为<em>柱面</em>。</p>
+<p>有两种准线：</p>
+<ol>
+<li>准线为平面直线，例如准线为f(x,y)&#x3D;0 &amp;&amp; z&#x3D;0，求母线平行于z轴，此时直接消去z即得柱面。</li>
+<li>准线为两平面交线，求母线平行为z轴的曲曲面，此时联立方程组消去z也可以得到柱面方程H(x,y)&#x3D;0。</li>
+</ol>
+<h4 id="二次曲面（重要）"><a href="#二次曲面（重要）" class="headerlink" title="二次曲面（重要）"></a>二次曲面（重要）</h4><p>(1) 椭圆锥面：<br>$$<br>\frac{x^2}{a^2} + \frac{y^2}{b^2} &#x3D; z^2<br>$$<br>但不常用，更常用的椭圆锥面的特例：<em>圆锥面</em> <code>x^2 + y^2 = z^2</code> <img src="/../images/image-20240612155646345.png" alt="image-20240612155646345"></p>
+<p>(2) 椭圆球面：<br>$$<br>\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} &#x3D; 1<br>$$<br>特殊情况即球面：<code>x^2 + y^2 + z^2 = 1</code></p>
+<p>其他几种情况一般不常用：</p>
+<p><img src="/../images/image-20240609201818127.png" alt="image-20240609201818127"></p>
 <p>实际上只有旋转抛物面最常用。</p>
-<h3 id="空间曲线的投影"><a href="#空间曲线的投影" class="headerlink" title="空间曲线的投影"></a>空间曲线的投影</h3><p>有曲线：F(x,y,z)&#x3D;0 &amp; G(x,y,z)&#x3D;0，在xOy面上投影的曲线方程为：</p>
+<h3 id="空间曲线的投影"><a href="#空间曲线的投影" class="headerlink" title="空间曲线的投影"></a>空间曲线的投影</h3><p>有曲线：F(x,y,z)&#x3D;0 &amp; G(x,y,z)&#x3D;0，在<strong>xOy</strong>面上投影的曲线方程为：</p>
 <p>H(x,y) &#x3D; 0 &amp;&amp; z &#x3D; 0</p>
+<p>即联立消去z（对x0y面投影而言）。（若有曲面中没有z，即在xOy面上，此时无需解直接将该曲线作为投影曲线）</p>
+<blockquote>
+<p>注意：解出来投影曲线的方程之后，要注意<em>范围</em></p>
+<p>例如空间曲线是球面与包含在球面内的柱面的交线，此时在其中一个平面上投影曲线是<code>z^2 + ax = a^2</code>，即是无限延伸的抛物线，需要限定范围。</p>
+</blockquote>
+<h2 id="多元微分在几何上的应用"><a href="#多元微分在几何上的应用" class="headerlink" title="多元微分在几何上的应用"></a>多元微分在几何上的应用</h2><p>实际上曲面求切平面的两种形式可以化为一种：</p>
+<p>z &#x3D; f(x,y)  &#x3D;&#x3D;&gt;  f(x,y) - z &#x3D; 0，对方程求偏导即得(f_x, f_y, -1).</p>
+<p><img src="/../images/image-20240612151426250.png" alt="image-20240612151426250"></p>
+<p>其中n_1 &#x3D; {F_x, F_y, F_z}，n_2 &#x3D; {G_x, G_y, G_z}.</p>
+<blockquote>
+<p>注意：两曲面相交决定的曲线，其切向量同时垂直于两个平面的法向量。</p>
+</blockquote>
 
         
       </div>

