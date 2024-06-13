@@ -97,8 +97,27 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240612155646345.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240609201818127.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240612151426250.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613114818998.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613115009295.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613114953983.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613115350688.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613170046703.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613165545347.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613165806129.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613172947005.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173057476.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173113560.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173129534.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173216272.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173324595.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173507319.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173610291.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613173653583.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613174122092.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613174704801.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240613174937578.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-12T08:26:20.689Z">
+<meta property="article:modified_time" content="2024-06-13T09:49:39.633Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -441,7 +460,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.8k 词 
+            6.7k 词 
           </div>
         </div>
         
@@ -817,6 +836,17 @@
 <li>L绕z轴所得方程：f(±sqrt(x^2 + y^2), z) &#x3D; 0</li>
 </ol>
 <p>即绕谁转谁不动，将另一变量换为sqrt(x^2 + ..^)。</p>
+<h5 id="参数方程形式给出"><a href="#参数方程形式给出" class="headerlink" title="参数方程形式给出"></a>参数方程形式给出</h5><p>当给出的为：</p>
+<p>x &#x3D; x(t)</p>
+<p>y &#x3D; y(t)</p>
+<p>z &#x3D; z(t)</p>
+<p>其旋转曲面很容易得出，例如绕z轴旋转：</p>
+<blockquote>
+<p>x &#x3D; sqrt(x^2 + y^2) * cos </p>
+<p>y &#x3D; sqrt(x^2 + y^2) * sin</p>
+<p>z &#x3D; z(x)</p>
+</blockquote>
+<p>即z不变，x和y变成sqrt(x^2 + y^2)再乘三角函数的形式。</p>
 <h4 id="柱面"><a href="#柱面" class="headerlink" title="柱面"></a>柱面</h4><p>平行于定直线，且沿特定曲线移动的直线L形成的轨迹，称为<em>柱面</em>。</p>
 <p>有两种准线：</p>
 <ol>
@@ -830,7 +860,7 @@
 <p>实际上只有旋转抛物面最常用。</p>
 <h3 id="空间曲线的投影"><a href="#空间曲线的投影" class="headerlink" title="空间曲线的投影"></a>空间曲线的投影</h3><p>有曲线：F(x,y,z)&#x3D;0 &amp; G(x,y,z)&#x3D;0，在<strong>xOy</strong>面上投影的曲线方程为：</p>
 <p>H(x,y) &#x3D; 0 &amp;&amp; z &#x3D; 0</p>
-<p>即联立消去z（对x0y面投影而言）。（若有曲面中没有z，即在xOy面上，此时无需解直接将该曲线作为投影曲线）</p>
+<p>即联立消去z（对x0y面投影而言），此时得到平面方程，再联立z&#x3D;0即得投影曲线方程。（若有曲面中没有z，即在xOy面上，此时无需解直接将该曲线作为投影曲线）</p>
 <blockquote>
 <p>注意：解出来投影曲线的方程之后，要注意<em>范围</em></p>
 <p>例如空间曲线是球面与包含在球面内的柱面的交线，此时在其中一个平面上投影曲线是<code>z^2 + ax = a^2</code>，即是无限延伸的抛物线，需要限定范围。</p>
@@ -842,6 +872,86 @@
 <blockquote>
 <p>注意：两曲面相交决定的曲线，其切向量同时垂直于两个平面的法向量。</p>
 </blockquote>
+<h1 id="第十二章-多元积分及其应用"><a href="#第十二章-多元积分及其应用" class="headerlink" title="第十二章 多元积分及其应用"></a>第十二章 多元积分及其应用</h1><h2 id="三重积分"><a href="#三重积分" class="headerlink" title="三重积分"></a>三重积分</h2><p>定义：<img src="/../images/image-20240613114818998.png" alt="image-20240613114818998"></p>
+<p>性质：</p>
+<ol>
+<li>绝对值不等式</li>
+<li>积分中值定理</li>
+</ol>
+<p>与定积分一样。</p>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><p>将三重积分化为先求二重积分，再求单个积分。</p>
+<ol>
+<li>先一后二：<img src="/../images/image-20240613115009295.png" alt="image-20240613115009295"></li>
+</ol>
+<p>二重积分的积分区域就是三重积分区域在xOy面上的<em>投影</em>；</p>
+<p>定积分区域：做平行于z轴的射线，交点表达式即为上下限。</p>
+<ol start="2">
+<li>先二后一：<img src="/../images/image-20240613114953983.png" alt="image-20240613114953983"></li>
+</ol>
+<p>与二重积分类似，使用x &#x3D; 0平面去<em>截取</em>积分区域（注意与上面的投影不同，有可能需要分界），获得的区域表达式和边界再求定积分。</p>
+<p>当被积函数是单个变量的函数时，使用先二后一更方便。</p>
+<h3 id="柱坐标"><a href="#柱坐标" class="headerlink" title="柱坐标"></a>柱坐标</h3><p>x &#x3D; r*cosα</p>
+<p>y &#x3D; r*sinα</p>
+<p>z &#x3D; z<img src="/../images/image-20240613115350688.png" alt="image-20240613115350688"></p>
+<p>柱坐标计算三重积分：<code>dv = r * dr * dα * dz</code>，再代入x,y,z到被积函数即可。</p>
+<p>适用于柱坐标计算的情况：</p>
+<ol>
+<li>函数：g(z)*f(sqrt(x^2+y^2)) &#x3D;&#x3D;&#x3D;&#x3D;&gt; g(z)*f(r)</li>
+<li>区域：柱体，锥体</li>
+</ol>
+<h3 id="球坐标"><a href="#球坐标" class="headerlink" title="球坐标"></a>球坐标</h3><p><img src="/../images/image-20240613170046703.png" alt="image-20240613170046703"></p>
+<p>化为体积微元：<code>dv = r^2 * sinφ * dr * dθ * dφ </code></p>
+<p>适用于球坐标计算的情况：</p>
+<ol>
+<li>函数：f(sqrt(x^2+y^2+z^2))</li>
+<li>区域：球体、半球体、两个球面、球面和锥面</li>
+</ol>
+<h3 id="利用对称性和奇偶性计算"><a href="#利用对称性和奇偶性计算" class="headerlink" title="利用对称性和奇偶性计算"></a>利用对称性和奇偶性计算</h3><p>若积分区域关于xOy面对称，则有：</p>
+<p><img src="/../images/image-20240613165545347.png" alt="image-20240613165545347"></p>
+<h3 id="利用变量对称性"><a href="#利用变量对称性" class="headerlink" title="利用变量对称性"></a>利用变量对称性</h3><p>对积分区域为x^2 + y^2 + z^2 &lt;&#x3D; R^2的球面，此时三个坐标实际上地位等同。</p>
+<p>因此有:<img src="/../images/image-20240613165806129.png" alt="image-20240613165806129"></p>
+<p>尤其适用于球面时的积分区域，之后可以用<em>球坐标</em>。</p>
+<h2 id="曲线积分"><a href="#曲线积分" class="headerlink" title="曲线积分"></a>曲线积分</h2><h3 id="对弧长的曲线积分：第一类曲线积分"><a href="#对弧长的曲线积分：第一类曲线积分" class="headerlink" title="对弧长的曲线积分：第一类曲线积分"></a>对弧长的曲线积分：第一类曲线积分</h3><p>定义：<img src="/../images/image-20240613172947005.png" alt="image-20240613172947005"></p>
+<p>性质：对弧长的线积分与路径方向无关。</p>
+<h4 id="计算-1"><a href="#计算-1" class="headerlink" title="计算"></a>计算</h4><ol>
+<li><p>参数方程给出：<img src="/../images/image-20240613173057476.png" alt="image-20240613173057476"></p>
+</li>
+<li><p>直角坐标给出：<img src="/../images/image-20240613173113560.png" alt="image-20240613173113560"></p>
+</li>
+<li><p>极坐标给出：<img src="/../images/image-20240613173129534.png" alt="image-20240613173129534"></p>
+</li>
+</ol>
+<h4 id="奇偶性"><a href="#奇偶性" class="headerlink" title="奇偶性"></a>奇偶性</h4><p>与二重积分完全相同：</p>
+<p><img src="/../images/image-20240613173216272.png" alt="image-20240613173216272"></p>
+<h4 id="对称性"><a href="#对称性" class="headerlink" title="对称性"></a>对称性</h4><p>若积分曲线关于直线y&#x3D;x对称，则函数中自变量x和y互换，曲线积分不变</p>
+<h4 id="空间曲线时"><a href="#空间曲线时" class="headerlink" title="空间曲线时"></a>空间曲线时</h4><p><img src="/../images/image-20240613173324595.png" alt="image-20240613173324595"></p>
+<h3 id="对坐标的曲线积分：第二类曲线积分"><a href="#对坐标的曲线积分：第二类曲线积分" class="headerlink" title="对坐标的曲线积分：第二类曲线积分"></a>对坐标的曲线积分：第二类曲线积分</h3><p>定义：<img src="/../images/image-20240613173507319.png" alt="image-20240613173507319"></p>
+<p>性质：与路径方向有关</p>
+<p>计算：</p>
+<ol>
+<li>参数方程：<img src="/../images/image-20240613173610291.png" alt="image-20240613173610291"></li>
+</ol>
+<p>注意：定积分上下限是起始点和终点</p>
+<h4 id="格林公式"><a href="#格林公式" class="headerlink" title="格林公式"></a>格林公式</h4><p>对于封闭曲线，可以用格林公式计算线积分：</p>
+<p><img src="/../images/image-20240613173653583.png" alt="image-20240613173653583"></p>
+<blockquote>
+<p>正向的定义：沿边界走，区域始终在左侧（即正向是相对于区域而言的）。</p>
+<p>可以用补线将区域封闭，再用格林公式。</p>
+</blockquote>
+<h4 id="利用线积分与路径无关"><a href="#利用线积分与路径无关" class="headerlink" title="利用线积分与路径无关"></a>利用线积分与路径无关</h4><p>判断定理：<img src="/../images/image-20240613174122092.png" alt="image-20240613174122092"></p>
+<p>单连通：区域内没有“洞”</p>
+<p>方便计算：</p>
+<ol>
+<li>改换路径：由曲线改为沿坐标轴的直线</li>
+<li>利用原函数：</li>
+</ol>
+<p>$$<br>\int_{(x_1,y_1)}^{(x_2,y_2)}Pdx+Qdy&#x3D;F(x_1,y_1) - F(x_2,y_2)<br>$$</p>
+<p>即<code>Pdx + Qdy = dF(x,y)</code></p>
+<p>求原函数方法：1. 偏积分 2. <em>凑微分</em>（更常用）</p>
+<h4 id="选择方法"><a href="#选择方法" class="headerlink" title="选择方法"></a>选择方法</h4><p>L封闭：格林公式</p>
+<p>L不封闭：看曲线是否与路径无关，有关且难直接算时补线用格林公式。</p>
+<h4 id="两类积分联系"><a href="#两类积分联系" class="headerlink" title="两类积分联系"></a>两类积分联系</h4><p><img src="/../images/image-20240613174704801.png" alt="image-20240613174704801"></p>
+<h4 id="空间曲线时的计算法"><a href="#空间曲线时的计算法" class="headerlink" title="空间曲线时的计算法"></a>空间曲线时的计算法</h4><p><img src="/../images/image-20240613174937578.png" alt="image-20240613174937578"></p>
 
         
       </div>
