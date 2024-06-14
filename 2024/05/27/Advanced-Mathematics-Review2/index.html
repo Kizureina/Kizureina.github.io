@@ -116,8 +116,9 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240613174122092.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240613174704801.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240613174937578.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240614174433247.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-13T09:49:39.633Z">
+<meta property="article:modified_time" content="2024-06-14T09:44:52.799Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -460,7 +461,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.7k 词 
+            6.9k 词 
           </div>
         </div>
         
@@ -884,7 +885,7 @@
 <li>先一后二：<img src="/../images/image-20240613115009295.png" alt="image-20240613115009295"></li>
 </ol>
 <p>二重积分的积分区域就是三重积分区域在xOy面上的<em>投影</em>；</p>
-<p>定积分区域：做平行于z轴的射线，交点表达式即为上下限。</p>
+<p>定积分区域：做平行于z轴的射线，交点表达式（即曲面表达式，z&#x3D;f(x,y）即为上下限。</p>
 <ol start="2">
 <li>先二后一：<img src="/../images/image-20240613114953983.png" alt="image-20240613114953983"></li>
 </ol>
@@ -936,7 +937,7 @@
 <p><img src="/../images/image-20240613173653583.png" alt="image-20240613173653583"></p>
 <blockquote>
 <p>正向的定义：沿边界走，区域始终在左侧（即正向是相对于区域而言的）。</p>
-<p>可以用补线将区域封闭，再用格林公式。</p>
+<p>可以用补线将区域封闭(注意方向要回环)，再用格林公式。</p>
 </blockquote>
 <h4 id="利用线积分与路径无关"><a href="#利用线积分与路径无关" class="headerlink" title="利用线积分与路径无关"></a>利用线积分与路径无关</h4><p>判断定理：<img src="/../images/image-20240613174122092.png" alt="image-20240613174122092"></p>
 <p>单连通：区域内没有“洞”</p>
@@ -951,7 +952,18 @@
 <h4 id="选择方法"><a href="#选择方法" class="headerlink" title="选择方法"></a>选择方法</h4><p>L封闭：格林公式</p>
 <p>L不封闭：看曲线是否与路径无关，有关且难直接算时补线用格林公式。</p>
 <h4 id="两类积分联系"><a href="#两类积分联系" class="headerlink" title="两类积分联系"></a>两类积分联系</h4><p><img src="/../images/image-20240613174704801.png" alt="image-20240613174704801"></p>
-<h4 id="空间曲线时的计算法"><a href="#空间曲线时的计算法" class="headerlink" title="空间曲线时的计算法"></a>空间曲线时的计算法</h4><p><img src="/../images/image-20240613174937578.png" alt="image-20240613174937578"></p>
+<h4 id="空间曲线时的计算法"><a href="#空间曲线时的计算法" class="headerlink" title="空间曲线时的计算法"></a>空间曲线时的计算法</h4><p>求空间曲线参数方程时：</p>
+<p>例如空间体与平面的交线：一般先求空间体的投影的参数方程，再代回平面求出z的参数方程。</p>
+<p><img src="/../images/image-20240613174937578.png" alt="image-20240613174937578"></p>
+<p>斯托克斯公式将线积分化为面积分。</p>
+<p>公式中的第二种形式更常用。</p>
+<p>注意：斯托克斯公式中法向量的正向，是平面边界方向使用<em>右手法则</em>得出的。</p>
+<h4 id="化空间曲线为平面曲线"><a href="#化空间曲线为平面曲线" class="headerlink" title="化空间曲线为平面曲线"></a>化空间曲线为平面曲线</h4><p>即降维。</p>
+<blockquote>
+<p>只适用于空间曲线是由一个<em>曲面</em>和一个<em>平面</em>确定的形式。</p>
+</blockquote>
+<p>例如平面为y + z &#x3D; 0，将<code>z = -y</code>代入线积分消去z，将空间线积分化为只有x，y变量的在xOy平面上的<strong>平面线积分</strong>，积分区域为原本积分区域在<em>xOy平面上的投影</em>，如果是闭区域，可以使用格林公式计算。</p>
+<p><img src="/../images/image-20240614174433247.png" alt="image-20240614174433247"></p>
 
         
       </div>

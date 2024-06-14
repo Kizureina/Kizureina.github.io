@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240523141342564.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240523142516175.png">
 <meta property="article:published_time" content="2024-05-11T10:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-13T09:10:35.548Z">
+<meta property="article:modified_time" content="2024-06-14T03:40:39.381Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -436,7 +436,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7.6k 词 
+            7.9k 词 
           </div>
         </div>
         
@@ -548,7 +548,10 @@
 <p>常用等价无穷小：</p>
 <p><img src="/../images/image-20240511173551932.png" alt="image-20240511173551932"></p>
 <h3 id="有理运算法则"><a href="#有理运算法则" class="headerlink" title="有理运算法则"></a>有理运算法则</h3><p>这个是计算极限的基本，但很容易犯错。</p>
+<blockquote>
 <p>关键是：如果可以拆成加减或者乘除求极限，拆出来的极限<strong>必须存在</strong>。</p>
+<p><em>注意</em>：当<em>加减形式</em>拆出来的极限为无穷大时，不能拆，会损失精度（此时需要继续做洛必达或其他变换）。</p>
+</blockquote>
 <p>因为如果拆出来的极限存在，而且要计算的极限一定存在，所以被拆之后的部分极限也一定存在。反之就算整体极限存在，其中拆出来的部分不存在，被拆的也有可能不存在 &#x3D;&gt; 此时不能拆开计算。</p>
 <p><img src="/../images/image-20240511174726188.png" alt="image-20240511174726188"></p>
 <p>上面的结论对极限、连续、可导均成立，即只有存在与存在经过加减运算后也存在，其他都不一定。</p>
@@ -561,7 +564,24 @@
 <h3 id="洛必达法则"><a href="#洛必达法则" class="headerlink" title="洛必达法则"></a>洛必达法则</h3><p>使用条件：分子分母均在x_0某去心邻域内可导，且上下求导后的极限存在（或极限为∞）。</p>
 <h3 id="泰勒公式"><a href="#泰勒公式" class="headerlink" title="泰勒公式"></a>泰勒公式</h3><p>常用泰勒公式：</p>
 <p><img src="/../images/image-20240511180729071.png" alt="image-20240511180729071"></p>
+<p>（6） arctanx &#x3D; x - (1&#x2F;3)*x^3 + (1&#x2F;5)*x^5 + …..</p>
 <p>使用泰勒公式时，要展开的项数是由最高指数决定的，因此后面的高阶无穷小忽略即可。</p>
+<blockquote>
+<p><em>注意</em>：计算时，使用泰勒展开加减要注意展开阶数，直到不能被完全消去。多展开的高阶部分可以直接舍去。</p>
+<p>无穷小运算定理：</p>
+<ol>
+<li>n阶无穷小与m阶无穷小相加，且n&lt;&#x3D;m，此时结果为n阶无穷小</li>
+<li>n阶无穷小与m阶无穷小相乘，结果为 n+m 阶无穷小</li>
+<li>x^n乘m阶无穷小，结果为x的 n+m 阶无穷小（注意）。</li>
+</ol>
+<p>因此高阶无穷小可以直接舍去。</p>
+</blockquote>
+<h4 id="泰勒公式求法"><a href="#泰勒公式求法" class="headerlink" title="泰勒公式求法"></a>泰勒公式求法</h4><ol>
+<li>直接使用定义</li>
+<li>四则运算</li>
+<li>复合</li>
+<li>逐项求导&#x2F;逐项积分（例如arctanx导数很容易求泰勒公式，对结果逐项积分即得到arctanx的展开式）</li>
+</ol>
 <h3 id="定积分定义求极限"><a href="#定积分定义求极限" class="headerlink" title="定积分定义求极限"></a>定积分定义求极限</h3><p>当表达式可以提取出<em>1&#x2F;n</em>时，可以凑定积分定义求解极限。</p>
 <p>定积分标准定义为Σf(psi)*Δx在Δx最大的值趋近于0时的极限，可以拆分为(1&#x2F;n)*Σf(psi)*(b - a)，凑这个值即可。</p>
 <p><img src="/../images/image-20240511194046582.png" alt="image-20240511194046582"></p>
