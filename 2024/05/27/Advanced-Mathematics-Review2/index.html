@@ -125,8 +125,13 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240615170119225.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240615170413450.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240615173330480.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240616172415267.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240616172134296.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240616172437585.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240616172350627.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240616172358880.png">
 <meta property="article:published_time" content="2024-05-27T12:47:07.000Z">
-<meta property="article:modified_time" content="2024-06-15T09:38:48.484Z">
+<meta property="article:modified_time" content="2024-06-16T09:33:27.189Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta name="twitter:card" content="summary">
@@ -469,7 +474,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7.9k 词 
+            8k 词 
           </div>
         </div>
         
@@ -1023,6 +1028,9 @@
 </blockquote>
 <p>当曲面有其他写法时：</p>
 <p>例如x&#x3D;x(y,z)，此时在yOz面上投影，前侧为正，后侧为负。</p>
+<blockquote>
+<p>在计算<code>Pdydz + Qdzdx + Rdxdy</code>时，如果不能用高斯，可以将微分化为一个平面上的投影：例如化为Dxy，则为:<br>$$<br>[P*(-z’_x) + Q*(-z’_y) + R] * dxdy<br>$$</p>
+</blockquote>
 <ol start="2">
 <li><em>高斯公式</em></li>
 </ol>
@@ -1039,12 +1047,18 @@
 <h3 id="两类面积分的联系"><a href="#两类面积分的联系" class="headerlink" title="两类面积分的联系"></a>两类面积分的联系</h3><p><img src="/../images/image-20240615170413450.png" alt="image-20240615170413450"></p>
 <p>注意：(cosα, cosβ, cosγ)是有向曲面块在该点的<strong>法线</strong>的方向向量。</p>
 <h2 id="多元积分应用"><a href="#多元积分应用" class="headerlink" title="多元积分应用"></a>多元积分应用</h2><p><img src="/../images/image-20240615173330480.png" alt="image-20240615173330480"></p>
-<h2 id="场论初步"><a href="#场论初步" class="headerlink" title="场论初步"></a>场论初步</h2><h3 id="方向导数"><a href="#方向导数" class="headerlink" title="方向导数"></a>方向导数</h3><p>定义：<br>$$<br>\frac{\partial f}{\partial l}\left| \left( x_0,y_0 \right) \right. &#x3D;\underset{t\rightarrow 0^+}{\lim}\frac{f\left( x_0+t\cos \alpha ,y_0+t\cos \beta \right) -f\left( x_0,y_0 \right)}{t}<br>$$<br>计算：</p>
-<p>若<code>z = f (x, y)</code>可微<br>$$<br>\frac{\partial f}{\partial l}&#x3D;\frac{\partial f}{\partial x}\cos \alpha +\frac{\partial f}{\partial y}\cos \beta<br>$$</p>
-<h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><p>$$<br>\boldsymbol{A}&#x3D;\left{ P,Q,R \right}<br>$$</p>
+<h2 id="场论初步"><a href="#场论初步" class="headerlink" title="场论初步"></a>场论初步</h2><h3 id="方向导数"><a href="#方向导数" class="headerlink" title="方向导数"></a>方向导数</h3><p>定义：<br>$$<br>\frac{\partial f}{\partial l}\left| \left( x_0,y_0 \right) \right. &#x3D;\underset{t\rightarrow 0^+}{\lim}\frac{f\left( x_0+t\cos \alpha ,y_0+t\cos \beta \right) -f\left( x_0,y_0 \right)}{t}<br>$$<br>计算：<img src="/../images/image-20240616172415267.png" alt="image-20240616172415267"></p>
+<blockquote>
+<p>注意：cosα和consβ 为方向余弦 &#x3D; 方向向量 除以 单位向量（即需要单位化）</p>
+</blockquote>
+<p>若<code>z = f (x, y)</code>可微(<em>可微</em>时沿任何方向的方向导数均存在)<br>$$<br>\frac{\partial f}{\partial l}&#x3D;\frac{\partial f}{\partial x}\cos \alpha +\frac{\partial f}{\partial y}\cos \beta<br>$$</p>
+<h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><p><img src="/../images/image-20240616172134296.png" alt="image-20240616172134296"></p>
+<p>计算公式：<img src="/../images/image-20240616172437585.png" alt="image-20240616172437585"></p>
+<p>即梯度为函数在某点处，三个坐标的偏导数代入坐标得到的<strong>向量</strong>。<br>$$<br>\boldsymbol{A}&#x3D;\left{ P,Q,R \right}<br>$$</p>
 <p>$$<br>\boldsymbol{grad\ z}&#x3D;\frac{\partial u}{\partial x}\boldsymbol{i}+\frac{\partial u}{\partial y}\boldsymbol{j}+\frac{\partial u}{\partial z}\boldsymbol{k}<br>$$</p>
-<h3 id="散度"><a href="#散度" class="headerlink" title="散度"></a>散度</h3><p>$$<br>\boldsymbol{divA}&#x3D;\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}<br>$$</p>
-<h3 id="旋度"><a href="#旋度" class="headerlink" title="旋度"></a>旋度</h3><p>$$<br>\mathbf{rot}\boldsymbol{A}&#x3D;\mathbf{\nabla }\times \boldsymbol{A}&#x3D;\left| \begin{matrix} \boldsymbol{i}&amp; \boldsymbol{j}&amp; \boldsymbol{k}\ \frac{\partial}{\partial x}&amp; \frac{\partial}{\partial y}&amp; \frac{\partial}{\partial z}\ P&amp; Q&amp; R\ \end{matrix} \right|<br>$$</p>
+<p>梯度是一个向量，代表方向导数<em>最大</em>的方向，梯度的模即为方向向量的最大值。</p>
+<h3 id="散度"><a href="#散度" class="headerlink" title="散度"></a>散度</h3><p>是一个数：<img src="/../images/image-20240616172350627.png" alt="image-20240616172350627"><br>$$<br>\boldsymbol{divA}&#x3D;\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}<br>$$</p>
+<h3 id="旋度"><a href="#旋度" class="headerlink" title="旋度"></a>旋度</h3><p>是一个向量：<img src="/../images/image-20240616172358880.png" alt="image-20240616172358880"><br>$$<br>\mathbf{rot}\boldsymbol{A}&#x3D;\mathbf{\nabla }\times \boldsymbol{A}&#x3D;\left| \begin{matrix} \boldsymbol{i}&amp; \boldsymbol{j}&amp; \boldsymbol{k}\ \frac{\partial}{\partial x}&amp; \frac{\partial}{\partial y}&amp; \frac{\partial}{\partial z}\ P&amp; Q&amp; R\ \end{matrix} \right|<br>$$</p>
 
         
       </div>
