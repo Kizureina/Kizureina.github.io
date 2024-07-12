@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B0FHXMTYNC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B0FHXMTYNC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>线性代数笔记 | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="0. 要点汇总本篇文章的要点整理如下   向量：抽象意义上，向量是可以对其进行加法和数乘运算的任意对象。计算机专业中，向量是一列数组。 标量：一个单独的数字，用来对向量进行缩放。比如乘以2相当于将这个向量拉长为原来的两倍。 张量：向量和矩阵的另一种说法。通俗一点理解的话，我们可以将标量视为零阶张量，向量（矢量）视为一阶张量，那么矩阵就是二阶张量，图像是三阶张量（高度、宽度、色彩通道） 线性组合：将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数笔记">
+<meta property="og:url" content="https://kizureina.github.io/2024/06/18/Note-of-Linear-Algebraic/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="0. 要点汇总本篇文章的要点整理如下   向量：抽象意义上，向量是可以对其进行加法和数乘运算的任意对象。计算机专业中，向量是一列数组。 标量：一个单独的数字，用来对向量进行缩放。比如乘以2相当于将这个向量拉长为原来的两倍。 张量：向量和矩阵的另一种说法。通俗一点理解的话，我们可以将标量视为零阶张量，向量（矢量）视为一阶张量，那么矩阵就是二阶张量，图像是三阶张量（高度、宽度、色彩通道） 线性组合：将">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F3.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F%E5%8A%A0%E6%B3%95.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F%E7%9A%84%E6%95%B0%E4%B9%98.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%882.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%BC%A0%E6%88%901.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%BC%A0%E6%88%902.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%BC%A0%E6%88%903.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A21.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A22.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A23.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A24.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A25.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A26.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A27.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A28.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A29.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A210.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A211.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A212.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A213.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E5%AE%9A%E4%B9%89.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E5%8A%A0%E6%B3%95.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A21.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A22.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A23.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A24.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E7%BB%93%E5%90%88%E5%BE%8B.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F2.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F3.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F4.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%96%B9%E7%A8%8B%E7%BB%841.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%96%B9%E7%A8%8B%E7%BB%842.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E9%80%86%E7%9F%A9%E9%98%B5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E9%80%86%E7%9F%A9%E9%98%B51.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%A7%A9%E7%9A%84%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E9%9B%B6%E7%A9%BA%E9%97%B4.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F%E7%9A%84%E6%A8%A11.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/L1norm.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/L2norm.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF2.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF4.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF3.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%B9%E8%A7%92%E5%85%AC%E5%BC%8F.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%A0%87%E5%87%86%E6%AD%A3%E4%BA%A4%E5%9F%BA.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8F%89%E7%A7%AF1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8F%89%E7%A7%AF2.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8F%89%E7%A7%AF3.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A21.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A22.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A23.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A24.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A25.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A26.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A27.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A28.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A29.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F2.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F4.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC5.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC2.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC3.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC4.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC1.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC2.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC3.png">
+<meta property="og:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC4.png">
+<meta property="article:published_time" content="2024-06-18T09:18:40.000Z">
+<meta property="article:modified_time" content="2024-07-12T14:18:49.065Z">
+<meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Linear Algebraic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/links">Links</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/links">Links</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar2.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Advanced-Mathematics/" rel="tag">Advanced Mathematics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Anime/" rel="tag">Anime</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linear-Algebraic/" rel="tag">Linear Algebraic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linear-Algebraic-Advanced-Mathematics/" rel="tag">Linear Algebraic Advanced Mathematics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/06 ">
+          六月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          五月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          四月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          三月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          一月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          十二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2024/07/12/Log-of-Summer/">暑假日志</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/18/Note-of-Linear-Algebraic/">线性代数笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/11/Note-of-Local-Address-Net-Security2/">内网安全攻防笔记(下)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/10/Note-of-Local-Address-Net-Security/">内网安全攻防笔记(上)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/08/Analysis-of-CVE-2024-4577/">古老漏洞的复活：php-cgi命令注入(CVE-2024-4577)漏洞分析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Note-of-Linear-Algebraic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        线性代数笔记
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-06-18T09:18:40.000Z" itemprop="datePublished">2024-06-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Mathematics/">Mathematics</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            14k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Algebraic/" rel="tag">Linear Algebraic</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="0-要点汇总"><a href="#0-要点汇总" class="headerlink" title="0. 要点汇总"></a>0. 要点汇总</h2><p>本篇文章的要点整理如下</p>
+<blockquote>
+<ul>
+<li>向量：抽象意义上，向量是可以对其进行加法和数乘运算的任意对象。计算机专业中，向量是一列数组。</li>
+<li>标量：一个单独的数字，用来对向量进行缩放。比如乘以2相当于将这个向量拉长为原来的两倍。</li>
+<li>张量：向量和矩阵的另一种说法。通俗一点理解的话，我们可以将标量视为零阶张量，向量（矢量）视为一阶张量，那么矩阵就是二阶张量，图像是三阶张量（高度、宽度、色彩通道）</li>
+<li>线性组合：将向量进行缩放再相加的操作，如3i+2j。</li>
+<li>张成空间：一组向量的全部线性组合所构成的向量集合</li>
+<li>线性相关：向量组中至少有一个向量都可以用向量组中其他向量的线性组合来表示出来。</li>
+<li>线性无关：向量组中的（任意）一个向量都无法用向量组中其他向量的线性组合表示出来。</li>
+<li>基：如果向量空间中的一组向量满足：互相线性无关，张成 V，则它们是向量空间 V 的一组基。该空间的任意向量都能表达为基向量的线性组合。</li>
+<li>线性变换：向量的运动，变换后保持加法和数乘两种运算。</li>
+<li>矩阵：一个二维数组。本质是对运动的描述。</li>
+<li>单位矩阵：任意向量与单位矩阵相乘，等于什么都没做。保持n维向量不变的矩阵叫做单位矩阵，其主对角线元素全是1，其余全是0.</li>
+<li>矩阵的逆：与原矩阵相乘得到单位矩阵的矩阵。不是所有的矩阵都有逆矩阵。存在逆矩阵的矩阵也称为非奇异矩阵。</li>
+<li>行列式：用来衡量矩阵参与矩阵乘法后空间扩大或者缩小了多少倍。如果行列式是0,那么空间至少沿着某一维完全收缩了,使其失去了所有的体积。</li>
+<li>秩：经过线性变换后空间的维数，即该矩阵的线性无关的列（行）的最大数目。</li>
+<li>范数：衡量向量“大小”的单位。常用范数有 L1 和 L2 范数（欧氏距离）。</li>
+<li>对角矩阵：只在主对角线上含有非零元素,其他位置都是零。</li>
+<li>单位向量：指模等于1（具有 单位范数）的向量。由于是非零向量，单位向量具有确定的方向。单位向量有无数个。</li>
+<li>对称矩阵：转置和自己相等的矩阵。</li>
+<li>正交矩阵：是指行向量和列向量是分别标准正交的方阵。</li>
+<li>特征分解：使用最广的矩阵分解之一，即我们将矩阵分解成一组特征向量和特征值。一个变换（或者说矩阵）的特征向量就是这样一种向量，它经过这种特定的变换后保持方向不变，只是进行长度上的伸缩而已。</li>
+</ul>
+</blockquote>
+<h2 id="1-向量-Vector"><a href="#1-向量-Vector" class="headerlink" title="1. 向量 Vector"></a>1. 向量 Vector</h2><h3 id="1-1-向量是什么"><a href="#1-1-向量是什么" class="headerlink" title="1.1 向量是什么"></a>1.1 向量是什么</h3><p>我们从最基础的向量的概念讲起。向量是线性代数最基本的元素，在不同学科中向量的涵义略微有所不同。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F1.png" alt="_images/向量1.png"></p>
+<p>物理学中的向量：空间中的箭头，由长度和它所指的方向决定。物理学中的向量可以自由移动，只要长度与方向不变，向量就是同一个。</p>
+<p>计算机专业中的向量：有序列表。</p>
+<p>数学中的向量：抽象意义上，数学中的向量可以是任意的东西，只要可以对它们进行 <strong>加法和数乘</strong> 运算即可。这也意味着，加法和数乘是向量最底层的运算。一切复杂和抽象的东西归根结底都源自于这两种运算，这一点贯穿线性代数的始终。但为了方便起见，我们之后还是以直角坐标系中的箭头来理解向量。</p>
+<p>和物理学中的向量一样，线性代数中的向量也是有大小和方向的，但必须注意的是：线性代数中的向量不能像物理学中的向量那样随意挪动。线性代数中的向量全部是以原点为起点的向量。</p>
+<p>以二维平面直角坐标系为例，线性代数中，向量的坐标由一对数字构成。这一对数字指示了如何从向量的起点（即坐标原点）出发到达向量的终点。第 1 个数字 -2 告诉我们从原点出发沿 x 轴负方向移动 2 个单位的距离，第 2 个数字 3 告诉我们从原点出发沿 y 轴正方向移动 3 个单位的距离，然后我们就能到达向量的终点了。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F3.png" alt="_images/向量3.png"></p>
+<p>关于“向量”的概念就先说到这里。虽然本章节使用的向量基本都是二维直角坐标系中可以用箭头来表示的几何向量，但记住向量可以是任何东西，可以是多项式，是数组，是函数等等，只要能满足特定的性质即可。</p>
+<h3 id="1-2-向量的运算"><a href="#1-2-向量的运算" class="headerlink" title="1.2 向量的运算"></a>1.2 向量的运算</h3><h4 id="1-2-1-向量的加法"><a href="#1-2-1-向量的加法" class="headerlink" title="1.2.1 向量的加法"></a>1.2.1 向量的加法</h4><p>如果将向量看看成是某种形式的运动，那么两个向量相加就是相继执行向量对应的运动。以下图两个向量为例，先沿 x 轴正方向移动 1 + 3 个单位，再沿 y 轴正方向移动 2 + (-1) 个单位，最终的结果就是两个向量相加的结果。这也对应了向量加法的数学形式，即把向量中对应的元素相加。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F%E5%8A%A0%E6%B3%95.png" alt="_images/向量加法.png"></p>
+<h4 id="1-2-2-向量的数乘"><a href="#1-2-2-向量的数乘" class="headerlink" title="1.2.2 向量的数乘"></a>1.2.2 向量的数乘</h4><p>向量的数乘运算就是对向量进行缩放，更精确的说是将向量中的各个元素分别进行缩放。例如，乘以2相当于将这个向量拉长为原来的两倍，乘以1&#x2F;3相当于将这个向量缩短为原来的1&#x2F;3，乘以-1相当于将这个向量调转方向。这个拉伸、压缩以及反向的过程就称为“缩放”。这里的2、1&#x2F;3、-1或任何用于缩放的数值，称为“标量” scalar。标量，就是一个单独的数字，一般用小写英文字母来表示。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F%E7%9A%84%E6%95%B0%E4%B9%98.png" alt="_images/向量的数乘.png"></p>
+<h2 id="2-线性组合、张成的空间与基-Linear-Combination-Span-and-Basis"><a href="#2-线性组合、张成的空间与基-Linear-Combination-Span-and-Basis" class="headerlink" title="2. 线性组合、张成的空间与基 Linear Combination, Span and Basis"></a>2. 线性组合、张成的空间与基 Linear Combination, Span and Basis</h2><h3 id="2-1-运算封闭"><a href="#2-1-运算封闭" class="headerlink" title="2.1 运算封闭"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id49">2.1 运算封闭</a></h3><p>运算封闭是数学中一个重要概念。对于一个集合，如果其中任意两个数在进行一种运算后，结果仍在这个集合中，那么我们说这个集合对于这种运算是封闭的。</p>
+<p>换句话说，封闭研究这样一个问题：当我定义了一种运算后，所可能产生的所有结果是什么？对于向量而言，问题就是，当我初始拥有了一定数量的向量后，对他（们）进行加法和数乘运算，所可能产生的整个向量集合是什么？这就引出了向量空间的概念，我们之后会讲到。</p>
+<h3 id="2-2-线性组合"><a href="#2-2-线性组合" class="headerlink" title="2.2 线性组合"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id50">2.2 线性组合</a></h3><p>以二维平面直角坐标系为例，i, j 分别是沿xy坐标轴方向的单位向量(1,0) 与 (0,1)。那么，坐标平面上的任意一个向量，都可以看作是 i 和 j （称为基向量）的缩放再相加的结果。基向量缩放的倍数对应向量的各个分量，即向量对应的坐标。例如，向量 (3,-2) 就可以看成是 3倍i 与 -2倍j 相加的结果。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88.png" alt="_images/线性组合.png"></p>
+<p><strong>一组基向量就对应一个坐标系，选择不同的基向量就构造出了不同的坐标系。</strong> 同一个向量，在不同的坐标系下（即采用不同的基向量），其坐标值也要相应地发生变化。</p>
+<p>这一“将向量进行缩放再相加”的操作，即 <strong>线性组合</strong> 。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%882.png" alt="_images/线性组合2.png"></p>
+<h3 id="2-2-向量张成的空间"><a href="#2-2-向量张成的空间" class="headerlink" title="2.2 向量张成的空间"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id51">2.2 向量张成的空间</a></h3><p>在二维平面中，选取 2 个向量，然后考虑它们所有可能的线性组合，我们会得到什么呢？这取决于我们选择的 2 个向量。</p>
+<p>通常情况下，我们会得到整个平面：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%BC%A0%E6%88%901.png" alt="_images/张成1.png"></p>
+<p>如果不巧，选择的 2 个向量恰好共线的话，那它们的线性组合就被局限在一条过原点的直线上了。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%BC%A0%E6%88%902.png" alt="_images/张成2.png"></p>
+<p>向量 v, w 的 全部线性组合所构成的向量集合称为向量 v, w 所 <strong>张成的空间</strong> 。张成的空间，实际上就是通过加法和数乘这两种运算，能获得的所有可能的向量集合是什么。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%BC%A0%E6%88%903.png" alt="_images/张成3.png"></p>
+<h3 id="2-3-线性相关与线性无关"><a href="#2-3-线性相关与线性无关" class="headerlink" title="2.3 线性相关与线性无关"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id52">2.3 线性相关与线性无关</a></h3><p>将线性组合的想法扩展到 3 维空间中。想象 3 个 3 维向量，它们所张成的空间会是什么样的呢？这取决于我们选择的 3 个向量。</p>
+<blockquote>
+<ul>
+<li><ol>
+<li>通常情况下，我们会得到整个 3 维空间</li>
+</ol>
+</li>
+<li><ol>
+<li>当选择的 3 个向量共面时，它们所张成的空间是一个过原点的平面</li>
+</ol>
+</li>
+<li><ol>
+<li>当 3 个向量共线时，它们所张成的空间是一条过原点的直线</li>
+</ol>
+</li>
+<li><ol>
+<li>当 3 个向量都是零向量时，它们所张成的空间只包含零向量</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<p>显然，在考虑向量所张成的空间时，有些向量是多余的。例如，情况 b ，确定一个平面只需要 2 个向量，而我们却用了 3 个向量，这意味着，有 1 个向量是多余的；情况 c，确定一条直线只需要 1 个向量就够了，而我们用了 3 个向量，有 2 个向量是多余的。数学上，我们用线性相关来描述这样的现象。</p>
+<p>当我们说几个向量所构成的向量组 <strong>线性相关</strong> 时，意思是向量组中至少有一个向量都可以用向量组中其他向量的线性组合来表示出来。换句话讲，这个向量已经落在其他向量所张成的空间中，它对整个向量组张成的空间是没有贡献的，把它从向量组中拿掉，并不会影响向量组所张成的空间。从几何角度举个例子，如果二维平面中两个向量线性相关，则其中一个向量可以写成另一个向量的倍数形式（两向量共线）。</p>
+<p><strong>线性无关</strong> 指的是，向量组中的（任意）一个向量都无法用向量组中其他向量的线性组合表示出来。换句话说，向量组中的每一个向量都为向量组所张成的空间贡献了一个维度，每一个向量都缺一不可，少了任何一个向量，都会改变向量组所张成的空间。</p>
+<p>关于线性相关与线性无关，以下是一些重要性质：</p>
+<blockquote>
+<ul>
+<li>一组向量组要么是线性相关，要么是线性无关，没有第三种情况。</li>
+<li>如果一组向量中有至少一个零向量，或有两个相同的向量，那它们肯定线性相关。</li>
+<li></li>
+</ul>
+</blockquote>
+<h3 id="2-4-基的定义"><a href="#2-4-基的定义" class="headerlink" title="2.4 基的定义"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id53">2.4 基的定义</a></h3><p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA.png" alt="_images/基.png"></p>
+<p>如果向量空间中的一组向量满足：互相线性无关，张成 V，则它们是向量空间 V 的一组 <strong>基</strong> 。该空间的任意向量都能表达为基向量的线性组合。基含有的向量的数量叫做维数（即该向量空间的维数，记作 dim(V)）。同一个向量空间可以有很多组基，它们的维数必定相等。</p>
+<h2 id="3-矩阵与线性变换-Linear-Transformation-x2F-Mapping"><a href="#3-矩阵与线性变换-Linear-Transformation-x2F-Mapping" class="headerlink" title="3. 矩阵与线性变换 Linear Transformation&#x2F;Mapping"></a>3. 矩阵与线性变换 Linear Transformation&#x2F;Mapping</h2><h3 id="3-1-线性变换"><a href="#3-1-线性变换" class="headerlink" title="3.1 线性变换"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id55">3.1 线性变换</a></h3><p>首先来理解线性变换。变换，本质就是函数。在微积分中，我们了解了函数描述了一种映射关系，输入内容，输出唯一与其对应的结果。在线性代数中，我们输入一个向量，输出另一个向量。</p>
+<p>之所以用“变换”这个术语，其实暗示了我们能够以某种方式可视化 输入—-输出 关系，暗示我们要从运动的角度去理解这一过程。变换让向量从一个地方（对应输入向量），运动到了另一个地方（对应输出向量）。</p>
+<p>如果用空间中的点来表示向量，则可以把变换可视化为下图这样：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A21.png" alt="_images/线性变换1.png"></p>
+<p>经过变换后，所有点运动到了新的位置：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A22.png" alt="_images/线性变换2.png"></p>
+<p>如果用等间距的平行网格来表示向量，则可以把变换可视化为下图这样：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A23.png" alt="_images/线性变换3.png"></p>
+<p>经过变换后，网格变成了这样：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A24.png" alt="_images/线性变换4.png"></p>
+<p>那么线性变换是什么意思呢？如果一个变换同时具有以下 2 条性质，则它是一个线性变换。</p>
+<blockquote>
+<ul>
+<li>变换前后，所有的直线仍然是直线</li>
+<li>变换前后，原点保持不变</li>
+</ul>
+</blockquote>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A25.png" alt="_images/线性变换5.png"></p>
+<p>放在二维直角坐标系这一特定场景下，具体的体现就是施加线性变换后，整个坐标系的原点不变，并使网络线保持平行且等距分布。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A26.png" alt="_images/线性变换6.png"></p>
+<p>那么，我们要如何用数学语言描述一个线性变换呢？答案很简单，我们只需要知道变化前后的两个基向量i 和 j 的位置。</p>
+<p>以平面直接坐标系为例，假定我们有一个向量 v &#x3D; [-1,2] ,由上一节可知，我们可以将它看成是 2 个基向量 i, j 的线性组合 v &#x3D; -1i + 2j。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A27.png" alt="_images/线性变换7.png"></p>
+<p>在某个线性变换的作用下，i, j 以及 v 都运动到了新的位置。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A28.png" alt="_images/线性变换8.png"></p>
+<p>线性变换前后网络线保持平行且等距分布，这一性质有一个重要的推论：线性变换后的 v 仍然是变换后的 i 和 j 的线性组合，并且线性组合的系数和变换前一样（仍然是 -1 和 2）。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A29.png" alt="_images/线性变换9.png"></p>
+<p>本例子中，变换后的基向量 i 和 j 分别是 [1,-2] 和 [3,0]。由此，我们可以轻松计算出变换后的v 的坐标是 [5,2]。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A210.png" alt="_images/线性变换10.png"></p>
+<p>事实上，我们只要知道线性变换之后的基向量 i, j 的位置（坐标），就可以计算出任意一个向量经过同样的线性变换之后的位置（坐标）。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A211.png" alt="_images/线性变换11.png"></p>
+<p>这意味着，对于一个线性变换，我们只需要跟踪基向量在变换前后的变化，就可以掌握整个空间（即全部向量）的变化。我们将线性变换后的基向量坐标按列组合起来，可以拼接成一个矩阵。线性变换的全部信息便都包含在这个矩阵当中了。</p>
+<p>对于二维空间的线性变换，用一个 2×2 的矩阵就可以完全确定。这个矩阵的 2 列 表示 2 个转换后的基向量的坐标，如下图所示。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A212.png" alt="_images/线性变换12.png"></p>
+<p>那么，任何向量经过该线性变换之后，其新坐标的计算方法都是这样。记住，所有的变换都只是简单的“对基向量缩放再相加”。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A213.png" alt="_images/线性变换13.png"></p>
+<p>通过这种方式，是否可以更轻松的理解矩阵与向量的乘法？我们可以把矩阵的每一列看作变换后的基向量，它描述了一种特定的线性变换，而矩阵与向量的相乘，就是将这个线性变换作用于给定向量。</p>
+<p>简而言之，选定基之后， <strong>向量刻画对象，矩阵刻画对象的运动，用矩阵与向量的乘法施加运动；矩阵的本质是运动的描述。</strong> 一旦理解了这点，线性代数之后的各个主题，包括矩阵乘法、基变换、特征值等都会非常直观易懂。</p>
+<h3 id="3-2-矩阵与基本运算"><a href="#3-2-矩阵与基本运算" class="headerlink" title="3.2 矩阵与基本运算"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id56">3.2 矩阵与基本运算</a></h3><p>上一节中，我们从线性变换的角度解释了矩阵的本质，下面我们简单温习下矩阵的基本数学概念。这些概念在任何一本代数教材中都可以轻易找到。</p>
+<h4 id="3-2-1-矩阵定义"><a href="#3-2-1-矩阵定义" class="headerlink" title="3.2.1 矩阵定义"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id57">3.2.1 矩阵定义</a></h4><p>矩阵：m * n 个数字排成 m * n 列的二维数组就是矩阵，一般用大写英文字母表示。若 m&#x3D;n，即行数与列数相同，则称矩阵是n阶方阵或n阶矩阵。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E5%AE%9A%E4%B9%89.png" alt="_images/矩阵定义.png"></p>
+<h4 id="3-2-2-矩阵的加法与数乘"><a href="#3-2-2-矩阵的加法与数乘" class="headerlink" title="3.2.2 矩阵的加法与数乘"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id58">3.2.2 矩阵的加法与数乘</a></h4><p>矩阵加法，即将两个形状相同的矩阵的每一个对应位置的元素加起来。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E5%8A%A0%E6%B3%95.png" alt="_images/矩阵加法.png"></p>
+<p>矩阵数乘，即将一个矩阵每个元素乘以一个标量k。每个元素在数乘后变成原来的k倍。</p>
+<h4 id="3-2-3-矩阵乘法"><a href="#3-2-3-矩阵乘法" class="headerlink" title="3.2.3 矩阵乘法"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id59">3.2.3 矩阵乘法</a></h4><p>矩阵加法和数乘都很好理解，让很多人头疼的矩阵乘法。 3.1 中我们提到，矩阵表示了一种线性变换。有些时候我们会进行多次线性变换，比如对向量先旋转再剪切，但无论经过多少次，最后的总体作用还是一个线性变换，这样的变换可以看做是由多个独立变换组合成的复合变换。</p>
+<p>那么如何描述这类复合变换呢？一样道理。麻烦的方法是，我们把多个线性变换拆开分别看，例如下图，对向量先施加一个旋转变换，再施加一个剪切变换，注意矩阵是往左侧不断叠加的：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A21.png" alt="_images/复合变换1.png"></p>
+<p>表示的就是对给定的向量先进行旋转，再进行剪切。但无论中间过程是什么，最后的结果都应该和复合变换的结果完全相同。复合矩阵反应的是旋转+剪切的总体效应。从这个角度来说，新的这个矩阵（复合矩阵）可以看做最初两个矩阵的积。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A22.png" alt="_images/复合变换2.png"></p>
+<p>关键点到了。很多人对矩阵的乘法计算只知道死记硬背，但一旦理解了矩阵相乘内在的几何意义（即两个线性变换的相继作用），那么矩阵相乘就是手到擒来的事。</p>
+<p>首先，需要记住一点，矩阵的相乘应该从右往左读，即先应用靠右边的变换，再依次向左。以下图的为例，假设我们的原始基向量是 i 和 j，经过矩阵 M1 和 M2 的作用后会变成怎样的新基向量呢？</p>
+<p>可以看到，j 经过 M1 的作用后变成了 [-2,0]， [-2,0]再经过 M2 的转换变成了 [0,-2]，因此新的基向量 j 就是 [0,-2]，也就是复合矩阵的第二列。和矩阵乘以向量的机制完全一样。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A23.png" alt="_images/复合变换3.png"></p>
+<p>推广到任意矩阵，就得到了我们在教科书中常见的矩阵乘法公式：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%8D%E5%90%88%E5%8F%98%E6%8D%A24.png" alt="_images/复合变换4.png"></p>
+<p>或者更广义的：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95.png" alt="_images/矩阵乘法.png"></p>
+<p>如此，把矩阵乘法理解为 <strong>连续的几次线性变换</strong> ，我们也能很容易理解，矩阵 A<em>B 的结果和矩阵 B</em>A 的结果是不一样的，因为操作顺序的不同，产生的影响也不同。比如，先对 i 和 j 基向量先往x轴方向拉伸一倍，再顺时针旋转90度，与先旋转90度再拉伸，结果肯定不一样。</p>
+<p>同样，我们也能轻易的理解矩阵乘法的结合律为什么合理了。你当然可以通过数学的方法证明等式左右两边的计算结果一致，但当你明白矩阵乘法实际的意义是相继的进行线性变换后，那么答案简直不言自明—— (AB)C 与 A(BC) 做的完全就是同一件事：先进行C变换，再进行B变换，最后进行A变换，根本不需要证明什么。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E7%BB%93%E5%90%88%E5%BE%8B.png" alt="_images/矩阵结合律.png"></p>
+<p>需要注意的是，矩阵的标准乘积（如上所述）不是矩阵中对应元素的乘积，但那样的矩阵操作也是存在的，称为元素对应乘积（element-wise product）或 Hadamard 乘积。</p>
+<h4 id="3-2-4-单位矩阵"><a href="#3-2-4-单位矩阵" class="headerlink" title="3.2.4 单位矩阵"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id60">3.2.4 单位矩阵</a></h4><p>单位矩阵：对角线为1，其余位置都为0 的矩阵，通常记作 I。任意向量与单位矩阵相乘，都不会改变，得到自身。</p>
+<p>把矩阵理解为施加的线性变换，矩阵的每一列就是线性变换后的新的基向量坐标组合起来，那么单位矩阵对应的变换就是——什么都没做，因为新的基向量和原始的基向量一模一样。如此，便可以轻松的理解单位矩阵的各种性质，例如 A * I &#x3D; A &#x3D; I * A。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5.png" alt="_images/单位矩阵.png"></p>
+<h4 id="3-2-5-矩阵的性质"><a href="#3-2-5-矩阵的性质" class="headerlink" title="3.2.5 矩阵的性质"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id61">3.2.5 矩阵的性质</a></h4><p>在了解了矩阵的加法、数乘、乘法、单位矩阵后，我们便可以认识一些矩阵的基本性质，包括结合律、分配律和中性元素。矩阵的结合律在 3.2.3 中我们已经提到过。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%80%A7%E8%B4%A8.png" alt="_images/矩阵性质.png"></p>
+<h2 id="5-行列式-Determinant"><a href="#5-行列式-Determinant" class="headerlink" title="5. 行列式 Determinant"></a>5. 行列式 Determinant</h2><p>之前通过网格线可视化线性变换的图片中我们可以看到，线性变换中有些将空间向外拉伸，有些将空间向内挤压，有件事对理解这些变换很有用，就是测量线性变换具体对空间产生了多少拉伸或压缩，换句话说，就是测量一个给定区域面积扩大或减小的比例。</p>
+<p>以下图为例，假设我们的新基向量是[3,0] 和 [0,2]，经过变换后，原先 1<em>1 的单位正方形区域的面积变成了 3</em>2 &#x3D; 6 即原来的6倍。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F1.png" alt="_images/行列式1.png"></p>
+<p>实际上，我们只需要观察这个单位正方形变换后的面积变化比例，就等于知道了其他任意区域的面积变化比例，因为对于其他任意的方块来说都会有相同的变化，这是由线性变换产生网格线保持平行且等距分布这一特性推断出的。而这个变化的比例，就是我们常说的行列式。</p>
+<p>如果说一个线性变换的行列式是3，那就是说它将一个区域的面积变化为原先的3倍。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F2.png" alt="_images/行列式2.png"></p>
+<p>如果一个线性变换的行列式为0，则说明它将原来的二维平面压缩到了一条线（甚至一个点）上，此时所有区域的面积都为0。换句话说，探究一个矩阵的行列式是否为0，就能了解这个矩阵对应的线性变换是否将空间压缩到了更低维度（例如从二维降维到一维空间）。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F3.png" alt="_images/行列式3.png"></p>
+<p>行列式还可能是负值。从几何意义上如何理解将面积变化为原来的负数倍呢？如果将二维空间想象成一张白纸，那么这个变换相当于将纸张翻转到了另一面。这类变换改变了空间的定向。因此，负值表示空间翻转了，但行列式的绝对值仍然表示区域面积的缩放比例。</p>
+<p>放到三维空间中，行列式的意义依然相同，告诉我们单位体积（即1<em>1</em>1的立方体）在变换后的缩放比例。当行列式为0时，这个立方体降维成了一个平面或一条直线，甚至一个点。</p>
+<p><strong>行列式的计算</strong></p>
+<p>二维矩阵的行列式计算公式很简单，但下图可以帮我们理解为什么是这样。 ad - bc 的结果就是黄色平行四边形的面积，也就是相对于单位正方形变化的比例。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F4.png" alt="_images/行列式4.png"></p>
+<p>然而就我个人而言，这些计算完全可以由电脑完成，死记硬背行列式的计算公式、甚至三阶、四阶行列式的公式并无太大意义，理解背后的意义和原因才更重要。这也是很多人觉得学习线性代数痛苦的原因，国内的大部分课本只会让你沉浸于各种奇怪的计算数学符号中，却根本无法让你知道为什么会是这样。比如下面这个定理：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E8%A1%8C%E5%88%97%E5%BC%8F5.png" alt="_images/行列式5.png"></p>
+<p>两个矩阵相乘的行列式，等于矩阵各自行列式的乘积。</p>
+<p>如果用数值的方法证明，大概可以写5张A4纸。但如果你明白了行列式的本质，那又是不言自明：左边的等式代表先进行 M2 矩阵代表的线性变换再执行 M1 所代表的线性变换之后，面积或者体积所变化的比例。右边的式子是两个线性变换使面积或体积变化的比例的乘积。因为两边线性变换之后的结果是一样的（执行顺序一样），所以比例肯定也是一样的</p>
+<h2 id="6-逆矩阵、秩、列空间、与零空间"><a href="#6-逆矩阵、秩、列空间、与零空间" class="headerlink" title="6. 逆矩阵、秩、列空间、与零空间"></a>6. 逆矩阵、秩、列空间、与零空间</h2><h3 id="6-1-逆矩阵"><a href="#6-1-逆矩阵" class="headerlink" title="6.1 逆矩阵"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id64">6.1 逆矩阵</a></h3><p>前面章节中，我们通过线性变换理解矩阵与向量的运算，这一章我们仍然用线性变换来理解逆矩阵、列空间与零空间这三大概念。Again，个人以为理解这些概念的意义比会计算重要的多，因此计算方法，例如高斯消元法、行阶梯形等不会在这里介绍。</p>
+<p>我们都知道，矩阵的一大用途的帮助我们解方程组，比如，我们可以将一个方程组写为以下线性方程组的形式：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%96%B9%E7%A8%8B%E7%BB%841.png" alt="_images/方程组1.png"></p>
+<p>这里，矩阵代表了某个线性变换，所以从几何意义上理解，求解该方程组的未知量 x,y,z 等同于寻找一个向量 x，使得它在经过 A 的变换后与向量 v 重合。</p>
+<p>我们来看一个二元方程组：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%96%B9%E7%A8%8B%E7%BB%842.png" alt="_images/方程组2.png"></p>
+<p>这个方程组 Ax &#x3D; v 的解依赖于矩阵 A 所代表的变换，是将原始空间挤压到一个更低维空间，还是保持不变，即 A 的行列式是否是0.</p>
+<p>如果行列式不为0，即空间的维度不变，那么只可能有一个向量在变换后与 v 重合，可以通过对 v 做逆变换来得到 x 向量。这里对 v 的逆变换就对应了另一个线性变换，也称为 A 的逆。例如，如果 A 变换是顺时针旋转90度，那么 A 的逆就是逆时针旋转90度。简单的说，如果先施加 A 变换，再施加 A 的逆，那么又回到原始状态。由此，我们给出逆矩阵的正式定义：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E9%80%86%E7%9F%A9%E9%98%B5.png" alt="_images/逆矩阵.png"></p>
+<p>当我们通过计算机得到 A 的逆矩阵后，求解向量 x 也就迎刃而解了，在等式两边同左乘 A 的逆即可。其几何意义对应于对 v 进行逆向的变换，还原为 x。 值得注意的是，不是所有的矩阵都有逆矩阵。存在逆矩阵的矩阵也称为 <strong>非奇异矩阵</strong> ，不存在逆矩阵的矩阵称为 <strong>奇异矩阵</strong> 。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E9%80%86%E7%9F%A9%E9%98%B51.png" alt="_images/逆矩阵1.png"></p>
+<p><strong>如果行列式为0，矩阵 A 所代表的变换将空间压缩到了更低的维度上，此时 A 没有相应的逆变换</strong> ，直观的理解就是我们没有办法将一个低维空间的东西变换到高维空间（比如把一条直线还原到一个平面），因为高维的空间包含更多的信息，压缩成低维后那些信息都已经丢失了，不可能恢复那些丢失的信息。</p>
+<p>行列式为0时，方程式的解可能也存在，就要看变换后的向量 v 是否在变换后的空间内，如果不在，就无解，如果在，就有无数解。</p>
+<p>在很多教科书上，你会读到这样一段解释： <strong>方程组 Ax &#x3D; v 有解当且仅当 v 是 A 的各列的线性组合</strong> 。细心体会一下，这与我们上一段说的其实是一回事。</p>
+<p>除了用行列式为0来描述矩阵变换后的结果，我们还可以更精确的描述变换后空间的维数，这里就引入了一个新的概念：秩。</p>
+<h3 id="6-2-矩阵的秩-Rank"><a href="#6-2-矩阵的秩-Rank" class="headerlink" title="6.2 矩阵的秩 Rank"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id65">6.2 矩阵的秩 Rank</a></h3><h4 id="6-2-1-秩的定义"><a href="#6-2-1-秩的定义" class="headerlink" title="6.2.1 秩的定义"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id66">6.2.1 秩的定义</a></h4><p><strong>秩</strong> 就代表了变换后空间的维数。如果变换后所有的向量都落在一条直线上，那么这个变换的秩为1；如果变换后所有的向量都落在一个二维空间上，那么这个变换的秩为2。</p>
+<p>对于一个 2<em>2 的矩阵来说，它的秩最大只能为2，因为它的2个基向量最多张成二维空间。对于 3</em>3 的矩阵，它变换后的结果可能为一个一维、二维或三维空间。</p>
+<p>更正式的定义：一个矩阵 A 的列秩是 A 的线性无关的列的极大数目。类似地，行秩是 A 的线性无关的行的极大数目。矩阵的列秩和行秩总是相等的，因此它们可以简单地称作矩阵 A 的秩。</p>
+<h4 id="6-2-2-秩的重要性质"><a href="#6-2-2-秩的重要性质" class="headerlink" title="6.2.2 秩的重要性质"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id67">6.2.2 秩的重要性质</a></h4><p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%A7%A9%E7%9A%84%E6%80%A7%E8%B4%A8.png" alt="_images/秩的性质.png"></p>
+<p>看看就行。</p>
+<h3 id="6-3-列空间-Column-Space"><a href="#6-3-列空间-Column-Space" class="headerlink" title="6.3 列空间 Column Space"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id68">6.3 列空间 Column Space</a></h3><p>对向量 x 施加线性变换，变换矩阵的各列可以看作基向量变换后的坐标，变换矩阵的各列张成的空间就是 <strong>列空间</strong> 。所以矩阵的秩也可以理解为，列空间的维数。秩最大的情况就是与矩阵的列数相等，称为满秩。</p>
+<p>值得注意的是，零向量，即原点一定包含在任何列空间里，因为线性变换必须保持原点位置不变。对于满秩变换来说，原点是唯一变换前后不变的向量，但对于非满秩变换来说，可能有一系列的向量在变换后变成了零向量。为什么呢？</p>
+<h3 id="6-4-零空间-Null-Space-x2F-Kernel"><a href="#6-4-零空间-Null-Space-x2F-Kernel" class="headerlink" title="6.4 零空间 Null Space&#x2F;Kernel"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id69">6.4 零空间 Null Space&#x2F;Kernel</a></h3><p>想象一下，如果一个线性变换将2D空间压缩到一条直线上，那么沿着某个特定方向直线上的所有点都会被压缩到原点（想象把一张纸压成一条线）。同样的，如果将一个3D空间压缩到一个平面上，也会有一整条直线上的向量变换后落在原点（想象把一个立方体压成一张纸），如果将一个3D空间压缩到一条直线上，那就会有一整个平面上的向量变换后落在原点。</p>
+<p>变换后落在原点的向量的集合，称为矩阵的 <strong>零空间</strong> 或者核(kernel)。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E9%9B%B6%E7%A9%BA%E9%97%B4.png" alt="_images/零空间.png"></p>
+<p>如上图所示，假设 V → W 是一个线性变换， <strong>象</strong> （Image）指的就是所有V中的向量所能映射到的W中的所有向量， <strong>核</strong> （Kernel）指的就是V中映射为W中零向量的元素整体。根据定义，零空间就是线性齐次方程组 Ax &#x3D; 0 的所有解的集合。</p>
+<p>最后，总结一下，变换矩阵是满秩，等价于矩阵各列向量线性无关，等价于矩阵的行列式不为0，等价于 Ax&#x3D;0 仅有唯一解零向量，等价于矩阵存在逆矩阵。</p>
+<h2 id="7-非方阵"><a href="#7-非方阵" class="headerlink" title="7. 非方阵"></a>7. 非方阵</h2><p>之前我们讨论的矩阵都是方阵，例如用 2*2 的矩阵表示二维向量到二维向量的变换。那么如何理解非方阵呢？很简单，仍然是线性变换，但是是从某个维度转换为另一个维度的坐标。</p>
+<p>以一个 3*2 的矩阵为例，它的几何意义是将输入的二维空间映射到三围空间上。 矩阵有2列表示输入空间有2个基向量（因此是二维输入空间），有3行表示每一个基向量在变换后用3个独立的坐标来描述。</p>
+<h2 id="8-模、点积与正交矩阵"><a href="#8-模、点积与正交矩阵" class="headerlink" title="8. 模、点积与正交矩阵"></a>8. 模、点积与正交矩阵</h2><h3 id="8-1-向量的模-Norms"><a href="#8-1-向量的模-Norms" class="headerlink" title="8.1 向量的模 Norms"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id72">8.1 向量的模 Norms</a></h3><p>当我们在几何平面上表达向量时，我们容易理解一个向量的“长度”即它从原点到箭头终点的线段长度，这就引出了模的概念。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%90%91%E9%87%8F%E7%9A%84%E6%A8%A11.png" alt="_images/向量的模1.png"></p>
+<p>只要满足以上3条性质，就是广义上的模。最常见的模即 L1 和 L2 Norm，俗称曼哈顿距离和欧氏距离：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/L1norm.png" alt="_images/L1norm.png"> <img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/L2norm.png" alt="_images/L2norm.png"></p>
+<h3 id="8-2-向量点积-Dot-Product"><a href="#8-2-向量点积-Dot-Product" class="headerlink" title="8.2 向量点积 Dot Product"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id73">8.2 向量点积 Dot Product</a></h3><p>向量的点积（也称为内积&#x2F;数量积），就是对两个向量对应位置的元素一一相乘之后求和，结果是一个标量。如果对一个向量本身进行点积，得到的其实就是该向量的 L2 模的平方。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF1.png" alt="_images/点积1.png"></p>
+<p>从几何角度理解，向量之间的点积就是其中一个向量在另一个向量上的投影长度，乘以另一个向量的长度。因此，点积的主要用途就是判断向量之间是否正交。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF2.png" alt="_images/点积2.png"></p>
+<p>很显然的，如果两个向量方向垂直（正交），点积的结果为0。如果方向相反，点积的结果为负值。当方向完全一致时，点积的值最大。</p>
+<p>这两者是如何联系起来的？</p>
+<p>首先，我们有一个从二维空间到数轴的线性变换，假设我们并不知道什么向量的点积运算公式，而只是将空间上的点投影到数轴上。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF4.png" alt="_images/点积4.png"></p>
+<p>因为这个变换是线性的，所以必然可以用一个1行2列的矩阵描述。这个矩阵 [ux uy] 即变换后的基向量 i 和 j 的坐标，也就是基向量在新数轴上的投影。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF5.png" alt="_images/点积5.png"></p>
+<p>而又因为1*2矩阵与一个二维向量相乘的过程，和将这个矩阵转置过来，与向量做点积的过程相同，所以这个投影的变换必定与某个二维向量有关。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%82%B9%E7%A7%AF3.png" alt="_images/点积3.png"></p>
+<p>由此我们得到结论，任何时候一个线性变换，如果输出空间是一维的数轴，不管这个变换是如何定义的，空间都会存在一个唯一的向量与这个变换相关，施加该线性变换和做点积效果是一样的。换句话说，两个向量的点积，就是将其中一个向量转换为线性变换，施加在另一个向量上。</p>
+<p>这是数学中对偶性的一个体现。一个向量的对偶，是它定义的线性变换。一个多维空间到一维空间的线性变换的对偶，就是多维空间中的某个特定向量。</p>
+<h3 id="8-3-正定矩阵"><a href="#8-3-正定矩阵" class="headerlink" title="8.3 正定矩阵"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id74">8.3 正定矩阵</a></h3><p>正定矩阵在机器学习，特别是矩阵分解中起着重要作用，它与向量点积密切相关。</p>
+<p>定义:A是n阶对称方阵，如果对任何非零向量x，都有 (x^{T}Ax &gt; 0) (其中 (x^{T}) 表示x的转置)，就称A是正定矩阵。 如果把等式的符号改为 &gt;&#x3D;0，则称A是半正定矩阵。</p>
+<p>从直观的角度理解，Ax 是对向量 x 施加线性变换A，假设变换后的向量 y &#x3D; Ax，则正定矩阵可以改写为：xy &gt; 0，即这两个向量的点积大于0，从几何上就是说，这两个向量的方向一致（夹角小于90度）。因此，正定、半正定矩阵表示的是一个向量经过该矩阵对应的线性变化后的向量，与其本身的夹角小于(等于)90度。</p>
+<p>从正定矩阵的定义 (x^{T}Ax &gt; 0) 我们也能推导出对于任何非零向量 x， Ax !&#x3D; 0 ，因此要让 Ax &#x3D; 0 成立则 x 只能是零向量，即正定矩阵 A 的零空间只包含一个零向量。另外，正定矩阵的对角线上的元素全部为正，通过令 x 为单位向量即可证明得到。</p>
+<h3 id="8-4-夹角与正交性"><a href="#8-4-夹角与正交性" class="headerlink" title="8.4 夹角与正交性"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id75">8.4 夹角与正交性</a></h3><h4 id="8-4-1-向量的夹角"><a href="#8-4-1-向量的夹角" class="headerlink" title="8.4.1 向量的夹角"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id76">8.4.1 向量的夹角</a></h4><p>8.2 中我们已经提过，从几何角度理解，向量之间的点积就是其中一个向量在另一个向量上的投影长度，乘以另一个向量的长度，即两个向量的模（长度）的乘积，再乘以向量夹角的余弦值。因此，这个夹角的计算公式可以写为：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A4%B9%E8%A7%92%E5%85%AC%E5%BC%8F.png" alt="_images/夹角公式.png"></p>
+<p>两向量的点积如果是0，则称它们互相正交。如果两个向量的模都等于1，则称为标准正交。</p>
+<h4 id="8-4-2-正交矩阵"><a href="#8-4-2-正交矩阵" class="headerlink" title="8.4.2 正交矩阵"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id77">8.4.2 正交矩阵</a></h4><p>定义：如果一个方阵满足：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5.png" alt="_images/正交矩阵.png"></p>
+<p>则称为正交矩阵。正交矩阵的各行（列）向量都是标准正交向量。</p>
+<h4 id="8-4-3-标准正交基"><a href="#8-4-3-标准正交基" class="headerlink" title="8.4.3 标准正交基"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id78">8.4.3 标准正交基</a></h4><p>如果向量空间的一组基互相正交，且基向量的长度都是1，则这样的基称为标准正交基。这个概念在支持向量机、主成分分解算法中非常重要。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E6%A0%87%E5%87%86%E6%AD%A3%E4%BA%A4%E5%9F%BA.png" alt="_images/标准正交基.png"></p>
+<h4 id="8-4-4-正交投影（TODO）"><a href="#8-4-4-正交投影（TODO）" class="headerlink" title="8.4.4 正交投影（TODO）"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id79">8.4.4 正交投影（TODO）</a></h4><h2 id="9-叉积"><a href="#9-叉积" class="headerlink" title="9. 叉积"></a>9. 叉积</h2><p>两个二维向量的叉积的大小，等于这两个向量构成的平行四边形的面积。同时，这个面积也是有正负号的，如果向量 v 叉积 w，v 在 w 的左侧，则面积为负。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8F%89%E7%A7%AF1.png" alt="_images/叉积1.png"> <img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8F%89%E7%A7%AF2.png" alt="_images/叉积2.png"></p>
+<p>要计算叉积的值，就要用到之前行列式的概念。记得行列式表示的是线性变换后单位区域的面积缩放的比例，在这里就相当于我们要计算的平行四边形的面积，因为这个平行四边形就来源于面积为1的单位正方形。</p>
+<p>两个三维向量的叉积，结果是一个新的三维向量。这个向量必然与原来两个向量确定的平面垂直，并且其长度与这两个向量张成的平行四边形的面积相同。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%8F%89%E7%A7%AF3.png" alt="_images/叉积3.png"></p>
+<h2 id="10-基变换-Basis-Change"><a href="#10-基变换-Basis-Change" class="headerlink" title="10. 基变换 Basis Change"></a>10. 基变换 Basis Change</h2><p>在直角坐标系中，任何一个向量（点的坐标）都可以看做是对 <strong>基向量 i 和 j 缩放的标量</strong> 。将这两个经过缩放的基向量相加就是坐标要描述的向量。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A21.png" alt="_images/基变换1.png"></p>
+<p>这个视角下，任何一个向量的第一个数字可以看成是（从原点）向右的运动，第二个数字是向上的运动，而这个事实取决于与我们选择的基向量 i [1,0] 和 j [0,1]，因为这两个向量是我们进行缩放的对象。那么如果我们使用不同的基向量会怎么样？</p>
+<p>假设现在我们有了另一组基向量 b1 和 b2，在我们的原始坐标系中，我们用 [2,1] 来描述 b1，[-1,1] 来描述 b2.</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A22.png" alt="_images/基变换2.png"></p>
+<p>于是，虽然我们关注的是空间中的同一个向量，但在原坐标系中它是[3,2]，在新的坐标系中就是另一个表达了（不过记住，无论是什么坐标系，原点是同一个）。这就好比两种语言描述同一个事物。</p>
+<p>那么如何在不同的坐标系之间互相转化呢？</p>
+<p>先看如何把新坐标系中向量的坐标转换为老坐标系。很简单，用新坐标系中的向量的坐标，数乘用老坐标系表达的新基向量，就得到了在老坐标系中向量的对应表达（黄色向量）。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A23.png" alt="_images/基变换3.png"></p>
+<p>注意，这就是一个矩阵与向量的乘法。我们之前已经从几何上理解了，矩阵向量乘法相当于对向量做了一个特定的线性变换，这里也可以同样的方法去理解。这个由新坐标系中的基向量构成的矩阵可以看成是一个线性变换，它将老坐标系中的基向量 i 和 j 转换成新基向量 [2,1] [-1,1].</p>
+<p>同理，已知老坐标系中向量的坐标，如何知道它在新坐标系中的坐标呢？很简单，逆向变换一下，用老坐标系中向量的坐标，乘以新的基向量构成的矩阵的逆就行了。</p>
+<p>用两张图总结一下不同坐标系之间的相互转化：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A24.png" alt="_images/基变换4.png"> <img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A25.png" alt="_images/基变换5.png"></p>
+<p>上面我们讲了如何在不同坐标系上表达同一个向量，那么如何用类似的道理来描述不同坐标系上的同一个线性变换（矩阵）呢？例如，我们知道在老坐标系中，逆时针90度的旋转可以用矩阵：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A26.png" alt="_images/基变换6.png"></p>
+<p>来表示。注意，我们的原始基向量 i[1,0] 和 j[0,1] 经过90度旋转后变成了 [0,1] 和 [-1,0], 组合在一起就变成了我们的变换矩阵。那么如何在新坐标系中描述这个变换呢？</p>
+<p>首先从新坐标系的任一向量出发，例如 [-1,2]。</p>
+<p>然后，对其施加基变换，即乘以新的基向量构成的矩阵。这时得到了该向量在老坐标系中的表达。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A27.png" alt="_images/基变换7.png"></p>
+<p>接着，把结果左乘我们老坐标系下的线性变换矩阵，这时就得到了变换后的向量，不过是用老的坐标系描述的。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A28.png" alt="_images/基变换8.png"></p>
+<p>最后，左乘新基向量变换矩阵的的逆，大功告成！它接收任何用新坐标系描述的向量，输出用新坐标系描述的变换后的向量。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%9F%BA%E5%8F%98%E6%8D%A29.png" alt="_images/基变换9.png"></p>
+<p>总的来说，每当我们遇到这样一个式子 (A^{-1} MA) 的时候，这就暗示着一种数学上的转移作用，中间的矩阵代表着一种所见的变换，另外两个矩阵代表着转移作用，也就是视角(坐标系基)的变化，矩阵的乘积还是代表着同一种变换，只不过是从其他人的视角来看的。</p>
+<p>这里也引出了 <strong>相似矩阵</strong> 的概念。对于同一个线性变换，不同基下的矩阵，称为相似矩阵。对于相似矩阵，它们的特征值、行列式和矩阵的迹都一致，因此这几个参数就是描述一个线性变换的关键，因为它们都和矩阵选择的基无关。</p>
+<h2 id="11-特征向量、特征值、特征分解与奇异值分解"><a href="#11-特征向量、特征值、特征分解与奇异值分解" class="headerlink" title="11. 特征向量、特征值、特征分解与奇异值分解"></a>11. 特征向量、特征值、特征分解与奇异值分解</h2><h3 id="11-1-特征向量与特征值"><a href="#11-1-特征向量与特征值" class="headerlink" title="11.1 特征向量与特征值"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id83">11.1 特征向量与特征值</a></h3><p>与行列式类似，矩阵的特征值和特征向量提供了一个新的角度来“描述”矩阵的特性。一个矩阵代表的线性变换通常可以由其特征值和特征向量完全描述。</p>
+<p>对于矩阵向量乘积，有两种情况：大多数情况下,向量经过线性变换后离开了其所张成的空间（该向量所在直线所有向量的集合），但是一些特殊的向量留在他们张成的空间中。意味着 <strong>矩阵对它的作用仅仅是拉伸或者压缩</strong> ，矩阵对于该向量的乘法作用只相当于一个标量。用数学的语言说，就是这样：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F2.png" alt="_images/特征向量2.png"></p>
+<p>以下图中的变换矩阵为例，基向量 i 在该矩阵的变换作用后，仅仅是沿着x轴方向拉伸了3倍，而 i 张成的空间是x轴，因此向量 i 经过线性变换后仍然留在其张成的空间中。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F1.png" alt="_images/特征向量1.png"></p>
+<p>这些特殊的向量就叫做特征向量，伸缩变换的比例叫做特征值。注意，特征值可以有正有负，对应着方向。此外，也容易看到，和基向量 i 共线的任意向量也和 i 一样，在矩阵的作用后只是拉伸为了原来的3倍，因此任意向量 ci 也是该矩阵的特征向量，具有相同的特征值。对于一个矩阵来说，相同特征值的特征向量的集合称之为 <strong>特征空间</strong> 。</p>
+<p>二维线性变换矩阵不一定有特征向量，例如旋转90度就没有（严格的说是没有实数特征向量），因为每个向量都发生了旋转离开了它张成的空间。</p>
+<p>另外，关于特征值，还有几个有趣的定理：</p>
+<ul>
+<li>矩阵的行列式等于其特征值的乘积</li>
+<li>矩阵的迹（对角线元素之和）等于其特征值之和</li>
+</ul>
+<h3 id="11-2-矩阵的对角化与特征分解"><a href="#11-2-矩阵的对角化与特征分解" class="headerlink" title="11.2 矩阵的对角化与特征分解"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id84">11.2 矩阵的对角化与特征分解</a></h3><p>对角矩阵，即除了对角线之外所有元素都为0的矩阵，结构简单，计算行列式、矩阵的幂和逆都相当迅速。对角矩阵的行列式就是对角线上所有元素的乘积，其k次幂就是把对角线上每个元素进行k次幂计算，其逆矩阵就是对角线上每个元素的倒数（除了0之外）。因此，如果能把一个矩阵转换到对角矩阵的形式，会使得计算方便很多。</p>
+<p>在知晓了特征向量和特征值的概念之后，如果转换矩阵的基向量恰好是特征向量的话，则将坐标系变换后（基向量变换后），对应的变换矩阵将变成一个对角矩阵，对角元是特征向量对应的特征值。如果变换矩阵有足够的特征向量来张成初始矩阵的列向量所张成的空间的话，那么就我们就可以通过变换坐标系，把原矩阵变成对角矩阵。</p>
+<p>在上一节已经讲到可以通过 (A^{-1} MA) 这种形式将一个线性变换矩阵转移到另一个坐标系的表达，那么矩阵对角化就是将原矩阵转变到特征基的坐标系。</p>
+<p>例如，我们已经知道原始变换矩阵：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F4.png" alt="_images/特征向量4.png"></p>
+<p>对应的两个特征向量是 [1,0] [-1,1]，那么经过</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F5.png" alt="_images/特征向量5.png"></p>
+<p>形式的变换，产生的新矩阵必然是对角矩阵，对角元对应特征值。要计算上述变换矩阵的100次幂，可以先将它转换到特征基，在那个新坐标系中计算100次幂，然后再转换回老的坐标系中。</p>
+<p>因此，如果存在一个矩阵 A 使得原始矩阵 M 经过 (D &#x3D; A^{-1} MA) 变换后能得到对角矩阵 D，则称 M 是可对角化的，换言之 M 是可对角化的等同于存在一个相似矩阵并且是对角矩阵。</p>
+<p>对矩阵进行 <strong>特征分解</strong> 就是把原矩阵分解为其特征值与特征向量的矩阵之积的形式，即 (M &#x3D; ADA^{-1}) ，也就是上述对角化的逆运算，本质上说的是一件事。D 是对角矩阵，对角线上的元素就是 M 的特征值，D 的维数就是 M 有多少个线性无关的特征向量（即 A 的秩）。</p>
+<p>只有方阵才能进行特征分解。对于对称矩阵来说，它总是可对角化的。但如果不是对称矩阵，则不能保证可以转化为对角矩阵。那么对于非方阵，能不能进行类似的分解操作呢？ 答案是奇异值分解，我们在下一章中介绍。</p>
+<h3 id="11-3-奇异值分解-Singular-Value-Decomposition"><a href="#11-3-奇异值分解-Singular-Value-Decomposition" class="headerlink" title="11.3 奇异值分解 Singular Value Decomposition"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id85">11.3 奇异值分解 Singular Value Decomposition</a></h3><p>奇异值分解，简写 SVD，被认为是线性代数中最基本最核心的理论，因为它能作用于任何矩阵。在现实应用中，奇异值被广泛使用在图像压缩、推荐系统、主成份分析算法中。关于如何理解奇异值分解，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22237507#answer-16927902">知乎问答</a> 已经有了非常精彩的解释，想要具体了解的同学可以移步学习。这里只简单记录一下其核心内容。</p>
+<p><strong>奇异值分解</strong></p>
+<p>假设 A 是一个 m*n 的矩阵，则如下的分解称为奇异值分解。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC1.png" alt="_images/奇异值1.png"></p>
+<p>其中，U 是 m<em>m 的由一组标准正交基组成的矩阵，V 也是 n</em>n 的标准正交基组成的矩阵，Σ 矩阵在非对角线上的元素均为0，对角线上的元素&gt;&#x3D;0，代表奇异值。如果 Σ 矩阵的行多于列（即 m&gt;n）则多余的行全部以0填充，反之亦然。</p>
+<p>从数学形式上讲，奇异值分解将一个矩阵代表的线性变换，拆解成了三部分：首先，进行一次基的变化（VT），然后进行缩放，并可能在维度上有增减（Σ），最后，进行第二次基变化（U）。更简单的讲，奇异值分解将任何矩阵变化分为了三部分：将坐标系旋转，再拉伸，最后再旋转到最终位置。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC5.png" alt="_images/奇异值5.png"></p>
+<p>从几何角度来理解，奇异值分解的涵义是，对于任何一个矩阵，首先找到一组两两正交的单位向量，使得矩阵作用于该单位向量组后得到的新向量仍然是两两正交的，奇异值的涵义就是变换后新向量各自对应的长度。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC2.png" alt="_images/奇异值2.png"></p>
+<p>以上图为例，VT 起了一个基变化的作用，将原本的正交基向量（左上图的 v1 v2）转变到了新的正交基向量（左下图的 e1 e2）。注意由于 V 是由标准正交基组成的正交矩阵，因此 VT 就等于 V 的逆。</p>
+<p>然后，奇异值矩阵 Σ 将新坐标系进行缩放（缩放比例即奇异值），并且可能增加或降低维度。图中的例子从二维变化到了三维。（右下图）</p>
+<p>最后，U 又做了一次基变换，并且变化后的基向量扩充到了三维空间。（右上图）</p>
+<p><strong>低秩近似</strong></p>
+<p>奇异值分解的一大用途就是低秩近似，即将原来的大的矩阵用若干个小的简单的秩一矩阵的和来替代，从而大大减小消耗的存储量。方法即把原来的 SVD 分解表达式：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC3.png" alt="_images/奇异值3.png"></p>
+<p>拆写为：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E5%A5%87%E5%BC%82%E5%80%BC4.png" alt="_images/奇异值4.png"></p>
+<p>其中 r&lt;k，每一项的系数 σ 即奇异值，且奇异值的大小依次降低，每一项的 uv 即一个单位向量与另一个单位向量的转置的乘积，结果就是一个秩一矩阵。保留前 r 个含有较大奇异值的项，就能得到原始矩阵的很好的近似。</p>
+<p>注意，一个列向量和一个行向量（即uv）的积一定是个秩一矩阵，因为所得到的一个 m*n 矩阵的每一行（列）都是原行向量（列向量）的线性组合，因此该矩阵的秩一定为一。</p>
+<h2 id="12-抽象的向量空间-Vector-Space"><a href="#12-抽象的向量空间-Vector-Space" class="headerlink" title="12. 抽象的向量空间 Vector Space"></a>12. 抽象的向量空间 Vector Space</h2><p>我们再来回顾下什么是向量？是一个有方向的箭头，亦或是有序的列表？还是这两种观点是更深层次抽象事物的体现？</p>
+<p>可以先讨论一个新的事物——函数，某种意义上函数也是一种向量，例如两个函数f(x)和g(x)，可以将两个函数相加可以得到新函数(f+g)(x),这和向量对应坐标的相加类似,只不过某种程度来说，函数有无数多个坐标要相加。类似的，对于函数与另一个数的数乘 (2f)(x)&#x3D;2f(x)，也和向量对应坐标的数乘类似。</p>
+<p>因此，以空间箭头为背景考虑的线性代数的概念和解决问题的手段也可以应用于函数，例如对函数的线性变换。那么怎么理解一个函数的变换是线性的呢？满足以下两条性质即可。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2%E6%80%A7%E8%B4%A8.png" alt="_images/线性变换性质.png"></p>
+<p>例如，对函数求导就是线性运算，因为它满足以上两条性质。两个函数相加再求导数，与分别求导数再相加的结果一致。乘法也一样。</p>
+<p><strong>矩阵求导</strong></p>
+<p>如果用矩阵来描述求导，该如何做？以多项式函数为例，我们可以把每一项的系数作为向量，把x的多次项作为基函数（基向量），而因为多项式的次数可以任意高，所以基函数集合也是无穷大的。因此，把一个多项式函数表达为矩阵就像下面这样：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC1.png" alt="_images/矩阵求导1.png"></p>
+<p>对一个多项式函数求导，就能表达成下面这样：</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC2.png" alt="_images/矩阵求导2.png"></p>
+<p>所以，函数求导和矩阵向量乘法这两件事，看似毫无关联，其实完全可以理解成同一件事。实际上，线性代数中关于向量的很多概念，在应用于函数时有直接的类比。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC3.png" alt="_images/矩阵求导3.png"></p>
+<p>所以，其实数学中有很多类似向量的事物，只要处理的对象集有数乘和相加的概念，无论是箭头、数组还是函数，线性代数中所有关于向量、线性变换和其它的概念都适用它。这些类似向量的事物，箭头也好函数也好，它们构成的集合叫做“向量空间”。</p>
+<h3 id="12-1-向量空间的公理"><a href="#12-1-向量空间的公理" class="headerlink" title="12.1 向量空间的公理"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id87">12.1 向量空间的公理</a></h3><p>定义 令 V 为一个定义了加法和标量乘法运算的集合，这意味着对 V 中的每一对元素 v 和 w，可唯一对应于 V 中的一个元素 v+w，且对每一个 V 中的元素 x 和每一个标量 α，可唯一对应于 V 中的元素 αx 。如果集合 V 连同其上的加法和标量乘法运算满足以下的八条公理，则称为 <strong>向量空间</strong> 。</p>
+<p><img src="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/_images/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC4.png" alt="_images/矩阵求导4.png"></p>
+<p>上边的八项公理，是建立一系列向量加法和数乘必须遵守的规则。因此如果要让所有建立好的理论和概念适用于一个向量空间，那么它必须满足上述的公理。</p>
+<p>向量的具体形式并不重要，只要它们相加和数乘的概念遵守向量加法和数乘的八项规则，它就是向量。</p>
+<h3 id="12-2-向量子空间"><a href="#12-2-向量子空间" class="headerlink" title="12.2 向量子空间"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id88">12.2 向量子空间</a></h3><p>如果有一个向量空间 V 的一个非空子集合 S，且 S 对于加法和标量乘法都封闭，则称 S 是 V 的 <strong>子空间</strong> 。以 S 为全集的数学系统连同从向量空间 V 继承的两个运算满足向量空间定义中的所有条件。向量空间的任何一个子空间仍然是向量空间。</p>
+<h3 id="12-3-仿射子空间"><a href="#12-3-仿射子空间" class="headerlink" title="12.3 仿射子空间"></a><a target="_blank" rel="noopener" href="https://machine-learning-from-scratch.readthedocs.io/zh-cn/latest/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0.html#id89">12.3 仿射子空间</a></h3><p>仿射子空间是一种更一般的空间。对于向量空间V中的一个非空的子集S，如果满足下面的条件，它就被称为仿射子空间：</p>
+<p>集合S &#x3D; { u - v | u, v是S中的向量｝， S是V的一个线性子空间。</p>
+<p>我们说，向量空间的向量可以理解为点与原点之间的位移和方向，而仿射空间的点则表示点与点的距离。仿射变换，就是在线性变换的基础上再加上一个平移变换。线性变换表达的是各种例如拉伸、旋转等变换，前提是变换前后原点不变，而仿射变换则是在此基础上进行平移。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/07/12/Log-of-Summer/"
+      title="暑假日志"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        暑假日志
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/06/11/Note-of-Local-Address-Net-Security2/"
+      title="内网安全攻防笔记(下)"
+     >
+
+    <p class="title-text">
+      
+        内网安全攻防笔记(下)
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({
+          el: '#vcomments',
+          appId: "j9YBSIHTlRyfuvPQqY50ARfV-gzGzoHsz",
+          appKey: "Q7s9zRzne9zaSVrroDR2wgO8"
+      })
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
