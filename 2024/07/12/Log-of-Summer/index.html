@@ -32,7 +32,7 @@
 <meta property="og:description" content="Opening今天开始就正式是2024年的暑假了，各种意义上，都是很关键的一个半月。 自从打算考研以来，我几乎没有一刻为准备考研本身和承担与之对应的风险而难受或者后悔，研究极限或者积分也好，背单词也好，看数据结构的算法题也好，都非常有趣。而且在漫长的人生中，能让你有如此充分的理由，安心研究数学或者计算机基础的机会实际上非常少。虽然超出预料，但决定考研是我正确的选择。 但几个月以来，我还是被自我所囚">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-13T15:51:50.326Z">
+<meta property="article:modified_time" content="2024-07-14T15:06:28.326Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -380,7 +380,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 词 
+            2.1k 词 
           </div>
         </div>
         
@@ -462,6 +462,13 @@
 <li><p>拐点：左右两侧凹凸性相反的点。拐点判断与极值点完全类似，但是所有导数高一阶，例如可导时，该点的二阶导f’’(a)&#x3D;0是必要条件。</p>
 </li>
 </ul>
+<ol start="3">
+<li>极限运算法则的结论：如果A&#x2F;B的极限存在，且B为0，则A的极限也是0</li>
+</ol>
+<p>这个结论很好用，但要注意<strong>“精度”</strong>。</p>
+<blockquote>
+<p>在与0比较时，例如比较二阶导是否为0还是大于或者小于0，不能直接看作极限为0，而应该考虑0+与0-。</p>
+</blockquote>
 <h2 id="线代-1"><a href="#线代-1" class="headerlink" title="线代"></a>线代</h2><h3 id="660矩阵填空题"><a href="#660矩阵填空题" class="headerlink" title="660矩阵填空题"></a>660矩阵填空题</h3><p>同样是概念为主的计算题。</p>
 <ol>
 <li><blockquote>
@@ -493,6 +500,33 @@
 <ol start="3">
 <li>数量级：十亿是10^9</li>
 </ol>
+<h1 id="7-14"><a href="#7-14" class="headerlink" title="7.14"></a>7.14</h1><p>想了想，因为打算早点做真题，所以放缓了660高数部分的进度，先推进线代和概率论。</p>
+<h2 id="线代-2"><a href="#线代-2" class="headerlink" title="线代"></a>线代</h2><h3 id="复习全书矩阵部分-660矩阵填空题"><a href="#复习全书矩阵部分-660矩阵填空题" class="headerlink" title="复习全书矩阵部分 + 660矩阵填空题"></a>复习全书<em>矩阵</em>部分 + 660矩阵填空题</h3><p>矩阵是线代的基础，概念和定理很多，整体难度中等：</p>
+<ul>
+<li><p>矩阵乘法相关概念：矩阵的初等变换 等价于 乘一个初等矩阵，其中行变换为左乘对应的矩阵，列变换为右乘对应矩阵。（注意：将某一行乘k加到另一行，就是左乘一个以E为基础的初等矩阵）</p>
+</li>
+<li><p>乘法与行向量&#x2F;列向量：可以将矩阵乘分解为行向量乘列向量，对A和C都是由向量线性组合组成的矩阵乘法，如<code>AB=C</code>，可以用这种分解矩阵的方法很快求出B。</p>
+</li>
+<li><p>矩阵方程求解：使用初等<strong>行</strong>变换法更高效，对<code>AX=B</code>直接用(A|B)-&gt;(E|X)；对<code>XA=B</code>，先两边求转置化为<code>A^T * X^T=B^T</code>的形式再用初等行变换求出X^T，最后再转置得到X。</p>
+</li>
+<li><p>矩阵求逆：这个也是初等行变换，需要注意的只有两点：</p>
+<blockquote>
+<ol>
+<li>只能使用初等行变换，不能用列变换</li>
+<li>有<em>数乘</em>时，一定记住提出来后最后要乘上，否则会出错————还是矩阵等价与相等的问题，初等变换中只有数乘会改变矩阵的大小，但行列式出现交换时要变号。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>伴随矩阵：实际上就一个公式最重要：<code>A*A = |A|E</code>，求逆矩阵那个是两边乘A^-1。</p>
+<ol>
+<li>需要注意的是求伴随矩阵时，将所有的代数余子式写好后，需要加一步“转置”才是伴随矩阵。</li>
+<li>|A*| &#x3D; |A|^(n-1)也很常用</li>
+</ol>
+</li>
+</ul>
+<h2 id="高数-2"><a href="#高数-2" class="headerlink" title="高数"></a>高数</h2><h3 id="660微分选择题-1"><a href="#660微分选择题-1" class="headerlink" title="660微分选择题"></a>660微分选择题</h3><p>做了三道全对，主要是昨天的概念题目</p>
+<h2 id="数据结构-2"><a href="#数据结构-2" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="栈与队列的应用"><a href="#栈与队列的应用" class="headerlink" title="栈与队列的应用"></a>栈与队列的应用</h3><p>比较简单</p>
+<h3 id="矩阵与数组"><a href="#矩阵与数组" class="headerlink" title="矩阵与数组"></a>矩阵与数组</h3><p>这部分比较像找规律题，不难但需要花功夫，主要需要注意的是矩阵与数组从0还是从1开始，以及上三角矩阵与下三角矩阵计算的不同。</p>
 
         
       </div>
