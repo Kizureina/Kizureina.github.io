@@ -33,7 +33,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.news.cn/mrdx/2024-07/16/1310781758_17211026652161n.jpg">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-16T15:14:22.019Z">
+<meta property="article:modified_time" content="2024-07-18T15:13:31.947Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -382,7 +382,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.7k 词 
+            5.5k 词 
           </div>
         </div>
         
@@ -640,6 +640,165 @@
 <li>树的分支数 &#x3D; 所有结点的<em>度</em>数（例如度为3的树，3 * a_3 + 2 * a_2 + 1 * a_1）</li>
 </ul>
 <p>通过上面两个可以建立子式，经常用来求叶子节点(即度为0的节点)数量。</p>
+<h1 id="7-17"><a href="#7-17" class="headerlink" title="7.17"></a>7.17</h1><p>今天下午下暴雨，晚上摸鱼了，所以专业课今日进度缩减。</p>
+<h2 id="高数-5"><a href="#高数-5" class="headerlink" title="高数"></a>高数</h2><h3 id="660积分选择题"><a href="#660积分选择题" class="headerlink" title="660积分选择题"></a>660积分选择题</h3><p>5&#x2F;8 依然是积分的基本概念，难度不大但正确率一般。</p>
+<p>要注意的主要是：</p>
+<ul>
+<li><p>定积分不等式：m &lt;&#x3D; 定积分 &lt;&#x3D; M 要注意使用条件：只能在<em>函数始终大于等于0</em>时用</p>
+</li>
+<li><p>可积的线性性质：不可积函数f(x) + 可积函数g(x) &#x3D; k(x) 此时k(x)一定<strong>不可积</strong>。</p>
+<ul>
+<li><p>很容易使用<strong>反证法</strong>证明：如果k(x)可积，则有k(x) - g(x) &#x3D; f(x)可积，与条件矛盾，故不可积。</p>
+</li>
+<li><blockquote>
+<p>这种反证法的思路对考察连续、可导、可微、可积等概念的线性组合很常用。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>不该犯的错误：tan(x)在x趋近于pi&#x2F;2和-pi&#x2F;2时，函数值趋近于无穷，即便tan(pi&#x2F;2)定义为其他固定的点【例如(pi&#x2F;2,1)】，tan(x)在该区间上仍然是“无界函数”。</p>
+</li>
+<li><p>比较大小时，对积分区域上有正有负的定积分，可以先拆为正区间积分和负区间积分，再用换元等化为同样的正区间再比较</p>
+<ul>
+<li><p>例如对sin(x)的[0, 2pi]区间，可以转为[0, pi]和[pi, 2pi]，再用换元<code>x = pi+t</code>&#x2F;<code>t = x - pi</code>，此时第二个负区间上被积分函数就转为了[0, pi]上的-sin(t)。</p>
+</li>
+<li><blockquote>
+<p>!!注意：对三角相关的函数，<code>x = pi + t</code>或者<code>x = pi - t</code>的换元很常用.!!</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="线代-5"><a href="#线代-5" class="headerlink" title="线代"></a>线代</h2><h3 id="复习全书特征值与特征向量部分-660特征值填空题"><a href="#复习全书特征值与特征向量部分-660特征值填空题" class="headerlink" title="复习全书特征值与特征向量部分 + 660特征值填空题"></a>复习全书<em>特征值与特征向量</em>部分 + 660特征值填空题</h3><p>这部分概念也很多，但整体不太复杂，主要是与前面内容的联系或者对矩阵方程求解的考察。</p>
+<ul>
+<li><p>特征值和特征向量的两种求法：</p>
+<ol>
+<li>特征值和特征向量的基本定义：<code>Aα = λα</code></li>
+<li><ul>
+<li>列方程求解特征值：<code>| A - λE | = 0</code>，即求行列式&#x2F;特征方程组，关键是化简行列式</li>
+<li>将特征值代入求矩阵方程：<code>(A - λE)X = 0</code>求解X的极大无关组&#x2F;基础解系，再线性表示就得的特征向量。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>特征值与特征向量的性质：</p>
+<ul>
+<li><p>|A| &#x3D; 所有特征值求乘积</p>
+</li>
+<li><blockquote>
+<p>若A的特征值为a，则f(A)的特征值为f(a)：例如(A+E)的特征值为a + 1</p>
+</blockquote>
+</li>
+<li><p>若A可逆，伴随矩阵A*的特征值为|A|&#x2F;a，逆矩阵特征值为1&#x2F;a</p>
+</li>
+<li><p>若A可逆，则A、A*、A^-1的特征向量相同</p>
+</li>
+<li><blockquote>
+<p>如果n阶矩阵的秩<code>r(A) ≤ 1</code>，此时矩阵的特征值有n-1个0（或矩阵特征值中的0为n-1阶），还有一个矩阵对角线求和（即矩阵的<em>迹</em>）。</p>
+<p>这个性质可以直接求出矩阵的特征值，可以简化特征值计算。</p>
+<p>对秩不是1的矩阵，如果通过线性变换或者加减E转为r&#x3D;1，也可以用</p>
+</blockquote>
+</li>
+<li><p>不同特征值对应的特征向量互相线性相关。</p>
+</li>
+</ul>
+</li>
+<li><p>特征值判断矩阵可逆：当0不是矩阵的特征值时，矩阵一定可逆</p>
+</li>
+<li><p>实对称矩阵：</p>
+<ul>
+<li>所有元素为实数。对称矩阵条件：<code>Q^T = Q</code></li>
+<li>所有不同特征值对应的特征向量彼此<em>正交</em>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="操作系统-debut"><a href="#操作系统-debut" class="headerlink" title="操作系统(debut)"></a>操作系统(debut)</h2><h3 id="计算机系统概述"><a href="#计算机系统概述" class="headerlink" title="计算机系统概述"></a>计算机系统概述</h3><p>并发与并行：</p>
+<ul>
+<li>并发：一段时间内同时执行（通过进程实现）</li>
+<li>并行：同一时刻同时执行</li>
+</ul>
+<p>操作系统的最基本特征：并发与共享</p>
+<h1 id="7-18"><a href="#7-18" class="headerlink" title="7.18"></a>7.18</h1><h2 id="高数-6"><a href="#高数-6" class="headerlink" title="高数"></a>高数</h2><h3 id="660积分选择题-1"><a href="#660积分选择题-1" class="headerlink" title="660积分选择题"></a>660积分选择题</h3><p>5&#x2F;7，实际上还有歪打正着的题目，整体难度较高</p>
+<ul>
+<li><blockquote>
+<p>最关键的要点：求定积分时，当被积分函数出现类似sqrt(cos(x)^2)的绝对值【例如|cos(x)|】，一定要注意积分区间内函数正负</p>
+<p>尤其对[0,pi]区间上的三角函数<strong>绝对值</strong>，需要将积分区间拆开求解【好吧，和昨天的注意是类似的】，但尤其对换元后出现|sinx|或者|cosx|时一定要判断正负。</p>
+</blockquote>
+</li>
+<li><p>牛顿-莱布尼茨公式的使用条件：函数在区间上<em>连续</em>，且有界</p>
+<ul>
+<li>注意：无界函数不能求定积分，例如1&#x2F;x在[-1,1]上定积分就不存在。</li>
+</ul>
+</li>
+</ul>
+<h2 id="线代-6"><a href="#线代-6" class="headerlink" title="线代"></a>线代</h2><h3 id="复习全书矩阵相似、相似对角化和实对称矩阵部分-660矩阵相似填空题"><a href="#复习全书矩阵相似、相似对角化和实对称矩阵部分-660矩阵相似填空题" class="headerlink" title="复习全书矩阵相似、相似对角化和实对称矩阵部分 + 660矩阵相似填空题"></a>复习全书<em>矩阵相似、相似对角化和实对称矩阵</em>部分 + 660矩阵相似填空题</h3><p>这部分概念也较多，尤其是计算实对称矩阵的计算量非常大，但题型比较固定：</p>
+<ul>
+<li><p>A与B矩阵相似的条件：</p>
+<ol>
+<li>存在可逆矩阵P，有<code>PAP^-1 = B</code>，此时A与B相似</li>
+<li>上面条件的变形：<code>PA = BP</code></li>
+<li>A与B的特征值相同，且均可对角化</li>
+</ol>
+</li>
+<li><p>相似的性质：</p>
+<ul>
+<li><p>|A| &#x3D; |B|</p>
+</li>
+<li><p>r(A) &#x3D; r(B)</p>
+</li>
+<li><p>特征值相同</p>
+</li>
+<li><p>f(A)与f(B)也相似</p>
+</li>
+<li><p>特征向量的关系：<code>β = P^-1 * α</code></p>
+</li>
+<li><blockquote>
+<p>注意：相似时有很多性质，但<em>不能</em>直接代入矩阵方程求解</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>相似对角化：当矩阵与对角矩阵相似时，称为可“相似对角化”，此时特征值很容易求出</p>
+</li>
+<li><p>可对角化的条件：</p>
+<ul>
+<li>特征向量：所有特征向量线性无关</li>
+<li>特征值：<ul>
+<li>若矩阵的特征值各不相同（实际上等价于特征向量都线性无关）, 则矩阵一定可以对角化</li>
+<li>若矩阵存在特征值λ的重数大于1，则需要重数<code>k &gt;= n - r(A-λE)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>实对称矩阵：</p>
+<ul>
+<li><p>元素均为实数</p>
+</li>
+<li><p>实对称矩阵均可以“对角化”</p>
+</li>
+<li><blockquote>
+<p>不同特征值对应的特征向量均<em>正交</em>（因此如果三阶矩阵特征值均不相同，知道两个特征向量，可以用向量正交求出第三个【有一个自由变量很正常，如果不理解可以翻看前面线性方程组基础解系的部分】）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>实对称矩阵的正交化：即给出矩阵A，求正交矩阵P，使A与P^-1*A*P为对角矩阵</p>
+<ul>
+<li>先求A的特征值，再代入|A-λE|得到特征向量</li>
+<li>当有多于一重的特征值时，对同一特征值的特征向量使用施密特正交化，一般只需要用<code>b2 = a2 - (a1*a2)/(a1*a1) * a1</code></li>
+<li>对得到的正交向量单位化，合并在一起就得到对应的正交矩阵。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>这部分660的题目都比较简单（虽然正确率只能说一般。。。），再次复习时要多做几遍全书的题目，很有技巧。</p>
+<h2 id="数据结构-5"><a href="#数据结构-5" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="二叉树与树的遍历"><a href="#二叉树与树的遍历" class="headerlink" title="二叉树与树的遍历"></a>二叉树与树的遍历</h3><p>整体难度不大，仔细算就不会出错。</p>
+<ul>
+<li>n个节点的二叉树用双链表存储时，有n-1个空域指针</li>
+<li>n个节点的二叉树用三指针链表（多了一个指向父节点）存储时，有n个空域指针</li>
+<li>n个节点的三叉树用三指针链表存储时，有2n-1个空域指针</li>
+</ul>
+<p>树的递归遍历很直观，非递归实现则比较复杂。</p>
 
         
       </div>
