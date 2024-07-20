@@ -32,8 +32,9 @@
 <meta property="og:description" content="Opening今天开始就正式是2024年的暑假了，各种意义上，都是很关键的一个半月。 自从打算考研以来，我几乎没有一刻为准备考研本身和承担与之对应的风险而难受或者后悔，研究极限或者积分也好，背单词也好，看数据结构的算法题也好，都非常有趣。而且在漫长的人生中，能让你有如此充分的理由，安心研究数学或者计算机基础的机会实际上非常少。虽然超出预料，但决定考研是我正确的选择。 但几个月以来，我还是被自我所囚">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.news.cn/mrdx/2024-07/16/1310781758_17211026652161n.jpg">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240720231158658.png">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-19T15:12:44.287Z">
+<meta property="article:modified_time" content="2024-07-20T15:12:09.690Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -382,7 +383,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.4k 词 
+            7k 词 
           </div>
         </div>
         
@@ -859,6 +860,52 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">TreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    TreeNode * left;</span><br><span class="line">    TreeNode * right;</span><br><span class="line">    TreeNode * parent;</span><br><span class="line">&#125;TreeNode;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre_order</span><span class="params">(TreeNode * Node)</span><span class="comment">//前序遍历递归算法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Node == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, Node-&gt;data);<span class="comment">//显示节点数据，可以更改为其他操作。在前面</span></span><br><span class="line">    <span class="built_in">pre_order</span>(Node-&gt;left);</span><br><span class="line">    <span class="built_in">pre_order</span>(Node-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">middle_order</span><span class="params">(TreeNode *Node)</span><span class="comment">//中序遍历递归算法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Node == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">middle_order</span>(Node-&gt;left);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, Node-&gt;data);<span class="comment">//在中间</span></span><br><span class="line">    <span class="built_in">middle_order</span>(Node-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">post_order</span><span class="params">(TreeNode *Node)</span><span class="comment">//后序遍历递归算法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Node == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>; </span><br><span class="line">    <span class="built_in">post_order</span>(Node-&gt;left);</span><br><span class="line">    <span class="built_in">post_order</span>(Node-&gt;right);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, Node-&gt;data);<span class="comment">//在最后</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>但具体分析起来却有点复杂，尤其是判断通用结论时不太直观，要特别注意。</p>
+<h1 id="7-20"><a href="#7-20" class="headerlink" title="7.20"></a>7.20</h1><p>今天是回归天空之日~~~</p>
+<hr>
+<p>今天开始做660的概率论，线代先放一下。</p>
+<h2 id="数据结构-7"><a href="#数据结构-7" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="树的遍历与森林-x2F-树的二叉化"><a href="#树的遍历与森林-x2F-树的二叉化" class="headerlink" title="树的遍历与森林&#x2F;树的二叉化"></a>树的遍历与森林&#x2F;树的二叉化</h3><p>难度较大，但认真做就不会错，所以正确率很不错。</p>
+<p>要注意的概念：</p>
+<ul>
+<li><strong>后序</strong>线索二叉树的<em>后继</em>遍历：只有这个线索二叉树遍历是不能仅靠线索指针就能实现的，而是需要用栈</li>
+<li>森林&#x2F;树与二叉树的转换：转换前的叶子节点数 &#x3D;&#x3D; 转换后没有左孩子&#x2F;左指针域为空的节点数</li>
+<li>计算节点数时，如果直接推导比较困难可以用特殊值</li>
+<li>给出为某种普遍的条件的时，要考虑对应的各种情况：例如u节点是v节点的父节点的父节点，<em>此时u和v的关系有四种情况</em>：即固定u，则u的孩子有左右两种，对应孩子的孩子又有左右两种，需要每种都考虑。</li>
+</ul>
+<h2 id="高数-8"><a href="#高数-8" class="headerlink" title="高数"></a>高数</h2><h3 id="660反常积分选择题"><a href="#660反常积分选择题" class="headerlink" title="660反常积分选择题"></a>660反常积分选择题</h3><p>2&#x2F;3 这部分也有点难度，而且与级数有点相关。</p>
+<ul>
+<li><p>可积与原函数存在没有关系：</p>
+<ul>
+<li>可积只需要满足有界+有限个间断点即可，但原函数存在需要函数“连续”</li>
+<li>或者说存在第一类间断点的函数一定不存在原函数（反过来说求出的原函数在该点处不可导）</li>
+</ul>
+</li>
+<li><blockquote>
+<p>反常识：R趋近于正无穷时，在[-R,R]区间上对sin(x)的定积分为0；但[-∞,+∞]区间上对sin(x)的定积分不存在（因为没有固定值，是发散的）。</p>
+</blockquote>
+<ul>
+<li>因此对实数区间上的奇函数f(x)，其在负无穷到正无穷的定积分可能不为0（函数也可能<em>发散</em>）</li>
+</ul>
+</li>
+<li><p>对给定区间上的反常积分，可以分区间讨论大小放缩，另外当[1,∞]上发散时，[0,∞]也一定发散。</p>
+</li>
+<li><p>发散 + 发散 &#x3D; 一定发散（级数时则不同：发散 + 发散 &#x3D; 不一定）</p>
+</li>
+<li><p>收敛 + 发散 &#x3D; 发散</p>
+</li>
+</ul>
+<p>几个常见错误：</p>
+<p><img src="/../images/image-20240720231158658.png" alt="image-20240720231158658"></p>
+<h2 id="概率论-1"><a href="#概率论-1" class="headerlink" title="概率论"></a>概率论</h2><h3 id="全书概率论第一章-660填空题"><a href="#全书概率论第一章-660填空题" class="headerlink" title="全书概率论第一章 + 660填空题"></a>全书概率论第一章 + 660填空题</h3><p>7&#x2F;9，整体比较简单，需要注意的不多：</p>
+<ul>
+<li><blockquote>
+<p>事件运算其实有点复杂，最好画个文氏图看看更直观。</p>
+</blockquote>
+</li>
+<li><p>事件独立时才有P(AB) &#x3D; P(A)P(B)，否则不能计算</p>
+</li>
+<li><p>根据给出的条件灵活用德摩根律转化和事件与积事件</p>
+</li>
+</ul>
 
         
       </div>
