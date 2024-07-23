@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://www.news.cn/mrdx/2024-07/16/1310781758_17211026652161n.jpg">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240720231158658.png">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-22T15:31:58.757Z">
+<meta property="article:modified_time" content="2024-07-23T15:30:17.168Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -383,7 +383,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            8.5k 词 
+            8.9k 词 
           </div>
         </div>
         
@@ -1055,6 +1055,53 @@
 <ul>
 <li>最大连通分量数，即最大独立节点数时，此时需要用尽可能少的节点数用完所有边 </li>
 <li>&#x3D;&#x3D;&gt; 所有边组成一个<strong>完全图</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="7-23"><a href="#7-23" class="headerlink" title="7.23"></a>7.23</h1><h2 id="高数-11"><a href="#高数-11" class="headerlink" title="高数"></a>高数</h2><h3 id="660微分方程选择题-1"><a href="#660微分方程选择题-1" class="headerlink" title="660微分方程选择题"></a>660微分方程选择题</h3><p>难度还好，题目比较常规</p>
+<ul>
+<li><p>计算出特解的形式时，如果给出的是具体的微分方程，或者参数限定了“范围”，需要再将特解形式代入</p>
+<ul>
+<li><p>判断是否会有不同形式，例如可能由Axsinx+Bxcosx变成Bxcos(x)</p>
+</li>
+<li><blockquote>
+<p>归根结底，求特解时还是代回去验证效率最高，而且不容易出错。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>伯努利方程：非齐次的自由项包含y^n，此时设z&#x3D;y^(1-n)，求z’和y’</p>
+</li>
+<li><p>欧拉方程：y’’x^2 + y’x + y …，设e^t&#x3D;x，求y’’和y’代入</p>
+</li>
+</ul>
+<h2 id="概率论-4"><a href="#概率论-4" class="headerlink" title="概率论"></a>概率论</h2><h3 id="全书概率论第三章-660二元随机变量的分布填空题"><a href="#全书概率论第三章-660二元随机变量的分布填空题" class="headerlink" title="全书概率论第三章 + 660二元随机变量的分布填空题"></a>全书概率论第三章 + 660二元随机变量的分布填空题</h3><p>今天结束二维随机变量，整体难度不高：</p>
+<ul>
+<li><p>正态分布的线性组合，仍然是正态分布，且具体参数为<code>aX+bY ~ N(au1 + bu2, a^2 * σ1^2 + b^2 * σ2^2 + a*b*σ1*σ2*ρ)</code></p>
+<ul>
+<li>ρ为两个变量的相关系数，独立&#x2F;不相关时为0</li>
+</ul>
+</li>
+<li><p>二维<strong>连续型</strong>随机变量的概率密度：卷积方程</p>
+<ul>
+<li>Z&#x3D;X+Y：f_Z(x) &#x3D; 在[-∞, +∞]对f(x,z-x)求x的积分</li>
+<li>独立时：f_Z(x) &#x3D; 在[-∞, +∞]对f_X(x)*f_Y(z-x)求x的积分</li>
+</ul>
+</li>
+<li><p>对连续型与离散型的组合求分布函数：</p>
+<ul>
+<li>直接写成P{X&lt;&#x3D;x}再推导</li>
+<li>多用全概率公式直接简化离散型</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据结构-10"><a href="#数据结构-10" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h3><p>难度一般，主要是为后面的遍历做基础：</p>
+<ul>
+<li>四种存储方式：<ul>
+<li>邻接矩阵</li>
+<li>邻接表</li>
+<li>十字链表（只用于有向图）</li>
+<li>邻接多表(用于解决邻接表存储无向图浪费一倍空间，因此只用于无向图)</li>
 </ul>
 </li>
 </ul>
