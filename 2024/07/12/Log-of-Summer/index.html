@@ -33,8 +33,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.news.cn/mrdx/2024-07/16/1310781758_17211026652161n.jpg">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240720231158658.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240724232314541.png">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-23T15:30:17.168Z">
+<meta property="article:modified_time" content="2024-07-24T15:37:57.181Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -383,7 +384,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            8.9k 词 
+            9.5k 词 
           </div>
         </div>
         
@@ -1104,6 +1105,76 @@
 <li>邻接多表(用于解决邻接表存储无向图浪费一倍空间，因此只用于无向图)</li>
 </ul>
 </li>
+</ul>
+<h1 id="7-24"><a href="#7-24" class="headerlink" title="7.24"></a>7.24</h1><h2 id="高数-12"><a href="#高数-12" class="headerlink" title="高数"></a>高数</h2><h3 id="660多元微分选择题"><a href="#660多元微分选择题" class="headerlink" title="660多元微分选择题"></a>660多元微分选择题</h3><p>本以为自己对这部分概念有理解，结果还是太嫩了，错了一半还多：</p>
+<ul>
+<li><p>多元函数极限：</p>
+<ul>
+<li>设y&#x3D;kx或者y&#x3D;x^2，代入判断是否为定值，有定值则极限<em>可能</em>存在，反之则一定不存在</li>
+<li>注意：如果代入一个发现存在，<strong>仍然不一定极限存在</strong>，可能与其他值不同</li>
+</ul>
+</li>
+<li><p>多元函数连续性与偏导数存在没有关系</p>
+<ul>
+<li>一元函数可导必连续，连续不一定可导</li>
+</ul>
+</li>
+<li><p>多元函数用定义求偏导：</p>
+<ul>
+<li><p>例如点(x_0,y_0)处对x的偏导数：<br>  $$<br>  \lim_{ h\to 0} \frac{f(h,y_0) - f(x_0,y_0)}{h}<br>  $$</p>
+</li>
+<li><p>注意：这个式子中分子第一项是(x_0,y_0)以外f(x,y)表达式，可以将y_0直接代入，第二项是具体值</p>
+</li>
+</ul>
+</li>
+<li><p>判断偏导数连续性：</p>
+<ul>
+<li><p>偏导数存在时，判断可微需要看偏导数在某点是否连续：</p>
+</li>
+<li><p>$$<br>  \lim_{(x,y)\to (x_0,y_0)} f_x’(x,y) &#x3D; \lim_{(x,y)\to (x_0,y_0)} f’_x(x,y_0) &#x3D; f’_x(x_0,y_0)<br>  $$</p>
+</li>
+<li><blockquote>
+<p><strong>先代后求</strong>：对定点求x的偏导时，可以直接将y_0的值代入f(x,y)，再求x的导数会方便很多</p>
+</blockquote>
+</li>
+<li><p>注意：有个反直观而且容易忽略的地方：</p>
+</li>
+<li><p>$$<br>  \lim_{x\to x_0} f’_x(x,y_0) &#x3D; f’_x(x_0,y_0)<br>  $$</p>
+</li>
+<li><p>上面这个式子不能等价于<strong>偏导数在(x_0,y_0)处连续</strong>，是必要条件不是充分条件。</p>
+</li>
+</ul>
+</li>
+<li><p>多元函数可微性判断：</p>
+<ul>
+<li><p>必要条件：偏导数都存在</p>
+</li>
+<li><p>充分条件：偏导数连续</p>
+</li>
+<li><blockquote>
+<p>注意：偏导数连续一定可微，但可微不一定有偏导连续&#x2F;偏导不连续不一定不可微</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>定义&#x2F;公式法判断可微性：</p>
+<ul>
+<li><p>$$<br>  \lim_{(x,y)\to (x_0,y_0)} \frac{f(x,y) - f(x_0,y_0) - [f_x’(x_0,y_0) + f_y’(x_0,y_0)]}{\sqrt{x^2+y^2}} &#x3D; 0<br>  $$</p>
+</li>
+<li><p><img src="/../images/image-20240724232314541.png" alt="image-20240724232314541"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据结构-11"><a href="#数据结构-11" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="图的遍历-amp-图的应用"><a href="#图的遍历-amp-图的应用" class="headerlink" title="图的遍历 &amp; 图的应用"></a>图的遍历 &amp; 图的应用</h3><p>BFS与DFS，整体考察难度一般</p>
+<p>需要注意存储为邻接矩阵和邻接表的BFS&#x2F;DFS时间复杂度不同。</p>
+<h2 id="概率论-5"><a href="#概率论-5" class="headerlink" title="概率论"></a>概率论</h2><h3 id="全书概率论第四章-660随机变量的数字特征填空题"><a href="#全书概率论第四章-660随机变量的数字特征填空题" class="headerlink" title="全书概率论第四章 + 660随机变量的数字特征填空题"></a>全书概率论第四章 + 660随机变量的数字特征填空题</h3><p>这部分也不简单，而且与前面的各种分布结合密切。</p>
+<ul>
+<li>相互独立的随机变量，其函数也都独立<ul>
+<li>尤其是X和Y独立，则X^2和Y^2独立，对计算E(X^2*Y^2)很重要</li>
+</ul>
+</li>
+<li>E(X+Y)^2和[E(X+Y)]^2写法不同，要注意</li>
 </ul>
 
         
