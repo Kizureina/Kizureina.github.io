@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240720231158658.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240724232314541.png">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-26T15:07:30.027Z">
+<meta property="article:modified_time" content="2024-07-29T15:59:42.416Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -384,7 +384,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            10k 词 
+            11k 词 
           </div>
         </div>
         
@@ -1248,6 +1248,130 @@
 <h2 id="概率论-7"><a href="#概率论-7" class="headerlink" title="概率论"></a>概率论</h2><h3 id="全书概率论第四章-660随机变量的数字特征填空题-2"><a href="#全书概率论第四章-660随机变量的数字特征填空题-2" class="headerlink" title="全书概率论第四章 + 660随机变量的数字特征填空题"></a>全书概率论第四章 + 660随机变量的数字特征填空题</h3><p>这部分内容很多，题目也不简答，因此多做了点全书的题目。</p>
 <ul>
 <li>注意：对独立同分布累加型的随机变量，最好将其化为一边固定对应另一个累加</li>
+</ul>
+<h1 id="7-27"><a href="#7-27" class="headerlink" title="7.27"></a>7.27</h1><p>决定了，就考西工大网安了。</p>
+<p>考计组+计网，而且大部分是硬件相关的研究方向，感觉不赖。</p>
+<h2 id="高数-15"><a href="#高数-15" class="headerlink" title="高数"></a>高数</h2><h3 id="660多元微分选择题-3"><a href="#660多元微分选择题-3" class="headerlink" title="660多元微分选择题"></a>660多元微分选择题</h3><p>认真做下来又全对了，还是基础为王啊。</p>
+<ul>
+<li><p>定积分性质：</p>
+<ul>
+<li>对f(x,t)求dt的定积分，再对x求偏导 &#x3D; 对f(x,t)求x偏导，再对dt做定积分</li>
+<li>实际上就是原函数求导得函数，和导函数求积分得原函数次序可以交换</li>
+</ul>
+</li>
+<li><p>多元微分计算混合偏导时，要记住f_x’仍然是二元函数</p>
+</li>
+<li><p>二元函数极值只可能在三种：</p>
+<ol>
+<li><p>f_x’&#x3D;f_y’&#x3D;0的驻点</p>
+</li>
+<li><p>偏导数不存在</p>
+</li>
+<li><blockquote>
+<p>条件极值时：边界</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>求条件极值边界上极值的两个方法：</p>
+<ul>
+<li><p>求出y&#x3D;g(x)，再代入f(x,y)求一元极值（最好用）</p>
+</li>
+<li><p>设L(x,y) &#x3D; f(x,y) + λg(x,y)</p>
+<ul>
+<li>L_x’ &#x3D; 0</li>
+<li>L_y’ &#x3D; 0</li>
+<li>L &#x3D; 0</li>
+</ul>
+<p>  即拉格朗日数乘法，比较麻烦。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="概率论-8"><a href="#概率论-8" class="headerlink" title="概率论"></a>概率论</h2><p>依旧做全书题目，还是要对随机变量<em>函数</em>的分布搞明白。</p>
+<h2 id="计网-debut"><a href="#计网-debut" class="headerlink" title="计网(debut)"></a>计网(debut)</h2><h3 id="第一章计算机网络体系结构"><a href="#第一章计算机网络体系结构" class="headerlink" title="第一章计算机网络体系结构"></a>第一章计算机网络体系结构</h3><p>不难，但概念要搞明白：</p>
+<ul>
+<li><p>速率：即传输数据的数量比时间，注意：单位是bit per second，即比特每秒，而不是字节每秒</p>
+</li>
+<li><p>时间延迟：发送时延 + 传播时延 + 存储转发&#x2F;处理时延 + 排队时延</p>
+<ul>
+<li><p>发送时延：或传输时延，即网卡发送速率导致的时间延迟：从第一个比特开始，到分组最后一个比特进入链路的时间。</p>
+<ul>
+<li><p>计算：分组长度&#x2F;发送速率</p>
+</li>
+<li><blockquote>
+<p>注意：计算发送时延时要注意分组一般是以字节B为单位，而速率是以比特b为单位，最后结果要乘8</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>传播时延：即数据在链路上传播所需的时间，一个比特从链路一端开始计时，到达链路终点时的时间。</p>
+<ul>
+<li>计算：信道长度&#x2F;电磁波在该链路上的传输速率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>为什么没有接收时延：因为发送时延与传播时延已经包含了完整流程里的接收部分。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="7-28"><a href="#7-28" class="headerlink" title="7.28"></a>7.28</h1><p>今天是成都少女偶像only，而且我还在成都邦邦群抽到了门票。</p>
+<p>所以摸鱼了。</p>
+<p>还蛮有趣的，同人也好 live也好</p>
+<h1 id="7-29"><a href="#7-29" class="headerlink" title="7.29"></a>7.29</h1><h2 id="高数-16"><a href="#高数-16" class="headerlink" title="高数"></a>高数</h2><h3 id="660多重积分选择题"><a href="#660多重积分选择题" class="headerlink" title="660多重积分选择题"></a>660多重积分选择题</h3><p>不难</p>
+<ul>
+<li>关键是<strong>对计算要有自信</strong>，发现复杂计算时不慌，相信能求出来</li>
+</ul>
+<h2 id="概率论-9"><a href="#概率论-9" class="headerlink" title="概率论"></a>概率论</h2><h3 id="全书概率论第五章-660大数定理填空题"><a href="#全书概率论第五章-660大数定理填空题" class="headerlink" title="全书概率论第五章 + 660大数定理填空题"></a>全书概率论第五章 + 660大数定理填空题</h3><p>整体难度不大，主要还是考察前面的知识：</p>
+<ul>
+<li>切比雪夫不等式：<code>P&#123;|X - E(X)| &gt;= e&#125; &lt;= D(X)/e^2</code><ul>
+<li>注意大于号、小于号与绝对值，以及该不等式只能求X+u与X-u范围内</li>
+</ul>
+</li>
+<li>大数定理使用的要求：<ul>
+<li>存在分布函数</li>
+<li>存在期望和方差</li>
+</ul>
+</li>
+<li>辛锌大数定理：<ul>
+<li>对独立同分布的n个随机变量序列，当n趋近于无穷时，X_n的算术平均值<strong>依概率收敛于</strong>X_i的数学期望。</li>
+</ul>
+</li>
+<li>中心极限定理：<ul>
+<li>X_n是独立的随机变量序列，期望于与方差都存在，X_n序列极限分布为正态分布</li>
+<li>X_n ~ N(n*E(X), n*D(X))</li>
+</ul>
+</li>
+<li>拉普拉斯定理：<ul>
+<li>正态分布是二项分布的极限分布，当n足够大时，可以用正态分布近似计算二项分布。</li>
+<li>X_n ~ N(np, np(1-p))</li>
+</ul>
+</li>
+</ul>
+<h2 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h2><h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>这部分简直是通信原理，主要是两个公式：</p>
+<ul>
+<li><p>奈氏准则：不考虑噪声，信道的不被码间误差模糊数据的最大传输速率：</p>
+<ul>
+<li><p>$$<br>  2<em>W</em>log_2{V}<br>  $$</p>
+</li>
+<li><p>W为信道带宽&#x2F;传输速率，V为一个码元包含的信息量&#x2F;不同单元数(例如4bit为16种不同单元)</p>
+</li>
+</ul>
+</li>
+<li><p>香农公式：考虑噪声的信道最大传输速率：</p>
+<ul>
+<li><p>$$<br>  W*log_2{(1+S&#x2F;N)}<br>  $$</p>
+</li>
+<li><p>S&#x2F;N为信噪比，有两种写法：</p>
+<ul>
+<li>信号功率&#x2F;噪声功率的比值</li>
+<li>dB分贝，例如30分贝，则比值写法为10^3</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         
