@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240720231158658.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240724232314541.png">
 <meta property="article:published_time" content="2024-07-12T14:22:40.000Z">
-<meta property="article:modified_time" content="2024-07-30T15:27:22.089Z">
+<meta property="article:modified_time" content="2024-07-31T14:57:49.451Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -384,7 +384,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            12k 词 
+            13k 词 
           </div>
         </div>
         
@@ -1423,6 +1423,68 @@
 </ul>
 <p>很容易根据定义推导。</p>
 <p>关键要注意总体期望u与样本均值X-，以及总体方差σ^2与样本方差S^2的区别。</p>
+<h1 id="7-31"><a href="#7-31" class="headerlink" title="7.31"></a>7.31</h1><p>七月的最后一天~七月之if</p>
+<h2 id="高数-18"><a href="#高数-18" class="headerlink" title="高数"></a>高数</h2><p>终于做完了660的1阶高数所有题目，差不多花了一个月。</p>
+<p>题目总体不难，越做越顺，有空再把错题刷一遍，今天唯一错的一道：</p>
+<ul>
+<li>对二重积分，可以把内层函数用g(x)表示，然后分部求</li>
+<li>这种分部积分有什么用呢？<ul>
+<li>如果内层函数是变上限积分&#x2F;或者导数很容易求的函数，用分部能化出dg(x)</li>
+</ul>
+</li>
+</ul>
+<p>之后再做2阶，级数和三重积分&#x2F;线面积分大部分都忘了</p>
+<h2 id="计网-2"><a href="#计网-2" class="headerlink" title="计网"></a>计网</h2><h3 id="链路层"><a href="#链路层" class="headerlink" title="链路层"></a>链路层</h3><h4 id="链路层概述-组帧-差错校验"><a href="#链路层概述-组帧-差错校验" class="headerlink" title="链路层概述 + 组帧 + 差错校验"></a>链路层概述 + 组帧 + 差错校验</h4><p>整体难度不大，要注意的只有CRC和海明校验码：</p>
+<ul>
+<li>注意“码距”的概念：即某种编码中，两个编码之间最少不同的bit数。<ul>
+<li>纠错n bit：码距为2n + 1</li>
+<li>校验n bit：码距为n + 1</li>
+</ul>
+</li>
+</ul>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>这部分的滑动窗口算法是重点。</p>
+<p>话说我记得之前学是在传输层才用的，对了有个区别：</p>
+<ul>
+<li>OSI模型中<strong>链路层</strong>要保证传输可靠</li>
+<li>TCP&#x2F;IP中<strong>传输层</strong>保证可靠</li>
+</ul>
+<p>对滑动窗口算法的模拟关键也是对流水线的理解。</p>
+<p>另外RTT的两倍的单向传播时延。</p>
+<h2 id="计组-4"><a href="#计组-4" class="headerlink" title="计组"></a>计组</h2><h3 id="浮点数存储与运算"><a href="#浮点数存储与运算" class="headerlink" title="浮点数存储与运算"></a>浮点数存储与运算</h3><p>主要是IEEE743规范的内容，很有难度，尤其与前面原码&#x2F;补码&#x2F;移码很相关。</p>
+<ul>
+<li><p>注意1开头的机器码，对原码&#x2F;补码&#x2F;浮点数均为负数，原码是符号位</p>
+</li>
+<li><p>浮点数存储有三部分组成：1位符号位 + 8位阶码 + 23位尾数</p>
+<ul>
+<li>阶码规定数据表示范围</li>
+<li>尾数规定数据精度</li>
+</ul>
+</li>
+<li><blockquote>
+<p>反直觉：int转为float可能有精度损失，因为长度均为32位，但float表示范围大很多，因此精度更低。</p>
+</blockquote>
+</li>
+<li><p>浮点数各部分数据：</p>
+<ul>
+<li><p>阶码由<strong>移码</strong>表示：即真值 + 127（注意不是128，不能直接删去最高位的1）</p>
+</li>
+<li><p>尾数由<strong>原码</strong>表示：因为符号位固定了</p>
+</li>
+<li><p>注意：为多存储一位尾数（提高精度），浮点数要做“规格化”，即化为1.XXXX而不是0.XXXX的形式</p>
+<ul>
+<li><p>有符号位时是把0&#x2F;1.0XXXXX化为0&#x2F;1.1XXXXXX</p>
+</li>
+<li><p>为此需要做左移&#x2F;右移（或者说左归右归）</p>
+</li>
+<li><blockquote>
+<p>注意：左移右移的概念与定点数一样，是<em>数</em>移动几位，而小数点不动</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
         
       </div>
