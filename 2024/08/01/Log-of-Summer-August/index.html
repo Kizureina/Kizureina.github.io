@@ -27,13 +27,13 @@
   <meta name="description" content="8.1八月开始，漫无止境的八月~ 计网链路层结束流量控制和滑动窗口，开始介质访问控制部分。 整体难度一般，需要注意：  窗口大小 &#x3D; 发送窗口 + 接收窗口 &lt;&#x3D; 2^n（用于帧编码的比特数）  发送窗口最大为2^n - 1  即窗口大小为k时，最多有k-1个帧已发送且未确认 如果有k个帧已发送，则对接收方来说，可能出现两种0-k帧： 0-k帧全部到达，并已经被确认 0-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="暑假日志(八月)">
-<meta property="og:url" content="https://kizureina.github.io/2024/08/12/Log-of-Summer-August/index.html">
+<meta property="og:url" content="https://kizureina.github.io/2024/08/01/Log-of-Summer-August/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
 <meta property="og:description" content="8.1八月开始，漫无止境的八月~ 计网链路层结束流量控制和滑动窗口，开始介质访问控制部分。 整体难度一般，需要注意：  窗口大小 &#x3D; 发送窗口 + 接收窗口 &lt;&#x3D; 2^n（用于帧编码的比特数）  发送窗口最大为2^n - 1  即窗口大小为k时，最多有k-1个帧已发送且未确认 如果有k个帧已发送，则对接收方来说，可能出现两种0-k帧： 0-k帧全部到达，并已经被确认 0-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240801230259304.png">
-<meta property="article:published_time" content="2024-08-12T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-01T15:08:30.559Z">
+<meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
+<meta property="article:modified_time" content="2024-08-03T15:19:14.110Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -325,7 +325,7 @@
       <ul>
         
           <li>
-            <a href="/2024/08/12/Log-of-Summer-August/">暑假日志(八月)</a>
+            <a href="/2024/08/01/Log-of-Summer-August/">暑假日志(八月)</a>
           </li>
         
           <li>
@@ -376,7 +376,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-12T14:39:40.000Z" itemprop="datePublished">2024-08-12</time>
+  <time class="dt-published" datetime="2024-08-01T14:39:40.000Z" itemprop="datePublished">2024-08-01</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -387,7 +387,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            845 词 
+            2.5k 词 
           </div>
         </div>
         
@@ -506,6 +506,271 @@
 </ul>
 </li>
 </ul>
+<h1 id="8-2"><a href="#8-2" class="headerlink" title="8.2"></a>8.2</h1><h2 id="线代-1"><a href="#线代-1" class="headerlink" title="线代"></a>线代</h2><p>伴随矩阵最重要的性质：<code>A^-1 = A* / |A|</code></p>
+<p>可以推出：<code>AA^-1 = AA*/|A| = E</code></p>
+<p>其他判断是否等价的式子大多都可以用两边取行列式判断，大多数都是|A| &#x3D; 0但不能推出A&#x3D;0。</p>
+<ul>
+<li>行列式中有成比例的向量时，行列式为0</li>
+</ul>
+<h2 id="概率论-1"><a href="#概率论-1" class="headerlink" title="概率论"></a>概率论</h2><p>今天终于结束概率论的660填空题和基本复习了。</p>
+<h3 id="置信区间"><a href="#置信区间" class="headerlink" title="置信区间"></a>置信区间</h3><p>用上面的假设估计给出总体分布的参数估计时，可以用无偏&#x2F;有效性等性质衡量，但不能量化。</p>
+<p>置信区间就是对估计可信程度的量化：</p>
+<p><code>P&#123; λ(X1,X2...) &lt; λ &lt; λ(X1,X2...) &#125; = 1 - α</code></p>
+<p>其中这个区间λ的取值区间称为置信区间，α称为置信度。</p>
+<p>实际上计算时，通常是将给出的估计值代入总体分布，再化简到只有参数的形式，用具体分布的上分位数计算</p>
+<h3 id="假设检验-1"><a href="#假设检验-1" class="headerlink" title="假设检验"></a>假设检验</h3><p>这部分是对置信区间理论的延申。</p>
+<p>当给出的不是确定的估计值，而是某种论断时，如何根据样本判断这种对总体的论断是否可靠。</p>
+<p>需要用<strong>拒绝域</strong>的概念，即将给出的论断称为H0，其对立的论断为H1.</p>
+<p>此时有两种错误应该避免：</p>
+<ul>
+<li>第一类错误：H0为真，且落入拒绝域内被拒绝</li>
+<li>第二类错误：H0为假，且未落入拒绝域被接收</li>
+</ul>
+<p>对第一类错误尽量减少的推断称为显著性检验。</p>
+<p>实际上就是将H0成立，然后代入：</p>
+<p><code>P&#123;|X - u| &lt;= k&#125; = α</code></p>
+<p>那么如何确定k呢？实际上知道X的分布，已经由α确定，即z_α&#x2F;2，X的上分位数。</p>
+<p>化简即可求出拒绝域。</p>
+<blockquote>
+<p>注意置信区间与拒绝域显著性水平写法不同，一个是1-α，一个是α</p>
+</blockquote>
+<h2 id="计网-1"><a href="#计网-1" class="headerlink" title="计网"></a>计网</h2><p>结束介质访问控制(MAC)层。</p>
+<p>这部分内容很多，而且有点复杂，但搞明白就不难。</p>
+<p>另外408的计网在这部分的考察明显比本科课程要难，除了以太网的CSMA&#x2F;CD协议，还对无线网802.11协议的CSMA&#x2F;CA有不低的要求，王道书上写得不多，要看谢书才能理解。</p>
+<ul>
+<li><p>争用期和最小帧是CSMA&#x2F;CD协议的核心</p>
+<ul>
+<li><p>争用期：有两种写法：</p>
+<ul>
+<li>2t，即传播时延的两倍</li>
+<li>发送最下帧长的传输时延</li>
+</ul>
+</li>
+<li><p>最小帧长度：与争用期紧密联系</p>
+<ul>
+<li><p>以太网中规定最下帧长度为64字节，即512bit</p>
+</li>
+<li><p>此时争用期与以太网传输速率有关</p>
+<ul>
+<li><p>对10Base-T（即10Mb&#x2F;s）：</p>
+</li>
+<li><p>&#96;&#96;&#96;latex<br>  2t &#x3D; (64*8&#x2F;10^(7)) &#x3D; 51.2us</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 100Mb/s：</span><br><span class="line"></span><br><span class="line">- ```latex</span><br><span class="line">	2t = (64*8/10^(8)) = 5.12us</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="计组-1"><a href="#计组-1" class="headerlink" title="计组"></a>计组</h2><p>终于搞定了第二章，老实说比想象的难太多。</p>
+<p>尤其是浮点数部分，但好在搞明白之后，做题正确率还是很高的。</p>
+<ul>
+<li>浮点数表示范围：<ul>
+<li>最大正数：<ul>
+<li>最大阶码：阶码不能全1，因此最大值为1111 1110，因为是移码，即254-127 &#x3D; 127</li>
+<li>最大尾数：尾数可以全1，1.1111…1 &#x3D; 2 - 0.0000….1 &#x3D; 2 - 2^-23</li>
+<li><code>2^127 * (2 - 2^-23) = 2^128 - 2^104</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其他特殊值：</p>
+<ol>
+<li>零。若 <code>指数</code> 为 <code>0</code>，<code>小数部分</code> 也为 <code>0</code>，则该数为 <code>±0</code>。</li>
+<li>无穷。若 <code>指数</code> 为 <code>2^e-1</code>，<code>小数部分</code> 为 <code>0</code>，则该数为 <code>±∞</code>。</li>
+<li>非数。若 <code>指数</code> 为 <code>2^e-1</code>，<code>小数部分</code> 非 <code>0</code>，则该数为 <code>NaN</code>。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>指数</th>
+<th>小数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>零</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>非规约形式</td>
+<td>0</td>
+<td>大于 0 小于 1</td>
+</tr>
+<tr>
+<td>规约形式</td>
+<td>1 到 2^e-2</td>
+<td>大于等于 1 小于 2</td>
+</tr>
+<tr>
+<td>无穷</td>
+<td>2^e-1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>2^e-1</td>
+<td>非 0</td>
+</tr>
+</tbody></table>
+<p>可以看到除了 NaN，从上至下，数值的 <code>绝对值</code> 和对应 <code>指数</code> 都是越来越大的。下面以 32 位单精度浮点数 <code>符号位（ 1 位）+ 指数域（ 8 位）+ 尾数域（ 23 位）</code> 为例，直观介绍其在计算机中的存储。下表中，最大最小均指 <code>绝对值</code>，符号位的 <code>*</code> 表示 <code>可正可负</code>，正为 0，负为 1。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>符号位</th>
+<th>实际指数</th>
+<th>偏移指数</th>
+<th>指数域</th>
+<th>尾数域</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>*</td>
+<td>0</td>
+<td>127</td>
+<td>低 7 位为 1</td>
+<td>全 0</td>
+<td>±1.0</td>
+</tr>
+<tr>
+<td>零</td>
+<td>*</td>
+<td>-127（保留）</td>
+<td>0</td>
+<td>全 0</td>
+<td>全 0</td>
+<td>±0.0</td>
+</tr>
+<tr>
+<td>最小非规约数</td>
+<td>*</td>
+<td>-126</td>
+<td>0（偏 126）</td>
+<td>全 0</td>
+<td>最低位为 1</td>
+<td>±2^(-126)*2^(-23)</td>
+</tr>
+<tr>
+<td>最大非规约数</td>
+<td>*</td>
+<td>-126</td>
+<td>0（偏 126）</td>
+<td>全 0</td>
+<td>全 1</td>
+<td>±2^(-126)*(1-2^(-23))</td>
+</tr>
+<tr>
+<td>最小规约数</td>
+<td>*</td>
+<td>-126</td>
+<td>1</td>
+<td>最低位为 1</td>
+<td>全 0</td>
+<td>±2^(-126)</td>
+</tr>
+<tr>
+<td>最大规约数</td>
+<td>*</td>
+<td>127</td>
+<td>254</td>
+<td>高 7 位为 1</td>
+<td>全 1</td>
+<td>±2^127*(2-2^(-23))</td>
+</tr>
+<tr>
+<td>无穷</td>
+<td>*</td>
+<td>128（保留）</td>
+<td>255</td>
+<td>全 1</td>
+<td>全 0</td>
+<td>±∞</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>*</td>
+<td>128（保留）</td>
+<td>255</td>
+<td>全 1</td>
+<td>非全 0</td>
+<td>非数</td>
+</tr>
+</tbody></table>
+<p>着重关注以下 4 点：</p>
+<ol>
+<li>实际指数的 -127 和 128 保留，分别表示 0 和 ∞&#x2F;NaN。</li>
+<li>规约数指数偏移量为 127，非规约减 1。</li>
+<li>最大非规约数尾数域 + 最小非规约数尾数域 &#x3D; 1</li>
+<li>最大规约数尾数域 + 最小非规约数尾数域 &#x3D; 2</li>
+</ol>
+<h4 id="浮点数加减"><a href="#浮点数加减" class="headerlink" title="浮点数加减"></a>浮点数加减</h4><p>五个过程：对阶、尾数求和、规格化、舍入和溢出判断</p>
+<p>具体细节参见这篇很赞的<a target="_blank" rel="noopener" href="https://logi.im/back-end/the-range-and-precision-of-ieee-754-basic-floating-point.html">博客</a>。</p>
+<h1 id="8-3"><a href="#8-3" class="headerlink" title="8.3"></a>8.3</h1><p>今天下暴雨，晚上就摸鱼了。</p>
+<h2 id="线代-2"><a href="#线代-2" class="headerlink" title="线代"></a>线代</h2><p>关于矩阵秩的部分性质很多，今天才搞明白。</p>
+<ul>
+<li><p>对m*n的非方阵A，<code>0 &lt;= r(A) &lt;= Min&#123;m, n&#125;</code></p>
+<ul>
+<li>即mn中较小的值，是矩阵秩的最大值</li>
+</ul>
+</li>
+<li><p>若有AB&#x3D;0，<code>r(A) + r(B) &lt;= n</code></p>
+<ul>
+<li>其中n为A的列数&#x2F;B的行数</li>
+<li>这个性质可以从矩阵方程的解推出，即写成Ax&#x3D;0，其中：<ul>
+<li>解向量个数s &#x3D; 未知数个数&#x2F;A列数n - r(A)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>r(AB) &lt;&#x3D; Min{r(A), r(B)}</p>
+<ul>
+<li>在A&#x2F;B可逆，或者其中一个矩阵满秩时取等号</li>
+</ul>
+</li>
+<li><p>r(A +&#x2F;- B) &lt;&#x3D; r(A) + r(B)</p>
+</li>
+<li><p>伴随矩阵A*:</p>
+<ul>
+<li>n   r(A) &#x3D; n</li>
+<li>1   r(A) &#x3D; n-1</li>
+<li>0   r(A) &lt; n-1</li>
+</ul>
+</li>
+</ul>
+<h2 id="概率论-2"><a href="#概率论-2" class="headerlink" title="概率论"></a>概率论</h2><p>又复习了下置信区间和检验估计，至少概率论有线代的掌握水平了。</p>
+<h2 id="高数"><a href="#高数" class="headerlink" title="高数"></a>高数</h2><h3 id="级数"><a href="#级数" class="headerlink" title="级数"></a>级数</h3><p>这部分有点难度的，但基本概念要搞明白：</p>
+<ul>
+<li><p>收敛级数 + 收敛 &#x3D; 收敛</p>
+<ul>
+<li>收敛 + 发散 &#x3D; 发散</li>
+<li>发散 + 发散 &#x3D; 不确定</li>
+</ul>
+</li>
+<li><p>对收敛级数，随便加括号，级数仍然收敛</p>
+<ul>
+<li>但如果加括号后的级数收敛，原级数不一定收敛</li>
+<li>例如1-1+1-1+1…<ul>
+<li>加括号时收敛于0</li>
+<li>不加括号时一直在-1和+1震荡，没有极限，是发散的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>对交错级数的敛散判断：</p>
+</blockquote>
+<ul>
+<li>对S_2n求n趋近于无穷，如果于S_2n-1相等，则级数收敛</li>
+</ul>
+</li>
+</ul>
+<p>主要是非常灵活，所以要仔细研究下才行，至少现在是没有能直接轻松做660的余裕的。</p>
 
         
       </div>
