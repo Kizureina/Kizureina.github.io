@@ -32,8 +32,9 @@
 <meta property="og:description" content="8.1八月开始，漫无止境的八月~ 计网链路层结束流量控制和滑动窗口，开始介质访问控制部分。 整体难度一般，需要注意：  窗口大小 &#x3D; 发送窗口 + 接收窗口 &lt;&#x3D; 2^n（用于帧编码的比特数）  发送窗口最大为2^n - 1  即窗口大小为k时，最多有k-1个帧已发送且未确认 如果有k个帧已发送，则对接收方来说，可能出现两种0-k帧： 0-k帧全部到达，并已经被确认 0-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240801230259304.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-04T15:53:37.555Z">
+<meta property="article:modified_time" content="2024-08-05T15:31:20.893Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -387,7 +388,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.9k 词 
+            3.6k 词 
           </div>
         </div>
         
@@ -811,6 +812,89 @@
 </li>
 </ul>
 <h2 id="计网-2"><a href="#计网-2" class="headerlink" title="计网"></a>计网</h2><h3 id="链路层-1"><a href="#链路层-1" class="headerlink" title="链路层"></a>链路层</h3><p>MAC帧的问题难度不大。</p>
+<h1 id="8-5"><a href="#8-5" class="headerlink" title="8.5"></a>8.5</h1><h2 id="线代-4"><a href="#线代-4" class="headerlink" title="线代"></a>线代</h2><p>依然是大部分虐菜，但对线性相关的概念仍然有新理解：</p>
+<ul>
+<li><p>n个线性无关的向量，最多能表示n个线性无关的向量</p>
+</li>
+<li><p>n个向量线性无关，则其任何子向量都线性无关</p>
+<ul>
+<li>但若线性相关，则可能有向量是彼此线性无关的</li>
+</ul>
+</li>
+<li><p>已知矩阵的最简型，求一个极大无关组时，注意结果是不唯一的</p>
+<ul>
+<li><blockquote>
+<p>除了常用的台脚对应的列向量是极大无关组以外，判断是否是无关可以将对应的向量组成“子式”判断是否结果为0，不为0时该矩阵子式对应的列向量线性无关</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="概率论-4"><a href="#概率论-4" class="headerlink" title="概率论"></a>概率论</h2><p>整体难度不大，但要注意：</p>
+<ul>
+<li><p>给出条件为概率时，不能推出事件的结论</p>
+</li>
+<li><p>有关与级数相关的计算：泊松分布的分布律为k^λ * e^-λ &#x2F; k!，求其和1，则可以推出：</p>
+<ul>
+<li><p>$$<br>  \sum_{k&#x3D;0}^{\infty}{\frac{x^k}{k !}} &#x3D; e^k<br>  $$</p>
+</li>
+<li><p><img src="/../images/image-20240805225415916.png" alt="image-20240805225415916"></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>k写成x就是常用的e^x的泰勒展开式。</p>
+<h2 id="高数-2"><a href="#高数-2" class="headerlink" title="高数"></a>高数</h2><p>今天大部分时间都花在<strong>级数</strong>上了，但好在是值得的，把大部分概念和题型搞明白了。</p>
+<ul>
+<li><p>求幂级数的收敛半径一般不难，就两种方法：直接比值求极限和开n次方</p>
+</li>
+<li><p>但求得收敛区间之后，如何判断端点是否收敛&#x2F;求收敛域就很麻烦了</p>
+<ul>
+<li><p>大部分需要用比较申敛，与p级数比较，或者直接求导判断单调性</p>
+<ul>
+<li><p>注意：判断单调性时，例如莱布尼茨定理用第一条要求判断递减，只需要n &gt; N时递减即可</p>
+</li>
+<li><blockquote>
+<p>因为级数删去有限项，不影响整体收敛半径和敛散性</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>对负数形式，大部分要拆成(-1)^n形式判断<strong>交错</strong>级数收敛</p>
+</li>
+</ul>
+</li>
+<li><p>求幂级数的和函数</p>
+<ul>
+<li><p>这个是难点，关键是要完全记住五个常用的麦克劳林公式，然后把给出形式转化为基本公式的函数即可</p>
+</li>
+<li><p>凑交错级数：x^n &#x3D; (-1) * (-1)^(n-1) * (-x)^n</p>
+<ul>
+<li><p>实际上是用(-x)^n凑出来(-1)^(2n-1)。</p>
+</li>
+<li><p>注意只能是x^n类型才可以凑，如果是2n-1这种必然是奇&#x2F;偶时不可能凑出来</p>
+</li>
+<li><p>这个最常用用于凑ln(x+1)的形式</p>
+<ul>
+<li><blockquote>
+<p>注意：ln(x+1)的展开式形式有一点特殊：求和是从1开始而不是从0</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>换元时要注意：</p>
+<ul>
+<li>最好凑乘法换元，而不是用加法<ul>
+<li>例如1&#x2F;(x+1)，凑1&#x2F;(ax + 1)而不是1&#x2F;[(x+a) + 1]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
         
       </div>
