@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240801230259304.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-05T15:31:20.893Z">
+<meta property="article:modified_time" content="2024-08-06T15:05:13.775Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -388,7 +388,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.6k 词 
+            4k 词 
           </div>
         </div>
         
@@ -895,6 +895,54 @@
 </ul>
 </li>
 </ul>
+<h1 id="8-6"><a href="#8-6" class="headerlink" title="8.6"></a>8.6</h1><h2 id="线代-5"><a href="#线代-5" class="headerlink" title="线代"></a>线代</h2><p>惯例先做线代，有复习了个有用的知识点：</p>
+<ul>
+<li>线性方程组的基础解系，是<em>解集</em>的极大无关组</li>
+<li>非齐次线性方程组的一大堆特解，线性组合之后仍然是解的充要条件：<ul>
+<li>所有参数之和为1</li>
+<li>线性组合之后是对应导出组特解的条件：所有参数之和为0</li>
+</ul>
+</li>
+</ul>
+<h2 id="高数-3"><a href="#高数-3" class="headerlink" title="高数"></a>高数</h2><p>终于搞定了级数这部分，确实不简单。</p>
+<p>关于幂函数，主要就两种：</p>
+<ol>
+<li>求级数的和函数</li>
+<li>求函数的展开式（麦克劳林或者泰勒）</li>
+</ol>
+<p>彼此相反，多数用到两种思路：</p>
+<ul>
+<li><p>直接凑常用的五种麦克劳林</p>
+</li>
+<li><p>用逐项求导和求积分级数不变</p>
+<ul>
+<li><blockquote>
+<p>还有一种，即可以求出S(x)的导数与函数本身的关系，此时可以用微分方程求解</p>
+<p>注意：实际上是用级数由无限性决定性质，所以有限项可以构造和凑</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>注意：这两种题目都要写收敛域，五种常用麦克劳林中，需要特别注意ln(x+1)是(-1,1]，1&#x2F;(x+1)是(-1,1)</p>
+<blockquote>
+<p>换元时，收敛域要改变：例如x^2代入ln(x+1)，此时收敛域变为[-1,1]</p>
+</blockquote>
+<h2 id="概率论-5"><a href="#概率论-5" class="headerlink" title="概率论"></a>概率论</h2><p>难度不大，但错了不少。</p>
+<p>分布函数的性质和要求：</p>
+<ol>
+<li>右连续<ul>
+<li>这个很重要，实际上是因为定义中P{X&lt;&#x3D;x}，即包含了X&#x3D;x的概率，所以需要用右连续F(x) &#x3D; F(x+0)</li>
+</ul>
+</li>
+<li>单调不减(即要么是常函数，要么递增)</li>
+<li>趋近于负无穷时为0，趋近于正无穷时为1</li>
+</ol>
+<p>概率密度的要求：</p>
+<ul>
+<li>在R上就定积分为1</li>
+</ul>
+<h2 id="计网-3"><a href="#计网-3" class="headerlink" title="计网"></a>计网</h2><h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>注意，判断某个地址是主机还是广播时，先看第一个地址位，判断是A&#x2F;B&#x2F;C，再找主机号，不能直接看最后一位</p>
 
         
       </div>
