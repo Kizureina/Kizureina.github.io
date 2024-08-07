@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240801230259304.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-06T15:05:13.775Z">
+<meta property="article:modified_time" content="2024-08-07T15:17:55.485Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -388,7 +388,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4k 词 
+            4.6k 词 
           </div>
         </div>
         
@@ -943,6 +943,76 @@
 <li>在R上就定积分为1</li>
 </ul>
 <h2 id="计网-3"><a href="#计网-3" class="headerlink" title="计网"></a>计网</h2><h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>注意，判断某个地址是主机还是广播时，先看第一个地址位，判断是A&#x2F;B&#x2F;C，再找主机号，不能直接看最后一位</p>
+<h1 id="8-7"><a href="#8-7" class="headerlink" title="8.7"></a>8.7</h1><h2 id="计网-4"><a href="#计网-4" class="headerlink" title="计网"></a>计网</h2><h3 id="网络层-1"><a href="#网络层-1" class="headerlink" title="网络层"></a>网络层</h3><p>继续做题，这部分题目是真多啊。</p>
+<h2 id="线代-6"><a href="#线代-6" class="headerlink" title="线代"></a>线代</h2><p>特征值和特征向量部分，意外的有点难度：</p>
+<ul>
+<li><p>特征值&#x2F;特征向量定义的两种用法：</p>
+<ul>
+<li>Aα &#x3D; λα</li>
+<li>|A-λE| &#x3D; 0</li>
+</ul>
+</li>
+<li><p>A的特征值为λ时，A的函数f(A)的特征值为f(λ)</p>
+<ul>
+<li><p>例如A^2的特征值为λ^2，且特征向量相同</p>
+</li>
+<li><blockquote>
+<p>但注意，此性质不能反推，即如果有A^2的特征值为λ^2，不能推出A的特征值为λ</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>判断两个矩阵相似：</p>
+<ol>
+<li>证明两个矩阵都可对角化<ul>
+<li>两种方法：1. 矩阵的特征值均不相同 2. 最大特征值重数 &#x3D; n - r(A - λE)</li>
+</ul>
+</li>
+<li>特征值完全相同</li>
+</ol>
+</li>
+<li><p>如何通过给出<strong>特征向量</strong>和<strong>特征值</strong>构造可逆矩阵P判断相似：</p>
+<ul>
+<li>当有<code>P^-1 * A * P = B 或者 AP = PB</code>时，如果B是对角矩阵：</li>
+<li>此时P由特征向量组成，B由特征值组成，且特征向量的k倍仍然是特征向量</li>
+<li>此时只需要特征向量与特征值是对应即可————例如特征值2对应α，在P和B的位置是相同的</li>
+</ul>
+</li>
+</ul>
+<h2 id="概率论-6"><a href="#概率论-6" class="headerlink" title="概率论"></a>概率论</h2><p>只有一个地方要注意：</p>
+<ul>
+<li>P{X&gt;x, Y&gt;y}不是1 - F(x,y)</li>
+<li>而是1 - F_X(x) - F_Y(y) + F(x,y)，画图就很容易看出来了，另外要记住边缘分布的定义</li>
+<li>F_X(x) &#x3D; F(x, +∞)</li>
+</ul>
+<h2 id="高数-4"><a href="#高数-4" class="headerlink" title="高数"></a>高数</h2><p>向量代数和空间几何，主要是三部分：</p>
+<ol>
+<li><p>确定平面方程：</p>
+<ul>
+<li><blockquote>
+<p>常用：一个点，两个不平行的向量，此时可以用<strong>混合积</strong>确定一个平面</p>
+</blockquote>
+<ul>
+<li>实际上就是三个点共面，列个行列式为0的方程解出来即可</li>
+</ul>
+</li>
+<li><p>找一个点和法向量</p>
+</li>
+</ul>
+</li>
+<li><p>确定直线方程：</p>
+<ul>
+<li>点 + 方向向量可以写对称式或者参数式</li>
+<li>常用：两个不平行平面的交线，此时问题就转化为了求平面方程</li>
+</ul>
+</li>
+<li><p>直线在平面上投影：</p>
+<ul>
+<li>一般是用两个平面的交线，即关键在如何解出一个垂直的平面</li>
+<li>如果给出了直线，但未直接给出点，可以带个x&#x3D;0或者y&#x3D;0构造一个已知的点。</li>
+</ul>
+</li>
+</ol>
 
         
       </div>
