@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240801230259304.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-09T15:21:05.416Z">
+<meta property="article:modified_time" content="2024-08-13T14:51:49.763Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -388,7 +388,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.4k 词 
+            6.6k 词 
           </div>
         </div>
         
@@ -1087,6 +1087,157 @@
 <li>R1发现一个链路N不可达时，在路由表写为16，但此时收到R2的路由信息，是R1原本距离+1 </li>
 <li>此时R1误以为N又可达了，因此更新路由表为R2路由距离值 + 1</li>
 <li>之前R2再更新，循环直到16。</li>
+</ul>
+<h1 id="8-10"><a href="#8-10" class="headerlink" title="8.10"></a>8.10</h1><p>少女乐队only</p>
+<p>第一次去livehouse看了乐队的live，很有趣。听了kon的歌和God knows，真的很棒。</p>
+<p>Louder和猛独也是超爽。</p>
+<p>想要下次搞个应援棒来了。</p>
+<p>大概我人生中又有许多钱是精力会花在这上面了。</p>
+<p>但确实是很迷人、很美好的事。</p>
+<p>爱与勇气传达给你。</p>
+<h1 id="8-11"><a href="#8-11" class="headerlink" title="8.11"></a>8.11</h1><p>昨天打call太累了，今天比较摸鱼。</p>
+<h2 id="计组-2"><a href="#计组-2" class="headerlink" title="计组"></a>计组</h2><p>终于把卡了好久的主存储器部分搞定，很有难度，看了好几遍才搞明白。</p>
+<ul>
+<li><p>SRAM与DRAM的区别：</p>
+<ul>
+<li>大部分很直观，最关键的部分是<strong>DRAM</strong>为了减少地址线数目，使用引脚复用：</li>
+<li>即将行地址和列地址分两次输入，因此只需要一半的引脚数</li>
+</ul>
+</li>
+<li><p>按字节编址和按字编址：</p>
+<ul>
+<li>分别是指两种存储单元所对应的信息个数。</li>
+<li>按字节是一个存储单元包含一个字节，即八个比特</li>
+<li>按字与CPU字长有关，如果字长为4B，则一个存储单元（即地址的一位）包含四个字节</li>
+</ul>
+</li>
+<li><p>交叉寻址：</p>
+<ul>
+<li>如果是轮流启动各个存储块，块数 &#x3D; 存取周期 &#x2F; 总线周期</li>
+<li>总线周期：CPU通过总线对存储器请求的周期</li>
+</ul>
+</li>
+<li><p>多个DRAM扩展时：</p>
+<ul>
+<li><p>这部分和之前学的区别不大，但要注意：</p>
+</li>
+<li><blockquote>
+<p>给出的是地址时，要注意片内用到了几位，再对剩下的尾数做片选</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="8-12"><a href="#8-12" class="headerlink" title="8.12"></a>8.12</h1><h2 id="概率论-8"><a href="#概率论-8" class="headerlink" title="概率论"></a>概率论</h2><p>二维随机变量分布函数的要求：</p>
+<p>其他与一维没区别，唯一多的是这个：</p>
+<ul>
+<li>落在矩形区域内的概率<strong>非负</strong><ul>
+<li>因此当只有一半平面例如y&gt;x这种不能满足分布函数的要求</li>
+</ul>
+</li>
+</ul>
+<h2 id="高数-6"><a href="#高数-6" class="headerlink" title="高数"></a>高数</h2><p>三重积分：</p>
+<ul>
+<li><p>先一后二&#x2F;先二后一</p>
+<ul>
+<li><p>这个看起来很容易，但用起来其实有点难度</p>
+</li>
+<li><p>先一时先对z求定积分，此时上下界为积分区域的上下曲面用z表示</p>
+<ul>
+<li>做一条平行z轴的直线，射入点位为上界，射出为下界</li>
+<li>然后再对D_xy上的投影做二重积分</li>
+</ul>
+</li>
+<li><p>先二时先求积分区域截面D(z)的二重积分，再求整体对z的定积分</p>
+<ul>
+<li><p>如何求截面D(z)？</p>
+<ul>
+<li><blockquote>
+<p>做积分区域在另外两个平面的投影，用z表示x和y即可</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>此时定积分上下界为z(值)的范围</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>记忆起来：实际上是信息量的分配不同</p>
+<ul>
+<li>先一是把信息量分配在对z的定积分，投影好求</li>
+<li>先二是把信息量分配在截面的二重积分，难点是求截面</li>
+</ul>
+</li>
+<li><p>因此，如果投影容易求，此时用先一更好</p>
+</li>
+<li><p>或者给出的被积函数很容易（例如只有一个变量），此时求截面后可以只用面积而不用求积分，此时用先二更好。</p>
+</li>
+</ul>
+<h1 id="8-13"><a href="#8-13" class="headerlink" title="8.13"></a>8.13</h1><h2 id="概率论-9"><a href="#概率论-9" class="headerlink" title="概率论"></a>概率论</h2><p>求与变量的数字特征相关的数学关系：</p>
+<ul>
+<li>直接求定积分&#x2F;换元</li>
+<li>凑数学期望或者方差的表达式再代回</li>
+</ul>
+<p>对不能直接看出来的分布，可以列几个看看</p>
+<ul>
+<li><blockquote>
+<p>尤其注意有X&#x3D;0的分布，可以导致期望可以很容易求出来</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="高数-7"><a href="#高数-7" class="headerlink" title="高数"></a>高数</h2><h3 id="依然是三重积分-x2F-线面积分"><a href="#依然是三重积分-x2F-线面积分" class="headerlink" title="依然是三重积分&#x2F;线面积分"></a>依然是三重积分&#x2F;线面积分</h3><p><code>球坐标：</code></p>
+<ul>
+<li><p>积分区域是球或者圆锥体时，一定要考虑下球坐标</p>
+</li>
+<li><p>三个变量：平面角，与z轴正方向夹角，距离</p>
+<ul>
+<li><blockquote>
+<p>注意：这里的距离和z轴夹角，都是相对于<strong>原点</strong>而不是圆心</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>其实z轴夹角最不直观，需要思考下，例如球心在原点时，夹角范围为[0,pi]</p>
+</li>
+</ul>
+<p><code>轮转对称性：</code></p>
+<ul>
+<li><p>这个最常用，但不容易想到</p>
+</li>
+<li><p>尤其在三重，主要是两种：<code>x+y+z=1</code> 或者 <code>x^2 + y^2 + z^2 &lt;= 1</code></p>
+<ol>
+<li>x^2 + 2*y^2 + 3*z^2 &#x3D; 6z^2</li>
+</ol>
+<ul>
+<li>注意：这里求三重积分时，可以换为可以方便求的变量</li>
+<li>例如求xOy平面的截面比较容易，则换位对6*z^2求三重积分<ul>
+<li>此时无需求积分，求出截面<strong>面积</strong>即可</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>反用：给出为x^2时：<ul>
+<li>凑为1&#x2F;3(x^2 + y^2 + z^2)</li>
+<li>如果是求面积分，此时可以化为半径平方，此时求球体表面积即可（这个离谱了）</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><code>质心/形心应用</code>：</p>
+<ul>
+<li>如果给出有形如对单个变量的一次方，例如对x求球体的三重积分</li>
+<li>此时可以化为:<code>球体的形心x坐标 * 球体面积</code><ul>
+<li>即逆用形心计算公式，此时形心坐标为球心</li>
+</ul>
+</li>
+</ul>
+<h2 id="计网-7"><a href="#计网-7" class="headerlink" title="计网"></a>计网</h2><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>难度一般，但题目不太好做。</p>
+<ul>
+<li>注意拥塞窗口的单位是MSS，因此如果MSS&#x3D;2KB，则起始大小为2KB</li>
+<li>TCP建立连接，对一方：只会占用一个报文段序号</li>
 </ul>
 
         
