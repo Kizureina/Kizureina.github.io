@@ -33,8 +33,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240801230259304.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20240814231713794.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-13T14:51:49.763Z">
+<meta property="article:modified_time" content="2024-08-14T15:24:10.836Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -388,7 +389,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.6k 词 
+            7.2k 词 
           </div>
         </div>
         
@@ -1238,6 +1239,79 @@
 <ul>
 <li>注意拥塞窗口的单位是MSS，因此如果MSS&#x3D;2KB，则起始大小为2KB</li>
 <li>TCP建立连接，对一方：只会占用一个报文段序号</li>
+</ul>
+<h1 id="8-14"><a href="#8-14" class="headerlink" title="8.14"></a>8.14</h1><h2 id="概率论-10"><a href="#概率论-10" class="headerlink" title="概率论"></a>概率论</h2><p>660概率也结束了。</p>
+<p>两个要点：</p>
+<ul>
+<li>样本均值与样本方差独立</li>
+<li>样本均值与方差的分布：<ul>
+<li>均值满足正态分布：参数为u和σ^2&#x2F;n</li>
+<li>方差满足卡方分布：<code>(n-1)S^2 / σ^2 ~ X^2(n-1)</code> 满足参数为<strong>n-1</strong>的卡方分布<ul>
+<li>注意：将S^2中的均值换为总体期望时，满足自由度为n的卡方分布</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>另外卡方分布的两个特征：</p>
+<ol>
+<li>期望为n</li>
+<li>方差为2n</li>
+</ol>
+<h2 id="高数-8"><a href="#高数-8" class="headerlink" title="高数"></a>高数</h2><h3 id="线面积分"><a href="#线面积分" class="headerlink" title="线面积分"></a>线面积分</h3><p>这部分难度无上限啊，各种对称性。</p>
+<p>主要有两个地方仔细思考了：</p>
+<ol>
+<li><p>求第二类面积分时（第一类就直接代入sqrt(1+z_x’^2+y_x’^2)就完了），要注意<strong>投影方向</strong>：</p>
+<ul>
+<li>计算时，将别积分曲面投影到平面上，例如投影到xOy，求出投影区域Dxy作为二重积分区域，然后将被积函数中的z用x和y表示</li>
+<li>注意：当给出为<code>f(x,y,z) dxdz</code>的形式，如果要投影在xOy上，需要将dz化为dy：<ul>
+<li>即<code>dz = - z_y&#39; * dy</code>，要注意这里对y求偏导时要加一个负号</li>
+<li>这个负号是隐函数推导时加的</li>
+<li>另外要注意这个负号与投影方向加的正负号不可混淆</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>椭圆极坐标换元</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><p>这部分甚至牵扯到换元的基本原理，即换元之后参数的计算：<a target="_blank" rel="noopener" href="https://blog.arg.pub/2021/11/05/math/%E9%9B%85%E5%8F%AF%E6%AF%94%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8/index.html">雅可比行列式</a></p>
+</li>
+<li><p>单纯计算的话，记住这个换元：</p>
+<ul>
+<li><code>x = r * a * cos(t) </code></li>
+<li><code>y = r * b * sin(t)</code></li>
+<li>容易看出，这种换元仍然保持了与圆的极坐标类似的：<code>x^2 + y^2 = r^2</code></li>
+</ul>
+</li>
+<li><p>换元之后如何代入二重积分呢？</p>
+<ul>
+<li>对t做积分，再对r做[0,1]的积分（这部分对椭圆是固定的）</li>
+<li>最后乘abr即得到结果</li>
+</ul>
+</li>
+</ul>
+<p>给出一个完整例子：</p>
+<p><img src="/../images/image-20240814231713794.png" alt="image-20240814231713794"></p>
+<h2 id="计网-8"><a href="#计网-8" class="headerlink" title="计网"></a>计网</h2><p>TCP计算没什么难度，但很容易错。</p>
+<ul>
+<li><p>例如计算发送了多少字节数据，要注意序号是第一个字节，例如1000，如果长度为400B，则发送的最后一个字节序号为1000+400-1&#x3D;1399，此时返回确认的ack值为1400.</p>
+</li>
+<li><p>动态滑动窗口：</p>
+<ul>
+<li><p>如果发送了400B，起始字节序号为500，结果接收到ack&#x3D;500的确认报文，此时说明：</p>
+</li>
+<li><p>前面发送的500报文段还没有收到，此时的确认是对之前报文段的</p>
+</li>
+<li><blockquote>
+<p>因此如果确认报文的rwnd&#x3D;500，但之前发送的400B仍然没确认，此时只能再发送100B</p>
+</blockquote>
+</li>
+</ul>
+</li>
 </ul>
 
         
