@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240814231713794.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-17T15:59:20.179Z">
+<meta property="article:modified_time" content="2024-08-18T15:34:49.846Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -389,7 +389,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            8.2k 词 
+            8.6k 词 
           </div>
         </div>
         
@@ -1427,6 +1427,42 @@
 <li>最低有效数据：即最低位数据</li>
 <li>大端小端</li>
 <li>变址寻址的变址寄存器IX，如果是任意时，在地址中也要写明（即寄存器号要占几位）</li>
+</ul>
+<h1 id="8-18"><a href="#8-18" class="headerlink" title="8.18"></a>8.18</h1><p>下午去天府红摸鱼了。</p>
+<p>不知道为什么这回对地偶兴趣不高，明明也看到了之前的几个。</p>
+<p>另外想了想感觉谷子盲盒这玩意其实是很聪明的设计：</p>
+<p>偶像化的任何企划（动画也好漫画也好游戏也好），如果要出单人的周边。</p>
+<p>就必然面临不同角色人气不同的难题，该如何定价？如何生产？很麻烦。</p>
+<p>盲盒就搞定了这个问题：相对于用市场&#x2F;调价做了一次动态调整。</p>
+<h2 id="高数-12"><a href="#高数-12" class="headerlink" title="高数"></a>高数</h2><p>级数选择题，难度还好</p>
+<ul>
+<li><p>主要是正项级数申敛法的本质：前n项和<strong>有界</strong></p>
+<ul>
+<li>推论：正项级数an收敛，则a_2n-1和a_2n均收敛</li>
+</ul>
+</li>
+<li><p>级数a_n收敛，但a_n^2不一定收敛</p>
+<ul>
+<li>正项一定收敛，但交错不一定</li>
+<li>例如(-1)^n * 1&#x2F;sqrt(n) [这个反例应该记住]</li>
+</ul>
+</li>
+<li><blockquote>
+<p>级数收敛 &#x3D;&gt; 在n趋近于无穷大时，a_n有界 &#x3D;&gt; 存在M，使|a_n| &lt; M</p>
+</blockquote>
+<ul>
+<li>这个结论可用于证明绝对收敛</li>
+</ul>
+</li>
+</ul>
+<h2 id="计组-6"><a href="#计组-6" class="headerlink" title="计组"></a>计组</h2><p>汇编基础，大部分都学过。</p>
+<ul>
+<li>补码相减：化为相加，即被减数 + 减数的取反 + 1<ul>
+<li>此时无需考虑负号或者真值</li>
+</ul>
+</li>
+<li>OF与CF：有符号溢出位OF，无符号数位CF，但实际上机器数中不区分有无负号，因此对有符号数也可以CF&#x3D;1，但此时没有含义</li>
+<li>基于堆栈调用子过程调用，过程要思考下才能搞明白</li>
 </ul>
 
         
