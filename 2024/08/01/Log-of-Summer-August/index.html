@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240814231713794.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-20T15:51:25.523Z">
+<meta property="article:modified_time" content="2024-08-22T15:45:35.424Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -389,7 +389,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            9.5k 词 
+            10k 词 
           </div>
         </div>
         
@@ -1602,6 +1602,99 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h1 id="8-21"><a href="#8-21" class="headerlink" title="8.21"></a>8.21</h1><h2 id="高数-15"><a href="#高数-15" class="headerlink" title="高数"></a>高数</h2><h3 id="660三重积分-x2F-线面积分选择题"><a href="#660三重积分-x2F-线面积分选择题" class="headerlink" title="660三重积分&#x2F;线面积分选择题"></a>660三重积分&#x2F;线面积分选择题</h3><p>660倒计时了。</p>
+<p>整体难度不大：</p>
+<ul>
+<li><p>格林公式转化为二重积分后如何确定正负号：</p>
+<ul>
+<li>二类线积分的方向为正向：即沿曲线方向，二重积分区域在左侧</li>
+<li>此时为正，反之为负</li>
+</ul>
+</li>
+<li><p>一类线&#x2F;面积分与二类线面积分的转化：</p>
+<ul>
+<li><blockquote>
+<p>(Pcosα + Qcosβ) ds &#x3D; Pdx + Qdy</p>
+<p>其中的α和β为曲线“切向量”的方向余弦</p>
+</blockquote>
+</li>
+<li><p>可由法向量转化为切向量：<code>cos(α_法) = cos(β_切)</code></p>
+</li>
+</ul>
+</li>
+<li><p>对向量求偏微分：</p>
+<ul>
+<li>例如u&#x3D;f(x,y)对法向量n&#x3D;(x,y)求偏微分</li>
+<li>此时实际上为<code>u_x&#39; * cosα_法 + u_y&#39; * cosβ_法</code></li>
+<li>注意这里的余弦值为法向量</li>
+</ul>
+</li>
+</ul>
+<h2 id="概率论-11"><a href="#概率论-11" class="headerlink" title="概率论"></a>概率论</h2><p>置信区间：</p>
+<ul>
+<li><p>搞明白关键定义：<strong>对参数的区间估计</strong></p>
+</li>
+<li><p>例如对u的估计，用样本均值X_表示，要确定在某个可信的范围内，此时有定义：</p>
+</li>
+<li><p><code>P&#123;|u - X_ &lt; k |&#125; = 1 - α</code></p>
+</li>
+<li><p>此时k被1-α确定，为z_α&#x2F;2</p>
+<ul>
+<li>因此问题就转化为对样本均值X_的分布求解再化简了</li>
+<li>注意这里只能有一个参数未知，否则无法化简（即枢轴量的概念）</li>
+</ul>
+</li>
+<li><p>详细推导参见<a target="_blank" rel="noopener" href="https://www.cnblogs.com/feixianxing/p/confidence-interval.html">这篇博客</a>，写得很清楚。</p>
+</li>
+</ul>
+<p><strong>求样本函数分布</strong>：</p>
+<ul>
+<li>若用样本函数α &#x3D; min{X1,X2….XN}估计某个参数，需要求α的分布</li>
+<li>此时可以直接用随机变量函数的分布做，也可以用F(x) &#x3D; P{X&lt;&#x3D;x}推导<ul>
+<li>因为独立，所以有：<code>F_min(x) = 1 - [1 - F(x)]^n</code></li>
+<li>max函数时为：<code>F_max(x) = F(x)^n</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="8-22"><a href="#8-22" class="headerlink" title="8.22"></a>8.22</h1><h2 id="高数-16"><a href="#高数-16" class="headerlink" title="高数"></a>高数</h2><h3 id="The-end-of-660"><a href="#The-end-of-660" class="headerlink" title="The end of 660"></a>The end of 660</h3><p>660结束，今天的题目全对了。</p>
+<ul>
+<li><p>方向导数是“数”，梯度是向量</p>
+<ul>
+<li>最大方向导数是梯度的模</li>
+</ul>
+</li>
+<li><p>方向导数求法：先求梯度，再用梯度点乘方向向量的方向余弦</p>
+<ul>
+<li><p>这些都是之前就知道的，但有个有意思的地方：线面积分的一类与二类转换可以与<strong>方向向量</strong>联系起来</p>
+</li>
+<li><blockquote>
+<p>即实际上一类转二类就是乘的曲线&#x2F;曲面切线的方向导数</p>
+<p>因此可以用在斯托克斯公式转化为第二类面积分之后</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>曲线切线的一种求法：</p>
+<ul>
+<li>如果给出曲线是曲面与平面的交线，则曲线切线一定满足：<ul>
+<li>与曲面法向量垂直</li>
+<li>与平面法向量垂直</li>
+</ul>
+</li>
+<li>此时可以用<code>n1 X n2 = 切线方向向量</code></li>
+<li>注意这里是叉乘</li>
+</ul>
+</li>
+</ul>
+<h2 id="计组-8"><a href="#计组-8" class="headerlink" title="计组"></a>计组</h2><h3 id="指令流水线"><a href="#指令流水线" class="headerlink" title="指令流水线"></a>指令流水线</h3><p>几乎是最后一个有难度的内容。</p>
+<ul>
+<li>为解决数据竞争的转发&#x2F;旁路技术：<ul>
+<li>注意有旁路时是<strong>上一个指令的EX后直接传送到下一个EX</strong>，即ALU中，因此跳过了第二个指令的ID取数阶段</li>
+<li>因此两个指令可以不阻塞直接流水</li>
+<li>但对load-use型的数据冲突不行，因为一定要执行完MEM阶段才能执行下一指令。</li>
 </ul>
 </li>
 </ul>
