@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240805225415916.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20240814231713794.png">
 <meta property="article:published_time" content="2024-08-01T14:39:40.000Z">
-<meta property="article:modified_time" content="2024-08-22T15:45:35.424Z">
+<meta property="article:modified_time" content="2024-08-24T15:47:50.519Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Advanced Mathematics">
 <meta property="article:tag" content="Linear Algebraic">
@@ -389,7 +389,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            10k 词 
+            11k 词 
           </div>
         </div>
         
@@ -1695,6 +1695,41 @@
 <li>注意有旁路时是<strong>上一个指令的EX后直接传送到下一个EX</strong>，即ALU中，因此跳过了第二个指令的ID取数阶段</li>
 <li>因此两个指令可以不阻塞直接流水</li>
 <li>但对load-use型的数据冲突不行，因为一定要执行完MEM阶段才能执行下一指令。</li>
+</ul>
+</li>
+</ul>
+<h1 id="8-23"><a href="#8-23" class="headerlink" title="8.23"></a>8.23</h1><h2 id="今天没有高数"><a href="#今天没有高数" class="headerlink" title="今天没有高数"></a>今天没有高数</h2><h2 id="2015英语一真题"><a href="#2015英语一真题" class="headerlink" title="2015英语一真题"></a>2015英语一真题</h2><p>难度真题一般，但错误不少：7完型&#x2F;5阅读&#x2F;2七选五</p>
+<p>七选五不该错，因为着急吃饭有点草率。</p>
+<p>但确实有点难度。</p>
+<p>bound熟词生义：除了边界和必然发生，还有开始&#x2F;出发去的意思</p>
+<p>conduct on：固定搭配，意思是研究某种事物</p>
+<ul>
+<li>distort：扭曲</li>
+<li>retort：反驳</li>
+</ul>
+<h2 id="计组-9"><a href="#计组-9" class="headerlink" title="计组"></a>计组</h2><h3 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h3><p>控制总线：单向传输，由CPU传输到各个部件时钟周期和控制信号</p>
+<ul>
+<li>但注意：控制总线上也会传输内存&#x2F;IO设备等的响应控制信号，但实际上是CPU对外设的中断响应</li>
+<li>因此方向仍然是单向，即CPU到外设</li>
+<li>同理：状态总线传输方向也是单向，但是外设到CPU</li>
+</ul>
+<h1 id="8-24"><a href="#8-24" class="headerlink" title="8.24"></a>8.24</h1><h2 id="高数-17"><a href="#高数-17" class="headerlink" title="高数"></a>高数</h2><h3 id="880开始"><a href="#880开始" class="headerlink" title="880开始"></a>880开始</h3><p>难度还好，不太好做，但正确率挺高。</p>
+<ul>
+<li><p>tanx的泰勒展开：<code>x + 1/3 * x^2 + 2/15 * x^3 + ...</code> </p>
+</li>
+<li><p>arctanx的泰勒：<code>x - 1/3 * x^3 + 1/5 * x^5 - ...</code></p>
+</li>
+</ul>
+<p>这两个偶尔会用到，尤其是tanx的，很难记住</p>
+<p>求极限的思路：当加减项不好求时，可以用提公因式转化为乘除：</p>
+<ul>
+<li>tanx - sinx &#x3D; sinx (1&#x2F;cosx - 1)</li>
+</ul>
+<h2 id="计组-10"><a href="#计组-10" class="headerlink" title="计组"></a>计组</h2><p>最后的计组了，居然有点难度：</p>
+<ul>
+<li>两种中断优先级：<ul>
+<li>响应优先级：设定为硬件电路的CPU对中断<strong>开始执行</strong>的优先级</li>
+<li>处理优先级：经过屏蔽字修改，即可以被抢占中断的优先级，CPU实际<strong>执行完</strong>中断处理的优先级</li>
 </ul>
 </li>
 </ul>
