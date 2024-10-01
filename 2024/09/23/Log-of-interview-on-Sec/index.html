@@ -32,7 +32,7 @@
 <meta property="og:description" content="安恒线下一面(9.23) 自我介绍  印象最深的SRC&#x2F;漏洞  SQL注入的分类  SSRF和CSRF  内网：黄金票据与白银票据  小程序：抓包发现是全加密，怎么渗透  找本地路径的小程序包 解包再反编译   拿到Postgresql的最高权限，怎么进一步渗透  我答的是写webshell 应该是执行命令，反弹shell   上传文件对后缀名有检测，只能上传.jpg，怎么绕过  加个;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-23T09:58:40.000Z">
-<meta property="article:modified_time" content="2024-09-23T10:30:27.814Z">
+<meta property="article:modified_time" content="2024-09-24T15:56:34.490Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           九月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -327,6 +327,10 @@
       <ul>
         
           <li>
+            <a href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论笔记</a>
+          </li>
+        
+          <li>
             <a href="/2024/09/23/Log-of-interview-on-Sec/">2024秋招安全岗面经</a>
           </li>
         
@@ -340,10 +344,6 @@
         
           <li>
             <a href="/2024/06/18/Note-of-Linear-Algebraic/">线性代数笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2024/06/11/Note-of-Local-Address-Net-Security2/">内网安全攻防笔记(下)</a>
           </li>
         
       </ul>
@@ -389,7 +389,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            156 词 
+            1k 词 
           </div>
         </div>
         
@@ -425,10 +425,154 @@
 <li>这个比较模糊，应该是与具体实现上传的代码有关</li>
 </ul>
 </li>
+<li><p>登录框的渗透思路</p>
+<ul>
+<li>Burp抓包，用sqlmap跑</li>
+</ul>
+</li>
 <li><p>开发经历</p>
 </li>
 </ul>
-<h1 id="深信服"><a href="#深信服" class="headerlink" title="深信服"></a>深信服</h1><h2 id="线下-9-24"><a href="#线下-9-24" class="headerlink" title="线下(9.24)"></a>线下(9.24)</h2>
+<blockquote>
+<p>因为要先去实习，之后转正才能发offer就拒了。</p>
+</blockquote>
+<h1 id="深信服"><a href="#深信服" class="headerlink" title="深信服"></a>深信服</h1><h2 id="线下-9-24"><a href="#线下-9-24" class="headerlink" title="线下(9.24)"></a>线下(9.24)</h2><h3 id="一面-1h"><a href="#一面-1h" class="headerlink" title="一面(1h)"></a>一面(1h)</h3><ul>
+<li><p>自我介绍</p>
+</li>
+<li><p>实习经历</p>
+</li>
+<li><p>海康的摄像头漏洞挖掘</p>
+</li>
+<li><p>拿到权限之后如何做后渗透</p>
+</li>
+<li><p>域内黄金票据利用</p>
+</li>
+<li><p>内网相关</p>
+</li>
+<li><p>域外寻找域控</p>
+</li>
+<li><p>域内寻找域控，具体命令</p>
+</li>
+<li><p>Windows提权：</p>
+<ul>
+<li>如果没有poc可用，如何提权，脏土豆</li>
+</ul>
+</li>
+<li><p>Linux提权</p>
+</li>
+<li><p>最擅长的漏洞类型</p>
+<ul>
+<li>答了RCE</li>
+</ul>
+</li>
+<li><p>Java如何执行命令：</p>
+<ul>
+<li><code>runtime.exec()</code></li>
+<li>利用进程执行</li>
+</ul>
+</li>
+<li><p>XSS payload</p>
+</li>
+<li><p>CS的两种木马差别</p>
+</li>
+<li><p>CSRF的利用</p>
+</li>
+<li><p>XSS与CSRF区别</p>
+</li>
+<li><p>SSRF与CSRF区别</p>
+</li>
+<li><p>redis未授权：</p>
+<ul>
+<li>写webshell，</li>
+<li>主从利用</li>
+<li>与SSRF相关</li>
+</ul>
+</li>
+<li><p>java反序列化</p>
+</li>
+<li><p>shiro反序列化原理：</p>
+<ul>
+<li>如果有waf，如何绕过</li>
+<li>如果有cookie长度限制，如何绕过</li>
+</ul>
+</li>
+<li><p>XSS的类型，具体区别和本质</p>
+</li>
+<li><p>代码审计：</p>
+<ul>
+<li>用到的工具</li>
+<li>审计的思路</li>
+<li>如何提高效率</li>
+<li>Java代码审计主要关注的危险函数</li>
+</ul>
+</li>
+<li><p><strong>内存马</strong>的分类：</p>
+<ul>
+<li>传统 Web 应用型内存马：使用基本 Servlet-API 实现的动态注册内存马，此种类型的内存马最经典，已经被扩展至适应各个中间件。</li>
+<li>框架型内存马：除了传统的 Servlet 项目，使用 Spring 全家桶进行开发的项目越来越多，而 Spring-MVC 则是自实现了相关路由注册查找逻辑，以及使用拦截器来进行过滤，思想上与 Servlet-Filter 的设计类似。</li>
+<li>中间件型内存马：在中间件的很多功能实现上，因为采用了类似 Filter-FilterChain 的职责链模式，可以被用来做内存马，由于行业对 Tomcat 的研究较多，因此大多数的技术实现和探究是针对 Tomcat 的，但其他中间件也有相当多的探究空间。</li>
+<li>其他内存马：还有一些其他非常规的利用思路，可以用在内存马的实现上，例如 WebSocket 协议等。</li>
+<li>Agent 型内存马：利用 Java Agent 技术进行植入内存马逻辑的实现方式。</li>
+</ul>
+</li>
+<li><p>x86的寄存器</p>
+</li>
+<li><p>hook的几种类型</p>
+</li>
+<li><p>免杀EDR对抗</p>
+</li>
+<li><p>如何绕过行为检测</p>
+</li>
+<li><p>挖到的SRC原理讲解</p>
+</li>
+</ul>
+<h3 id="二面-40mins"><a href="#二面-40mins" class="headerlink" title="二面(40mins)"></a>二面(40mins)</h3><ul>
+<li>内网票据传递</li>
+<li>寻找域控，域控移动</li>
+<li>代码审计优化（如何快速审计整个项目）</li>
+<li>python爬虫</li>
+<li>如何优化爬取的结果</li>
+<li>如何快速做漏洞挖掘</li>
+<li>如何将大量爬取的结果入库</li>
+<li>python是多线程还是多进程</li>
+<li>如果有多个进程同时写库，如何分配调度<ul>
+<li>线程池，加锁</li>
+</ul>
+</li>
+<li>如果域控不能做票据传递，如何拿域控<ul>
+<li>找域控相关服务漏洞</li>
+</ul>
+</li>
+<li>绕过静态检测，绕过行为检测</li>
+<li>免杀白加黑</li>
+<li>webshell免杀</li>
+<li>深信服产品了解</li>
+<li>对内卷的看法</li>
+<li>对加班的看法</li>
+</ul>
+<blockquote>
+<p>其实有部分是一面没答上来的，但是中间没仔细准备，还是没答上来。。</p>
+</blockquote>
+<h3 id="三面-x2F-HR面-30mins"><a href="#三面-x2F-HR面-30mins" class="headerlink" title="三面&#x2F;HR面(30mins)"></a>三面&#x2F;HR面(30mins)</h3><p>主要是校园经历</p>
+<ul>
+<li>绩点相关</li>
+<li>实验室相关</li>
+<li>为什么不考研</li>
+<li>你的优势和劣势</li>
+<li>未来职业规划</li>
+<li>反问：加班与工作时长<ul>
+<li>加班比较灵活，时长早8.40打卡，12:00下班，中午两小时午休，下午六点下班</li>
+</ul>
+</li>
+</ul>
+<h2 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h2><ul>
+<li>9.10 官网投递</li>
+<li>9.13 笔试</li>
+<li>9.14 选线下面试地点</li>
+<li>9.19 线下约面</li>
+<li>9.24 线下一&#x2F;二&#x2F;三面</li>
+</ul>
+
         
       </div>
 
@@ -440,10 +584,15 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/"
+      title="概率论笔记"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        概率论笔记
         
     </p>
   </a>

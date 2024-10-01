@@ -180,7 +180,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           九月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -325,6 +325,10 @@
       <ul>
         
           <li>
+            <a href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论笔记</a>
+          </li>
+        
+          <li>
             <a href="/2024/09/23/Log-of-interview-on-Sec/">2024秋招安全岗面经</a>
           </li>
         
@@ -340,10 +344,6 @@
             <a href="/2024/06/18/Note-of-Linear-Algebraic/">线性代数笔记</a>
           </li>
         
-          <li>
-            <a href="/2024/06/11/Note-of-Local-Address-Net-Security2/">内网安全攻防笔记(下)</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -354,6 +354,86 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Note-of-Probability-Theory-and-Mathematical-Statistics" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论笔记</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-25T15:47:40.000Z" itemprop="datePublished">2024-09-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Mathematics/">Mathematics</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            174 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+基于方浩概率论强化课的笔记
+
+1. 随机事件和概率2. 随机变量及其分布分布函数关键要求：
+
+连续
+单调不减
+x趋近于正无穷为1，趋近于负无穷为0
+值只能在[0,1]范围内
+右连续（这个最重要）
+
+判断某个函数是否能作为分布函数时，先看单调性，再看趋近于正无穷负无穷，最后看右连续。
+
+注意：右连续要求区间只能是左闭右开，可以用求右极限判断
+极限值的正负：x趋近于a+时，-x趋近于a-，经常用来判断是否是右连续。
+
+  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Log-of-interview-on-Sec" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -386,7 +466,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            156 词 
+            1k 词 
           </div>
         </div>
         
@@ -423,10 +503,55 @@ SSRF和CSRF
 这个比较模糊，应该是与具体实现上传的代码有关
 
 
+登录框的渗透思路
+
+Burp抓包，用sqlmap跑
+
+
 开发经历
 
 
-深信服线下(9.24)  
+
+因为要先去实习，之后转正才能发offer就拒了。
+
+深信服线下(9.24)一面(1h)
+自我介绍
+
+实习经历
+
+海康的摄像头漏洞挖掘
+
+拿到权限之后如何做后渗透
+
+域内黄金票据利用
+
+内网相关
+
+域外寻找域控
+
+域内寻找域控，具体命令
+
+Windows提权：
+
+如果没有poc可用，如何提权，脏土豆
+
+
+Linux提权
+
+最擅长的漏洞类型
+
+答了RCE
+
+
+Java如何执行命令：
+
+runtime.exec()
+利用进程执行
+
+
+XSS payload
+
+CS的两...  
           </div>
         
       </div>
@@ -1124,83 +1249,6 @@ else没有匹配的if &#x3D;&gt; 语法分析错误
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-AutoBangumi-qbit-and-plex-on-mini-server" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/18/AutoBangumi-qbit-and-plex-on-mini-server/">AutoBangumi + qbit + plex搭建优雅的追番服务</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-18T11:34:07.000Z" itemprop="datePublished">2024-05-18</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/ACG/">ACG</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.3k 词 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            前言最近很迷少女乐队，之前沉迷了半年的邦邦和mygo，最近又被Girls Band Cry所捕获，甚至为此打破了自己不看未完结动画的原则。
-仁菜是复杂的矛盾集合体，但只是不想违背自己的本心而已，实在很可爱。
-言归正传，要优雅地追动画，在盗版网站是很没意思的，体验很差。所以打算自己搭一个。
-主要架构很简单：AutoBangumi + Qbit + Plex。
-
-AB通过解析RSS将种子交给qbit下载，然后对下载完的文件做刮削，再交给Plex作为流媒体平台。
-
-主要参考：
-AutoBangumi官方文档，有对大部分配置参数的详细说明
-官方搭建教程
-一切环境的根本：docker关键是docker-compose.yml的配置文件：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465version: &#x27;3.9&#x27;services:  ab:    image: estrellax...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  with-pic  "
-       style="background-image: url(/../images/image-20240518193610980.png)" 
-      href="/2024/05/18/AutoBangumi-qbit-and-plex-on-mini-server/" 
-    >
-       
-      <div class="overlay">
-        <i class="fa-solid fa-angle-right with-pic"></i>
-      </div>
        
     </a>
      
