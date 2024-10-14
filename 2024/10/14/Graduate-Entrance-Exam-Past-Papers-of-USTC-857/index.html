@@ -24,17 +24,18 @@
   
   <title>中国科学技术大学 密码学与网络安全真题 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="2020年选择题 使用非对称密码的私钥加密数据，不能提供（ D&#x2F;B? ）安全机制  ​	A.数据保密性 B.数据时效性 C.不可否认性 D.身份认证  非对称密码的私钥加密通常用于数据签名，而不提供身份认证功能。身份认证通常依赖于公钥验证。   SMS4是（ C ）国家商用密钥标准  ​	A.美国 B.俄罗斯 C.中国 D.以色列   SMS4是中国国家商用密码标准之一，主要用于无线局域">
+  <meta name="description" content="2020年选择题 使用非对称密码的私钥加密数据，不能提供（ A ）安全机制  ​	A.数据保密性 B.数据时效性 C.不可否认性 D.身份认证  私钥加密可以提供 身份认证 和 不可否认性，但无法直接提供 数据时效性，因为它不能保证数据在特定时间内有效或防止重放攻击。因此，数据保密性 是唯一不适用的选项，因为私钥加密本身并不提供保密性，它是用来签名或验证身份的。   SMS4是（ C ）国家商用密">
 <meta property="og:type" content="article">
 <meta property="og:title" content="中国科学技术大学 密码学与网络安全真题">
 <meta property="og:url" content="https://kizureina.github.io/2024/10/14/Graduate-Entrance-Exam-Past-Papers-of-USTC-857/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="2020年选择题 使用非对称密码的私钥加密数据，不能提供（ D&#x2F;B? ）安全机制  ​	A.数据保密性 B.数据时效性 C.不可否认性 D.身份认证  非对称密码的私钥加密通常用于数据签名，而不提供身份认证功能。身份认证通常依赖于公钥验证。   SMS4是（ C ）国家商用密钥标准  ​	A.美国 B.俄罗斯 C.中国 D.以色列   SMS4是中国国家商用密码标准之一，主要用于无线局域">
+<meta property="og:description" content="2020年选择题 使用非对称密码的私钥加密数据，不能提供（ A ）安全机制  ​	A.数据保密性 B.数据时效性 C.不可否认性 D.身份认证  私钥加密可以提供 身份认证 和 不可否认性，但无法直接提供 数据时效性，因为它不能保证数据在特定时间内有效或防止重放攻击。因此，数据保密性 是唯一不适用的选项，因为私钥加密本身并不提供保密性，它是用来签名或验证身份的。   SMS4是（ C ）国家商用密">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003235729.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003526608.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241015003404015.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-13T16:49:20.975Z">
+<meta property="article:modified_time" content="2024-10-14T16:46:03.615Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -397,7 +398,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3k 词 
+            6.3k 词 
           </div>
         </div>
         
@@ -405,11 +406,11 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <h1 id="2020年"><a href="#2020年" class="headerlink" title="2020年"></a>2020年</h1><h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><ol>
-<li>使用非对称密码的私钥加密数据，不能提供（ D&#x2F;B? ）安全机制</li>
+<li>使用非对称密码的私钥加密数据，不能提供（ A ）安全机制</li>
 </ol>
 <p>​	A.数据保密性 B.数据时效性 C.不可否认性 D.身份认证</p>
 <blockquote>
-<p>非对称密码的私钥加密通常用于数据签名，而不提供身份认证功能。身份认证通常依赖于公钥验证。</p>
+<p>私钥加密可以提供 <strong>身份认证</strong> 和 <strong>不可否认性</strong>，但无法直接提供 <strong>数据时效性</strong>，因为它不能保证数据在特定时间内有效或防止重放攻击。因此，<strong>数据保密性</strong> 是唯一不适用的选项，因为私钥加密本身并不提供保密性，它是用来签名或验证身份的。</p>
 </blockquote>
 <ol start="2">
 <li>SMS4是（ C ）国家商用密钥标准</li>
@@ -477,19 +478,26 @@
 </ol>
 <blockquote>
 <p>双重数字签名是一种利用两次哈希和加密的方式，以确保消息完整性和身份认证。</p>
-</blockquote>
 <p>双重数字签名的流程一般是：</p>
 <ol>
 <li>先对支付信息和订单信息做哈希，生成摘要。</li>
-<li>再将这些摘要进行<strong>拼接</strong>，”并对其再进行一次哈希（这一步存疑，可能不需要）”。</li>
+<li>再将这些摘要进行<strong>拼接</strong>，并对其再进行一次哈希。</li>
 <li>使用私钥对最终的哈希值进行加密，形成签名。</li>
 </ol>
-<p>正确答案应该是用Alice的私钥<code>KRA</code>对<code>H( H(PI) || H(OI) )</code>进行加密（或者为kra对<code>( H(PI) || H(OI) )</code>加密&#x2F;即签名）。</p>
+<p>正确答案应该是用Alice的私钥<code>KRA</code>对<code>H( H(PI) || H(OI) )</code>进行加密。</p>
+<p>注：双重数字签名是SET协议的内容，主要用于客户、商家和银行之间信息保密性和认证性的实现。</p>
+<ul>
+<li>具体使用：</li>
+</ul>
+<p>（1）客户将“订购信息+支付信息的消息摘要+双重签名”发给商家，将“支付信息+订购信息的消息摘要+双重签名”发给银行；</p>
+<p>（2）商家和银行对收到的信息先生成摘要，再与另一个摘要连接起来，如果它与解密后的双重签名（利用客户的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%AC%E9%92%A5/6447788?fromModule=lemma_inlink">公钥</a>）相等，就可确定消息的真实性。</p>
+<p>然商家看不到顾客账户信息、银行不知道客户的购买信息，但都可确认另一方是真实的。</p>
+</blockquote>
 <h2 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h2><ol>
-<li>数据加密DES采用（ <strong>Feistel</strong> ）密码结构，明文分组长度（ <strong>64比特</strong> ），有效密钥长度（ <strong>56比特</strong> ）。当以字节为单位输入时，（ <strong>最低</strong> ）位比较被丢弃。</li>
+<li>数据加密DES采用（ <strong>Feistel</strong> ）密码结构，明文分组长度（ <strong>64比特</strong> ），有效密钥长度（ <strong>56比特</strong> ）。当以字节为单位输入密钥时，（ <strong>最低</strong> ）位比特被丢弃。</li>
 </ol>
 <blockquote>
-<p><strong>解释</strong>：DES使用Feistel结构，64比特明文分组，虽然DES的密钥是64比特，但其中8比特用于校验，不参与加密，因此有效密钥长度为56比特。</p>
+<p><strong>解释</strong>：DES使用Feistel结构，64比特明文分组，虽然DES的密钥是64比特，但其中8比特用于校验（即每个字节的最右&#x2F;最低位比特），不参与加密，因此有效密钥长度为56比特。</p>
 </blockquote>
 <ol start="2">
 <li>好的雪崩效应：当（ <strong>明文位</strong> ）或（ <strong>密钥位</strong> ）发生比较变化时，（ <strong>密文</strong> ）中有随机的（ <strong>位</strong> ）比较发生了改变。</li>
@@ -552,8 +560,7 @@
 <p><strong>解释</strong>：SA（Security Association）由这三项参数来唯一标识，用于IPSec等协议中。</p>
 </blockquote>
 <h2 id="解答题"><a href="#解答题" class="headerlink" title="解答题"></a>解答题</h2><ol>
-<li><p>当需要对数据进行保密和来源认证双重保护时, 可以对数据采用先签名后加密，先加密后签名两种方式吗？</p>
-<p> 1）、请分析这两种方式各有什么缺陷或局限性 </p>
+<li><h3 id="当需要对数据进行保密和来源认证双重保护时-可以对数据采用先签名后加密，先加密后签名两种方式吗？"><a href="#当需要对数据进行保密和来源认证双重保护时-可以对数据采用先签名后加密，先加密后签名两种方式吗？" class="headerlink" title="当需要对数据进行保密和来源认证双重保护时, 可以对数据采用先签名后加密，先加密后签名两种方式吗？"></a>当需要对数据进行保密和来源认证双重保护时, 可以对数据采用先签名后加密，先加密后签名两种方式吗？</h3><p> 1）、请分析这两种方式各有什么缺陷或局限性 </p>
 <p> 2）、请设计一种方案，不更换原有的加密加密和签名算法，保持二者的操作顺序不受限制，以解决上述局限性</p>
 </li>
 </ol>
@@ -578,7 +585,7 @@
 </blockquote>
 <hr>
 <ol start="2">
-<li>Alice和 Bob用 Diffie-Hellman密钥协商协议建立会话密钥，选择模数P&#x3D;17,本原元a&#x3D;5：</li>
+<li><h3 id="Alice和-Bob用-Diffie-Hellman密钥协商协议建立会话密钥，选择模数P-x3D-17-本原元a-x3D-5："><a href="#Alice和-Bob用-Diffie-Hellman密钥协商协议建立会话密钥，选择模数P-x3D-17-本原元a-x3D-5：" class="headerlink" title="Alice和 Bob用 Diffie-Hellman密钥协商协议建立会话密钥，选择模数P&#x3D;17,本原元a&#x3D;5："></a>Alice和 Bob用 Diffie-Hellman密钥协商协议建立会话密钥，选择模数P&#x3D;17,本原元a&#x3D;5：</h3></li>
 </ol>
 <p>​	1）、若随机数 X &#x3D;7和 X &#x3D;3，请计算协议执行中他们发给对方的数据，以及他们之间形成的会话密钥 </p>
 <p>​	2）简述攻击者 Eve如何发起中间人攻击</p>
@@ -601,8 +608,7 @@
 </blockquote>
 <hr>
 <ol start="3">
-<li><p>在<code>RSA</code>算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;912</p>
-<p> 1）求 A私钥 d&#x3D;？ </p>
+<li><h3 id="在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-912"><a href="#在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-912" class="headerlink" title="在RSA算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;912"></a>在<code>RSA</code>算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;912</h3><p> 1）求 A私钥 d&#x3D;？ </p>
 <p> 2）用户 B预向 A发送私密信息 M&#x3D;4，求密文 C&#x3D;?(计算过程） </p>
 <p> 3）若用户 A欲对消息 M&#x3D;157进行签名，求签名结果 S&#x3D;? </p>
 <p> 4）继续给用户 B分配公钥&#x2F;私钥时，可用的公钥有多少个？</p>
@@ -614,30 +620,67 @@
 </blockquote>
 <hr>
 <ol start="4">
-<li><p>Alice将一副牌中的红桃 A至红桃 Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉 Bob一条秘密消息 M,而偷听着的 Eve可以听到他们说的所有内容：</p>
-<p> 1）请为 Alice设计一个具体的通讯方案。注意，这个方案她只能大声地告诉Bob，且Eve能听得到 </p>
+<li><h3 id="Alice将一副牌中的红桃-A至红桃-Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉-Bob一条秘密消息-M-而偷听着的-Eve可以听到他们说的所有内容："><a href="#Alice将一副牌中的红桃-A至红桃-Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉-Bob一条秘密消息-M-而偷听着的-Eve可以听到他们说的所有内容：" class="headerlink" title="Alice将一副牌中的红桃 A至红桃 Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉 Bob一条秘密消息 M,而偷听着的 Eve可以听到他们说的所有内容："></a>Alice将一副牌中的红桃 A至红桃 Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉 Bob一条秘密消息 M,而偷听着的 Eve可以听到他们说的所有内容：</h3><p> 1）请为 Alice设计一个具体的通讯方案。注意，这个方案她只能大声地告诉Bob，且Eve能听得到 </p>
 <p> 2）证明：Alice有可能找到一种方法将 9比特的消息安全地传递给Bob，Eve不能获得M的任何信息，但完美安全地传递 10比特信息则是不可能的</p>
 </li>
 </ol>
 <blockquote>
 <p>解：</p>
-<p><strong>Alice和Bob传递秘密消息</strong></p>
-<ol>
-<li><strong>通信方案：</strong></li>
-</ol>
+<h5 id="1-通讯方案"><a href="#1-通讯方案" class="headerlink" title="1. 通讯方案"></a>1. 通讯方案</h5><p>设定：</p>
 <ul>
-<li>Alice 将分给Bob的红桃牌随机分配，并且每次传递一张牌时，根据是否为红桃确定一个二进制值。这使得Alice可以通过牌的分配方式传递秘密信息，而Eve无法直接推测出信息。</li>
+<li>Alice 将红桃 A 至红桃 Q 中的 12 张牌分成两组：6 张给 Bob，6 张留给自己。</li>
+<li>假设 Alice 将红桃 A, B, C, D, E, F 发送给 Bob（每张牌代表 1 位二进制信息）。</li>
+<li>Alice 和 Bob 事先约定一些编码方式，将每张牌与二进制数对应。</li>
 </ul>
-<ol start="2">
-<li><strong>9比特信息传递证明：</strong></li>
+<p>通讯步骤：</p>
+<ol>
+<li><strong>信息编码</strong>：<ul>
+<li>将 Alice 要传递的 9 比特消息M（例如 9 比特的二进制数）拆分为 9 位，分别用 6 张牌表示：<ul>
+<li>例如，0 可以用红桃 A 代表，1 用红桃 B 代表，以此类推，直到 6 张牌为止。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>生成密钥</strong>：<ul>
+<li>Alice 在发送消息之前，会先将自己的 6 张牌和 Bob 的 6 张牌混合在一起，进行排列组合。</li>
+<li>然后，Alice 从混合的牌中随机选择 6 张牌，并告知 Bob。</li>
+</ul>
+</li>
+<li><strong>信息传递</strong>：<ul>
+<li>Alice 将 6 张牌的顺序大声读出。Eve 可以听到这些内容，但不知道具体顺序和含义。</li>
+<li>Bob 根据 Alice 之前设定的编码方式解读这 6 张牌，得到 9 比特的信息M。</li>
+</ul>
+</li>
 </ol>
+<p>安全性分析:</p>
 <ul>
-<li>Alice通过不同的分配方案可以将9比特的秘密信息传递给Bob，确保Eve无法解出。完美安全性需要足够的随机性和保密性，传递9比特的消息是可能的；但传递10比特则需要更多的复杂性，无法保证完美安全。</li>
+<li>对 Eve 的安全性：<ul>
+<li>Eve 听到的牌的顺序无法反推 Alice 传达的 9 比特信息，因为她不知道每张牌具体代表的含义。</li>
+<li>Alice 和 Bob 使用的编码是私密的，即使 Eve 知道哪些牌被用来发送消息，也无法解码具体信息。</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息"><a href="#2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息" class="headerlink" title="2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息"></a>2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息</h5><p>9 比特信息的安全性:</p>
+<ul>
+<li>Alice 使用 6 张牌，可以组合成 2^6&#x3D;64 种不同的状态。</li>
+<li>9 比特信息需要 2^9 &#x3D; 512 种不同的状态，因此 Alice 可以通过 6 张牌的排列组合，生成多达 64 种状态中的一种来表示 9 比特的信息。</li>
+<li>由于每种组合都足够随机，Eve 无法推测 Alice 传达的信息。</li>
+</ul>
+<p>10 比特信息的不可能性:</p>
+<ul>
+<li>要传递 10 比特的信息，Alice 需要 2^10&#x3D;1024 种状态。</li>
+<li>使用 6 张牌，最多可以组合成 64 种状态，这远远不足以表示 10 比特的信息。</li>
+<li>因此，尽管 Alice 可以使用某种编码方式来发送 10 比特的信息，但由于她可用的状态数量（64 种）无法覆盖所需的状态数量（1024 种），这就导致了信息的不安全性。</li>
+</ul>
+<p>结论:</p>
+<ul>
+<li>Alice 可以通过合理的通讯方案安全地将 9 比特的信息传递给 Bob，Eve 无法获取任何关于消息 MMM 的信息。</li>
+<li>但是，使用相同的牌组合和编码方案，完美安全地传递 10 比特的信息是不可行的。</li>
 </ul>
 </blockquote>
 <hr>
 <ol start="5">
-<li>什么是数字信封？解释数字信封具有什么作用</li>
+<li><h3 id="什么是数字信封？解释数字信封具有什么作用"><a href="#什么是数字信封？解释数字信封具有什么作用" class="headerlink" title="什么是数字信封？解释数字信封具有什么作用"></a>什么是数字信封？解释数字信封具有什么作用</h3></li>
 </ol>
 <blockquote>
 <p>解：</p>
@@ -645,29 +688,184 @@
 </blockquote>
 <hr>
 <ol start="6">
-<li>说明什么时候需要撤销一个证书，如何撤销一个证书？</li>
+<li><h3 id="说明什么时候需要撤销一个证书，如何撤销一个证书？"><a href="#说明什么时候需要撤销一个证书，如何撤销一个证书？" class="headerlink" title="说明什么时候需要撤销一个证书，如何撤销一个证书？"></a>说明什么时候需要撤销一个证书，如何撤销一个证书？</h3></li>
 </ol>
 <blockquote>
 <p>解：</p>
 <p>当证书持有人的私钥泄露、证书过期、身份信息变更等情况下需要撤销证书。撤销证书可以通过发布<strong>证书撤销列表（CRL）</strong>或使用<strong>在线证书状态协议（OCSP）</strong>进行。</p>
+<p><strong>向证书颁发机构提交撤销请求</strong>：</p>
+<ul>
+<li>证书持有者需向其证书颁发机构（CA）提交撤销请求。通常，CA 会提供在线表单或 API 接口供用户提交撤销申请。</li>
+</ul>
+<p><strong>验证撤销请求</strong>：</p>
+<ul>
+<li>CA 会验证撤销请求的真实性，确保请求者是证书的合法持有者，通常需要提供身份验证信息。</li>
+</ul>
+<p><strong>更新证书撤销列表（CRL）</strong>：</p>
+<ul>
+<li>一旦撤销请求获得批准，CA 会将该证书的序列号添加到证书撤销列表（CRL）中。CRL 是一个包含所有已撤销证书的列表，通常会定期更新。</li>
+</ul>
+<p><strong>发布撤销信息</strong>：</p>
+<ul>
+<li>CA 会将更新后的 CRL 发布到其服务器上，用户和应用程序可以查询此列表以验证证书的有效性。</li>
+</ul>
+<p><strong>通知相关方</strong>：</p>
+<ul>
+<li>如果可能，证书持有者应通知所有依赖该证书的方，以便他们更新或撤销信任该证书的相关配置。</li>
+</ul>
 </blockquote>
 <hr>
 <ol start="7">
-<li>解释为什么 FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？</li>
+<li><h3 id="解释为什么-FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？"><a href="#解释为什么-FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？" class="headerlink" title="解释为什么 FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？"></a>解释为什么 FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？</h3></li>
 </ol>
 <blockquote>
 <p>解：</p>
-<p>在FTP主动模式下，服务器尝试主动连接客户端的高端口。然而，防火墙往往阻止了来自外部的主动连接请求，导致FTP数据连接无法建立。</p>
+<p>在 FTP 的主动模式下，服务器从其数据端口 <code>20</code> <strong>主动</strong>连接到客户端的指定端口。这会产生以下问题：</p>
+<ol>
+<li><strong>主动连接被阻止</strong>：<ul>
+<li>从防火墙的角度看，<em>服务器的数据连接是从外部发起的</em>，而状态检测防火墙一般会默认阻止这种从外部主动发起的连接，因为防火墙并没有看到客户端主动发起对该数据端口的请求。</li>
+<li>即便客户端已经通过控制连接发起了请求，但数据连接是由服务器主动发起，防火墙会认为这是未经过授权的连接，导致阻止该数据连接的建立。</li>
+</ul>
+</li>
+<li><strong>动态端口问题</strong>：<ul>
+<li>在主动模式下，客户端指定的端口号是动态生成的，而不是固定的端口。防火墙需要有能力动态识别这些随机端口号并做出相应的规则调整，否则无法处理这些随机的外部连接请求。</li>
+</ul>
+</li>
+</ol>
 </blockquote>
 <hr>
 <ol start="8">
-<li>网络协议和网络安全协议涉及到填充，给出填充的常用作用:</li>
+<li><h3 id="网络协议和网络安全协议涉及到填充，给出填充的常用作用"><a href="#网络协议和网络安全协议涉及到填充，给出填充的常用作用" class="headerlink" title="网络协议和网络安全协议涉及到填充，给出填充的常用作用:"></a>网络协议和网络安全协议涉及到填充，给出填充的常用作用:</h3></li>
 </ol>
 <blockquote>
 <p>解：</p>
 <p>填充用于确保数据块的长度满足分组加密算法的要求，同时可以防止明文攻击或长度攻击。</p>
+<ul>
+<li>对齐数据长度</li>
+<li>防止数据泄露</li>
+<li>消息完整性校验</li>
+<li>隐藏真实数据长度</li>
+<li>增强安全性</li>
+</ul>
 </blockquote>
-<p>9. </p>
+<ol start="9">
+<li><h3 id="PGP可以同时提供加密、完整性和认证保护"><a href="#PGP可以同时提供加密、完整性和认证保护" class="headerlink" title="PGP可以同时提供加密、完整性和认证保护"></a>PGP可以同时提供加密、完整性和认证保护</h3></li>
+</ol>
+<p>（1）请解释邮件发送端产生 PGP消息的具体操作流程？ </p>
+<p>（2）进一步地，实际使用时一个用户往往是有一系列的秘钥（首先，每个用户可能拥有多个秘钥对，一个用户也收集了人量别的用户的公钥，这里面每个用户也还可能不止一个公钥。）当 Alice收到一个来自 Bob的 PGP信息时，她怎样才能知道Bob采用的哪个秘钥进行加密和签名的，简要进行描述 </p>
+<p>（3）相应的用户和钥需要自行进行安全保存，显然不能直接明文存储，应该采用怎样的手段？</p>
+<blockquote>
+<p>解：</p>
+<p>1）邮件发送端产生 PGP 消息的具体操作流程：</p>
+<p>在发送端，生成 PGP 消息的过程分为以下几个步骤：</p>
+<ol>
+<li><strong>消息压缩</strong>：<ul>
+<li>PGP 首先将要发送的消息进行压缩，以减少数据大小和传输时间。压缩数据不仅能提高效率，还能增强加密的安全性，因为压缩后的数据更难被预测。</li>
+</ul>
+</li>
+<li><strong>消息加密</strong>：<ul>
+<li>生成一个<strong>会话密钥</strong>（随机生成的对称密钥），这个密钥会用于加密压缩后的消息数据。</li>
+<li>然后，用接收方（Bob）的<strong>公钥</strong>加密这个会话密钥。PGP 采用<strong>混合加密</strong>，即先使用对称加密（如 AES）加密消息，再用非对称加密（如 RSA）加密对称密钥。这样既保证了安全性，又提升了加密速度。</li>
+</ul>
+</li>
+<li><strong>消息签名</strong>：<ul>
+<li>为确保消息的完整性和来源认证，发送方（Alice）会生成消息的<strong>摘要</strong>（通过哈希算法，如 SHA），然后用自己的<strong>私钥</strong>对摘要进行加密，生成数字签名。</li>
+<li>数字签名可以验证消息在传输过程中是否被篡改，并且可以确认消息的发送者。</li>
+</ul>
+</li>
+<li><strong>合并消息</strong>：<ul>
+<li>最后，PGP 会将加密后的消息、加密的会话密钥和数字签名打包在一起，形成 PGP 消息，发送给接收方（Bob）。</li>
+</ul>
+</li>
+</ol>
+<p>整个过程确保了加密性、完整性、认证性，接收方能够解密并验证消息的真实性和完整性。</p>
+<p>2）Alice 如何知道 Bob 使用哪个秘钥进行加密和签名</p>
+<p>在实际应用中，一个用户可能拥有多个公私钥对，且收集了其他人的多个公钥。因此，Alice 在收到来自 Bob 的 PGP 消息时，需要确定 Bob 使用的具体秘钥。这通常通过以下步骤实现：</p>
+<ol>
+<li><strong>公钥标识</strong>：<ul>
+<li>PGP 公钥中包含一个称为<strong>Key ID</strong> 的字段，用于唯一标识秘钥对。当 Bob 使用某个秘钥对加密或签名消息时，这个秘钥的<strong>Key ID</strong> 会包含在加密后的消息中。</li>
+<li>当 Alice 接收到 Bob 的消息时，PGP 软件会从消息中读取<strong>Key ID</strong>，然后在 Alice 本地保存的公钥库中查找与该 ID 匹配的公钥。</li>
+</ul>
+</li>
+<li><strong>验证签名和解密</strong>：<ul>
+<li>Alice 的 PGP 软件首先根据消息中的 <strong>Key ID</strong> 找到相应的公钥，然后使用这个公钥验证 Bob 的签名。</li>
+<li>验证通过后，PGP 软件会使用这个公钥对加密的会话密钥进行解密，从而获取原始的对称会话密钥，最终用该会话密钥解密消息内容。</li>
+</ul>
+</li>
+</ol>
+<p>通过 <strong>Key ID</strong> 机制，Alice 可以确定 Bob 用的是哪个公钥进行的加密和签名，从而安全地解密和验证消息。</p>
+<p>3）用户密钥的安全存储方式：</p>
+<p>由于用户的私钥是非常敏感的信息，必须采取有效的手段来保证它的安全存储，防止被未经授权的人获取。通常有以下几种措施：</p>
+<ol>
+<li><strong>密钥加密（Key Encryption）</strong>：<ul>
+<li>PGP 系统会将用户的私钥加密后存储在硬盘上，用户需要输入<strong>口令短语（passphrase）</strong>来解锁和使用私钥。</li>
+<li>这种方式通过结合口令和加密技术确保即使密钥文件被盗，攻击者也无法直接使用私钥，除非知道正确的口令。</li>
+</ul>
+</li>
+<li><strong>硬件安全模块（HSM）</strong>：<ul>
+<li>使用<strong>硬件安全模块</strong>或<strong>智能卡</strong>等物理设备存储私钥，这类设备能够提供更高的安全性。私钥存储在硬件设备中，只有通过设备才能进行加密和签名操作，私钥不会离开设备。</li>
+</ul>
+</li>
+<li><strong>安全环境存储</strong>：<ul>
+<li>使用操作系统的<strong>安全存储机制</strong>，如 Windows 的凭据管理器、macOS 的钥匙串（Keychain）或 Linux 的 GnuPG 管理机制，这些工具都提供了加密和存储秘钥的功能，并通过操作系统的身份认证来限制访问。</li>
+</ul>
+</li>
+<li><strong>定期备份和更新</strong>：<ul>
+<li>私钥应进行安全备份，以防止因设备故障或遗失造成的密钥丢失。同时，用户应定期更新口令短语，并在密钥泄露的情况下迅速吊销旧的密钥并生成新的密钥对。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<ol start="10">
+<li><h3 id="NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓朴图如下所示）"><a href="#NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓朴图如下所示）" class="headerlink" title="NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓朴图如下所示）"></a>NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓朴图如下所示）</h3></li>
+</ol>
+<p><img src="/../images/image-20241015003404015.png" alt="image-20241015003404015"></p>
+<p>（1）从数据请求和应答两个方面解释一下从内部主机（假设为 192.168.3.1）对外进行访问（假设访间服务器 202.38.64.3的 WWW服务，端口为 WWW服务器的周知端口）的IP数据包变化过程和 NAT的处理方法？ </p>
+<p>（2）当内部主机 C需要对外提供 WWW服务，从而让所有的 Internet用户都能访问到其所提供的服务管理员需要做什么样的操作</p>
+<blockquote>
+<h5 id="1-从数据请求和应答两方面解释内部主机对外访问的IP数据包变化过程和-NAT-的处理方法？"><a href="#1-从数据请求和应答两方面解释内部主机对外访问的IP数据包变化过程和-NAT-的处理方法？" class="headerlink" title="(1) 从数据请求和应答两方面解释内部主机对外访问的IP数据包变化过程和 NAT 的处理方法？"></a>(1) 从数据请求和应答两方面解释内部主机对外访问的IP数据包变化过程和 NAT 的处理方法？</h5><p>假设内部主机 <code>192.168.3.1</code> 访问外部 Web 服务器 <code>202.38.64.3</code> 上的 WWW 服务，其 IP 数据包变化和 NAT 处理过程如下：</p>
+<ul>
+<li><strong>数据请求阶段</strong>：<ol>
+<li>内部主机发送请求：<ul>
+<li>主机 <code>192.168.3.1</code> 构造一个 HTTP 请求数据包，目的 IP 是 <code>202.38.64.3</code>，目的端口是 Web 服务器的周知端口 <code>80</code> (WWW 服务)，源 IP 是 <code>192.168.3.1</code>，源端口是本地动态分配的端口，比如 <code>12345</code>。</li>
+</ul>
+</li>
+<li>NAT 网关处理请求：<ul>
+<li>NAT 网关接收到该数据包后，会将源 IP 和源端口替换为 NAT 网关的外部 IP（如图所示为202.30.75.87）和一个新的端口号（例如6789）。NAT 记录表会保存这种映射关系，记录：<ul>
+<li>内部主机 <code>192.168.3.1:12345</code> 对应 NAT 外部 IP <code>202.30.75.87:6789</code>。</li>
+</ul>
+</li>
+<li>经过 NAT 处理后的数据包发送到 Internet，数据包的目的 IP 和端口不变，仍然是 <code>202.38.64.3:80</code>。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>数据应答阶段</strong>：<ol>
+<li>外部 Web 服务器应答：<ul>
+<li>Web 服务器 <code>202.38.64.3</code> 收到请求并返回响应数据包，源 IP 是 <code>202.38.64.3</code>，源端口为 <code>80</code>，目的 IP 是 NAT 网关的外部 IP <code>202.30.75.87</code>，目的端口为 <code>6789</code>。</li>
+</ul>
+</li>
+<li>NAT 网关处理应答：<ul>
+<li>NAT 网关根据之前记录的映射关系，识别出该数据包是为内部主机 <code>192.168.3.1</code> 准备的，将目的 IP 和目的端口还原为 <code>192.168.3.1:12345</code>，然后将数据包转发给内部主机。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>这样，内部主机成功接收到来自外部服务器的响应。</p>
+<h5 id="2-内部主机-C-需要对外提供-WWW-服务时，服务管理员需要做的操作："><a href="#2-内部主机-C-需要对外提供-WWW-服务时，服务管理员需要做的操作：" class="headerlink" title="(2) 内部主机 C 需要对外提供 WWW 服务时，服务管理员需要做的操作："></a>(2) 内部主机 C 需要对外提供 WWW 服务时，服务管理员需要做的操作：</h5><p>假设内部主机 <code>192.168.3.3</code>（图中的 C 主机）需要提供对外的 WWW 服务，管理员需要进行以下操作：</p>
+<ol>
+<li>**端口映射 (Port Forwarding)**：<ul>
+<li>在 NAT 网关上进行配置，创建一条端口映射规则。例如，将 NAT 网关的外部 IP（<code>202.30.75.87</code>）的端口 <code>80</code> 映射到内部主机 <code>192.168.3.3</code> 的端口 <code>80</code>。这样，任何从 Internet 发向 <code>202.30.75.87:80</code> 的 HTTP 请求都会转发到 <code>192.168.3.3:80</code>。</li>
+</ul>
+</li>
+<li><strong>配置防火墙</strong>：<ul>
+<li>如果有防火墙，确保允许 HTTP 流量（端口 <code>80</code> 或 <code>443</code>）通过，并且转发到内部主机 <code>192.168.3.3</code>。</li>
+</ul>
+</li>
+</ol>
+<p>通过这两步操作，外部用户就可以通过访问 NAT 网关的 IP（<code>202.30.75.87</code>）来访问内部主机 C 提供的 WWW 服务。</p>
+</blockquote>
 <h1 id="2021年"><a href="#2021年" class="headerlink" title="2021年"></a>2021年</h1>
         
       </div>
