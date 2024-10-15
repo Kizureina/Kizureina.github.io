@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003526608.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241015003404015.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-14T16:46:03.615Z">
+<meta property="article:modified_time" content="2024-10-15T16:47:00.068Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -398,7 +398,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.3k 词 
+            8.7k 词 
           </div>
         </div>
         
@@ -626,58 +626,23 @@
 </ol>
 <blockquote>
 <p>解：</p>
-<h5 id="1-通讯方案"><a href="#1-通讯方案" class="headerlink" title="1. 通讯方案"></a>1. 通讯方案</h5><p>设定：</p>
+<h5 id="1-通讯方案"><a href="#1-通讯方案" class="headerlink" title="1. 通讯方案"></a>1. 通讯方案</h5><p>两人的牌可以随机分配，但彼此可以计算出对方的牌，因此可以实现密钥协商。</p>
+<p>Alice将自己的所有牌代表的数字相乘得到密钥，Bob用12!除以自己牌数字的乘积即可得到Alice的密钥。</p>
+<p>然后将协商出的密钥作为一次一密的密钥，与明文异或，再将异或后的密文大声告诉Bob即可。</p>
+<h5 id="2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息"><a href="#2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息" class="headerlink" title="2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息"></a>2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息</h5><p>Alice 和 Bob 的分牌方式决定了共享密钥的大小和信息量。总共有 C(12,6)&#x3D;924 种分牌方式，其中 Alice 和 Bob 各持有 6 张牌。对于每一种分牌方式，Alice 和 Bob 都可以协商出一个唯一的共享密钥。</p>
 <ul>
-<li>Alice 将红桃 A 至红桃 Q 中的 12 张牌分成两组：6 张给 Bob，6 张留给自己。</li>
-<li>假设 Alice 将红桃 A, B, C, D, E, F 发送给 Bob（每张牌代表 1 位二进制信息）。</li>
-<li>Alice 和 Bob 事先约定一些编码方式，将每张牌与二进制数对应。</li>
+<li>这 924 种可能性对应的密钥数是log⁡2(924)≈9.85比特的信息量。因此，这个密钥空间足够大，足以保证 9 比特消息的完美安全传递。</li>
 </ul>
-<p>通讯步骤：</p>
-<ol>
-<li><strong>信息编码</strong>：<ul>
-<li>将 Alice 要传递的 9 比特消息M（例如 9 比特的二进制数）拆分为 9 位，分别用 6 张牌表示：<ul>
-<li>例如，0 可以用红桃 A 代表，1 用红桃 B 代表，以此类推，直到 6 张牌为止。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>生成密钥</strong>：<ul>
-<li>Alice 在发送消息之前，会先将自己的 6 张牌和 Bob 的 6 张牌混合在一起，进行排列组合。</li>
-<li>然后，Alice 从混合的牌中随机选择 6 张牌，并告知 Bob。</li>
-</ul>
-</li>
-<li><strong>信息传递</strong>：<ul>
-<li>Alice 将 6 张牌的顺序大声读出。Eve 可以听到这些内容，但不知道具体顺序和含义。</li>
-<li>Bob 根据 Alice 之前设定的编码方式解读这 6 张牌，得到 9 比特的信息M。</li>
-</ul>
-</li>
-</ol>
-<p>安全性分析:</p>
-<ul>
-<li>对 Eve 的安全性：<ul>
-<li>Eve 听到的牌的顺序无法反推 Alice 传达的 9 比特信息，因为她不知道每张牌具体代表的含义。</li>
-<li>Alice 和 Bob 使用的编码是私密的，即使 Eve 知道哪些牌被用来发送消息，也无法解码具体信息。</li>
-</ul>
-</li>
-</ul>
-<h5 id="2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息"><a href="#2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息" class="headerlink" title="2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息"></a>2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息</h5><p>9 比特信息的安全性:</p>
-<ul>
-<li>Alice 使用 6 张牌，可以组合成 2^6&#x3D;64 种不同的状态。</li>
-<li>9 比特信息需要 2^9 &#x3D; 512 种不同的状态，因此 Alice 可以通过 6 张牌的排列组合，生成多达 64 种状态中的一种来表示 9 比特的信息。</li>
-<li>由于每种组合都足够随机，Eve 无法推测 Alice 传达的信息。</li>
-</ul>
-<p>10 比特信息的不可能性:</p>
-<ul>
-<li>要传递 10 比特的信息，Alice 需要 2^10&#x3D;1024 种状态。</li>
-<li>使用 6 张牌，最多可以组合成 64 种状态，这远远不足以表示 10 比特的信息。</li>
-<li>因此，尽管 Alice 可以使用某种编码方式来发送 10 比特的信息，但由于她可用的状态数量（64 种）无法覆盖所需的状态数量（1024 种），这就导致了信息的不安全性。</li>
-</ul>
-<p>结论:</p>
-<ul>
-<li>Alice 可以通过合理的通讯方案安全地将 9 比特的信息传递给 Bob，Eve 无法获取任何关于消息 MMM 的信息。</li>
-<li>但是，使用相同的牌组合和编码方案，完美安全地传递 10 比特的信息是不可行的。</li>
-</ul>
+<p>当 Alice 通过一次一密传递 9 比特的消息时，Eve 面临 924 种可能的密钥，所以她无法区分出哪种密钥是正确的。因此，从信息论的角度来看，Eve 无法从密文中获得任何关于明文的信息，达到完美安全的传输。如果 Alice 尝试传递 10 比特的消息，这超出了密钥的熵（信息量），Eve 可以利用这多出的信息做推测，破坏完美安全性。</p>
+<p>一次一密依赖于密文对每个密钥都应该看起来是随机的、均匀分布的。但是，如果要传递的消息长度（10 比特）超过了密钥空间的信息量（9.85 比特），那么密文对于 Eve 来说就不再完全随机。Eve 可以利用这多出来的 0.15 比特信息，逐步缩小她对密钥的猜测范围。</p>
 </blockquote>
+<p>注意：一次一密（One-Time Pad, OTP）是 <strong>信息论意义上完美安全</strong> 的加密方式，但它的前提条件是：</p>
+<ol>
+<li><strong>密钥的长度必须至少等于消息的长度</strong></li>
+<li>密钥必须完全随机</li>
+<li>密钥必须只使用一次</li>
+<li>双方都必须准确共享该密钥。</li>
+</ol>
 <hr>
 <ol start="5">
 <li><h3 id="什么是数字信封？解释数字信封具有什么作用"><a href="#什么是数字信封？解释数字信封具有什么作用" class="headerlink" title="什么是数字信封？解释数字信封具有什么作用"></a>什么是数字信封？解释数字信封具有什么作用</h3></li>
@@ -855,18 +820,173 @@
 <p>这样，内部主机成功接收到来自外部服务器的响应。</p>
 <h5 id="2-内部主机-C-需要对外提供-WWW-服务时，服务管理员需要做的操作："><a href="#2-内部主机-C-需要对外提供-WWW-服务时，服务管理员需要做的操作：" class="headerlink" title="(2) 内部主机 C 需要对外提供 WWW 服务时，服务管理员需要做的操作："></a>(2) 内部主机 C 需要对外提供 WWW 服务时，服务管理员需要做的操作：</h5><p>假设内部主机 <code>192.168.3.3</code>（图中的 C 主机）需要提供对外的 WWW 服务，管理员需要进行以下操作：</p>
 <ol>
-<li>**端口映射 (Port Forwarding)**：<ul>
+<li>端口映射 (Port Forwarding)：<ul>
 <li>在 NAT 网关上进行配置，创建一条端口映射规则。例如，将 NAT 网关的外部 IP（<code>202.30.75.87</code>）的端口 <code>80</code> 映射到内部主机 <code>192.168.3.3</code> 的端口 <code>80</code>。这样，任何从 Internet 发向 <code>202.30.75.87:80</code> 的 HTTP 请求都会转发到 <code>192.168.3.3:80</code>。</li>
 </ul>
 </li>
-<li><strong>配置防火墙</strong>：<ul>
+<li>配置防火墙:<ul>
 <li>如果有防火墙，确保允许 HTTP 流量（端口 <code>80</code> 或 <code>443</code>）通过，并且转发到内部主机 <code>192.168.3.3</code>。</li>
 </ul>
 </li>
 </ol>
 <p>通过这两步操作，外部用户就可以通过访问 NAT 网关的 IP（<code>202.30.75.87</code>）来访问内部主机 C 提供的 WWW 服务。</p>
 </blockquote>
-<h1 id="2021年"><a href="#2021年" class="headerlink" title="2021年"></a>2021年</h1>
+<h1 id="2021年"><a href="#2021年" class="headerlink" title="2021年"></a>2021年</h1><h2 id="选择题-1"><a href="#选择题-1" class="headerlink" title="选择题"></a>选择题</h2><ol>
+<li>关于认证，错误的是：(D)</li>
+</ol>
+<p>A alice可用与bob的对称会话密钥作签名，给carol证明身份</p>
+<p>B alice可用与bob的对称会话密钥作签名，给bob证明身份</p>
+<p>C Alice可用自己的私钥证明自己的身份</p>
+<p>D Alice可用自己的公钥证明自己的身份</p>
+<ol start="2">
+<li>不是标准分组密码工作模式的是：(B)</li>
+</ol>
+<p>A CTR B ECB C CFB D CBC</p>
+<ol start="3">
+<li>D-H交换，错误的是：(D)</li>
+</ol>
+<p>A 易受中间人攻击</p>
+<p>B 用于对话中交换密钥</p>
+<p>C 不能通过截获交换的随机数得到会话密钥</p>
+<p>D 不支持一方离线</p>
+<ol start="4">
+<li><p>PGP工作顺序（签名-压缩-加密）</p>
+</li>
+<li><p>包过滤防火墙检查哪些分组（第一个(X)or每一个(O)）</p>
+</li>
+<li><p>哈希函数需要满足（单向、强碰撞、弱碰撞）</p>
+</li>
+<li><p>IPSec的SPI:</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>SPI</strong> 是 IPSec 中用于标识安全关联（SA）的一个唯一标识符。它用于区分不同的安全关联，并在处理 IPSec 数据包时确定正确的加密和解密参数。</p>
+</blockquote>
+<h2 id="填空题-1"><a href="#填空题-1" class="headerlink" title="填空题"></a>填空题</h2><p>1、 雪崩效应、代换和置乱改变消息的（）</p>
+<blockquote>
+<p><strong>雪崩效应</strong>：指输入的微小改变（如一个比特）会导致输出的极大变化。它改变了消息的比特模式，使得小的输入改变会引起加密结果的完全不同。</p>
+<p><strong>代换</strong>：指通过某种规则替换消息中的数据，也改变消息的比特模式。</p>
+<p><strong>置乱</strong>：指重新排列消息中的比特或字节，改变消息的比特模式</p>
+</blockquote>
+<p>2、 信息安全三个特性、分别被什么攻击所破坏</p>
+<blockquote>
+<ul>
+<li><strong>机密性（Confidentiality）</strong>：被<strong>窃听（Eavesdropping）</strong>或<strong>信息泄露（Data Breach）</strong>所破坏，未经授权的用户获取信息。</li>
+<li><strong>完整性（Integrity）</strong>：被<strong>篡改（Tampering）</strong>或<strong>伪造（Forgery）</strong>攻击所破坏，攻击者更改了信息内容。</li>
+<li><strong>可用性（Availability）</strong>：被<strong>拒绝服务攻击（Denial of Service, DoS）</strong>所破坏，使得合法用户无法访问系统或资源。</li>
+</ul>
+</blockquote>
+<p>3、 SET三主体:<strong>商家（Merchant）</strong>、<strong>持卡人（Cardholder）</strong>、<strong>收单行或发卡行（Acquirer&#x2F;Issuer）</strong></p>
+<p>4、 WLAN增强方案举例</p>
+<blockquote>
+<p><strong>WPA（Wi-Fi Protected Access）</strong>：替代原来的 WEP，增加了加密强度和身份验证机制。</p>
+<p><strong>WPA2</strong>：基于 AES 加密算法，增强了数据保护和网络访问控制。</p>
+<p><strong>WPA3</strong>：增强了个人和企业级无线网络的安全，提供更强的加密算法和保护机制。</p>
+</blockquote>
+<p>5、 AAA服务：认证授权计费</p>
+<p>6、 双重数字签名的表示：<code>E_pr[H( H(PI) || H(OI) )]</code></p>
+<p>7、 PGP保证兼容性采用了（MIME），原报文扩展了（64bit签名）</p>
+<p>8、 防火墙的分类:</p>
+<blockquote>
+<p><strong>包过滤防火墙（Packet Filtering Firewall）</strong>：基于 IP 地址、端口号和协议检查每个数据包。</p>
+<p><strong>状态检测防火墙（Stateful Inspection Firewall）</strong>：跟踪整个连接的状态，并根据连接状态进行过滤。</p>
+<p><strong>代理防火墙（Proxy Firewall）</strong>：通过代理服务器处理请求，隐藏内部网络的结构。</p>
+<p><strong>下一代防火墙（Next-Generation Firewall, NGFW）</strong>：结合了传统防火墙、入侵检测和防病毒功能。</p>
+</blockquote>
+<p>9、 SA由三元组标识：</p>
+<blockquote>
+<p><strong>SPI（Security Parameters Index）</strong>：唯一标识一个特定的安全关联。</p>
+<p><strong>目标 IP 地址（Destination IP Address）</strong>：标识数据包的目的地。</p>
+<p><strong>安全协议（Security Protocol Identifier）</strong>：标识是使用 AH（认证头部协议）还是 ESP（封装安全载荷协议）。</p>
+</blockquote>
+<h2 id="解答题-1"><a href="#解答题-1" class="headerlink" title="解答题"></a>解答题</h2><p>1、Feistel结构第i轮，用md5设计轮函数</p>
+<blockquote>
+<p>在 Feistel 结构中，每一轮的轮函数通常用于混淆输入。你可以将 MD5 哈希函数作为轮函数的一部分来处理输入和密钥。在第 i 轮中，轮函数可以设计为：<br>$$<br>Fi(Li,Ki)&#x3D;MD5(Li∣∣Ki)<br>$$<br>其中，LiL_iLi 是左半部分的输入，KiK_iKi 是当前轮的密钥，两个值被拼接后通过 MD5 进行哈希计算，输出作为轮函数的结果。</p>
+</blockquote>
+<p>2、在 GF(2 4 )域中，伪随机数发生器 xi+1＝axi mod b（x0、a、b 值忘了） (a)写出一个周期的输出 (b)最大周期是多少，a、b 要符合的条件，种子要符合的条件</p>
+<p>3、(a)RSA：给 m 加密，给 c 解密 (b)对一条消息的每个字节进行单独加密安全吗。安全给理由，不安全给攻击方法</p>
+<blockquote>
+<p>不安全。RSA 是基于模幂运算的，并不是每个字节独立加密的设计。对每个字节单独加密的方式容易导致重复模式和攻击方法，例如<strong>字典攻击</strong>。攻击者可以预计算所有可能的加密字节模式并通过匹配来解密整个消息。</p>
+</blockquote>
+<p>4、(a)s&#x3D;md mod p*q 中国剩余定理计算 RSA 签名 s1&#x3D;md mod p，s2&#x3D;md mod q。 (b)若 s1计算错误，s2正确，将 s 公开出去安全吗</p>
+<blockquote>
+<p>不安全。因为通过已知 s2s_2s2 和 sss 的关系，攻击者可以通过一定的计算推导出 s1s_1s1，并且可以进一步推导出一些私钥的相关信息，这样会破坏 RSA 的安全性。</p>
+</blockquote>
+<p>5、数字信封流程，功能和优势</p>
+<blockquote>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>用对称密钥加密消息。</li>
+<li>用接收方的公钥加密对称密钥。</li>
+<li>将加密的消息和加密的对称密钥一起发送给接收方。</li>
+</ol>
+<p><strong>功能</strong>：保证消息的机密性。使用对称加密来加密大数据提高效率，同时使用非对称加密安全地传输对称密钥。</p>
+<p><strong>优势</strong>：结合对称加密和非对称加密的优点，提高了加密速度，同时保障密钥传输的安全。</p>
+</blockquote>
+<p>6、认证和加密顺序不一样时各自的优缺点</p>
+<blockquote>
+<p><strong>先认证后加密（Authenticate-then-Encrypt, AtE）</strong>：</p>
+<ul>
+<li><strong>优点</strong>：接收方可以首先验证消息是否来自合法方，然后再解密，保证解密只针对有效消息。</li>
+<li><strong>缺点</strong>：在有些情况下，认证过程本身可能泄露部分加密信息。</li>
+</ul>
+<p><strong>先加密后认证（Encrypt-then-Authenticate, EtA）</strong>：</p>
+<ul>
+<li><strong>优点</strong>：加密的消息在认证前就已完全保密，认证过程不会泄露任何信息。</li>
+<li><strong>缺点</strong>：需要先进行加密，可能导致性能开销稍大。</li>
+</ul>
+</blockquote>
+<p>7、证书内容，谁产生，产生流程。证书撤销原因，撤销方法</p>
+<blockquote>
+<p>(a) <strong>证书内容</strong>：证书通常包含公钥、证书持有者的身份信息、证书颁发机构（CA）的签名、有效期等信息。</p>
+<p>(b) <strong>谁产生，产生流程</strong>：证书由 CA 生成。流程包括：</p>
+<ol>
+<li>用户生成密钥对并提交公钥和身份信息给 CA。</li>
+<li>CA 验证用户身份后，将公钥与身份信息绑定，生成证书，并用 CA 的私钥对其签名。</li>
+</ol>
+<p>(c) <strong>证书撤销原因</strong>：私钥泄露、证书到期、持有者身份不再有效等。</p>
+<p>(d) <strong>撤销方法</strong>：通过发布证书撤销列表（CRL）或在线证书状态协议（OCSP）。</p>
+</blockquote>
+<p>8、(a)IPSec 的 AH、ESP 作用 (b)画两种模式 AH 的位置 (c)画两种模式 AH 的认证范围</p>
+<blockquote>
+<p>(a) <strong>AH（Authentication Header）</strong>：提供数据包的完整性验证和来源身份认证，不提供加密。</p>
+<p><strong>ESP（Encapsulating Security Payload）</strong>：提供加密、完整性验证、和身份认证。</p>
+<p>(b) <strong>两种模式 AH 的位置</strong>：</p>
+<ul>
+<li><strong>传输模式（Transport Mode）</strong>：AH 位于 IP 包头之后，封装上层协议（如 TCP）。</li>
+<li><strong>隧道模式（Tunnel Mode）</strong>：AH 包裹整个原始 IP 数据包，包括包头。</li>
+</ul>
+<p>(c) <strong>两种模式下 AH 的认证范围</strong>：</p>
+<ul>
+<li><strong>传输模式</strong>：AH 仅认证 IP 数据包的载荷部分。</li>
+<li><strong>隧道模式</strong>：AH 认证整个 IP 数据包，包括包头和载荷。</li>
+</ul>
+</blockquote>
+<p>9、(a)PGP 流程（指明使用的算法）。 (b)pgp 接收者拥有的自己的和其他人的密钥很多，怎么确定 bob 使用哪个密钥对签名哪个密钥对加密。 (c)Alice 该怎么保管自己的私钥防止泄露。</p>
+<blockquote>
+<p>(a) <strong>PGP 流程</strong>：</p>
+<ol>
+<li>使用对称密钥（如 AES）加密消息。</li>
+<li>用接收方的公钥加密对称密钥。</li>
+<li>接收方用其私钥解密对称密钥，然后用该密钥解密消息。</li>
+</ol>
+<p>(b) <strong>确定 Bob 使用哪个密钥对签名哪个密钥对加密</strong>： PGP 使用公钥证书和密钥标识符来确定 Bob 的密钥。消息中包含公钥标识符，Bob 可以使用对应的私钥进行解密或签名验证。</p>
+<p>(c) <strong>Alice 保管私钥防止泄露</strong>：Alice 应该将私钥存储在安全的地方（如硬件安全模块或加密的密钥库）并设置强密码。</p>
+</blockquote>
+<p>10、(a)密钥派生及作用。 (b)什么是会话重用，作用？会话重用用在什么协议</p>
+<blockquote>
+<p>(a) <strong>密钥派生</strong>：从一个主密钥生成多个会话密钥或其他加密材料。用于提高安全性，防止长期密钥泄露导致所有加密内容被破解。</p>
+<p>(b) <strong>会话重用</strong>：在安全通信中，客户端和服务器可以在多个会话之间重用以前协商的会话密钥，避免重新进行完整的密钥协商过程，提升性能。会话重用通常用于 TLS 协议中。</p>
+</blockquote>
+<p>11、VPN的类型举例</p>
+<blockquote>
+<p><strong>远程访问 VPN</strong>：允许远程用户通过公共网络访问企业内部网络资源。</p>
+<p><strong>站点到站点 VPN</strong>：连接不同地理位置的分支机构，使它们通过 VPN 实现安全通信。</p>
+<p><strong>MPLS VPN</strong>：多协议标签交换 VPN，提供基于服务提供商的虚拟网络。</p>
+<p><strong>SSL VPN</strong>：使用 SSL&#x2F;TLS 协议建立加密通道，常用于通过浏览器访问网络资源。</p>
+<p>(IPSec、TLS)</p>
+</blockquote>
+
         
       </div>
 
