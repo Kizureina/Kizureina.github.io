@@ -34,8 +34,10 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003235729.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003526608.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241015003404015.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241016234546064.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241016234121333.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-15T16:47:00.068Z">
+<meta property="article:modified_time" content="2024-10-16T15:46:16.489Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -398,7 +400,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            8.7k 词 
+            11k 词 
           </div>
         </div>
         
@@ -985,6 +987,229 @@
 <p><strong>MPLS VPN</strong>：多协议标签交换 VPN，提供基于服务提供商的虚拟网络。</p>
 <p><strong>SSL VPN</strong>：使用 SSL&#x2F;TLS 协议建立加密通道，常用于通过浏览器访问网络资源。</p>
 <p>(IPSec、TLS)</p>
+</blockquote>
+<h1 id="2022年"><a href="#2022年" class="headerlink" title="2022年"></a>2022年</h1><h2 id="选择题-2"><a href="#选择题-2" class="headerlink" title="选择题"></a>选择题</h2><ol>
+<li>WEP缺点包括哪些，其中不包括哪个？( C )</li>
+</ol>
+<p>A. 所有设备都用一个密钥</p>
+<p>B. 40bit密钥</p>
+<p>C. 使用流密码加密</p>
+<p>D. 用CRC校验</p>
+<blockquote>
+<p>使用RC4流密码是特征，不是缺点</p>
+</blockquote>
+<ol start="2">
+<li>公钥和私钥的关系 ( A )</li>
+</ol>
+<p>A.私钥也能作为加密密钥</p>
+<p>B.公钥不需要也不可能保密</p>
+<p>C.D没争议，有脑子就会</p>
+<p>3．AAA不包括什么 ( D )</p>
+<p>A.授权</p>
+<p>B.认证</p>
+<p>C.计费</p>
+<p>D.审计</p>
+<ol start="4">
+<li>双重数字签名可以表示为：（ A ）</li>
+</ol>
+<p>A. E(PRa,(H(H(OI)||H(PI))))</p>
+<p>BCD在A基础上瞎改的</p>
+<ol start="5">
+<li>Feistel结构哪项说法是正确的：( D )</li>
+</ol>
+<p>A．每次都有一半的分组明文没有进行任何操作</p>
+<p>B．加解密过程完全一样</p>
+<p>C．明文开始被分为分组的一半分别进行操作</p>
+<p>D．轮函数中始终用初始密钥加密</p>
+<blockquote>
+<p>Feistel结构在每一轮中使用的是不同的<em>子密钥</em>（通过密钥调度算法生成的子密钥），而不是始终使用相同的初始密钥。</p>
+</blockquote>
+<ol start="6">
+<li>以下哪个为邮件提供了完整性和保密性：( A )</li>
+</ol>
+<p>A．S&#x2F;MIME</p>
+<p>B. stmp</p>
+<p>C. pop3</p>
+<p>D. SET</p>
+<ol start="7">
+<li>CBC分组模式以下哪个说法错误：( A )</li>
+</ol>
+<p>A.一组密文传输错误会导致后面所有密文无法正确解密</p>
+<p>B.明文输入时产生错误则会影响后续所有分组</p>
+<p>C.需要解密算法</p>
+<p>D.CBC可用于加密大量密文数据传输&#x2F;认证</p>
+<blockquote>
+<p>CBC明文出错导致后面所有无法加密，但密文出错只会导致当前和后一个无法解密</p>
+</blockquote>
+<h2 id="填空题-2"><a href="#填空题-2" class="headerlink" title="填空题"></a>填空题</h2><p>1.DES明文分组多少位(64),多少轮(16)。AES明文分组多少(128)，密钥最短多少(128)，最短密钥对应多少(10)轮，最长对于多少轮(14)。</p>
+<p>2.信息安全三特性是什么，什么攻击对应破坏了哪个特性</p>
+<blockquote>
+<p><strong>保密性</strong>（Confidentiality）：防止未经授权的访问。</p>
+<ul>
+<li>破坏：窃听攻击。</li>
+</ul>
+<p><strong>完整性</strong>（Integrity）：确保数据在传输或存储过程中没有被篡改。</p>
+<ul>
+<li>破坏：篡改攻击。</li>
+</ul>
+<p><strong>可用性</strong>（Availability）：确保合法用户能访问所需资源。</p>
+<ul>
+<li>破坏：拒绝服务（DoS）攻击。</li>
+</ul>
+</blockquote>
+<p>3.CFB分组模式下，32bit向量分组，密文传输错误后发现对应解密出的明文第10组到第20组全部出错，问原来密文分组中最少有几组出错，第一组出错是在哪组，最后一组出错是在哪组？</p>
+<blockquote>
+<p>密文传输错误影响的明文是基于反馈机制的。在32位的CFB模式下，第10组到第20组解密出的明文全部出错，表明错误影响了多个分组。</p>
+<p><strong>最少有几组密文出错</strong>：由于CFB的错误传播模式是逐组影响，传输错误影响的明文组数多于密文出错组数，所以最少只需要<strong>1组密文出错</strong>即可。</p>
+<p><strong>第一组出错</strong>：第10组明文出错，意味着第9组密文已经受到了错误影响。因此，<strong>第一组出错的密文</strong>应为<strong>第9组</strong>。</p>
+<p><strong>最后一组出错</strong>：明文的第20组受影响，最可能对应的密文组为<strong>第20组</strong>。</p>
+</blockquote>
+<p>4.DH交换计算（正常顺序的计算，没有已知结果反向求什么东西）</p>
+<p>5.RSA密文和明文的计算。常规，但计算量大。底数指数模数都是两位数的</p>
+<p>6.IPSec三元组是:</p>
+<blockquote>
+<p>SPI、目标IP地址、安全协议</p>
+</blockquote>
+<p>7.IPsec 中（AH）提供数据源认证，（ESP）提供数据保密性。</p>
+<p>8.PGP加密签名压缩顺序，报文扩展了多少</p>
+<blockquote>
+<p>顺序：先签名，然后压缩，再加密。</p>
+<p>PGP报文通常因压缩和数据结构而略微扩展，但具体扩展量取决于消息内容、密钥大小等。</p>
+<p>一般扩展64比特</p>
+</blockquote>
+<p>9.SSL基于传输层的（TCP）协议。</p>
+<h2 id="解答题-2"><a href="#解答题-2" class="headerlink" title="解答题"></a>解答题</h2><ol>
+<li>简述hash函数的三个性质（单向性，抗弱碰撞性，抗强碰撞性），用于签名的必须要满足哪些性质？</li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>单向性</strong>（Pre-image Resistance）：给定哈希值 H(x)，找到对应的原始输入 x 是计算上不可行的。这意味着从哈希值无法轻易推回原始数据。</li>
+<li><strong>抗弱碰撞性</strong>（Second Pre-image Resistance）：给定某个输入x，找到一个不同的输入 x′ 使得<code>H(x) = H(x′)</code>是计算上不可行的。</li>
+<li><strong>抗强碰撞性</strong>（Collision Resistance）：找到任意两个不同的输入x 和 x′ 使得<code>H(x) = H(x′)</code>是计算上不可行的。</li>
+</ul>
+<p><strong>用于签名的Hash函数必须满足</strong>：单向性、抗弱碰撞性、抗强碰撞性。因为签名要防止攻击者伪造信息或找到同样哈希值的伪造文件。</p>
+</blockquote>
+<ol start="2">
+<li>线性同余生成器<code>Xn = a * Xn-1 + b (mod M)</code>, 观测发现最大生成为39，现有序列5，31，23，</li>
+</ol>
+<p>(1)求M</p>
+<p>(2)求a，b (枚举和瞎猜均不给分)</p>
+<blockquote>
+<p>M明显是39 + 1 &#x3D; 40</p>
+<p>再代入三个序列写出一次同余方程组解即可（注意有两个解）</p>
+</blockquote>
+<ol start="3">
+<li>题目先给出了材料，Rabin的定义和计算方法，m*m&#x3D;C mod N，C&#x3D;16,N&#x3D;pq&#x3D;77已知，求解m所有可能的解，</li>
+</ol>
+<p>是否可以抵挡选择密文攻击，给出理由。</p>
+<blockquote>
+<p>Rabin 加密定义：m^2 &#x3D; C mod N，其中 C&#x3D;16, N &#x3D; pq &#x3D; 77。</p>
+<p>解密时，找到所有 m 使得 m^2 ≡ 16 mod 77。</p>
+<p>计算：m^2 &#x3D; 16 mod 77，使用分解 N &#x3D; 7 × 11 来求解。</p>
+<p><strong>选择密文攻击防御</strong>：Rabin加密无法抵挡选择密文攻击，因为选择密文攻击能够利用平方根性质进行解密。</p>
+</blockquote>
+<h3 id="知识点：不经意传输-Oblivious-Transfer"><a href="#知识点：不经意传输-Oblivious-Transfer" class="headerlink" title="知识点：不经意传输(Oblivious Transfer)"></a>知识点：不经意传输(Oblivious Transfer)</h3><p>情景1：◦ Alice有一个秘密，想用100元的价格卖给Bob。而Bob只有50元，秘密又不可分割。两人 协商的结果是：Bob付50元，以50%的几率得到消息；Alice对Bob是否得到消息不知情。 </p>
+<p>• Rabin的抽象描述： </p>
+<p>​	◦ Alice以0.5的概率给Bob传递了秘密 </p>
+<p>​	◦ Bob以0.5的概率得到Alice的秘密，以0.5的概率什么也得不到 </p>
+<p>​	◦ Alice对Bob是否获得秘密一无所知 </p>
+<p>• 协议（秘密是p和q）:</p>
+<p><img src="/../images/image-20241016234546064.png" alt="image-20241016234546064"></p>
+<ol start="4">
+<li>RSA盲签名，e&#x3D;9，n&#x3D;55，Alice拿M1文件给Bob让Bob签名，第二天Bob发现M2文件上被签上了名，其中M2&#x3D;6，A选择的盲化因子为2.</li>
+</ol>
+<p>（1）描述Alice骗取签名的流程</p>
+<p>（2）计算M1</p>
+<blockquote>
+<p><strong>Alice骗取签名的流程</strong>：</p>
+<ol>
+<li>Alice 选择一个盲化因子 r &#x3D; 2。</li>
+<li>Alice 计算 M′ &#x3D; M ⋅ r^e mod  n，并将 M′ 发送给 Bob 进行签名。</li>
+<li>Bob 返回 S′&#x3D;(M′)^d mod n。</li>
+<li>Alice 解除盲化：S &#x3D; S′⋅r^(−1) mod  n，得到 Bob 对 M 的签名。</li>
+</ol>
+<p><strong>计算M1</strong>： 通过已知的 M2 &#x3D; 6 和盲化因子 r &#x3D; 2，可以根据 RSA 公式反向计算 M1。</p>
+</blockquote>
+<h3 id="知识点：盲签名"><a href="#知识点：盲签名" class="headerlink" title="知识点：盲签名"></a>知识点：盲签名</h3><p>盲签名方案是发送者A和签名者B之间的协议 </p>
+<p>◦ 基本思想： </p>
+<p>​	• A发送给B一段消息，B对它签名并送回给A </p>
+<p>​	• 由这个签名，A能够计算B关于A预先所选消息m的签名 </p>
+<p>​	• 但B既不知道消息m，也不知道消息m的签名 </p>
+<p>◦ 目的： 防止B看到消息和签名</p>
+<p><img src="/../images/image-20241016234121333.png" alt="image-20241016234121333"></p>
+<ol start="5">
+<li>一个公司将文件上传到云盘中，设计一个系统满足：上传的人不知道谁将被授权，任何人都可以下载云盘中文件，但只有被授权的人才能解密被授权的文件；文件制作者制作并上传文件；授权部门负责授予权利，但不制作密钥；公司内任何信道都是公开的。</li>
+</ol>
+<blockquote>
+<p><strong>需求</strong>：上传者不知道谁会被授权，任何人可以下载，但只有授权者可以解密。</p>
+<p><strong>系统设计思路</strong>：</p>
+<ol>
+<li>文件制作者使用对称加密算法加密文件，生成密文和对称密钥。</li>
+<li>对称密钥使用公钥加密，授权者使用私钥解密密钥后可以解密文件。</li>
+<li>授权部门生成授权信息，控制哪些人有权限下载或解密文件。</li>
+<li>通过公钥基础设施（PKI）管理密钥的分发和使用。</li>
+</ol>
+</blockquote>
+<p>6．证书撤销和证书过期的区别，以及给出证书撤销的几个原因</p>
+<blockquote>
+<p><strong>证书过期</strong>：证书到达设定的有效期，不再被信任。</p>
+<p><strong>证书撤销</strong>：证书在到期前失效，可能是因为私钥泄露、主体不再可信或证书被误发。</p>
+<p><strong>撤销原因</strong>：</p>
+<ul>
+<li>私钥泄露或被盗。</li>
+<li>主体不再需要证书。</li>
+<li>证书的使用违反了政策或协议。</li>
+</ul>
+</blockquote>
+<ol start="7">
+<li>填充的应用场景及作用</li>
+</ol>
+<blockquote>
+<p><strong>场景</strong>：在对称加密中，明文块长度不足加密算法的分组长度时需要填充，如 AES、DES 分组加密。</p>
+<p><strong>作用</strong>：确保明文块满足分组加密的长度要求，防止数据长度泄露。</p>
+<ul>
+<li>对齐数据长度</li>
+<li>防止数据泄露</li>
+<li>消息完整性校验</li>
+<li>隐藏真实数据长度</li>
+<li>增强安全性</li>
+</ul>
+</blockquote>
+<ol start="8">
+<li>利用数字签名，设计一个”一个用户向另一个用户证明自己的身份”的流程。</li>
+</ol>
+<blockquote>
+<ol>
+<li>用户 A 生成消息并对其计算哈希值。</li>
+<li>用户 A 用自己的私钥对哈希值进行签名，生成数字签名。</li>
+<li>用户 A 将消息和签名发送给用户 B。</li>
+<li>用户 B 使用用户 A 的公钥验证签名，确认消息是由用户 A 发出的，且未被篡改。</li>
+</ol>
+</blockquote>
+<ol start="9">
+<li>ftp的主动模式为什么面对状态检测型防火墙往往不能成功进行数据连接？</li>
+</ol>
+<blockquote>
+<p>在 FTP 主动模式下，服务器主动连接客户端的随机端口。</p>
+<p>状态检测型防火墙通常阻止服务器主动发起的连接，导致数据连接无法建立，因为防火墙只允许客户端发起的连接。</p>
+</blockquote>
+<ol start="10">
+<li>什么是会话重用？为什么会使用会话重用？</li>
+</ol>
+<blockquote>
+<p><strong>定义</strong>：在 SSL&#x2F;TLS 协议中，客户端和服务器可以重用之前的会话状态，避免每次都重新进行完整的握手过程。</p>
+<p><strong>原因</strong>：会话重用减少了握手的时间和计算成本，特别是在高频次连接的场景下，有助于提高性能。</p>
+</blockquote>
+<ol start="11">
+<li>密钥派生的作用，密钥派生的流程。</li>
+</ol>
+<blockquote>
+<p><strong>作用</strong>：从一个主密钥（如会话密钥或根密钥）生成多个子密钥，确保每次通信使用不同的密钥，增强安全性。</p>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>主密钥结合上下文信息（如会话 ID、非对称加密参数等）生成密钥材料。</li>
+<li>通过密钥派生函数（如 HMAC 或 KDF）生成多个子密钥，用于不同的加密和认证操作。</li>
+</ol>
 </blockquote>
 
         
