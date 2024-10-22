@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B0FHXMTYNC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B0FHXMTYNC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>网络安全理论与协议笔记 | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="网络安全理论与协议大纲网络安全基本概念a) 网络安全特征；常见的不安全原因、因素；常见攻击手段  b) 网络安全模型、网络访问安全模型  PKI 体系a) PKI 基本概念、组成和基本结构  b) PKI 基本功能 、证书的生命周期、证书链、交叉认证  IPSec：AH、ESP 与 IKEa) 熟悉 SA、SAD&#x2F;SPD  b) IKE：相关密钥的推导和作用；认证和密钥协商过程  c)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络安全理论与协议笔记">
+<meta property="og:url" content="https://kizureina.github.io/2024/10/20/Note-of-Internet-Security-Theory/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="网络安全理论与协议大纲网络安全基本概念a) 网络安全特征；常见的不安全原因、因素；常见攻击手段  b) 网络安全模型、网络访问安全模型  PKI 体系a) PKI 基本概念、组成和基本结构  b) PKI 基本功能 、证书的生命周期、证书链、交叉认证  IPSec：AH、ESP 与 IKEa) 熟悉 SA、SAD&#x2F;SPD  b) IKE：相关密钥的推导和作用；认证和密钥协商过程  c)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020114945622.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020114929507.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020120015078.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020122739885.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020121650137.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020121623522.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020122201401.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241020122132725.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241023002642513.png">
+<meta property="article:published_time" content="2024-10-20T03:15:50.000Z">
+<meta property="article:modified_time" content="2024-10-22T16:33:30.835Z">
+<meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20241020114945622.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/links">Links</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/links">Links</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar2.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Advanced-Mathematics/" rel="tag">Advanced Mathematics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Anime/" rel="tag">Anime</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linear-Algebraic/" rel="tag">Linear Algebraic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/10 ">
+          十月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          九月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/06 ">
+          六月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          五月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          四月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          三月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          一月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          十二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2024/10/20/Note-of-Internet-Security-Theory/">网络安全理论与协议笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/14/Graduate-Entrance-Exam-Past-Papers-of-USTC-857/">中国科学技术大学 密码学与网络安全真题</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论&amp;级数笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/23/Log-of-interview-on-Sec/">2024秋招安全岗面经</a>
+          </li>
+        
+          <li>
+            <a href="/2024/08/01/Log-of-Summer-August/">暑假日志(八月)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Note-of-Internet-Security-Theory" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        网络安全理论与协议笔记
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-10-20T03:15:50.000Z" itemprop="datePublished">2024-10-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            9.3k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="网络安全理论与协议"><a href="#网络安全理论与协议" class="headerlink" title="网络安全理论与协议"></a>网络安全理论与协议</h1><h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><h3 id="网络安全基本概念"><a href="#网络安全基本概念" class="headerlink" title="网络安全基本概念"></a>网络安全基本概念</h3><p>a) 网络安全特征；常见的不安全原因、因素；常见攻击手段 </p>
+<p>b) 网络安全模型、网络访问安全模型 </p>
+<h3 id="PKI-体系"><a href="#PKI-体系" class="headerlink" title="PKI 体系"></a>PKI 体系</h3><p>a) PKI 基本概念、组成和基本结构 </p>
+<p>b) PKI 基本功能 、证书的生命周期、证书链、交叉认证 </p>
+<h3 id="IPSec：AH、ESP-与-IKE"><a href="#IPSec：AH、ESP-与-IKE" class="headerlink" title="IPSec：AH、ESP 与 IKE"></a>IPSec：AH、ESP 与 IKE</h3><p>a) 熟悉 SA、SAD&#x2F;SPD </p>
+<p>b) IKE：相关密钥的推导和作用；认证和密钥协商过程 </p>
+<p>c) AH&#x2F;ESP 头标、保护范围 </p>
+<p>d) 工作模式：传输模式和隧道模式 </p>
+<p>e) VPN 的种类、功能 </p>
+<p>f) IPSec VPN 的处理流程 </p>
+<h3 id="SSL-x2F-TLS"><a href="#SSL-x2F-TLS" class="headerlink" title="SSL&#x2F;TLS"></a>SSL&#x2F;TLS</h3><p>a) SSL 的基本层次结构、安全服务 </p>
+<p>b) SSL 协议的基本描述 </p>
+<p>c) 安全操作流程：握手协议、会话重用 </p>
+<p>d) 相关密钥的生成（派生方法） </p>
+<h3 id="防火墙和-NAT"><a href="#防火墙和-NAT" class="headerlink" title="防火墙和 NAT"></a>防火墙和 NAT</h3><p>a) 防火墙种类、功能 </p>
+<p>b) 包过滤型防火墙和状态检测型防火墙之间的差异 </p>
+<p>c) NAT 基本原理、作用； </p>
+<p>d) 数据访问 SNAT 和 DNAT 的处理流程和数据包的变化 </p>
+<p>e) 基本组网原理：交换机、路由器等的基本功能 </p>
+<h3 id="应用层安全和无线安全"><a href="#应用层安全和无线安全" class="headerlink" title="应用层安全和无线安全"></a>应用层安全和无线安全</h3><p>a) PGP 的基本功能、安全服务 </p>
+<p>b) SET 协议的基本概念、双重数字签名等 </p>
+<p>c) WLAN 的基本概念，WEP 安全服务、增强方案举例</p>
+<h2 id="1-网络安全基本概念"><a href="#1-网络安全基本概念" class="headerlink" title="1. 网络安全基本概念"></a>1. 网络安全基本概念</h2><h3 id="a-网络安全特征；常见的不安全原因、因素；常见攻击手段"><a href="#a-网络安全特征；常见的不安全原因、因素；常见攻击手段" class="headerlink" title="a) 网络安全特征；常见的不安全原因、因素；常见攻击手段"></a>a) <strong>网络安全特征；常见的不安全原因、因素；常见攻击手段</strong></h3><h4 id="1-网络安全特征"><a href="#1-网络安全特征" class="headerlink" title="1. 网络安全特征"></a>1. <strong>网络安全特征</strong></h4><ul>
+<li><strong>机密性</strong>：确保信息不会泄露给未经授权的用户或实体。</li>
+<li><strong>完整性</strong>：保证数据在传输或存储过程中未被非法修改或破坏。</li>
+<li><strong>可用性</strong>：确保授权用户可以随时访问并使用所需的信息。</li>
+<li><strong>可控性</strong>：具备控制信息传播及其内容的能力，防止未经授权的操作。</li>
+</ul>
+<h4 id="2-常见的不安全原因与因素"><a href="#2-常见的不安全原因与因素" class="headerlink" title="2. 常见的不安全原因与因素"></a>2. <strong>常见的不安全原因与因素</strong></h4><ul>
+<li><strong>物理因素</strong>：设备安全不足或电磁泄漏等问题可能导致信息泄露或设备损坏。</li>
+<li><strong>系统因素</strong>：系统漏洞、病毒感染和入侵等问题容易被利用进行攻击。</li>
+<li><strong>网络因素</strong>：网络协议漏洞、数据篡改、网络拥塞或拒绝服务攻击使得网络容易被攻击者利用。</li>
+<li><strong>管理因素</strong>：管理员安全意识薄弱或误操作可能导致安全策略缺陷，增加系统风险。</li>
+</ul>
+<h4 id="3-常见攻击手段"><a href="#3-常见攻击手段" class="headerlink" title="3. 常见攻击手段"></a>3. <strong>常见攻击手段</strong></h4><ul>
+<li><strong>社会工程</strong>：通过欺骗或伪装身份获取敏感信息，如钓鱼攻击。</li>
+<li><strong>口令破解</strong>：使用工具破解口令或通过窃听、猜测等方式获得用户凭证。</li>
+<li><strong>地址欺骗</strong>：伪造IP地址或电子邮件地址，假装是信任来源，进行欺诈性操作。</li>
+<li><strong>连接盗用</strong>：攻击者在合法连接建立后劫持会话，冒充一方与另一方通信。</li>
+<li><strong>网络窃听</strong>：监听网络通信，获取传输中的敏感信息。</li>
+<li><strong>数据篡改</strong>：截获并修改数据，破坏其完整性。</li>
+<li><strong>拒绝服务攻击（DoS）</strong>：通过大量请求阻塞系统或网络，导致服务不可用。</li>
+</ul>
+<hr>
+<h3 id="b-网络安全模型、网络访问安全模型"><a href="#b-网络安全模型、网络访问安全模型" class="headerlink" title="b) 网络安全模型、网络访问安全模型"></a>b) <strong>网络安全模型、网络访问安全模型</strong></h3><h4 id="1-网络安全模型"><a href="#1-网络安全模型" class="headerlink" title="1. 网络安全模型"></a>1. <strong>网络安全模型</strong></h4><p><img src="/../images/image-20241020114945622.png" alt="image-20241020114945622"></p>
+<p>网络安全模型用于保护数据在传输中的安全，主要目标是确保端到端的通信不受窃听、篡改或伪造。这种模型依赖于各种安全机制，如加密、身份认证和数据完整性保护，以防止恶意攻击。</p>
+<ul>
+<li><strong>主动攻击</strong>：更改或伪造数据流的攻击，如伪装、重放、篡改数据、拒绝服务。</li>
+<li><strong>被动攻击</strong>：窃听或监视数据流，获取敏感信息，如窃听攻击、流量分析。</li>
+</ul>
+<blockquote>
+<p>主动与被动攻击的区别：是否对目标系统有修改或者伪造。</p>
+<p>特点：主动攻击易于发现，难以防护；被动攻击难以发现，但易于防护。</p>
+</blockquote>
+<h4 id="2-网络访问安全模型"><a href="#2-网络访问安全模型" class="headerlink" title="2. 网络访问安全模型"></a>2. <strong>网络访问安全模型</strong></h4><p><img src="/../images/image-20241020114929507.png" alt="image-20241020114929507"></p>
+<p>网络访问安全模型侧重于保护网络本身免遭未经授权的访问和操作。通过访问控制、身份验证和资源管理，确保只有授权用户能够进入系统并操作特定资源。</p>
+<ul>
+<li><strong>认证</strong>：验证通信双方的身份，确保是合法用户。</li>
+<li><strong>访问控制</strong>：限制未经授权的用户访问网络资源。</li>
+<li><strong>数据机密性</strong>：通过加密保护数据不被泄露。</li>
+<li><strong>数据完整性</strong>：防止数据被篡改或破坏。</li>
+<li><strong>不可否认性</strong>：确保通信双方不能否认参与了通信或交易。</li>
+</ul>
+<blockquote>
+<h4 id="八类特定安全机制："><a href="#八类特定安全机制：" class="headerlink" title="八类特定安全机制："></a>八类特定安全机制：</h4><ul>
+<li><strong>加密</strong>：用加密算法对信息加密。保护信息的机密性</li>
+<li><strong>数字签名</strong>：用签名算法对信息进行计算，计算结果附加于信息单元。用于身份认证、数据完整性和非否认服务</li>
+<li><strong>访问控制</strong>：用于实施资源访问权限的机制</li>
+<li><strong>数据完整性</strong>：用于确保信息的完整性</li>
+<li><strong>认证交换</strong>：确保信息交换的实体是所声称的实体，通过信息交换以确保实体身份，包括公知密码、特征、位置信息等</li>
+<li><strong>流量填充</strong>：填充信息，防止流量分析</li>
+<li><strong>路由控制</strong>：能够为特定数据选择特定路由</li>
+<li><strong>公证</strong>：采用可信任的第三方以确保一些信息交换的性质</li>
+</ul>
+<h4 id="五类安全服务："><a href="#五类安全服务：" class="headerlink" title="五类安全服务："></a>五类安全服务：</h4><ul>
+<li><p><strong>认证</strong>（Authentication）:提供某个实体的身份保证</p>
+</li>
+<li><p>对等实体认证、数据源认证</p>
+</li>
+<li><p><strong>访问控制</strong>（Access control）:保护资源，防止对它的非法使用和操纵</p>
+</li>
+<li><p><strong>数据机密性</strong>（Data encryption）:保护信息不被泄露</p>
+</li>
+<li><p>连接保密性、无连接保密性、选择域保密性、流量保密性</p>
+</li>
+<li><p><strong>数据完整性</strong>（Integrity）:保护信息以防止非法篡改</p>
+</li>
+<li><p>具有恢复功能的连接完整性、无恢复功能的连接完整性、选择与连接完整性、无连接完整性、选择域无连接完整性</p>
+</li>
+<li><p><strong>不可否认性</strong>（No-repudiation）:防止参与通信的一方事后否认</p>
+</li>
+<li><p>源点的不可否认性、信宿的不可否认性</p>
+</li>
+</ul>
+<h4 id="安全机制与安全服务的关系："><a href="#安全机制与安全服务的关系：" class="headerlink" title="安全机制与安全服务的关系："></a>安全机制与安全服务的关系：</h4><table>
+<thead>
+<tr>
+<th><strong>安全服务</strong>&#x2F;<strong>安全机制</strong></th>
+<th><strong>加密</strong></th>
+<th><strong>数字签名</strong></th>
+<th><strong>访问控制</strong></th>
+<th><strong>完整性</strong></th>
+<th><strong>认证</strong></th>
+<th><strong>流量填充</strong></th>
+<th align="center"><strong>路由控制</strong></th>
+<th align="center"><strong>公证</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>对等实体认证</strong></td>
+<td><strong>Y</strong></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong>数据源认证</strong></td>
+<td><strong>Y</strong></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong>访问控制</strong></td>
+<td></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong>机密性</strong></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td align="center"><strong>Y</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong>流量机密性</strong></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td align="center"><strong>Y</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong>数据完整性</strong></td>
+<td><strong>Y</strong></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td><strong>非否认服务</strong></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td></td>
+<td align="center"></td>
+<td align="center"><strong>Y</strong></td>
+</tr>
+<tr>
+<td><strong>可用性</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td><strong>Y</strong></td>
+<td></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</blockquote>
+<blockquote>
+<h4 id="网络各层的安全协议："><a href="#网络各层的安全协议：" class="headerlink" title="网络各层的安全协议："></a>网络各层的安全协议：</h4><ul>
+<li>链路层：链路隧道协议、加密技术</li>
+<li>网络层：包过滤机制、NAT、IPsec协议、<strong>VPN</strong>（注意是在网络层）</li>
+<li><strong>传输层&#x2F;会话层 ：SSL&#x2F;TLS 协议</strong></li>
+<li>应用层：SHTTP、HTTPS、PGP、S&#x2F;MIME等</li>
+</ul>
+</blockquote>
+<h2 id="2-PKI体系"><a href="#2-PKI体系" class="headerlink" title="2. PKI体系"></a>2. PKI体系</h2><h3 id="a-PKI-基本概念、组成和基本结构"><a href="#a-PKI-基本概念、组成和基本结构" class="headerlink" title="a) PKI 基本概念、组成和基本结构"></a>a) <strong>PKI 基本概念、组成和基本结构</strong></h3><h4 id="1-PKI-基本概念"><a href="#1-PKI-基本概念" class="headerlink" title="1. PKI 基本概念"></a>1. <strong>PKI 基本概念</strong></h4><p>公钥基础设施（Public Key Infrastructure，PKI）是基于非对称加密算法的安全框架，主要用于提供安全服务，如身份认证、数据加密、数字签名等。PKI通过公钥和私钥的配对管理，支持信息的安全传输。它为电子商务、电子政务等应用中的信息安全提供了统一的标准和可信的第三方服务。</p>
+<ul>
+<li><strong>非对称加密</strong>：PKI利用非对称加密技术，其中公钥用于加密，私钥用于解密。</li>
+<li><strong>公钥证书</strong>：PKI使用证书来验证实体的身份，证书通过认证机构（CA）签发，保证公钥的真实性。</li>
+</ul>
+<h4 id="2-PKI的组成"><a href="#2-PKI的组成" class="headerlink" title="2. PKI的组成"></a>2. <strong>PKI的组成</strong></h4><ul>
+<li><strong>认证机构（CA，Certificate Authority）</strong>：负责签发、管理和撤销证书。CA是PKI体系中权威可信的第三方。</li>
+<li><strong>注册机构（RA，Registration Authority）</strong>：负责验证申请证书用户的身份，并将信息传递给CA进行证书签发。</li>
+<li><strong>证书库（Certification Library）</strong>：存储证书和证书撤销列表（CRL），供公众查询，通常使用LDAP协议进行访问。</li>
+<li><strong>密钥备份与恢复系统</strong>：确保加密密钥在丢失后能够恢复，以保证数据解密的连续性。</li>
+<li><strong>证书撤销列表（CRL，Certificate Revocation List）</strong>：当证书失效或被撤销时，CRL用于通知相关方证书不再有效。</li>
+</ul>
+<h4 id="3-证书的基本结构"><a href="#3-证书的基本结构" class="headerlink" title="3. 证书的基本结构"></a>3. <strong>证书的基本结构</strong></h4><p><img src="/../images/image-20241020120015078.png" alt="image-20241020120015078"></p>
+<ul>
+<li><strong>证书版本号</strong>：标识证书的版本。</li>
+<li><strong>证书序列号</strong>：CA分配的唯一标识符。</li>
+<li><strong>签名算法标识</strong>：指示用于生成证书签名的算法。</li>
+<li><strong>CA名称</strong>：签发证书的认证机构名称。</li>
+<li><strong>有效期</strong>：证书的起始和终止时间。</li>
+<li><strong>用户信息</strong>：证书持有者的身份信息和公钥。（&lt;&lt;–<em>证书的核心</em>）</li>
+<li><strong>扩展项</strong>：包括密钥用途、策略扩展等信息。</li>
+</ul>
+<hr>
+<h3 id="b-PKI-基本功能-、证书的生命周期、证书链、交叉认证"><a href="#b-PKI-基本功能-、证书的生命周期、证书链、交叉认证" class="headerlink" title="b) PKI 基本功能 、证书的生命周期、证书链、交叉认证"></a>b) <strong>PKI 基本功能 、证书的生命周期、证书链、交叉认证</strong></h3><h4 id="1-PKI-基本功能"><a href="#1-PKI-基本功能" class="headerlink" title="1. PKI 基本功能"></a>1. <strong>PKI 基本功能</strong></h4><ul>
+<li><strong>认证</strong>：通过数字证书验证实体身份，确保数据来源的真实性。</li>
+<li><strong>完整性</strong>：通过数字签名和消息摘要，确保数据在传输过程中的完整性，防止篡改。</li>
+<li><strong>保密性</strong>：通过数字信封技术，加密传输会话密钥，保证通信内容的保密性。</li>
+<li><strong>不可否认性</strong>：通过数字签名，防止通信双方事后否认参与过通信。</li>
+<li><strong>公证服务</strong>：CA作为可信第三方，为交易或通信提供公证服务，确保信息的合法性和真实性。</li>
+</ul>
+<h4 id="2-证书的生命周期"><a href="#2-证书的生命周期" class="headerlink" title="2. 证书的生命周期"></a>2. <strong>证书的生命周期</strong></h4><ul>
+<li><p><strong>初始化阶段</strong>：用户通过RA向CA申请证书，经过身份验证后，CA签发证书并将证书存储在证书库中，供公众查阅。</p>
+</li>
+<li><p><strong>使用阶段</strong>：证书持有者使用私钥进行数据签名，接收方通过验证证书和数字签名，确保数据来源的真实性。</p>
+</li>
+<li><p><strong>撤销阶段</strong>：当<strong>证书失效、用户密钥泄露或用户身份不再有效</strong>时，CA会将证书列入<strong>CRL</strong>，并通知各方证书已被撤销。</p>
+<ul>
+<li><blockquote>
+<p>何时需要撤销证书：用户私钥泄露，证书不被信任，CA不被信任，CA私钥泄露</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>证书更新</strong>：在证书即将过期时，CA可自动或手动更新证书，签发新的证书。</p>
+</li>
+</ul>
+<h4 id="3-证书链"><a href="#3-证书链" class="headerlink" title="3. 证书链"></a>3. <strong>证书链</strong></h4><p>证书链是一系列从终端用户证书到根CA证书的连续证书，用于验证证书的可信度。<strong>每一级证书由上一级CA签名</strong>，最终由根CA签名。验证时，接收方会从用户的证书开始，一直追溯到根CA，确保整个链条的可信性。</p>
+<blockquote>
+<p>示例：A&lt;&lt;B&gt;&gt;B&lt;&lt;C&gt;&gt;C&lt;&lt;D&gt;&gt;D&lt;&lt;E&gt;&gt;，此时建立了A和E的认证（安全获取E的公钥）</p>
+</blockquote>
+<h4 id="4-交叉认证"><a href="#4-交叉认证" class="headerlink" title="4. 交叉认证"></a>4. <strong>交叉认证</strong></h4><ul>
+<li><strong>交叉认证</strong>：在多个独立运行的PKI系统之间建立信任关系的方式。CA之间通过交叉签发证书，确保不同PKI体系中的用户可以互相验证证书。</li>
+<li><strong>信任模型</strong>：PKI体系的信任模型可以是层次模型、分布式模型或混合模型。层次模型中，根CA控制整个体系；分布式模型中，多个CA相互独立，但通过交叉认证建立信任；混合模型则结合了两者的特点。</li>
+</ul>
+<p>通过交叉认证，PKI可以实现全球互通性，支持跨域安全通信和数据交换。</p>
+<h2 id="3-IPSec"><a href="#3-IPSec" class="headerlink" title="3. IPSec"></a>3. IPSec</h2><h3 id="1-SA、SAD-x2F-SPD"><a href="#1-SA、SAD-x2F-SPD" class="headerlink" title="1. SA、SAD&#x2F;SPD"></a>1. <strong>SA、SAD&#x2F;SPD</strong></h3><ul>
+<li><p><strong>SA（Security Association）安全关联</strong>：在IPSec中，SA是通信双方之间的单向安全连接，用于指定加密和认证的方式。</p>
+<ul>
+<li><blockquote>
+<p>SA三元组：<strong>安全参数索引（SPI）、目的IP地址和使用的协议（AH或ESP）</strong>。</p>
+</blockquote>
+</li>
+<li><p>SA是<strong>单向</strong>的，因此在双向通信时，需要两个SA来分别保护每个方向的流量（<strong>不同方向的传输可能存在不同的策略</strong>）。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>SAD（Security Association Database）</strong>：数据库，<strong>存储所有<em>当前活动</em>的SA</strong>，每个SA条目包含认证和加密算法、密钥、序列号等（存储协商完成后的SA参数）。</p>
+</li>
+<li><p><strong>SPD（Security Policy Database）</strong>：数据库，定义<strong>IPSec处理的策略</strong>，用于决定哪些数据流需要进行IPSec处理，策略包括IPSec协议（AH或ESP）、操作模式（传输或隧道模式）等。</p>
+</li>
+</ul>
+<h3 id="2-IKE-相关密钥的推导和作用；认证和密钥协商过程"><a href="#2-IKE-相关密钥的推导和作用；认证和密钥协商过程" class="headerlink" title="2. IKE 相关密钥的推导和作用；认证和密钥协商过程"></a>2. <strong>IKE 相关密钥的推导和作用；认证和密钥协商过程</strong></h3><p><strong>IKE（Internet Key Exchange）</strong>：因特网密钥交换协议，是一个以受保护的方式<strong>动态协商IPsec SA</strong>的协议。</p>
+<p>IKE通过Diffie-Hellman密钥交换生成会话密钥，保护后续的IPSec数据传输。IKE还负责协商IPSec的SA，确保双方使用相同的加密算法、密钥和安全参数。密钥推导使用PRF函数生成不同用途的密钥，如SKEYID_d（派生密钥）、SKEYID_a（认证密钥）、SKEYID_e（加密密钥）。</p>
+<p><img src="/../images/image-20241020122739885.png" alt="image-20241020122739885"></p>
+<blockquote>
+<p>IKE密钥协商与DH的优势：</p>
+<ul>
+<li>可以防止阻塞&#x2F;拒绝服务攻击</li>
+<li>使用临时交互号防止重放攻击</li>
+<li>对DH交换的数据进行认证，防止中间人攻击</li>
+</ul>
+</blockquote>
+<h3 id="3-AH-x2F-ESP-头标、保护范围"><a href="#3-AH-x2F-ESP-头标、保护范围" class="headerlink" title="3. AH&#x2F;ESP 头标、保护范围"></a>3. <strong>AH&#x2F;ESP 头标、保护范围</strong></h3><ul>
+<li><p><strong>AH（Authentication Header）</strong>：认证<img src="/../images/image-20241020121650137.png" alt="image-20241020121650137"></p>
+<ul>
+<li>提供数据包的完整性和源身份认证，但<strong>不提供加密</strong>。</li>
+<li>AH的保护范围包括IP头和数据载荷，但不包括某些变化的IP头字段（如TTL）。</li>
+</ul>
+</li>
+<li><p><strong>ESP（Encapsulating Security Payload）</strong>：加密</p>
+<p>  <img src="/../images/image-20241020121623522.png" alt="image-20241020121623522"></p>
+<ul>
+<li>提供加密、数据完整性和源身份认证。</li>
+<li>ESP保护IP包的载荷，但不会对IP头本身进行认证或加密。</li>
+<li>ESP通常用于保证数据保密性和防止重播攻击。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-工作模式：传输模式和隧道模式"><a href="#4-工作模式：传输模式和隧道模式" class="headerlink" title="4. 工作模式：传输模式和隧道模式"></a>4. <strong>工作模式：传输模式和隧道模式</strong></h3><ul>
+<li><strong>传输模式（Transport Mode）</strong>：只保护IP包的<strong>载荷</strong>，主要用于端到端的通信，适合主机之间的通信。</li>
+<li><strong>隧道模式（Tunnel Mode）</strong>：保护整个IP包，将整个包封装在一个新的IP包中，用于网关到网关或网关到主机的通信。隧道模式常用于VPN，保护整个数据包。</li>
+</ul>
+<h3 id="5-VPN-的种类、功能"><a href="#5-VPN-的种类、功能" class="headerlink" title="5. VPN 的种类、功能"></a>5. <strong>VPN 的种类、功能</strong></h3><ul>
+<li>VPN（Virtual Private Network）：通过公用网络（如互联网）在远程用户或不同站点之间建立安全的通信通道。基于IPSec的VPN通常用于：<ul>
+<li><strong>站点到站点VPN</strong>：用于连接两个或多个局域网，通常用于公司分支机构之间的通信。</li>
+<li><strong>远程访问VPN</strong>：允许远程用户通过VPN访问公司内网资源。</li>
+<li><strong>客户端到站点VPN</strong>：用户使用VPN客户端软件连接到企业网络。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-IPSec-VPN-的处理流程"><a href="#6-IPSec-VPN-的处理流程" class="headerlink" title="6. IPSec VPN 的处理流程"></a>6. <strong>IPSec VPN 的处理流程</strong></h3><ol>
+<li><strong>SA协商</strong>：通过IKE协商IPSec的SA，包括加密和认证算法的选择。</li>
+<li><strong>AH&#x2F;ESP头的插入</strong>：根据所选择的IPSec协议（AH或ESP），在传输层或网络层插入对应的头标。</li>
+<li><strong>数据包的加密和认证</strong>：使用ESP进行加密或使用AH进行认证，保护数据的完整性和保密性。</li>
+<li><strong>SA生命周期管理</strong>：根据协商的参数，定期进行SA的重新协商或密钥更新，确保通信的持续安全。</li>
+</ol>
+<blockquote>
+<p>IPSec对外出IP分组的处理流程：</p>
+<p><img src="/../images/image-20241020122201401.png" alt="image-20241020122201401"></p>
+<p>IPSec对进入IP分组的处理流程：</p>
+<p><img src="/../images/image-20241020122132725.png" alt="image-20241020122132725"></p>
+</blockquote>
+<h2 id="4-SSL-x2F-TLS"><a href="#4-SSL-x2F-TLS" class="headerlink" title="4. SSL&#x2F;TLS"></a>4. SSL&#x2F;TLS</h2><h3 id="a-SSL-的基本层次结构和安全服务"><a href="#a-SSL-的基本层次结构和安全服务" class="headerlink" title="a) SSL 的基本层次结构和安全服务"></a>a) SSL 的基本层次结构和安全服务</h3><p><strong>SSL 基本层次结构</strong>：<br>SSL 协议是在传输层（TCP 之上）实现的安全协议，分为两个主要层次：</p>
+<ol>
+<li><strong>记录层</strong>：管理数据传输，提供数据加密、完整性保护。</li>
+<li><strong>握手层</strong>：在通信开始时建立安全参数，包括身份认证和密钥协商。</li>
+</ol>
+<p><strong>SSL 提供的安全服务</strong>：</p>
+<ol>
+<li><strong>身份认证</strong>：验证客户端和服务器的合法性，通常通过 X.509 证书实现。</li>
+<li><strong>数据保密性</strong>：通过对称加密算法（如 DES、Triple DES、AES、RC4 等）确保数据在传输过程中无法被窃听。</li>
+<li><strong>数据完整性</strong>：通过 MAC（消息认证码）和散列算法（如 MD5 或 SHA-1）来确保数据未被篡改。</li>
+</ol>
+<h3 id="b-SSL-协议的基本描述"><a href="#b-SSL-协议的基本描述" class="headerlink" title="b) SSL 协议的基本描述"></a>b) SSL 协议的基本描述</h3><p>SSL（Secure Socket Layer）是一种为客户端和服务器之间的通信提供加密通道的协议，最初由 Netscape 开发，现已被 TLS 取代。SSL 使用公钥和对称密钥加密技术来确保数据的机密性、完整性和身份认证。它通过记录协议和握手协议来管理连接。</p>
+<ul>
+<li><strong>握手协议</strong>：在会话开始时协商加密算法、认证身份并生成会话密钥。</li>
+<li><strong>记录协议</strong>：负责加密和解密实际传输的数据，并确保数据的完整性。</li>
+</ul>
+<p>SSL&#x2F;TLS 采用的是分层结构，记录协议在握手协议之上运行，提供机密性和完整性保护。</p>
+<h3 id="c-安全操作流程：握手协议、会话重用"><a href="#c-安全操作流程：握手协议、会话重用" class="headerlink" title="c) 安全操作流程：握手协议、会话重用"></a>c) 安全操作流程：握手协议、会话重用</h3><p><strong>握手协议</strong>：<br>SSL 握手协议包括多个阶段：</p>
+<ol>
+<li><strong>客户端发送 ClientHello 消息</strong>：包含支持的 SSL 版本、加密算法、会话 ID 以及随机数。</li>
+<li><strong>服务器回应 ServerHello 消息</strong>：选择 SSL 版本、加密算法，并返回会话 ID 和随机数。</li>
+<li><strong>服务器发送证书（可选）</strong>：用于客户端验证服务器身份。</li>
+<li><strong>密钥交换</strong>：客户端生成 Pre-Master Secret，通过服务器的公钥加密后发送给服务器。</li>
+<li><strong>生成主密钥（Master Secret）</strong>：客户端和服务器利用 Pre-Master Secret 以及双方的随机数生成 Master Secret。</li>
+<li><strong>更改密码规范</strong>：双方通知对方开始使用协商好的加密算法和密钥。</li>
+<li><strong>握手完成</strong>：双方交换 Finished 消息，确保握手过程未被篡改，之后即可开始加密通信。</li>
+</ol>
+<p><strong>会话重用</strong>：<br>会话重用允许客户端和服务器在相同会话 ID 下重用以前协商的加密参数，避免重新进行完整的握手过程。通过这一机制，SSL 减少了握手时使用的计算资源，并加快了连接建立速度。</p>
+<h3 id="d-相关密钥的生成（派生方法）"><a href="#d-相关密钥的生成（派生方法）" class="headerlink" title="d) 相关密钥的生成（派生方法）"></a>d) 相关密钥的生成（派生方法）</h3><p><strong>密钥生成与派生</strong>：</p>
+<ol>
+<li><p><strong>预主密钥（Pre-Master Secret）</strong>：客户端生成 48 字节的 Pre-Master Secret，并使用服务器的公钥加密后发送。</p>
+</li>
+<li><p>主密钥（Master Secret）</p>
+<p> ：客户端和服务器使用相同的 Pre-Master Secret 和随机数生成 Master Secret，公式为：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Master Secret = PRF(Pre-Master Secret, <span class="string">&quot;master secret&quot;</span>, ClientHello.random + ServerHello.random)[<span class="number">0.</span><span class="number">.47</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>派生会话密钥</strong>：Master Secret 被用来生成加密密钥、MAC 密钥和初始化向量（IV），分别用于数据的加密和完整性保护。这些密钥由 Master Secret 和随机数结合通过特定的伪随机函数（PRF）派生。SSL 3.0 和 TLS 1.0 使用不同的密钥派生方法。</p>
+</li>
+</ol>
+<p>在此过程中，SSL 使用了 HMAC、MD5、SHA-1 等算法来确保密钥生成的安全性。</p>
+<h2 id="5-防火墙和-NAT"><a href="#5-防火墙和-NAT" class="headerlink" title="5. 防火墙和 NAT"></a>5. 防火墙和 NAT</h2><h3 id="a-防火墙种类、功能"><a href="#a-防火墙种类、功能" class="headerlink" title="a) 防火墙种类、功能"></a>a) 防火墙种类、功能</h3><p><strong>防火墙种类</strong>：</p>
+<ol>
+<li><strong>包过滤型防火墙（Packet Filtering Firewall）</strong>：基于IP和传输层协议（如TCP&#x2F;UDP）的头信息过滤数据包，决定是否转发或丢弃数据包。</li>
+<li><strong>状态检测防火墙（Stateful Inspection Firewall）</strong>：除了基于头信息过滤，还跟踪<strong>连接的状态</strong>，通过建立连接记录来判断数据包的合法性。</li>
+<li><strong>应用级网关防火墙（Application-level Firewall）</strong>：在<strong>应用层上针对特定应用协议</strong>（如HTTP、FTP）进行数据包过滤，支持内容级别的安全控制。</li>
+<li><strong>代理服务型防火墙（Circuit-level Gateway）</strong>：通过代理服务，将外部访问与内部资源隔离，提供通信过程的中继和隔离功能。</li>
+<li><strong>复合型防火墙（Hybrid Firewall）</strong>：结合包过滤、状态检测和应用级网关技术，提供更为综合的安全防护能力。</li>
+</ol>
+<p><strong>防火墙的功能</strong>：</p>
+<ol>
+<li><strong>访问控制</strong>：过滤、代理、隔断外部对内部网络的非法访问。</li>
+<li><strong>加密与认证</strong>：实现VPN等加密通信，提供用户身份验证。</li>
+<li><strong>地址翻译（NAT）</strong>：隐藏内部网络结构，映射外部IP。</li>
+<li><strong>日志与审计</strong>：记录网络访问情况，提供安全审计与报警。</li>
+<li><strong>负载均衡与流量控制</strong>：优化流量分布，防止资源耗尽。</li>
+<li><strong>内容过滤</strong>：扫描传输数据，阻止恶意内容或不安全流量（如病毒、恶意网址）。</li>
+</ol>
+<h3 id="b-包过滤型防火墙和状态检测型防火墙之间的差异"><a href="#b-包过滤型防火墙和状态检测型防火墙之间的差异" class="headerlink" title="b) 包过滤型防火墙和状态检测型防火墙之间的差异"></a>b) 包过滤型防火墙和状态检测型防火墙之间的差异</h3><ol>
+<li>包过滤型防火墙：<ul>
+<li>基于网络层的规则，直接分析<strong>每个独立的数据包</strong>。</li>
+<li>优点：简单高效、对用户透明、易于实现。</li>
+<li>缺点：<strong>无法识别连接的状态</strong>，不能处理多包攻击，不能验证数据流的上下文，无法进行用户认证。</li>
+</ul>
+</li>
+<li>状态检测型防火墙：<ul>
+<li>不仅检查<strong>每个数据包</strong>，还跟踪<strong>连接的状态</strong>，确保数据包符合当前连接状态。</li>
+<li>优点：能够防范基于连接上下文的攻击，处理复杂协议更为有效，安全性较高。</li>
+<li>缺点：需要维护大量连接状态信息，消耗更多的系统资源。</li>
+</ul>
+</li>
+</ol>
+<h3 id="c-NAT-基本原理、作用"><a href="#c-NAT-基本原理、作用" class="headerlink" title="c) NAT 基本原理、作用"></a>c) NAT 基本原理、作用</h3><p><strong>NAT（Network Address Translation）</strong>：NAT 是一种地址转换技术，用于在私有网络和公有网络之间进行 IP 地址的转换。它可以将私有 IP 地址转换为公共 IP 地址，以隐藏内部网络结构并减少公有 IP 地址的需求。</p>
+<p><strong>NAT 的作用</strong>：</p>
+<ol>
+<li><strong>地址复用</strong>：通过将多个私有 IP 地址映射到一个公共 IP 地址，缓解 IP 地址短缺问题。</li>
+<li><strong>网络隔离</strong>：隐藏内部网络结构，增强网络安全。</li>
+<li><strong>负载均衡</strong>：通过动态映射，分配外部请求到不同的内部服务器，实现流量均衡。</li>
+</ol>
+<h3 id="d-数据访问-SNAT-和-DNAT-的处理流程和数据包的变化"><a href="#d-数据访问-SNAT-和-DNAT-的处理流程和数据包的变化" class="headerlink" title="d) 数据访问 SNAT 和 DNAT 的处理流程和数据包的变化"></a>d) 数据访问 SNAT 和 DNAT 的处理流程和数据包的变化</h3><p>两种NAT：源地址NAT与目的地址NAT：</p>
+<ol>
+<li>SNAT（Source NAT）：用于改变数据包的<strong>源 IP 地址</strong>。典型应用是<strong>内网设备访问公网</strong>时，NAT 将内网设备的私有 IP 地址转换为公网 IP 地址。<ul>
+<li>处理流程：<ul>
+<li>数据包从内部主机发送到 NAT 设备。</li>
+<li>NAT 设备将数据包的源 IP 地址替换为公共 IP 地址，并记录映射关系。</li>
+<li>外部网络接收数据包并响应时，NAT 将响应数据包的目标 IP 地址还原为内部主机的私有 IP。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DNAT（Destination NAT）：用于改变数据包的<strong>目标 IP 地址</strong>，常用于实现<strong>外网访问内网服务</strong>。<ul>
+<li>处理流程：<ul>
+<li>外部设备发出请求，数据包到达 NAT 设备。</li>
+<li>NAT 将目标 IP 地址转换为内部网络服务器的 IP 地址，并将数据包转发到目标主机。</li>
+<li>内部服务器响应时，NAT 再次修改数据包的源 IP 地址，将其恢复为外部设备原始请求的目标 IP。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="e-基本组网原理：交换机、路由器等的基本功能"><a href="#e-基本组网原理：交换机、路由器等的基本功能" class="headerlink" title="e) 基本组网原理：交换机、路由器等的基本功能"></a>e) 基本组网原理：交换机、路由器等的基本功能</h3><ol>
+<li><strong>交换机（Switch）</strong>：<ul>
+<li>工作在数据链路层（第二层）。</li>
+<li>主要用于在同一网络中的多个设备之间建立连接，基于 MAC 地址进行数据帧的转发。</li>
+<li>通过交换技术提高网络性能，减少冲突域。</li>
+</ul>
+</li>
+<li><strong>路由器（Router）</strong>：<ul>
+<li>工作在网络层（第三层）。</li>
+<li>负责在不同网络之间转发数据包，基于 IP 地址决定数据包的最佳传输路径。</li>
+<li>提供广域网连接，支持不同的子网和协议间的通信。</li>
+</ul>
+</li>
+</ol>
+<p>这些网络设备共同构建网络通信的基础，交换机用于本地网络中的通信，而路由器则连接不同网络并实现跨网络的数据转发。</p>
+<h3 id="课后题：分析FTP主动模式和-被动模式下，包过滤型和状态检测型两种防火墙的过滤策略"><a href="#课后题：分析FTP主动模式和-被动模式下，包过滤型和状态检测型两种防火墙的过滤策略" class="headerlink" title="课后题：分析FTP主动模式和 被动模式下，包过滤型和状态检测型两种防火墙的过滤策略"></a>课后题：分析FTP主动模式和 被动模式下，包过滤型和状态检测型两种防火墙的过滤策略</h3><blockquote>
+<p>在讨论防火墙的过滤策略前，了解 FTP 的两种工作模式很重要。</p>
+<ol>
+<li><strong>FTP 主动模式（Active Mode）</strong>：<ul>
+<li>客户端通过端口 21 与服务器建立控制连接，并告诉服务器它在哪个端口（通常大于 1023）接收数据连接。</li>
+<li>服务器从其 20 号端口主动连接客户端指定的端口，进行数据传输。</li>
+</ul>
+</li>
+<li><strong>FTP 被动模式（Passive Mode）</strong>：<ul>
+<li>客户端通过端口 21 建立控制连接。</li>
+<li>服务器被动地开放一个高端口（大于 1023）并告知客户端，客户端再连接该端口来进行数据传输。</li>
+</ul>
+</li>
+</ol>
+<h3 id="包过滤型防火墙的过滤策略"><a href="#包过滤型防火墙的过滤策略" class="headerlink" title="包过滤型防火墙的过滤策略"></a>包过滤型防火墙的过滤策略</h3><p><strong>包过滤型防火墙</strong>通过预设的规则，根据数据包的源地址、目标地址、源端口、目标端口和协议等信息进行过滤。</p>
+<h4 id="1-主动模式下的过滤策略"><a href="#1-主动模式下的过滤策略" class="headerlink" title="1. 主动模式下的过滤策略"></a>1. 主动模式下的过滤策略</h4><ul>
+<li><strong>控制连接</strong>：允许客户端的任何高端口连接到服务器的 21 号端口。<ul>
+<li>规则示例：允许 <strong>出站 TCP</strong> 数据包从客户端高端口连接到服务器的 21 号端口。</li>
+<li>允许 <strong>入站 TCP</strong> 数据包从服务器的 21 号端口返回到客户端的高端口。</li>
+</ul>
+</li>
+<li><strong>数据连接</strong>：服务器会从其 20 号端口主动连接到客户端的高端口，这要求防火墙开放客户端的高端口。<ul>
+<li>规则示例：允许 <strong>入站 TCP</strong> 数据包从服务器的 20 号端口连接到客户端的高端口。</li>
+<li>允许 <strong>出站 TCP</strong> 数据包从客户端的高端口返回到服务器的 20 号端口。</li>
+</ul>
+</li>
+</ul>
+<p><strong>问题</strong>：由于服务器在主动模式下发起数据连接，客户端的防火墙必须开放大量高端口，增加了攻击面。</p>
+<h4 id="2-被动模式下的过滤策略"><a href="#2-被动模式下的过滤策略" class="headerlink" title="2. 被动模式下的过滤策略"></a>2. 被动模式下的过滤策略</h4><ul>
+<li><strong>控制连接</strong>：同主动模式，允许客户端从高端口连接到服务器的 21 号端口。<ul>
+<li>规则示例：允许 <strong>出站 TCP</strong> 数据包从客户端高端口连接到服务器的 21 号端口。</li>
+<li>允许 <strong>入站 TCP</strong> 数据包从服务器 21 号端口返回到客户端的高端口。</li>
+</ul>
+</li>
+<li><strong>数据连接</strong>：服务器在被动模式下开放高端口，客户端连接该高端口。<ul>
+<li>规则示例：允许 <strong>出站 TCP</strong> 数据包从客户端高端口连接到服务器指定的高端口。</li>
+<li>允许 <strong>入站 TCP</strong> 数据包从服务器的高端口返回到客户端的高端口。</li>
+</ul>
+</li>
+</ul>
+<p><strong>问题</strong>：需要开放服务器的动态高端口以允许数据连接，但比主动模式更安全。</p>
+<h3 id="状态检测型防火墙的过滤策略"><a href="#状态检测型防火墙的过滤策略" class="headerlink" title="状态检测型防火墙的过滤策略"></a>状态检测型防火墙的过滤策略</h3><p><strong>状态检测防火墙</strong>能够跟踪连接的状态信息，不仅基于 IP 和端口进行过滤，还能根据连接状态动态生成规则。这提高了安全性和效率。</p>
+<h4 id="1-主动模式下的过滤策略-1"><a href="#1-主动模式下的过滤策略-1" class="headerlink" title="1. 主动模式下的过滤策略"></a>1. 主动模式下的过滤策略</h4><ul>
+<li><p>控制连接</p>
+<p>  ：跟踪 FTP 控制连接，识别出客户端和服务器之间的控制会话。</p>
+<ul>
+<li>规则示例：跟踪并允许控制连接的状态变化。</li>
+</ul>
+</li>
+<li><p>数据连接</p>
+<p>  ：当控制连接中检测到 PORT 命令，防火墙可以动态允许服务器从 20 号端口连接客户端的高端口，而不需要提前开放大量高端口。</p>
+<ul>
+<li>规则示例：在控制连接中监测到 PORT 命令后，动态生成允许服务器 20 号端口访问客户端指定高端口的规则。</li>
+</ul>
+</li>
+</ul>
+<p><strong>优势</strong>：动态生成的规则大大减少了开放端口的范围，提高了安全性。</p>
+<h4 id="2-被动模式下的过滤策略-1"><a href="#2-被动模式下的过滤策略-1" class="headerlink" title="2. 被动模式下的过滤策略"></a>2. 被动模式下的过滤策略</h4><ul>
+<li><strong>控制连接</strong>：与主动模式相同，跟踪控制连接的状态。<ul>
+<li>规则示例：跟踪并允许控制连接的状态变化。</li>
+</ul>
+</li>
+<li><strong>数据连接</strong>：当防火墙检测到 PASV 命令时，它会动态开放服务器返回的高端口，并允许客户端连接该端口进行数据传输。<ul>
+<li>规则示例：检测到 PASV 命令后，动态生成允许客户端访问服务器指定高端口的规则。</li>
+</ul>
+</li>
+</ul>
+<p><strong>优势</strong>：不需要预先开放所有服务器高端口，而是根据实际连接动态开放，大幅提高了安全性。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><strong>包过滤型防火墙</strong>：只能根据静态规则过滤数据包，主动模式下需要开放大量高端口，不太安全；被动模式下也需要开放服务器高端口，存在攻击面。</li>
+<li><strong>状态检测型防火墙</strong>：通过动态跟踪 FTP 控制连接，可以根据 FTP 命令动态开放相应的端口，大大提高了安全性和灵活性。</li>
+</ul>
+</blockquote>
+<h2 id="6-应用层安全和无线安全"><a href="#6-应用层安全和无线安全" class="headerlink" title="6. 应用层安全和无线安全"></a>6. 应用层安全和无线安全</h2><h3 id="a-PGP-的基本功能、安全服务"><a href="#a-PGP-的基本功能、安全服务" class="headerlink" title="a) PGP 的基本功能、安全服务"></a>a) PGP 的基本功能、安全服务</h3><p><strong>PGP（Pretty Good Privacy）</strong>是用于电子邮件和文件加密的安全协议，提供如下基本功能和安全服务：</p>
+<blockquote>
+<p>注意流程顺序不可改变：签名 - 压缩 - 加密<strong>（在压缩前签名，压缩后加密）</strong> </p>
+</blockquote>
+<ol>
+<li><strong>加密</strong>：PGP 使用对称加密算法（如 IDEA、3-DES 或 CAST-128）加密邮件内容。为解决对称密钥分发问题，PGP 使用接收者的公钥加密一次性会话密钥，然后将加密后的会话密钥和邮件一起发送。</li>
+<li><strong>认证</strong>：PGP 支持数字签名，通过使用发件人的私钥对消息摘要（使用 SHA-1 或 MD5 计算）进行签名，以确保消息的来源和不可抵赖性。接收者使用发件人的公钥验证签名。</li>
+<li><strong>压缩</strong>：为了节省存储空间并提高加密效率，PGP 在加密之前压缩邮件。先签名再压缩，以确保签名针对未压缩的内容。</li>
+<li><strong>兼容性</strong>：PGP 使用 Radix-64 编码将二进制加密数据转换为 ASCII 字符，确保兼容所有电子邮件系统。</li>
+<li><strong>分段与重组</strong>：当邮件超过长度限制时，PGP 自动将其分段，并在接收端重新组装。</li>
+</ol>
+<p><strong>PGP 提供的安全服务</strong>：</p>
+<ul>
+<li><strong>机密性</strong>：通过加密确保邮件内容仅能被指定的接收者解密和查看。</li>
+<li><strong>认证性</strong>：通过数字签名确认发件人的身份。</li>
+<li><strong>完整性</strong>：通过消息摘要和签名确保邮件在传输过程中未被篡改。</li>
+<li><strong>不可抵赖性</strong>：发送者无法否认其发送的消息，因为签名是用其私钥生成的。</li>
+</ul>
+<h3 id="b-SET-协议的基本概念、双重数字签名"><a href="#b-SET-协议的基本概念、双重数字签名" class="headerlink" title="b) SET 协议的基本概念、双重数字签名"></a>b) SET 协议的基本概念、双重数字签名</h3><p><strong>SET（Secure Electronic Transaction）协议</strong>是由 Visa 和 MasterCard 为了保障互联网信用卡交易的安全性而开发的协议。它是一个为电子商务设计的开放规范，确保交易中涉及的各方数据的机密性、完整性和身份认证。</p>
+<p><strong>SET 协议的基本概念</strong>：</p>
+<ol>
+<li><strong>信息的机密性</strong>：通过加密确保信用卡信息和交易细节的机密性。</li>
+<li><strong>数据完整性</strong>：通过数字签名和哈希函数（如 SHA-1）确保传输过程中数据未被篡改。</li>
+<li><strong>身份认证</strong>：通过使用 X.509 数字证书对持卡人、商家和支付网关进行身份认证，确保交易参与方的合法性。</li>
+<li><strong>不可抵赖性</strong>：使用 RSA 签名保证交易的不可抵赖性。</li>
+</ol>
+<p><strong>双重数字签名（Dual Signature）</strong>：</p>
+<ul>
+<li><strong>概念</strong>：在 SET 中，双重签名用于在信用卡支付中同时保护订单信息和支付信息，并将其分离。商家可以看到订单信息，但不能看到支付信息；银行可以看到支付信息，但不能查看订单信息。这种机制通过双重签名来实现。</li>
+</ul>
+<p><img src="/../images/image-20241023002642513.png" alt="image-20241023002642513"></p>
+<ul>
+<li><strong>实现过程</strong>：<ul>
+<li>客户分别生成两个哈希值：一个用于订单信息，另一个用于支付信息。</li>
+<li>将这两个哈希值连接起来，并对其进行签名，生成双重签名。</li>
+<li>商家和银行可以验证双重签名，确保交易信息的完整性和机密性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="c-WLAN-的基本概念，WEP-安全服务、增强方案举例"><a href="#c-WLAN-的基本概念，WEP-安全服务、增强方案举例" class="headerlink" title="c) WLAN 的基本概念，WEP 安全服务、增强方案举例"></a>c) WLAN 的基本概念，WEP 安全服务、增强方案举例</h3><h4 id="1-WLAN-的基本概念"><a href="#1-WLAN-的基本概念" class="headerlink" title="1. WLAN 的基本概念"></a>1. WLAN 的基本概念</h4><p><strong>WLAN（无线局域网，Wireless Local Area Network）</strong>是一种通过无线电波连接终端设备（如笔记本、手机）和网络的技术，通常用于短距离内的网络通信。它可以通过无线接入点（Access Point, AP）提供局域网的连接，主要特点包括：</p>
+<ul>
+<li><strong>灵活性</strong>：WLAN 安装方便，用户可以在接入点覆盖范围内自由移动。</li>
+<li><strong>易于部署</strong>：无需有线连接，网络部署更加简便。</li>
+<li><strong>应用广泛</strong>：WLAN 被广泛应用于家庭、企业以及公共场所的互联网接入。</li>
+</ul>
+<p><strong>WLAN 标准</strong>：</p>
+<ul>
+<li><strong>IEEE 802.11 系列标准</strong>：是 WLAN 的主要协议族，包含多个不同的版本，例如 802.11b、802.11g、802.11a、802.11n、802.11ac 等，提供不同频段和速率的无线通信服务。</li>
+</ul>
+<p><strong>WLAN 的架构</strong>：</p>
+<ul>
+<li><strong>Ad-hoc 模式</strong>：不依赖接入点，设备间直接通信，适用于小型临时网络。</li>
+<li><strong>Infrastructure 模式</strong>：所有设备通过接入点连接，形成局域网，是主流的 WLAN 架构。</li>
+</ul>
+<h4 id="2-WEP-安全服务"><a href="#2-WEP-安全服务" class="headerlink" title="2. WEP 安全服务"></a>2. WEP 安全服务</h4><p><strong>WEP（Wired Equivalent Privacy，等效于有线保密）</strong>是 WLAN 的早期安全协议，旨在提供类似于有线网络的保密性。它的设计目的是防止未经授权的用户访问无线网络并保护无线数据传输的机密性和完整性。WEP 的安全服务包括：</p>
+<ul>
+<li><strong>访问控制</strong>：要求所有连接 WLAN 的设备共享一个静态密钥，只有拥有正确 WEP 密钥的用户才能接入网络。</li>
+<li><strong>数据机密性</strong>：使用 RC4 流加密算法对数据进行加密，确保通信内容无法被第三方窃听。WEP 使用一个 40-bit 或 104-bit 的密钥，加上 24-bit 的初始化向量（IV）生成密钥流来加密数据。</li>
+<li><strong>数据完整性</strong>：使用 CRC-32（循环冗余校验）来确保数据在传输过程中未被篡改。</li>
+</ul>
+<p><strong>WEP 的工作流程</strong>：</p>
+<ol>
+<li><strong>密钥共享</strong>：所有 WLAN 设备共享一个静态的对称密钥。</li>
+<li><strong>加密数据</strong>：发送方通过 RC4 算法对数据进行加密，生成密文。</li>
+<li><strong>校验完整性</strong>：发送方使用 CRC-32 对数据进行校验，并将校验值附加到加密后的数据中。</li>
+</ol>
+<h4 id="3-WEP-的安全弱点"><a href="#3-WEP-的安全弱点" class="headerlink" title="3. WEP 的安全弱点"></a>3. WEP 的安全弱点</h4><p>虽然 WEP 提供了基本的加密和完整性检查，但其设计存在多个严重的安全漏洞：</p>
+<ul>
+<li><strong>IV 长度不足</strong>：WEP 使用的 24-bit IV 过短，容易出现 IV 重复。攻击者可以通过捕获大量无线数据包，利用重复的 IV 值破解加密密钥。</li>
+<li><strong>RC4 弱点</strong>：RC4 算法存在已知的密钥调度攻击漏洞，攻击者可以通过分析弱密钥流推断出 WEP 密钥。</li>
+<li><strong>CRC-32 不安全</strong>：WEP 使用的 CRC-32 校验具有线性特性，攻击者可以通过修改数据包并重新计算校验值来进行攻击。</li>
+<li><strong>静态密钥</strong>：所有设备共享同一个静态密钥，没有动态密钥管理机制，增加了密钥泄露的风险。</li>
+</ul>
+<h4 id="4-WEP-的增强方案举例"><a href="#4-WEP-的增强方案举例" class="headerlink" title="4. WEP 的增强方案举例"></a>4. WEP 的增强方案举例</h4><p>为了应对 WEP 的安全弱点，后来提出了多种增强方案，主要包括：</p>
+<ol>
+<li><strong>WPA（Wi-Fi Protected Access）</strong>：<ul>
+<li><strong>过渡方案</strong>：WPA 是一种临时解决方案，用来替代 WEP，直到 IEEE 802.11i 标准（即 WPA2）正式通过。它可以兼容旧设备，提供更强的安全性。</li>
+<li><strong>TKIP（临时密钥完整性协议，Temporal Key Integrity Protocol）</strong>：WPA 引入了 TKIP，动态生成每个会话的加密密钥，并增加了 IV 长度（48-bit），有效减少了 IV 重复问题。</li>
+<li><strong>消息完整性检查</strong>：WPA 使用更强的消息完整性检查算法（MIC，Message Integrity Check），防止篡改攻击。</li>
+</ul>
+</li>
+<li><strong>WPA2（Wi-Fi Protected Access II）</strong>：<ul>
+<li><strong>最终方案</strong>：WPA2 是 802.11i 标准的一部分，完全替代 WEP，提供更高的安全性。</li>
+<li><strong>AES 加密</strong>：WPA2 使用 AES（Advanced Encryption Standard）作为加密算法，提供更强的机密性。</li>
+<li><strong>CCMP 模式</strong>：WPA2 使用 CCMP（Counter Mode with Cipher Block Chaining Message Authentication Code Protocol）作为加密和认证协议，确保数据包的机密性、完整性和源验证。</li>
+</ul>
+</li>
+<li><strong>802.1X 认证</strong>：<ul>
+<li><strong>基于端口的网络访问控制</strong>：802.1X 提供了基于 RADIUS 等外部服务器的认证机制，支持动态分配密钥，防止静态密钥问题。</li>
+<li><strong>EAP 扩展认证协议</strong>：802.1X 支持多种认证方式（如 EAP-TLS、EAP-PEAP 等），提高身份认证的灵活性和安全性。</li>
+</ul>
+</li>
+<li><strong>WAPI（WLAN Authentication and Privacy Infrastructure）</strong>：<ul>
+<li><strong>中国标准</strong>：WAPI 是中国提出的 WLAN 安全标准，采用了椭圆曲线加密算法和对称加密算法，提供强大的认证和加密服务，尽管其算法未公开。</li>
+</ul>
+</li>
+</ol>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/10/14/Graduate-Entrance-Exam-Past-Papers-of-USTC-857/"
+      title="中国科学技术大学 密码学与网络安全真题"
+     >
+
+    <p class="title-text">
+      
+        中国科学技术大学 密码学与网络安全真题
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({
+          el: '#vcomments',
+          appId: "j9YBSIHTlRyfuvPQqY50ARfV-gzGzoHsz",
+          appKey: "Q7s9zRzne9zaSVrroDR2wgO8"
+      })
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
