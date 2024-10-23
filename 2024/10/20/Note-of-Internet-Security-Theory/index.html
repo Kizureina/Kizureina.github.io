@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241020122132725.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241023002642513.png">
 <meta property="article:published_time" content="2024-10-20T03:15:50.000Z">
-<meta property="article:modified_time" content="2024-10-22T16:33:30.835Z">
+<meta property="article:modified_time" content="2024-10-23T16:18:16.018Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -404,7 +404,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            9.3k 词 
+            9.4k 词 
           </div>
         </div>
         
@@ -750,7 +750,7 @@
 <li><strong>数据保密性</strong>：通过对称加密算法（如 DES、Triple DES、AES、RC4 等）确保数据在传输过程中无法被窃听。</li>
 <li><strong>数据完整性</strong>：通过 MAC（消息认证码）和散列算法（如 MD5 或 SHA-1）来确保数据未被篡改。</li>
 </ol>
-<h3 id="b-SSL-协议的基本描述"><a href="#b-SSL-协议的基本描述" class="headerlink" title="b) SSL 协议的基本描述"></a>b) SSL 协议的基本描述</h3><p>SSL（Secure Socket Layer）是一种为客户端和服务器之间的通信提供加密通道的协议，最初由 Netscape 开发，现已被 TLS 取代。SSL 使用公钥和对称密钥加密技术来确保数据的机密性、完整性和身份认证。它通过记录协议和握手协议来管理连接。</p>
+<h3 id="b-SSL-协议的基本描述"><a href="#b-SSL-协议的基本描述" class="headerlink" title="b) SSL 协议的基本描述"></a>b) SSL 协议的基本描述</h3><p>SSL（Secure Socket Layer）是一种为客户端和服务器之间的通信提供加密通道的协议，最初由 Netscape 开发，现已被 TLS 取代。SSL 使用<strong>公钥和对称密钥加密技术</strong>来确保数据的机密性、完整性和身份认证。它通过记录协议和握手协议来管理连接。</p>
 <ul>
 <li><strong>握手协议</strong>：在会话开始时协商加密算法、认证身份并生成会话密钥。</li>
 <li><strong>记录协议</strong>：负责加密和解密实际传输的数据，并确保数据的完整性。</li>
@@ -766,13 +766,12 @@
 <li><strong>更改密码规范</strong>：双方通知对方开始使用协商好的加密算法和密钥。</li>
 <li><strong>握手完成</strong>：双方交换 Finished 消息，确保握手过程未被篡改，之后即可开始加密通信。</li>
 </ol>
-<p><strong>会话重用</strong>：<br>会话重用允许客户端和服务器在相同会话 ID 下重用以前协商的加密参数，避免重新进行完整的握手过程。通过这一机制，SSL 减少了握手时使用的计算资源，并加快了连接建立速度。</p>
+<p><strong>会话重用</strong>：<br>会话重用允许客户端和服务器在<strong>相同会话 ID</strong> 下重用以前协商的加密参数，避免重新进行完整的握手过程。通过这一机制，SSL 减少了握手时使用的计算资源，并加快了连接建立速度。</p>
 <h3 id="d-相关密钥的生成（派生方法）"><a href="#d-相关密钥的生成（派生方法）" class="headerlink" title="d) 相关密钥的生成（派生方法）"></a>d) 相关密钥的生成（派生方法）</h3><p><strong>密钥生成与派生</strong>：</p>
 <ol>
 <li><p><strong>预主密钥（Pre-Master Secret）</strong>：客户端生成 48 字节的 Pre-Master Secret，并使用服务器的公钥加密后发送。</p>
 </li>
-<li><p>主密钥（Master Secret）</p>
-<p> ：客户端和服务器使用相同的 Pre-Master Secret 和随机数生成 Master Secret，公式为：</p>
+<li><p><strong>主密钥（Master Secret）</strong>：客户端和服务器使用相同的 Pre-Master Secret 和随机数生成 Master Secret，公式为：</p>
  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Master Secret = PRF(Pre-Master Secret, <span class="string">&quot;master secret&quot;</span>, ClientHello.random + ServerHello.random)[<span class="number">0.</span><span class="number">.47</span>]</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>派生会话密钥</strong>：Master Secret 被用来生成加密密钥、MAC 密钥和初始化向量（IV），分别用于数据的加密和完整性保护。这些密钥由 Master Secret 和随机数结合通过特定的伪随机函数（PRF）派生。SSL 3.0 和 TLS 1.0 使用不同的密钥派生方法。</p>
@@ -896,14 +895,12 @@
 <p><strong>问题</strong>：需要开放服务器的动态高端口以允许数据连接，但比主动模式更安全。</p>
 <h3 id="状态检测型防火墙的过滤策略"><a href="#状态检测型防火墙的过滤策略" class="headerlink" title="状态检测型防火墙的过滤策略"></a>状态检测型防火墙的过滤策略</h3><p><strong>状态检测防火墙</strong>能够跟踪连接的状态信息，不仅基于 IP 和端口进行过滤，还能根据连接状态动态生成规则。这提高了安全性和效率。</p>
 <h4 id="1-主动模式下的过滤策略-1"><a href="#1-主动模式下的过滤策略-1" class="headerlink" title="1. 主动模式下的过滤策略"></a>1. 主动模式下的过滤策略</h4><ul>
-<li><p>控制连接</p>
-<p>  ：跟踪 FTP 控制连接，识别出客户端和服务器之间的控制会话。</p>
+<li><p>控制连接：跟踪 FTP 控制连接，识别出客户端和服务器之间的控制会话。</p>
 <ul>
 <li>规则示例：跟踪并允许控制连接的状态变化。</li>
 </ul>
 </li>
-<li><p>数据连接</p>
-<p>  ：当控制连接中检测到 PORT 命令，防火墙可以动态允许服务器从 20 号端口连接客户端的高端口，而不需要提前开放大量高端口。</p>
+<li><p>数据连接：当控制连接中检测到 PORT 命令，防火墙可以动态允许服务器从 20 号端口连接客户端的高端口，而不需要提前开放大量高端口。</p>
 <ul>
 <li>规则示例：在控制连接中监测到 PORT 命令后，动态生成允许服务器 20 号端口访问客户端指定高端口的规则。</li>
 </ul>
@@ -911,14 +908,10 @@
 </ul>
 <p><strong>优势</strong>：动态生成的规则大大减少了开放端口的范围，提高了安全性。</p>
 <h4 id="2-被动模式下的过滤策略-1"><a href="#2-被动模式下的过滤策略-1" class="headerlink" title="2. 被动模式下的过滤策略"></a>2. 被动模式下的过滤策略</h4><ul>
-<li><strong>控制连接</strong>：与主动模式相同，跟踪控制连接的状态。<ul>
+<li><strong>控制连接</strong>：与主动模式相同，跟踪控制连接的状态。</li>
 <li>规则示例：跟踪并允许控制连接的状态变化。</li>
-</ul>
-</li>
-<li><strong>数据连接</strong>：当防火墙检测到 PASV 命令时，它会动态开放服务器返回的高端口，并允许客户端连接该端口进行数据传输。<ul>
+<li><strong>数据连接</strong>：当防火墙检测到 PASV 命令时，它会动态开放服务器返回的高端口，并允许客户端连接该端口进行数据传输。</li>
 <li>规则示例：检测到 PASV 命令后，动态生成允许客户端访问服务器指定高端口的规则。</li>
-</ul>
-</li>
 </ul>
 <p><strong>优势</strong>：不需要预先开放所有服务器高端口，而是根据实际连接动态开放，大幅提高了安全性。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
@@ -928,7 +921,13 @@
 </blockquote>
 <h2 id="6-应用层安全和无线安全"><a href="#6-应用层安全和无线安全" class="headerlink" title="6. 应用层安全和无线安全"></a>6. 应用层安全和无线安全</h2><h3 id="a-PGP-的基本功能、安全服务"><a href="#a-PGP-的基本功能、安全服务" class="headerlink" title="a) PGP 的基本功能、安全服务"></a>a) PGP 的基本功能、安全服务</h3><p><strong>PGP（Pretty Good Privacy）</strong>是用于电子邮件和文件加密的安全协议，提供如下基本功能和安全服务：</p>
 <blockquote>
-<p>注意流程顺序不可改变：签名 - 压缩 - 加密<strong>（在压缩前签名，压缩后加密）</strong> </p>
+<p>注意流程顺序不可改变：签名 - 压缩 - 加密<strong>（在压缩前签名，压缩后加密）</strong></p>
+<h4 id="签名-压缩-加密顺序的原因："><a href="#签名-压缩-加密顺序的原因：" class="headerlink" title="签名-压缩-加密顺序的原因："></a>签名-压缩-加密顺序的原因：</h4><ul>
+<li><p><strong>签名后再压缩</strong>：是为了方便<strong>保存未压缩的报文和签名</strong>，为了以后存储方便，如果签名是对压缩后报文进行的，势必要保存一份压缩的文档与之对应，或者增加部分计算。但相同的压缩算法可能产生略微不同的压缩结果。</p>
+</li>
+<li><p><strong>压缩后加密</strong>：可以节约传输文件的存储空间，<strong>加快加密速度</strong>，且因为压缩，<strong>减少了原文中的关联性</strong>，使密码分析也更困难。</p>
+</li>
+</ul>
 </blockquote>
 <ol>
 <li><strong>加密</strong>：PGP 使用对称加密算法（如 IDEA、3-DES 或 CAST-128）加密邮件内容。为解决对称密钥分发问题，PGP 使用接收者的公钥加密一次性会话密钥，然后将加密后的会话密钥和邮件一起发送。</li>
