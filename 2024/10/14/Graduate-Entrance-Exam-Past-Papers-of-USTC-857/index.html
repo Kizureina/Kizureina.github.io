@@ -34,10 +34,12 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003235729.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241014003526608.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241015003404015.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241025005347830.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241025005407823.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241016234546064.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241016234121333.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-16T15:46:16.489Z">
+<meta property="article:modified_time" content="2024-10-24T16:58:30.868Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -400,7 +402,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            11k 词 
+            13k 词 
           </div>
         </div>
         
@@ -1097,6 +1099,16 @@
 <blockquote>
 <p>M明显是39 + 1 &#x3D; 40</p>
 <p>再代入三个序列写出一次同余方程组解即可（注意有两个解）</p>
+<h4 id="解一次同余方程"><a href="#解一次同余方程" class="headerlink" title="解一次同余方程"></a>解一次同余方程</h4><p><img src="/../images/image-20241025005347830.png" alt="image-20241025005347830"></p>
+<p><img src="/../images/image-20241025005407823.png" alt="image-20241025005407823"></p>
+<p>解一次同余方程的基本步骤是：</p>
+<ol>
+<li>检查是否有解。</li>
+<li>约简方程。</li>
+<li>找到乘法逆元（如果存在）。</li>
+<li>计算解或通解。</li>
+</ol>
+<p>通过扩展欧几里得算法，可以快速找到逆元并求出解。</p>
 </blockquote>
 <ol start="3">
 <li>题目先给出了材料，Rabin的定义和计算方法，m*m&#x3D;C mod N，C&#x3D;16,N&#x3D;pq&#x3D;77已知，求解m所有可能的解，</li>
@@ -1211,6 +1223,128 @@
 <li>通过密钥派生函数（如 HMAC 或 KDF）生成多个子密钥，用于不同的加密和认证操作。</li>
 </ol>
 </blockquote>
+<h1 id="2023年"><a href="#2023年" class="headerlink" title="2023年"></a>2023年</h1><h2 id="选择题-3"><a href="#选择题-3" class="headerlink" title="选择题"></a>选择题</h2><p><strong>不属于数据流的主动攻击的是</strong></p>
+<ul>
+<li>主动攻击通常是指篡改或伪造数据的攻击。常见的主动攻击包括中间人攻击、重放攻击、伪造数据包等。不属于主动攻击的则是被动攻击，如窃听、流量分析等。</li>
+</ul>
+<p><strong>Feistel密码结构描述正确的是</strong></p>
+<ul>
+<li>Feistel结构是一种对称加密结构，其中的加密和解密过程非常相似，主要是对明文分组（如左右两半部分），然后进行若干轮的处理，每一轮通过一个复杂的函数（Feistel函数）对其中一半进行处理并与另一半进行交换，最后合并得到密文。解密时，只需要按反顺序进行同样的操作。典型的例子是DES算法。</li>
+</ul>
+<p><strong>Alice 获取证书包括RSA的公钥和私钥，并把公钥公开，然后谁可以计算模数?</strong></p>
+<ul>
+<li>如果Alice将她的RSA公钥公开，公钥通常包括模数（n）和公钥指数（e）。模数是公开的，任何人都可以通过查看公钥获得模数。公钥是供所有人使用的，任何需要加密或验证Alice的签名的人都可以访问模数。</li>
+</ul>
+<p><strong>会话密钥的使用正确的是(什么时候更新)</strong></p>
+<ul>
+<li>会话密钥是一种临时的对称密钥，用于保护单次会话中的数据传输。会话密钥应该定期更新，特别是在长时间的通信过程中，或者当会话结束时。通常，新的会话开始或出现特定的事件（如用户身份验证、加密协议的重新协商）时会更新会话密钥。</li>
+</ul>
+<p><strong>D-H协议的解释，下来说法正确的是</strong></p>
+<ul>
+<li>Diffie-Hellman (D-H) 密钥交换协议允许两方在不安全的网络上安全地生成共享的会话密钥。双方分别生成各自的私钥和公钥，然后通过交换公钥并进行计算生成共享的密钥。正确的说法包括：<ul>
+<li>D-H 协议本身不提供身份认证，因此容易受到中间人攻击，除非结合其他机制（如数字签名）使用。</li>
+<li>D-H 依赖于离散对数问题的困难性来保证安全性。</li>
+</ul>
+</li>
+</ul>
+<p><strong>WEP 说法正确的</strong></p>
+<ul>
+<li>WEP（Wired Equivalent Privacy）是一种早期的无线网络安全协议，设计目的是提供与有线网络类似的安全性。然而，WEP存在许多已知的漏洞，容易受到攻击，特别是密钥调度算法存在问题。常见的正确说法是：<ul>
+<li>WEP 使用的密钥相对较短（通常为40位或104位）。</li>
+<li>WEP 使用RC4流密码进行加密。</li>
+<li>WEP 的密钥管理不够安全，导致容易受到密钥重放攻击。</li>
+</ul>
+</li>
+</ul>
+<p><strong>WLAN 安全接入协议</strong></p>
+<ul>
+<li>WLAN的安全接入协议包括WEP、WPA（Wi-Fi Protected Access）、WPA2和WPA3等：<ul>
+<li>WPA&#x2F;WPA2使用TKIP和AES加密。</li>
+<li>WPA2是目前广泛使用的协议，它提供了更强的加密（AES）和更好的密钥管理机制。</li>
+<li>WPA3是最新的安全标准，引入了SAE（Simultaneous Authentication of Equals）协议，进一步增强了安全性。</li>
+</ul>
+</li>
+</ul>
+<h2 id="填空题-3"><a href="#填空题-3" class="headerlink" title="填空题"></a>填空题</h2><ol>
+<li><p><strong>伪随机序列生成器有n个元件，则生成多长的序列，若其中只能异或，能出现多长序列。</strong></p>
+<ul>
+<li>伪随机序列生成器通常根据其内部状态的不同组合生成序列。对于n个元件的线性反馈移位寄存器（LFSR）来说，如果采用最大周期的反馈函数，能够生成的伪随机序列的最大长度是 2n−12^n - 12n−1，即n位的所有可能状态（除全零状态）。如果只允许异或操作（线性反馈），在最大周期时，可以生成长度为 2n−12^n - 12n−1 的伪随机序列。</li>
+</ul>
+</li>
+<li><p><strong>分组密码分组长度为3、6次置乱出现明文，求分组密码次置乱出现明文的情况。</strong></p>
+<ul>
+<li>置乱（permutation）是一种重新排列分组密码块的操作。对于不同分组长度，经过一定次数的置乱，明文可能会重新出现。<ul>
+<li>分组长度为3时，如果经过6次置乱，明文重新出现，说明置乱的周期为6。</li>
+<li>分组长度为6时，次置乱后出现明文，表示置乱的周期也为6。</li>
+<li>若问题是问其他分组长度下的周期，可以通过分析具体的置乱方式来确定每种情况的置乱周期。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>2^2022 mod 11</strong></p>
+<p> 由欧拉定理：<code>a ^ fi(p) = 1 mod p</code></p>
+<p> &#x3D;&gt; 2^2022 mod 11 &#x3D; 4</p>
+</li>
+<li><p><strong>模3系2，模7系3，模11系3最小正整数。</strong></p>
+<ul>
+<li><p>这个问题涉及中国剩余定理。给定模数条件如下：</p>
+<ul>
+<li><p>x ≡ 2 mod 3</p>
+</li>
+<li><p>x ≡ 3 mod 7</p>
+</li>
+<li><p>x ≡ 3 mod 11 </p>
+<p>  需要找到最小的正整数 x 满足这些条件。通过中国剩余定理，可以通过构建模数方程组并解出最小解。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>通常意义上的AAA，分别指哪几种安全服务？</strong></p>
+<ul>
+<li>AAA 是指三种安全服务：<ul>
+<li><strong>Authentication（认证）</strong>：验证用户或实体的身份。</li>
+<li><strong>Authorization（授权）</strong>：确定已认证用户能够访问的资源和权限。</li>
+<li><strong>Accounting（计费）</strong>：跟踪用户的活动和资源使用情况，通常用于审计和计费。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>每个 SA 由一个三元组唯一地进行标识，该三元组为、和。</strong></p>
+<ul>
+<li>在IPSec中，安全关联（SA）是由三元组来唯一标识的：<ul>
+<li><strong>安全协议（Security Protocol）</strong>：比如ESP或AH。</li>
+<li><strong>目的IP地址（Destination IP Address）</strong>。</li>
+<li><strong>安全参数索引（SPI, Security Parameters Index）</strong>：用于区分不同的安全会话。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>SSL 中会话重用回复的消息中有用户发送的消息有同样的协议之上</strong></p>
+<ul>
+<li>SSL&#x2F;TLS协议中，会话重用通过发送一个<code>Session ID</code>来识别并重用先前会话。在重用会话时，用户不需要重新进行完整的握手过程，从而节省资源和时间。</li>
+</ul>
+</li>
+<li><p><strong>SSL 在传输层 协议之上</strong></p>
+<ul>
+<li>SSL&#x2F;TLS 位于传输层协议（TCP）之上，用于在网络通信中提供加密和安全性。</li>
+</ul>
+</li>
+<li><p><strong>CA 中心的实体名称 认证实体的是，签发证书的是</strong></p>
+<ul>
+<li>CA（Certificate Authority，证书颁发机构）是负责颁发、撤销和管理数字证书的实体。<ul>
+<li><strong>认证实体</strong>：通常是指想要获得数字证书的实体（如个人、服务器）。</li>
+<li><strong>签发证书的是</strong>：证书颁发机构（CA）是负责签发证书的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>IPSEC 会话重用的</strong></p>
+</li>
+</ol>
+<ul>
+<li>在IPSec中，安全关联（SA）用于建立和维护安全会话，通常不涉及会话重用。IPSec的每个会话根据不同的安全关联进行处理，并通过SPI等参数进行区分。</li>
+</ul>
 
         
       </div>
