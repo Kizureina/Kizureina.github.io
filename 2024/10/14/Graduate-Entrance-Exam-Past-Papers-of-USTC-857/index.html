@@ -38,8 +38,9 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241025005407823.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241016234546064.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241016234121333.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241026000648592.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-24T16:58:30.868Z">
+<meta property="article:modified_time" content="2024-10-25T16:24:25.083Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -402,7 +403,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            13k 词 
+            17k 词 
           </div>
         </div>
         
@@ -612,7 +613,7 @@
 </blockquote>
 <hr>
 <ol start="3">
-<li><h3 id="在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-912"><a href="#在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-912" class="headerlink" title="在RSA算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;912"></a>在<code>RSA</code>算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;912</h3><p> 1）求 A私钥 d&#x3D;？ </p>
+<li><h3 id="在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-9"><a href="#在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-9" class="headerlink" title="在RSA算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;9"></a>在<code>RSA</code>算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;9</h3><p> 1）求 A私钥 d&#x3D;？ </p>
 <p> 2）用户 B预向 A发送私密信息 M&#x3D;4，求密文 C&#x3D;?(计算过程） </p>
 <p> 3）若用户 A欲对消息 M&#x3D;157进行签名，求签名结果 S&#x3D;? </p>
 <p> 4）继续给用户 B分配公钥&#x2F;私钥时，可用的公钥有多少个？</p>
@@ -786,7 +787,7 @@
 </ol>
 </blockquote>
 <ol start="10">
-<li><h3 id="NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓朴图如下所示）"><a href="#NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓朴图如下所示）" class="headerlink" title="NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓朴图如下所示）"></a>NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓朴图如下所示）</h3></li>
+<li><h3 id="NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓扑图如下所示）"><a href="#NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓扑图如下所示）" class="headerlink" title="NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓扑图如下所示）"></a>NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓扑图如下所示）</h3></li>
 </ol>
 <p><img src="/../images/image-20241015003404015.png" alt="image-20241015003404015"></p>
 <p>（1）从数据请求和应答两个方面解释一下从内部主机（假设为 192.168.3.1）对外进行访问（假设访间服务器 202.38.64.3的 WWW服务，端口为 WWW服务器的周知端口）的IP数据包变化过程和 NAT的处理方法？ </p>
@@ -1266,25 +1267,50 @@
 </li>
 </ul>
 <h2 id="填空题-3"><a href="#填空题-3" class="headerlink" title="填空题"></a>填空题</h2><ol>
-<li><p><strong>伪随机序列生成器有n个元件，则生成多长的序列，若其中只能异或，能出现多长序列。</strong></p>
+<li><strong>伪随机序列生成器有n个元件，则生成多长的序列，若其中只能异或，能出现多长序列。</strong></li>
+</ol>
 <ul>
-<li>伪随机序列生成器通常根据其内部状态的不同组合生成序列。对于n个元件的线性反馈移位寄存器（LFSR）来说，如果采用最大周期的反馈函数，能够生成的伪随机序列的最大长度是 2n−12^n - 12n−1，即n位的所有可能状态（除全零状态）。如果只允许异或操作（线性反馈），在最大周期时，可以生成长度为 2n−12^n - 12n−1 的伪随机序列。</li>
+<li>伪随机序列生成器通常根据其内部状态的不同组合生成序列。</li>
+<li>对任意伪随机序列生成器，最多生成<code>2^n</code>长度的序列；</li>
+<li>对只能使用异或的线性反馈移位寄存器（LFSR）来说，如果采用最大周期的反馈函数，能够生成的伪随机序列的最大长度是<code>2^n − 1</code>，即n位的所有可能状态（除全零状态）。</li>
 </ul>
-</li>
-<li><p><strong>分组密码分组长度为3、6次置乱出现明文，求分组密码次置乱出现明文的情况。</strong></p>
+<ol start="2">
+<li><strong>经过一定的置乱之后也可能出现明文，分组密码分组长度为3，结果几次置乱出现明文？分组密码分组长度为6，经过几次置乱出现明文？分组密码分组长度为7，几次置乱出现明文？</strong></li>
+</ol>
+<blockquote>
+<h5 id="置乱次数的周期性"><a href="#置乱次数的周期性" class="headerlink" title="置乱次数的周期性"></a>置乱次数的周期性</h5><p>若分组长度为 n，则置乱周期为 n 的最小正整数 k，满足在 k 次置乱操作后，分组顺序恢复到最初的状态。这个 k 的值通常与分组长度 n 的因数结构相关。</p>
+<h5 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h5><ol>
+<li><strong>分组长度为 3 时</strong></li>
+</ol>
 <ul>
-<li>置乱（permutation）是一种重新排列分组密码块的操作。对于不同分组长度，经过一定次数的置乱，明文可能会重新出现。<ul>
-<li>分组长度为3时，如果经过6次置乱，明文重新出现，说明置乱的周期为6。</li>
-<li>分组长度为6时，次置乱后出现明文，表示置乱的周期也为6。</li>
-<li>若问题是问其他分组长度下的周期，可以通过分析具体的置乱方式来确定每种情况的置乱周期。</li>
+<li>对于分组长度 n&#x3D;3，一个可能的置乱顺序是将每个块的位置进行交换。</li>
+<li>通过实验或排列理论，可以验证分组长度为 3 的置乱周期为 <strong>2</strong>。</li>
+<li>因此，<strong>分组长度为 3 的分组密码经过 2 次置乱后会再次出现明文</strong>。</li>
 </ul>
-</li>
+<ol start="2">
+<li><strong>分组长度为 6 时</strong></li>
+</ol>
+<ul>
+<li>对于分组长度 n&#x3D;6，可以将每个块的位置进行交换。</li>
+<li>分组长度为 6 的置乱周期为 <strong>6</strong>。</li>
+<li>因此，<strong>分组长度为 6 的分组密码经过 6 次置乱后会再次出现明文</strong>。</li>
 </ul>
-</li>
-<li><p><strong>2^2022 mod 11</strong></p>
-<p> 由欧拉定理：<code>a ^ fi(p) = 1 mod p</code></p>
-<p> &#x3D;&gt; 2^2022 mod 11 &#x3D; 4</p>
-</li>
+<ol start="3">
+<li><strong>分组长度为 7 时</strong></li>
+</ol>
+<ul>
+<li>对于分组长度 n&#x3D;7，因其是质数，每个位置必须经历完整的循环才能恢复。</li>
+<li>分组长度为 7 的置乱周期为 <strong>7</strong>。</li>
+<li>因此，<strong>分组长度为 7 的分组密码经过 7 次置乱后会再次出现明文</strong>。</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li><strong>2^2022 mod 11</strong></li>
+</ol>
+<p>  由欧拉定理：<code>a ^ fi(p) = 1 mod p</code></p>
+<p>  且11为素数，故有fi(11) &#x3D; 11 - 1 &#x3D; 10</p>
+<p>  &#x3D;&gt; 2^2022 mod 11 &#x3D; 4</p>
+<ol start="4">
 <li><p><strong>模3系2，模7系3，模11系3最小正整数。</strong></p>
 <ul>
 <li><p>这个问题涉及中国剩余定理。给定模数条件如下：</p>
@@ -1294,7 +1320,8 @@
 <li><p>x ≡ 3 mod 7</p>
 </li>
 <li><p>x ≡ 3 mod 11 </p>
-<p>  需要找到最小的正整数 x 满足这些条件。通过中国剩余定理，可以通过构建模数方程组并解出最小解。</p>
+</li>
+<li><p>需要找到最小的正整数 x 满足这些条件。通过中国剩余定理，可以通过构建模数方程组并解出最小解。</p>
 </li>
 </ul>
 </li>
@@ -1310,22 +1337,22 @@
 </li>
 </ul>
 </li>
-<li><p><strong>每个 SA 由一个三元组唯一地进行标识，该三元组为、和。</strong></p>
+<li><p><strong>每个 SA 由一个三元组唯一地进行标识，该三元组为</strong></p>
 <ul>
 <li>在IPSec中，安全关联（SA）是由三元组来唯一标识的：<ul>
 <li><strong>安全协议（Security Protocol）</strong>：比如ESP或AH。</li>
 <li><strong>目的IP地址（Destination IP Address）</strong>。</li>
-<li><strong>安全参数索引（SPI, Security Parameters Index）</strong>：用于区分不同的安全会话。</li>
+<li><strong>安全参数索引（SPI, Security Parameters Index）</strong>：用于区分不同的安全会话(ESP&#x2F;AH)。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><strong>SSL 中会话重用回复的消息中有用户发送的消息有同样的协议之上</strong></p>
+<li><p><strong>SSL 中会话重用回复的消息中有用户发送的消息有同样的()</strong></p>
 <ul>
 <li>SSL&#x2F;TLS协议中，会话重用通过发送一个<code>Session ID</code>来识别并重用先前会话。在重用会话时，用户不需要重新进行完整的握手过程，从而节省资源和时间。</li>
 </ul>
 </li>
-<li><p><strong>SSL 在传输层 协议之上</strong></p>
+<li><p><strong>SSL 在传输层()协议之上</strong></p>
 <ul>
 <li>SSL&#x2F;TLS 位于传输层协议（TCP）之上，用于在网络通信中提供加密和安全性。</li>
 </ul>
@@ -1339,12 +1366,188 @@
 </li>
 </ul>
 </li>
-<li><p><strong>IPSEC 会话重用的</strong></p>
+<li><p><strong>IPSEC 会话重用</strong></p>
 </li>
 </ol>
 <ul>
 <li>在IPSec中，安全关联（SA）用于建立和维护安全会话，通常不涉及会话重用。IPSec的每个会话根据不同的安全关联进行处理，并通过SPI等参数进行区分。</li>
 </ul>
+<ol start="11">
+<li><strong>Email 安全协议</strong></li>
+</ol>
+<p>Email 安全协议用于保护电子邮件在传输和存储过程中的机密性、完整性和真实性。常见的 Email 安全协议有：</p>
+<ul>
+<li>**SMTP over SSL&#x2F;TLS (SMTPS)**：对邮件传输协议 (SMTP) 的数据流进行加密，以保护邮件的传输。SMTPS 使用 SSL 或 TLS 协议来加密数据，从而防止第三方拦截或窃听内容。</li>
+<li>**POP3 over SSL&#x2F;TLS (POP3S) 和 IMAP over SSL&#x2F;TLS (IMAPS)**：这些协议用于邮件客户端接收邮件时的数据加密。通过 SSL 或 TLS 加密 POP3 和 IMAP 的数据流，确保邮件在接收时的安全性。</li>
+<li><strong>PGP（Pretty Good Privacy）和 S&#x2F;MIME（Secure&#x2F;Multipurpose Internet Mail Extensions）</strong>：用于邮件内容的端到端加密和签名，确保邮件的机密性和不可否认性。PGP 和 S&#x2F;MIME 都可以对邮件进行加密和签名，但它们使用的证书格式和密钥管理机制不同。</li>
+</ul>
+<ol start="12">
+<li><strong>DNAT 的解释</strong></li>
+</ol>
+<p>DNAT（Destination Network Address Translation，目标网络地址转换）是 NAT 的一种形式，主要用于将外部请求映射到内部网络上的特定 IP 地址或端口。DNAT 常用于<strong>端口转发</strong>或<strong>负载均衡</strong>，以便外部设备能够访问内部网络的服务器或服务。</p>
+<ul>
+<li><strong>工作原理</strong>：在数据包到达防火墙或路由器时，DNAT 会将目标 IP 地址和端口更改为内部网络的相应地址，从而将请求转发到特定服务器。例如，访问某一公网 IP 的请求可以被 DNAT 转换为内部服务器的私有 IP 地址。</li>
+<li><strong>应用场景</strong>：DNAT 常用于将多个外部请求转发到内网服务器上，尤其是在私有网络中托管 Web 服务器、FTP 服务器等对外公开的服务时。</li>
+</ul>
+<ol start="13">
+<li><strong>Hash 函数的抗强碰撞性</strong></li>
+</ol>
+<p><strong>抗强碰撞性</strong>是 hash 函数的一个重要安全属性，表示在已知某一 hash 函数的情况下，难以找到两个不同的输入 x 和 y，使得它们的 hash 值相同，即 H(x)&#x3D;H(y)。这意味着：</p>
+<ul>
+<li><strong>强碰撞性要求</strong>：攻击者在已知 hash 函数的情况下，不能有效找到两组不同的输入得到相同的输出值。</li>
+<li><strong>安全性作用</strong>：强碰撞性保证了 hash 函数的完整性，可以防止恶意篡改数据，例如数字签名和文件完整性校验中需要此特性来避免伪造。</li>
+</ul>
+<h2 id="解答题-3"><a href="#解答题-3" class="headerlink" title="解答题"></a>解答题</h2><h3 id="1-DES-加密方法的抗选择明文攻击性能和代价"><a href="#1-DES-加密方法的抗选择明文攻击性能和代价" class="headerlink" title="1. DES 加密方法的抗选择明文攻击性能和代价"></a>1. DES 加密方法的抗选择明文攻击性能和代价</h3><p>题目描述了一种加密方法为：</p>
+<p><img src="/../images/image-20241026000648592.png" alt="image-20241026000648592"></p>
+<p>其中 r 是随机数，M 是明文，k1 和 k2 是两个不同的密钥。我们需要评估这种加密方法对<strong>选择明文攻击</strong>的抗性和其代价。</p>
+<h4 id="性能评价："><a href="#性能评价：" class="headerlink" title="性能评价："></a>性能评价：</h4><ul>
+<li><strong>抗选择明文攻击能力</strong>： 这种双重加密方法通过使用两个密钥 k1 和 k2 增强了安全性。随机数 r 的引入增加了攻击者进行<strong>明文选择</strong>的难度，使得攻击者<strong>难以预知加密输出</strong>，尤其是通过修改明文来推测密钥的可能性显著降低。这种机制也类似于<strong>随机填充</strong>的策略，阻止了对相同明文多次加密得到相同密文的情况。因此，这种方法在理论上增强了对选择明文攻击的防护能力。</li>
+<li><strong>代价</strong>：代价主要体现在计算复杂度和密钥管理上：<ol>
+<li><strong>计算复杂度</strong>：由于每个加密过程需要进行两次 DES 加密，整体计算代价翻倍（相比于普通的单轮 DES）。因此，效率较低。</li>
+<li><strong>密钥管理</strong>：使用了两个密钥 k1 和 k2，增加了密钥管理的复杂性。</li>
+</ol>
+</li>
+</ul>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>该方案增强了对选择明文攻击的抵抗能力，但增加了计算开销和密钥管理的复杂性。</p>
+<hr>
+<h3 id="2-Hash-函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力"><a href="#2-Hash-函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力" class="headerlink" title="2. Hash 函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力"></a>2. Hash 函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力</h3><p>题目给出了一种用公钥加密的 hash 函数结构，类似于<strong>基于分组加密的 hash 函数设计</strong>。这个结构可能类似于<strong>Merkle-Damgård</strong> 结构，使用了块 M1,M2,…并通过多个加密运算（包括公钥加密）来产生最终的 hash 值。</p>
+<h4 id="抗单向性攻击能力："><a href="#抗单向性攻击能力：" class="headerlink" title="抗单向性攻击能力："></a>抗单向性攻击能力：</h4><ul>
+<li><strong>单向性</strong>是 hash 函数的基本性质，要求攻击者在给定 hash 值的情况下，<strong>难以反推出相应的输入消息</strong>。</li>
+<li>由于这种设计中使用了公钥加密 E_k，<strong>公钥加密算法通常具有单向性和抗逆性特征</strong>，因此该设计有望具有良好的单向性保护。</li>
+</ul>
+<h4 id="抗弱碰撞能力："><a href="#抗弱碰撞能力：" class="headerlink" title="抗弱碰撞能力："></a>抗弱碰撞能力：</h4><ul>
+<li><strong>弱碰撞抗性</strong>要求在给定一个消息 M 的情况下，难以找到<strong>另一个消息 M′</strong>，使得 <code>Hash(M) = Hash(M′)</code>。</li>
+<li>由于这个 hash 函数依赖于多个加密步骤（类似于分组加密），每个加密步骤都对输入块进行变换，因此要找到不同的输入 M′导致相同的输出 hash 是较为困难的。不过，具体的抗性依赖于加密算法本身的强度。</li>
+</ul>
+<h4 id="抗强碰撞能力："><a href="#抗强碰撞能力：" class="headerlink" title="抗强碰撞能力："></a>抗强碰撞能力：</h4><ul>
+<li><strong>强碰撞抗性</strong>要求难以找到任意<strong>两条不同的消息 M 和 M′</strong>，使得它们的 hash 值相同。</li>
+<li>在这种基于加密的 hash 函数中，如果每个加密步骤和块处理是不可逆且具有高随机性，那么抵抗强碰撞的能力会较强。不过，强碰撞抗性依赖于加密算法的内部安全性，特别是如果加密算法容易受到碰撞攻击，这种 hash 函数的强碰撞抗性会受到影响。</li>
+</ul>
+<h3 id="3-RSA-方案评价（消息加随机数后加密）"><a href="#3-RSA-方案评价（消息加随机数后加密）" class="headerlink" title="3. RSA 方案评价（消息加随机数后加密）"></a>3. RSA 方案评价（消息加随机数后加密）</h3><p>在描述的 RSA 加密方案中，把消息<strong>按字节</strong>分组，消息 m_i 被加上一个随机数 r，形成新消息 <code>x = m_i + r</code> 进行加密传输。这种设计是为了防止明文中包含 0 或 1，并增加随机性。</p>
+<blockquote>
+<p>RSA按字节分组的缺点：</p>
+<p><strong>无随机性</strong>：</p>
+<ul>
+<li>如果直接按字节分组，RSA 的加密是<strong>确定性加密</strong>，即相同的明文总是会生成相同的密文，缺乏随机性。攻击者可以利用这一点进行<strong>已知明文攻击</strong>或<strong>重放攻击</strong>。</li>
+</ul>
+<p><strong>小明文攻击</strong>：</p>
+<ul>
+<li>按字节分组会生成非常小的明文块，攻击者可以通过分析密文之间的关系，推断出明文。例如，如果加密的明文只是一些简单的 ASCII 字符，攻击者很容易进行字典攻击或频率分析。</li>
+</ul>
+<p><strong>明文模式泄露</strong>：</p>
+<ul>
+<li>如果每次加密的分组大小很小（如 1 字节或几个字节），某些固定模式或结构可能在密文中反映出来。例如，当加密多个相同的分组时，密文可能会重复，暴露了明文的模式。</li>
+</ul>
+<p><strong>效率低下</strong>：</p>
+<ul>
+<li>RSA 加密是基于复杂的数学运算（大数的模幂运算），其处理速度较慢。直接对每个字节或小块明文进行 RSA 加密会导致性能低下，而这种做法完全不利用对称加密的高效性。</li>
+</ul>
+</blockquote>
+<p>从密码学角度来看：</p>
+<ul>
+<li><strong>优点</strong>：<ul>
+<li><strong>增强随机性</strong>：加入随机数 r 能增加消息的随机性，减小因相同明文导致相同密文的可能性，防止简单的重放攻击和已知明文攻击。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li><strong>安全性风险</strong>：简单的加法对消息进行扰动并不足以提供额外的安全性。攻击者仍可能使用数学分析或模式识别来推断出明文。此外，随机数的选择和分发也可能成为一个安全漏洞。</li>
+<li><strong>增加开销</strong>：需要处理随机数的生成、分发和存储，也增加了加密前处理的复杂度。</li>
+</ul>
+</li>
+</ul>
+<p><strong>改进建议</strong>：可以考虑使用更安全的<strong>填充方案</strong>（如 PKCS#1）来代替随机数扰动，确保消息随机化并能正确解密。</p>
+<h3 id="4-DH-密钥交换计算"><a href="#4-DH-密钥交换计算" class="headerlink" title="4. DH 密钥交换计算"></a>4. DH 密钥交换计算</h3><p>Diffie-Hellman (DH) 密钥交换算法允许双方在不直接交换密钥的情况下，协商出一个共享的秘密密钥。假设 Alice 和 Bob 想通过 DH 协商一个共享密钥，他们会进行如下计算：</p>
+<ul>
+<li><strong>公共信息</strong>：<ul>
+<li>选择一个大素数 p 和生成元 g，这些信息是公开的。</li>
+</ul>
+</li>
+<li><strong>双方的计算</strong>：<ul>
+<li>Alice 选择一个私有密钥 a，计算 <code>A = g^a mod p</code>，并将 A 发送给 Bob。</li>
+<li>Bob 选择一个私有密钥 b，计算 <code>B = g^b mod p</code>，并将 B 发送给 Alice。</li>
+</ul>
+</li>
+<li><strong>生成共享密钥</strong>：<ul>
+<li>Alice 计算 K &#x3D; B^a mod p。</li>
+<li>Bob 计算 K &#x3D; A^b mod p。</li>
+<li>最终，Alice 和 Bob 都计算出相同的共享密钥 K。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-数字信封的形成及作用"><a href="#5-数字信封的形成及作用" class="headerlink" title="5. 数字信封的形成及作用"></a>5. 数字信封的形成及作用</h3><p><strong>数字信封</strong>是一种结合对称加密和非对称加密的技术，用于<strong>安全传输数据</strong>。它的作用是通过加密来保护机密信息的传输，同时也能确保加密密钥的安全性。</p>
+<ul>
+<li><strong>形成过程</strong>：<ol>
+<li>发送者选择一个对称密钥（如 AES 密钥）来加密消息，并用该密钥对消息进行加密。</li>
+<li>使用接收者的公钥对该对称密钥进行加密。</li>
+<li>发送加密的消息和加密的对称密钥给接收者。</li>
+</ol>
+</li>
+<li><strong>接收者解密过程</strong>：<ol>
+<li>使用自己的私钥解密对称密钥。</li>
+<li>使用解密后的对称密钥来解密消息。</li>
+</ol>
+</li>
+</ul>
+<p><strong>作用</strong>：数字信封的优势在于结合了对称加密和非对称加密的优点，实现了高效的消息加密和安全的密钥传输。</p>
+<h3 id="6-密钥派生的作用与方法"><a href="#6-密钥派生的作用与方法" class="headerlink" title="6. 密钥派生的作用与方法"></a>6. 密钥派生的作用与方法</h3><p><strong>密钥派生</strong>用于从主密钥或初始密钥派生出多个密钥，以满足不同的加密需求。密钥派生的重要性在于减少密钥的重复使用，确保不同数据传输的安全性。</p>
+<ul>
+<li><strong>作用</strong>：<ul>
+<li><strong>防止重放攻击</strong>。</li>
+<li>为不同的数据流或会话生成唯一密钥，保证安全。</li>
+</ul>
+</li>
+<li><strong>常见的派生方法</strong>：<ul>
+<li>**KDF (Key Derivation Function)**：常用的 KDF 是基于 hash 函数或 HMAC（如 PBKDF2、HKDF）。KDF 通过输入主密钥和其他参数（如盐值、标签等）生成子密钥。</li>
+<li><strong>对称密钥扩展</strong>：从一个随机生成的密钥通过数学方式生成多个用于加密的密钥。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-身份认证：公钥密码和私钥签名的认证方案"><a href="#7-身份认证：公钥密码和私钥签名的认证方案" class="headerlink" title="7. 身份认证：公钥密码和私钥签名的认证方案"></a>7. 身份认证：公钥密码和私钥签名的认证方案</h3><p>使用公钥密码和数字签名的身份认证方案可用于让<strong>A 向 B 证明自己的身份</strong>：</p>
+<ol>
+<li><strong>A 向 B 发送公钥证书</strong>：A 向 B 发送由可信 CA 签名的公钥证书，证书中包含 A 的公钥 K_A。</li>
+<li><strong>B 验证证书</strong>：B 使用 CA 的公钥验证 A 的公钥证书，确认证书的合法性。</li>
+<li><strong>A 使用私钥签名消息</strong>：A 使用自己的私钥 SK_A 对一条消息或挑战值 M 进行签名 S &#x3D; Sign(SK_A, M)。</li>
+<li><strong>B 验证签名</strong>：B 使用 A 的公钥 K_A 来验证签名 S，确认该签名来自 A，进而确认 A 的身份。</li>
+</ol>
+<h3 id="8-隧道模式下的-IPSEC-ESP-隧道入口流程"><a href="#8-隧道模式下的-IPSEC-ESP-隧道入口流程" class="headerlink" title="8. 隧道模式下的 IPSEC ESP 隧道入口流程"></a>8. 隧道模式下的 IPSEC ESP 隧道入口流程</h3><p>在隧道模式下的 IPSEC ESP（Encapsulating Security Payload）用于加密和认证整个 IP 包的载荷。在隧道入口，ESP 流程如下：</p>
+<ol>
+<li><strong>输入数据</strong>：将原始 IP 包作为载荷。</li>
+<li><strong>加密数据</strong>：ESP 对原始 IP 包的载荷部分进行加密（通常使用对称加密，如 AES）。</li>
+<li><strong>附加头部</strong>：ESP 会在加密后的数据前附加新的 IP 头部（用于隧道传输）。</li>
+<li><strong>生成认证标签</strong>：对加密后的数据进行完整性检查，生成认证标签并附加到 ESP 包中。</li>
+<li><strong>封装</strong>：最终的 ESP 包将被封装并传送给接收者。</li>
+</ol>
+<h3 id="9-PGP-在发送端的操作及私钥保护"><a href="#9-PGP-在发送端的操作及私钥保护" class="headerlink" title="9. PGP 在发送端的操作及私钥保护"></a>9. PGP 在发送端的操作及私钥保护</h3><p>在 PGP（Pretty Good Privacy）中：</p>
+<ul>
+<li><strong>发送端操作</strong>：<ol>
+<li>发送端使用对称加密加密消息，并生成一个对称密钥。</li>
+<li>使用接收方的公钥对该对称密钥进行加密。</li>
+<li>将加密的消息和加密的对称密钥发送给接收方。</li>
+</ol>
+</li>
+<li><strong>私钥保护</strong>：PGP 私钥通常通过<strong>口令短语</strong>保护，确保只有正确的口令才能解锁和使用私钥。此外，私钥也可以存储在硬件安全模块（HSM）中，防止泄露。</li>
+<li><strong>确定使用的密钥对</strong>：PGP 使用接收方的公钥来加密会话密钥，发送方通过与接收方交换的公钥指纹来确定对方的密钥对。</li>
+</ul>
+<h3 id="10-16-人会议的会话密钥协商方案"><a href="#10-16-人会议的会话密钥协商方案" class="headerlink" title="10. 16 人会议的会话密钥协商方案"></a>10. 16 人会议的会话密钥协商方案</h3><p>在 16 人的会议中，协商会话密钥可以采用分层的 Diffie-Hellman 协议或通过中央服务器的方式。以下是一个简单方案：</p>
+<ul>
+<li><strong>初始协商</strong>：<ol>
+<li>每个人生成一个临时公私钥对，互相广播自己的公钥。</li>
+<li>每两个人执行 DH 密钥交换，生成共享密钥。</li>
+<li>将这些共享密钥通过中央节点整合，生成一个全局的会话密钥。</li>
+</ol>
+</li>
+<li><strong>新成员加入</strong>：<ol>
+<li>新加入的成员广播自己的公钥。</li>
+<li>其他成员与新成员执行 DH 密钥交换，更新会话密钥。</li>
+</ol>
+</li>
+<li><strong>成员退出</strong>：<ol>
+<li>现有成员重新进行 DH 密钥交换，排除退出者的公钥。</li>
+<li>生成新的会话密钥，保证安全性。</li>
+</ol>
+</li>
+</ul>
+<p>这种方案可以通过多轮 DH 计算或利用专门的协议（如 Group Key Management）实现。</p>
 
         
       </div>
