@@ -24,21 +24,22 @@
   
   <title>概率论&amp;级数笔记 | Kizureina&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="基于方浩概率论&#x2F;级数强化课的笔记  概率论1. 随机事件和概率古典概型分清放回与不放回。 注意有排序时要乘C(1,n)，没有排序时不用。  例如取两次，先红再白则要概率乘2，两次均红则不用  2. 随机变量及其分布分布函数关键要求：  连续 单调不减 x趋近于正无穷为1，趋近于负无穷为0 值只能在[0,1]范围内 右连续（这个最重要）  判断某个函数是否能作为分布函数时，先看单调性，再">
+  <meta name="description" content="基于方浩概率论&#x2F;级数强化课的笔记  概率论1. 随机事件和概率古典概型分清放回与不放回：  放回时为独立重复实验（需要考虑顺序） 不放回为古典概型（此时无需考虑顺序）  注意有排序时要乘C(1,n)，没有排序时不用。  例如取两次，先红再白则要概率乘2，两次均红则不用  2. 随机变量及其分布分布函数关键要求：  连续 单调不减 x趋近于正无穷为1，趋近于负无穷为0 值只能在[0,1]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概率论&amp;级数笔记">
 <meta property="og:url" content="https://kizureina.github.io/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/index.html">
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
-<meta property="og:description" content="基于方浩概率论&#x2F;级数强化课的笔记  概率论1. 随机事件和概率古典概型分清放回与不放回。 注意有排序时要乘C(1,n)，没有排序时不用。  例如取两次，先红再白则要概率乘2，两次均红则不用  2. 随机变量及其分布分布函数关键要求：  连续 单调不减 x趋近于正无穷为1，趋近于负无穷为0 值只能在[0,1]范围内 右连续（这个最重要）  判断某个函数是否能作为分布函数时，先看单调性，再">
+<meta property="og:description" content="基于方浩概率论&#x2F;级数强化课的笔记  概率论1. 随机事件和概率古典概型分清放回与不放回：  放回时为独立重复实验（需要考虑顺序） 不放回为古典概型（此时无需考虑顺序）  注意有排序时要乘C(1,n)，没有排序时不用。  例如取两次，先红再白则要概率乘2，两次均红则不用  2. 随机变量及其分布分布函数关键要求：  连续 单调不减 x趋近于正无穷为1，趋近于负无穷为0 值只能在[0,1]">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241027001737893.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241018170021791.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241018170105266.png">
 <meta property="article:published_time" content="2024-09-25T15:47:40.000Z">
-<meta property="article:modified_time" content="2024-10-18T10:44:13.586Z">
+<meta property="article:modified_time" content="2024-10-26T17:00:01.514Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kizureina.github.io/images/image-20241018170021791.png">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20241027001737893.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -397,7 +398,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            542 词 
+            1.3k 词 
           </div>
         </div>
         
@@ -407,24 +408,82 @@
           <blockquote>
 <p>基于方浩概率论&#x2F;级数强化课的笔记</p>
 </blockquote>
-<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><h2 id="1-随机事件和概率"><a href="#1-随机事件和概率" class="headerlink" title="1. 随机事件和概率"></a>1. 随机事件和概率</h2><h2 id="古典概型"><a href="#古典概型" class="headerlink" title="古典概型"></a>古典概型</h2><p>分清放回与不放回。</p>
+<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><h2 id="1-随机事件和概率"><a href="#1-随机事件和概率" class="headerlink" title="1. 随机事件和概率"></a>1. 随机事件和概率</h2><h3 id="古典概型"><a href="#古典概型" class="headerlink" title="古典概型"></a>古典概型</h3><p>分清放回与不放回：</p>
+<ul>
+<li>放回时为独立重复实验（需要考虑顺序）</li>
+<li>不放回为古典概型（此时无需考虑顺序）</li>
+</ul>
 <p>注意有排序时要乘C(1,n)，没有排序时不用。</p>
 <blockquote>
 <p>例如取两次，先红再白则要概率乘2，两次均红则不用</p>
 </blockquote>
-<h2 id="2-随机变量及其分布"><a href="#2-随机变量及其分布" class="headerlink" title="2. 随机变量及其分布"></a>2. 随机变量及其分布</h2><h2 id="分布函数"><a href="#分布函数" class="headerlink" title="分布函数"></a>分布函数</h2><p>关键要求：</p>
+<h2 id="2-随机变量及其分布"><a href="#2-随机变量及其分布" class="headerlink" title="2. 随机变量及其分布"></a>2. 随机变量及其分布</h2><h3 id="分布函数"><a href="#分布函数" class="headerlink" title="分布函数"></a>分布函数</h3><p>关键要求：</p>
 <ol>
 <li>连续</li>
 <li>单调不减</li>
 <li>x趋近于正无穷为1，趋近于负无穷为0</li>
 <li>值只能在[0,1]范围内</li>
-<li>右连续（这个最重要）</li>
+<li><strong>右连续（这个最重要）</strong>【P{X&lt;&#x3D;x}，因此分布函数必然包含x+0，为右连续】</li>
 </ol>
 <p>判断某个函数是否能作为分布函数时，先看单调性，再看趋近于正无穷负无穷，最后看<strong>右连续</strong>。</p>
 <blockquote>
 <p>注意：右连续要求区间只能是<em>左闭右开</em>，可以用求右极限判断</p>
 <p>极限值的正负：x趋近于a+时，-x趋近于a-，经常用来判断是否是右连续。</p>
 </blockquote>
+<h2 id="3-多维随机变量的分布"><a href="#3-多维随机变量的分布" class="headerlink" title="3. 多维随机变量的分布"></a>3. 多维随机变量的分布</h2><p>定义：F(x,y) &#x3D; P{X&lt;&#x3D;x, Y&lt;&#x3D;y}</p>
+<p>性质：</p>
+<ul>
+<li>F(+∞, +∞) &#x3D; 1（两个正无穷为1）</li>
+<li>F(-∞, y) &#x3D; 0 &#x2F; F(x, -∞) &#x3D; 0 （只要有一个负无穷就为0）</li>
+</ul>
+<p>边缘分布：<code>F_X(x) = P&#123;X&lt;=x&#125; = P&#123;X&lt;=x, Y &lt;= +∞&#125;</code></p>
+<p>注意：只能由二维推出一维，不能由一维推出二维。</p>
+<h3 id="联合概率密度函数-x2F-联合分布"><a href="#联合概率密度函数-x2F-联合分布" class="headerlink" title="联合概率密度函数&#x2F;联合分布"></a>联合概率密度函数&#x2F;联合分布</h3><p>绝大多数X、Y不独立。</p>
+<blockquote>
+<p>二维连续型独立的两个必要条件：</p>
+<ol>
+<li>积分区间是矩形</li>
+<li>f(x,y) &#x3D; g(x) * h(y)【即变量可分离】</li>
+</ol>
+</blockquote>
+<p>先看范围，画出区域。</p>
+<h3 id="条件分布-x2F-边缘分布"><a href="#条件分布-x2F-边缘分布" class="headerlink" title="条件分布&#x2F;边缘分布"></a>条件分布&#x2F;边缘分布</h3><p><img src="/../images/image-20241027001737893.png" alt="image-20241027001737893"></p>
+<p>注意区别，边缘分布是一元概率，条件分布是在Y&#x3D;y的条件下，X的一元分布。</p>
+<blockquote>
+<p>条件分布与条件没关系，不能代条件概率公式！</p>
+<p>注意区分P{X&lt;1 | Y&#x3D;1&#x2F;2}与P{X&lt;1 | Y&lt;1&#x2F;2}，计算完全不同！</p>
+<p>前者需要直接代入Y&#x3D;1&#x2F;2求X的一元概率密度，后者代条件概率公式求二元分布（即确定区域求<strong>二重积分</strong>）。</p>
+</blockquote>
+<ul>
+<li>例如<code>P&#123;-1&lt;X&lt;1/3 | Y=1/2&#125;</code>，此时Y&#x3D;1&#x2F;2，直接代入f(x,y)得到f_X|Y(x|y)，即在Y&#x3D;1&#x2F;2条件下，X的分布。</li>
+<li>但对<code>P&#123;-1&lt;X&lt;1/3 | Y&lt;1/2&#125;</code>完全不同，化为：<code>P&#123;-1&lt;X&lt;1/3, Y&lt;1/2&#125; / P&#123;Y&lt;=1/2&#125;</code>。<ul>
+<li>注意求这个式子的分子要仔细画出二重积分的积分区域再积分。</li>
+</ul>
+</li>
+</ul>
+<h3 id="P-X-Y-gt-a-型的概率"><a href="#P-X-Y-gt-a-型的概率" class="headerlink" title="P{X+Y&gt;a}型的概率"></a>P{X+Y&gt;a}型的概率</h3><p>画出联合概率分布的区间，再画图<code>y=a-x</code>直线，取相交的区域求二重积分。</p>
+<h3 id="二维正态分布"><a href="#二维正态分布" class="headerlink" title="二维正态分布"></a>二维正态分布</h3><p>两种写法：</p>
+<ol>
+<li>f(x,y) &#x3D; 1&#x2F;2pi * e^(x^2 + ρ + y^2)</li>
+<li>(X,Y) ~ N(u1, u2, σ1^2, σ2^2, ρ)</li>
+</ol>
+<p>性质：</p>
+<ul>
+<li><p>边缘分布是<strong>一维正态分布</strong>，且与ρ无关</p>
+</li>
+<li><p>X,Y独立 &lt;&#x3D;&gt; ρ&#x3D;0</p>
+</li>
+<li><p><strong>(ax+by, cx+dy) 满足二维正态分布【即线性组合是二维正态】</strong></p>
+</li>
+<li><blockquote>
+<p>最重要的性质：<strong>ax+by满足一维正态分布</strong>，且与ρ无关（即无论是否独立都成立）</p>
+<p>即一维正态分布服从<strong>独立可加性</strong>，这是概率论中最重要的结论，一定要满足独立。</p>
+<p>但对二维正态，其边缘分布<strong>一定是一维正态</strong>，因此X,Y的任意线性组合也一定符合正态分布，可以不独立。</p>
+<p>注意线性组合之后服从正态的参数：<code>ax+by ~ N(a * u1 + b * u2, a^2 * σ1^2 + b^2 * σ2^2 )</code>，方差无论随机变量是加还是减，结果均为方差之和。</p>
+</blockquote>
+</li>
+</ul>
+<p>计算二维正态的关键：<strong>配方</strong>出标准形式，使负无穷到正无穷的积分为1。</p>
 <h1 id="级数"><a href="#级数" class="headerlink" title="级数"></a>级数</h1><p>先判断收敛域，大多用柯西判别法：开n次方根，取n-&gt;无穷</p>
 <blockquote>
 <p>基本思路：</p>
