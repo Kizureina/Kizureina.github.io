@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241016234121333.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241026000648592.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-27T17:16:25.136Z">
+<meta property="article:modified_time" content="2024-10-28T17:01:05.127Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -405,7 +405,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            17k 词 
+            19k 词 
           </div>
         </div>
         
@@ -513,7 +513,7 @@
 <p>雪崩效应指的是对输入的微小改动会导致输出的较大变化。</p>
 </blockquote>
 <ol start="3">
-<li>分组密码的计数器工作模式英文缩写为（ <strong>CTR</strong> ），它（ <strong>支持</strong> ）预处理和并行处理，（ <strong>支持</strong> ）分组的随机解密，（ <strong>不</strong> ）错误传播。</li>
+<li>分组密码的计数器工作模式英文缩写为（ <strong>CTR</strong> ），它（ <strong>支持</strong> ）预处理和并行处理，（ <strong>支持</strong> ）分组的随机解密，（ <strong>无</strong> ）错误传播。</li>
 </ol>
 <blockquote>
 <p>CTR模式允许加密和解密时的并行处理，并且不会引起错误传播。</p>
@@ -522,7 +522,7 @@
 <li>散列算法SHA-1的消息摘要长度为（ <strong>160</strong> ）比特，抗单向性攻击的强度为（ <strong>160</strong> ），抗弱碰撞攻击强度（ <strong>80</strong> ），抗强碰撞强度（ <strong>80</strong> ）。</li>
 </ol>
 <blockquote>
-<p>SHA-1生成160比特的摘要，其抗碰撞强度理论上为2的80次方(因为生日悖论)。</p>
+<p>SHA-1生成160比特的摘要，其抗碰撞强度理论上为2的80次方(因为<strong>生日悖论</strong>)。</p>
 </blockquote>
 <ol start="5">
 <li>公钥证书是由（ <strong>CA</strong> ）签发的，用来证实（ <strong>公钥</strong> ）的有效性，任何人都可以使用（ <strong>CA的公钥</strong> ）对其进行验证。</li>
@@ -578,17 +578,15 @@
 <blockquote>
 <p>SA（Security Association）由这三项参数来唯一标识，用于IPSec等协议中。</p>
 </blockquote>
-<h2 id="解答题"><a href="#解答题" class="headerlink" title="解答题"></a>解答题</h2><h3 id="1-当需要对数据进行保密和来源认证双重保护时-可以对数据采用先签名后加密，先加密后签名两种方式吗？"><a href="#1-当需要对数据进行保密和来源认证双重保护时-可以对数据采用先签名后加密，先加密后签名两种方式吗？" class="headerlink" title="1. 当需要对数据进行保密和来源认证双重保护时, 可以对数据采用先签名后加密，先加密后签名两种方式吗？"></a>1. 当需要对数据进行保密和来源认证双重保护时, 可以对数据采用先签名后加密，先加密后签名两种方式吗？</h3><p>1）请分析这两种方式各有什么缺陷或局限性 </p>
+<h2 id="解答题"><a href="#解答题" class="headerlink" title="解答题"></a>解答题</h2><h3 id="1-签名与加密顺序不同的区别"><a href="#1-签名与加密顺序不同的区别" class="headerlink" title="1. 签名与加密顺序不同的区别"></a>1. 签名与加密顺序不同的区别</h3><p>当需要对数据进行保密和来源认证双重保护时, 可以对数据采用先签名后加密，先加密后签名两种方式吗？</p>
+<p>1）请分析这两种方式各有什么缺陷或局限性 </p>
 <p>2）请设计一种方案，不更换原有的加密加密和签名算法，保持二者的操作顺序不受限制，以解决上述局限性</p>
 <blockquote>
-<p>解：</p>
 <p><strong>1) 关于先签名后加密与先加密后签名的方式分析：</strong></p>
 <p><strong>两种方式的局限性：</strong></p>
 <ul>
-<li>先签名后加密：<ul>
+<li>先签名后加密：</li>
 <li>缺陷：如果接收方的私钥泄露，攻击者可以看到签名的明文部分，从而推测出原始数据。此方法还可能暴露发送者的签名信息。</li>
-</ul>
-</li>
 <li>先加密后签名：<ul>
 <li>缺陷：发送方的签名只保证了加密数据的完整性，而无法直接验证原始数据的完整性。如果加密算法不安全或加密密钥泄露，则接收方无法确认数据来源。</li>
 </ul>
@@ -596,12 +594,16 @@
 </ul>
 <p><strong>2) 改进方案：结合使用数字摘要（Hash）</strong></p>
 <ol>
-<li><strong>步骤</strong>：<ul>
-<li><strong>创建数据的哈希值</strong>：在签名之前，首先对原始数据进行哈希运算，生成固定长度的哈希值。</li>
+<li><strong>步骤</strong>：</li>
+</ol>
+<ul>
+<li><strong>创建数据的哈希值</strong>：在签名之前，首先对原始数据进行哈希运算，生成固定长度的哈希值。<ul>
 <li><strong>签名哈希值</strong>：用签名者的私钥对哈希值进行签名，得到签名数据。</li>
 <li><strong>加密哈希签名与原始数据</strong>：将原始数据和签名数据一起加密，使用接收者的公钥加密后生成密文。</li>
 </ul>
 </li>
+</ul>
+<ol start="2">
 <li><strong>优点</strong>：<ul>
 <li><strong>数据完整性</strong>：通过对原始数据进行哈希，可以在解密后直接验证数据的完整性，避免了签名信息被篡改的风险。</li>
 <li><strong>提高性能</strong>：对数据进行哈希运算的开销较小，尤其是处理大数据时，只需签名哈希值而非整个数据。</li>
@@ -611,10 +613,10 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-Alice和-Bob用-Diffie-Hellman密钥协商协议建立会话密钥，选择模数P-x3D-17-本原元a-x3D-5："><a href="#2-Alice和-Bob用-Diffie-Hellman密钥协商协议建立会话密钥，选择模数P-x3D-17-本原元a-x3D-5：" class="headerlink" title="2. Alice和 Bob用 Diffie-Hellman密钥协商协议建立会话密钥，选择模数P&#x3D;17,本原元a&#x3D;5："></a>2. Alice和 Bob用 Diffie-Hellman密钥协商协议建立会话密钥，选择模数P&#x3D;17,本原元a&#x3D;5：</h3><p>1）若随机数 X &#x3D;7和 X &#x3D;3，请计算协议执行中他们发给对方的数据，以及他们之间形成的会话密钥 </p>
+<h3 id="2-DH计算-x2F-中间人攻击"><a href="#2-DH计算-x2F-中间人攻击" class="headerlink" title="2. DH计算&#x2F;中间人攻击"></a>2. DH计算&#x2F;中间人攻击</h3><p>Alice和 Bob用 Diffie-Hellman密钥协商协议建立会话密钥，选择模数P&#x3D;17,本原元a&#x3D;5：</p>
+<p>1）若随机数 X &#x3D;7和 X &#x3D;3，请计算协议执行中他们发给对方的数据，以及他们之间形成的会话密钥 </p>
 <p>2）简述攻击者 Eve如何发起中间人攻击</p>
 <blockquote>
-<p>解：</p>
 <ol>
 <li><strong>计算过程：</strong></li>
 </ol>
@@ -624,27 +626,27 @@
 <li><strong>Eve的中间人攻击：</strong></li>
 </ol>
 <ul>
-<li>Eve可以分别与Alice和Bob建立两个单独的Diffie-Hellman会话：<ul>
-<li>Eve选择自己的随机数并发送给Alice和Bob，分别冒充对方。</li>
+<li>Eve可以分别与Alice和Bob建立两个单独的Diffie-Hellman会话：</li>
+<li>Eve选择自己的随机数并发送给Alice和Bob，分别冒充对方。<ul>
 <li>Alice和Bob的密钥协商实际与Eve进行，从而Eve能够解密并查看双方的通信。</li>
 </ul>
 </li>
 </ul>
 </blockquote>
 <hr>
-<h3 id="3-在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-9"><a href="#3-在RSA算法中，若系统选择大素数-P-x3D-17-q-x3D-11。并为用户-A选择公钥e-x3D-9" class="headerlink" title="3. 在RSA算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;9"></a>3. 在<code>RSA</code>算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;9</h3><p>1）求 A私钥 d&#x3D;？ </p>
+<h3 id="3-RSA计算"><a href="#3-RSA计算" class="headerlink" title="3. RSA计算"></a>3. RSA计算</h3><p>在<code>RSA</code>算法中，若系统选择大素数 P&#x3D;17,q&#x3D;11。并为用户 A选择公钥e&#x3D;9</p>
+<p>1）求 A私钥 d&#x3D;？ </p>
 <p>2）用户 B预向 A发送私密信息 M&#x3D;4，求密文 C&#x3D;? </p>
 <p>3）若用户 A欲对消息 M&#x3D;157进行签名，求签名结果 S&#x3D;? </p>
 <p>4）继续给用户 B分配公钥&#x2F;私钥时，可用的公钥有多少个？</p>
 <blockquote>
-<p>解：</p>
 <p><img src="/../images/image-20241014003526608.png" alt="image-20241014003526608"></p>
 </blockquote>
 <hr>
-<h3 id="4-Alice将一副牌中的红桃-A至红桃-Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉-Bob一条秘密消息-M-而偷听着的-Eve可以听到他们说的所有内容："><a href="#4-Alice将一副牌中的红桃-A至红桃-Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉-Bob一条秘密消息-M-而偷听着的-Eve可以听到他们说的所有内容：" class="headerlink" title="4. Alice将一副牌中的红桃 A至红桃 Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉 Bob一条秘密消息 M,而偷听着的 Eve可以听到他们说的所有内容："></a>4. Alice将一副牌中的红桃 A至红桃 Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉 Bob一条秘密消息 M,而偷听着的 Eve可以听到他们说的所有内容：</h3><p>1）请为 Alice设计一个具体的通讯方案。注意，这个方案她只能大声地告诉Bob，且Eve能听得到。</p>
+<h3 id="4-一次一密方案设计-x2F-密钥交换"><a href="#4-一次一密方案设计-x2F-密钥交换" class="headerlink" title="4. 一次一密方案设计&#x2F;密钥交换"></a>4. 一次一密方案设计&#x2F;密钥交换</h3><p>Alice将一副牌中的红桃 A至红桃 Q（12张）随机且私密地分一半给Bob。现在，Alice准备大声地告诉 Bob一条秘密消息 M,而偷听着的 Eve可以听到他们说的所有内容：</p>
+<p>1）请为 Alice设计一个具体的通讯方案。注意，这个方案她只能大声地告诉Bob，且Eve能听得到。</p>
 <p>2）证明：Alice有可能找到一种方法将 9比特的消息安全地传递给Bob，Eve不能获得M的任何信息，但完美安全地传递 10比特信息则是不可能的。</p>
 <blockquote>
-<p>解：</p>
 <h5 id="1-通讯方案"><a href="#1-通讯方案" class="headerlink" title="1. 通讯方案"></a>1. 通讯方案</h5><p>两人的牌可以随机分配，但彼此可以计算出对方的牌，因此可以实现密钥协商。</p>
 <p>Alice将自己的所有牌代表的数字相乘得到密钥，Bob用12!除以自己牌数字的乘积即可得到Alice的密钥。</p>
 <p>然后将协商出的密钥作为一次一密的密钥，与明文异或，再将异或后的密文大声告诉Bob即可。</p>
@@ -663,13 +665,13 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="5-什么是数字信封？解释数字信封具有什么作用"><a href="#5-什么是数字信封？解释数字信封具有什么作用" class="headerlink" title="5. 什么是数字信封？解释数字信封具有什么作用"></a>5. 什么是数字信封？解释数字信封具有什么作用</h3><blockquote>
-<p>解：</p>
+<h3 id="5-数字信封"><a href="#5-数字信封" class="headerlink" title="5. 数字信封"></a>5. 数字信封</h3><p>什么是数字信封？解释数字信封具有什么作用</p>
+<blockquote>
 <p><strong>数字信封</strong>是结合了对称加密和非对称加密的技术。具体而言，用对称密钥加密数据，再用接收方的公钥加密对称密钥。接收方用私钥解密对称密钥，然后解密数据。数字信封确保了数据保密性和密钥安全。</p>
 </blockquote>
 <hr>
-<h3 id="6-说明什么时候需要撤销一个证书，如何撤销一个证书？"><a href="#6-说明什么时候需要撤销一个证书，如何撤销一个证书？" class="headerlink" title="6. 说明什么时候需要撤销一个证书，如何撤销一个证书？"></a>6. 说明什么时候需要撤销一个证书，如何撤销一个证书？</h3><blockquote>
-<p>解：</p>
+<h3 id="6-证书撤销"><a href="#6-证书撤销" class="headerlink" title="6. 证书撤销"></a>6. 证书撤销</h3><p>说明什么时候需要撤销一个证书，如何撤销一个证书？</p>
+<blockquote>
 <h4 id="1）需要撤销证书的情况；"><a href="#1）需要撤销证书的情况；" class="headerlink" title="1）需要撤销证书的情况；"></a>1）需要撤销证书的情况；</h4><ul>
 <li><strong>用户私钥泄露</strong></li>
 <li><strong>CA不再被信任</strong></li>
@@ -698,16 +700,20 @@
 </ul>
 </blockquote>
 <hr>
-<h3 id="7-解释为什么-FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？"><a href="#7-解释为什么-FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？" class="headerlink" title="7. 解释为什么 FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？"></a>7. 解释为什么 FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？</h3><blockquote>
-<p>解：</p>
+<h3 id="7-FTP主动模式与防火墙"><a href="#7-FTP主动模式与防火墙" class="headerlink" title="7. FTP主动模式与防火墙"></a>7. FTP主动模式与防火墙</h3><p>解释为什么 FTP主动模式在状态检测防火墙下往往无法成功地发起数据连接？</p>
+<blockquote>
 <p><img src="/../images/image-20241027235352103.png" alt="image-20241027235352103"></p>
 <p>在 FTP 的主动模式下，服务器从其数据端口<code>20</code><strong>主动</strong>连接到客户端的指定端口。这会产生以下问题：</p>
 <ol>
-<li><strong>主动连接被阻止</strong>：<ul>
-<li>从防火墙的角度看，<em>服务器的数据连接是从外部发起的</em>，而状态检测防火墙一般会默认阻止这种从外部主动发起的连接，因为防火墙并没有看到客户端主动发起对该数据端口的请求。</li>
+<li><strong>主动连接被阻止</strong>：</li>
+</ol>
+<ul>
+<li>从防火墙的角度看，<em>服务器的数据连接是从外部发起的</em>，而状态检测防火墙一般会默认阻止这种从外部主动发起的连接，因为防火墙并没有看到客户端主动发起对该数据端口的请求。<ul>
 <li>即便客户端已经通过控制连接发起了请求，但数据连接是由服务器主动发起，防火墙会认为这是未经过授权的连接，导致阻止该数据连接的建立。</li>
 </ul>
 </li>
+</ul>
+<ol start="2">
 <li><strong>动态端口问题</strong>：<ul>
 <li>在主动模式下，客户端指定的端口号是动态生成的，而不是固定的端口。防火墙需要有能力动态识别这些随机端口号并做出相应的规则调整，否则无法处理这些随机的外部连接请求。</li>
 </ul>
@@ -715,8 +721,8 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="8-网络协议和网络安全协议涉及到填充，给出填充的常用作用"><a href="#8-网络协议和网络安全协议涉及到填充，给出填充的常用作用" class="headerlink" title="8. 网络协议和网络安全协议涉及到填充，给出填充的常用作用:"></a>8. 网络协议和网络安全协议涉及到填充，给出填充的常用作用:</h3><blockquote>
-<p>解：</p>
+<h3 id="8-填充的作用"><a href="#8-填充的作用" class="headerlink" title="8. 填充的作用"></a>8. 填充的作用</h3><p>网络协议和网络安全协议涉及到填充，给出填充的常用作用:</p>
+<blockquote>
 <p>填充用于确保数据块的长度满足分组加密算法的要求，同时可以防止明文攻击或长度攻击。</p>
 <ul>
 <li>对齐数据长度</li>
@@ -726,11 +732,11 @@
 <li>增强安全性</li>
 </ul>
 </blockquote>
-<h3 id="9-PGP可以同时提供加密、完整性和认证保护"><a href="#9-PGP可以同时提供加密、完整性和认证保护" class="headerlink" title="9. PGP可以同时提供加密、完整性和认证保护"></a>9. PGP可以同时提供加密、完整性和认证保护</h3><p>（1）请解释邮件发送端产生 PGP消息的具体操作流程？ </p>
+<h3 id="9-PGP流程"><a href="#9-PGP流程" class="headerlink" title="9. PGP流程"></a>9. PGP流程</h3><p>PGP可以同时提供加密、完整性和认证保护 </p>
+<p>（1）请解释邮件发送端产生 PGP消息的具体操作流程？ </p>
 <p>（2）进一步地，实际使用时一个用户往往是有一系列的秘钥（首先，每个用户可能拥有多个秘钥对，一个用户也收集了人量别的用户的公钥，这里面每个用户也还可能不止一个公钥。）当 Alice收到一个来自 Bob的 PGP信息时，她怎样才能知道Bob采用的哪个秘钥进行加密和签名的，简要进行描述 </p>
 <p>（3）相应的用户和钥需要自行进行安全保存，显然不能直接明文存储，应该采用怎样的手段？</p>
 <blockquote>
-<p>解：</p>
 <h4 id="1）邮件发送端产生-PGP-消息的具体操作流程："><a href="#1）邮件发送端产生-PGP-消息的具体操作流程：" class="headerlink" title="1）邮件发送端产生 PGP 消息的具体操作流程："></a>1）邮件发送端产生 PGP 消息的具体操作流程：</h4><p><img src="/../images/image-20241028002326044.png" alt="image-20241028002326044"></p>
 <p>在发送端，生成 PGP 消息的过程分为以下几个步骤：</p>
 <ol>
@@ -758,7 +764,13 @@
 </li>
 </ol>
 <p>整个过程确保了加密性、完整性、认证性，接收方能够解密并验证消息的真实性和完整性。</p>
-<h4 id="2）Alice-如何知道-Bob-使用哪个秘钥进行加密和签名"><a href="#2）Alice-如何知道-Bob-使用哪个秘钥进行加密和签名" class="headerlink" title="2）Alice 如何知道 Bob 使用哪个秘钥进行加密和签名"></a>2）Alice 如何知道 Bob 使用哪个秘钥进行加密和签名</h4><p>在实际应用中，一个用户可能拥有多个公私钥对，且收集了其他人的多个公钥。因此，Alice 在收到来自 Bob 的 PGP 消息时，需要确定 Bob 使用的具体秘钥。这通常通过以下步骤实现：</p>
+<h4 id="2）Alice-如何知道-Bob-使用哪个秘钥进行加密和签名"><a href="#2）Alice-如何知道-Bob-使用哪个秘钥进行加密和签名" class="headerlink" title="2）Alice 如何知道 Bob 使用哪个秘钥进行加密和签名"></a>2）Alice 如何知道 Bob 使用哪个秘钥进行加密和签名</h4><p>在实际应用中，一个用户可能拥有多个公私钥对，且收集了其他人的多个公钥。因此，Alice 在收到来自 Bob 的 PGP 消息时，需要确定 Bob 使用的具体秘钥。</p>
+<p>主要有两种实现方法：</p>
+<ul>
+<li><strong>公钥与消息一起发送给接收方</strong></li>
+<li><strong>将一个标识符与一个公钥关联，对一个用户来说做到一一对应</strong></li>
+</ul>
+<p>这通常通过以下步骤实现：</p>
 <ol>
 <li><strong>公钥标识</strong>：<ul>
 <li>PGP 公钥中包含一个称为<strong>Key ID</strong> 的字段，用于唯一标识秘钥对。当 Bob 使用某个秘钥对加密或签名消息时，这个秘钥的<strong>Key ID</strong> 会包含在加密后的消息中。</li>
@@ -775,7 +787,7 @@
 <h4 id="3）用户密钥的安全存储方式："><a href="#3）用户密钥的安全存储方式：" class="headerlink" title="3）用户密钥的安全存储方式："></a>3）用户密钥的安全存储方式：</h4><p>由于用户的私钥是非常敏感的信息，必须采取有效的手段来保证它的安全存储，防止被未经授权的人获取。通常有以下几种措施：</p>
 <ol>
 <li><strong>密钥加密（Key Encryption）</strong>：<ul>
-<li>PGP 系统会将用户的私钥加密后存储在硬盘上，用户需要输入<strong>口令短语（passphrase）</strong>来解锁和使用私钥。</li>
+<li>PGP 系统会将用户的私钥做加密后存储在硬盘上，用户需要输入<strong>口令短语（passphrase）</strong>来解锁和使用私钥。</li>
 <li>这种方式通过结合口令和加密技术确保即使密钥文件被盗，攻击者也无法直接使用私钥，除非知道正确的口令。</li>
 </ul>
 </li>
@@ -793,7 +805,8 @@
 </li>
 </ol>
 </blockquote>
-<h3 id="10-NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓扑图如下所示）"><a href="#10-NATPT是-NAT的一种，转换中结合了-IP地址和传输层端口（拓扑图如下所示）" class="headerlink" title="10. NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓扑图如下所示）"></a>10. NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓扑图如下所示）</h3><p><img src="/../images/image-20241015003404015.png" alt="image-20241015003404015"></p>
+<h3 id="10-NAT与组网"><a href="#10-NAT与组网" class="headerlink" title="10. NAT与组网"></a>10. NAT与组网</h3><p>NATPT是 NAT的一种，转换中结合了 IP地址和传输层端口（拓扑图如下所示）</p>
+<p><img src="/../images/image-20241015003404015.png" alt="image-20241015003404015"></p>
 <p>（1）从数据请求和应答两个方面解释一下从内部主机（假设为 192.168.3.1）对外进行访问（假设访间服务器 202.38.64.3的 WWW服务，端口为 WWW服务器的周知端口）的IP数据包变化过程和 NAT的处理方法？ </p>
 <p>（2）当内部主机 C需要对外提供 WWW服务，从而让所有的 Internet用户都能访问到其所提供的服务管理员需要做什么样的操作</p>
 <blockquote>
@@ -928,9 +941,27 @@
 <p>在 Feistel 结构中，每一轮的轮函数通常用于混淆输入。你可以将 MD5 哈希函数作为轮函数的一部分来处理输入和密钥。在第 i 轮中，轮函数可以设计为：<code>Fi(Li,Ki) = MD5(Li ∣∣ Ki)</code></p>
 <p>其中，L_i是左半部分的输入，K_i是当前轮的密钥，两个值被拼接后通过 MD5 进行哈希计算，输出作为轮函数的结果。</p>
 </blockquote>
-<h3 id="2-伪随机数发生器"><a href="#2-伪随机数发生器" class="headerlink" title="2. 伪随机数发生器"></a>2. 伪随机数发生器</h3><p>在 GF(2,4)域中，伪随机数发生器<code>X_i+1 ＝ a *  X_i  mod b</code></p>
+<h3 id="2-伪随机数发生器"><a href="#2-伪随机数发生器" class="headerlink" title="2. 伪随机数发生器"></a>2. 伪随机数发生器</h3><p>在 GF(2^4)域中，伪随机数发生器<code>X_i+1 ＝ a *  X_i  mod b</code></p>
 <p>(a) 写出一个周期的输出</p>
 <p>(b) 最大周期是多少，a、b要符合的条件，种子要符合的条件</p>
+<blockquote>
+<p>(a) 直接按照发生器的公式写出后续序列即可，到重复时为一个周期的输出</p>
+<p>(b) 在 GF(2^4)中，最大周期的理论值为 15（即域中非零元素的个数）。要实现最大周期，必须满足以下条件：</p>
+<ol>
+<li><strong>乘数 a 必须是一个原根</strong>：在 GF(2^4) 中，乘数 a 必须是这个域的一个原根，才能产生最大周期。这里的原根是指在有限域中能生成所有非零元素的数。</li>
+</ol>
+<p>例如：在GF(2^4)中，3 是一个原根，它可以生成所有的非零元素，因此<code>a = 3</code>是合适的选择。</p>
+<ol start="2">
+<li><p><strong>模数 b&#x3D;1</strong>：为了不限制生成序列的周期，通常选择<code>b = 1</code>或者直接不取模运算，仅在域内运算即可。</p>
+</li>
+<li><p><strong>初始种子 X≠0</strong>：种子 X_0 必须是非零元素，因为在 GF(2^4) 中，0 乘以任何数都会是 0，这样会导致序列周期为 1。所以初始值必须是非零的，以避免序列坍缩。</p>
+</li>
+</ol>
+<ul>
+<li>此外伪随机数的种子应该满足完全随机的要求，即伪随机生成器的种子为真随机数。</li>
+<li>随机数的要求：独立性、不可预测性、（不可重复性）。【密码学随机数不要求第三个性质】</li>
+</ul>
+</blockquote>
 <h3 id="3-RSA安全性"><a href="#3-RSA安全性" class="headerlink" title="3. RSA安全性"></a>3. RSA安全性</h3><p>(a) RSA：给 m 加密，给 c 解密 </p>
 <p>(b) 对一条消息的每个字节进行单独加密安全吗。安全给理由，不安全给攻击方法</p>
 <blockquote>
@@ -954,18 +985,32 @@
 <p><strong>优势</strong>：结合对称加密和非对称加密的优点，提高了加密速度，同时保障密钥传输的安全。</p>
 </blockquote>
 <h3 id="6-认证和加密顺序不一样时各自的优缺点"><a href="#6-认证和加密顺序不一样时各自的优缺点" class="headerlink" title="6. 认证和加密顺序不一样时各自的优缺点"></a>6. 认证和加密顺序不一样时各自的优缺点</h3><blockquote>
-<p><strong>先认证后加密（Authenticate-then-Encrypt, AtE）</strong>：</p>
+<p>在网络通信中，认证和加密的顺序确实会影响通信的安全性和效率。这里我们分别讨论<strong>先认证后加密</strong>和<strong>先加密后认证</strong>这两种模式的优缺点。</p>
+<h4 id="1-先认证后加密"><a href="#1-先认证后加密" class="headerlink" title="1. 先认证后加密"></a>1. 先认证后加密</h4><p><strong>流程</strong>：通信双方首先进行身份认证，然后再建立加密通道，确保双方身份后传输加密信息。</p>
+<p><strong>优点</strong>：</p>
 <ul>
-<li><strong>优点</strong>：接收方可以首先验证消息是否来自合法方，然后再解密，保证解密只针对有效消息。</li>
-<li><strong>缺点</strong>：在有些情况下，认证过程本身可能泄露部分加密信息。</li>
+<li><strong>确保身份合法性</strong>：先认证可以确认通信双方身份，防止未经授权的第三方连接到加密通道上。尤其在安全协议（如TLS）中，先认证后加密能够有效防止中间人攻击。</li>
+<li><strong>精简加密流量</strong>：若认证失败，通信可以终止，避免了不必要的加密和数据传输，节省计算资源和带宽。</li>
 </ul>
-<p><strong>先加密后认证（Encrypt-then-Authenticate, EtA）</strong>：</p>
+<p><strong>缺点</strong>：</p>
 <ul>
-<li><strong>优点</strong>：加密的消息在认证前就已完全保密，认证过程不会泄露任何信息。</li>
-<li><strong>缺点</strong>：需要先进行加密，可能导致性能开销稍大。</li>
+<li><strong>潜在的额外负载</strong>：身份认证需要额外的握手和计算，可能会稍微增加延迟，尤其在高并发场景中。</li>
 </ul>
+<h4 id="2-先加密后认证"><a href="#2-先加密后认证" class="headerlink" title="2. 先加密后认证"></a>2. 先加密后认证</h4><p><strong>流程</strong>：通信双方首先通过加密通道交换数据，然后在必要时对数据进行认证。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li><strong>适合匿名通信</strong>：在某些场景中（例如点对点加密通信），可以优先进行加密传输，再在必要时验证身份。</li>
+<li><strong>隐私保护更强</strong>：部分应用中，通信双方不愿意公开身份，因此在隐私敏感的场景下先加密后认证可能更为适合。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li><strong>容易遭受中间人攻击</strong>：由于没有在加密之前确认身份，恶意用户可能会在未经认证的加密通道中实施攻击，例如重放攻击、篡改数据等。</li>
+<li><strong>降低通信效率</strong>：若认证失败，已经进行的加密操作将被浪费，消耗了不必要的资源和带宽。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一般来说，<strong>先认证后加密</strong>是大多数安全通信协议（如TLS）所采用的顺序，能够有效防止攻击并确保通信的机密性和完整性。先加密后认证适用于特殊场景，但需要在设计上采取额外的防御措施以保证通信安全。</p>
 </blockquote>
-<h3 id="7-证书内容，谁产生，产生流程。证书撤销原因，撤销方法"><a href="#7-证书内容，谁产生，产生流程。证书撤销原因，撤销方法" class="headerlink" title="7. 证书内容，谁产生，产生流程。证书撤销原因，撤销方法"></a>7. 证书内容，谁产生，产生流程。证书撤销原因，撤销方法</h3><blockquote>
+<h3 id="7-数字证书"><a href="#7-数字证书" class="headerlink" title="7. 数字证书"></a>7. 数字证书</h3><p>证书内容，谁产生，产生流程。证书撤销原因，撤销方法</p>
+<blockquote>
 <p>(a) <strong>证书内容</strong>：证书通常包含公钥、证书持有者的身份信息、证书颁发机构（CA）的签名、有效期等信息。</p>
 <p>(b) <strong>谁产生，产生流程</strong>：证书由 CA 生成。流程包括：</p>
 <ol>
@@ -975,7 +1020,10 @@
 <p>(c) <strong>证书撤销原因</strong>：私钥泄露、证书到期、持有者身份不再有效等。</p>
 <p>(d) <strong>撤销方法</strong>：通过发布证书撤销列表（CRL）或在线证书状态协议（OCSP）。</p>
 </blockquote>
-<h3 id="8-a-IPSec-的-AH、ESP-作用-b-画两种模式-AH-的位置-c-画两种模式-AH-的认证范围"><a href="#8-a-IPSec-的-AH、ESP-作用-b-画两种模式-AH-的位置-c-画两种模式-AH-的认证范围" class="headerlink" title="8. (a)IPSec 的 AH、ESP 作用 (b)画两种模式 AH 的位置 (c)画两种模式 AH 的认证范围"></a>8. (a)IPSec 的 AH、ESP 作用 (b)画两种模式 AH 的位置 (c)画两种模式 AH 的认证范围</h3><blockquote>
+<h3 id="8-IPSec"><a href="#8-IPSec" class="headerlink" title="8. IPSec"></a>8. IPSec</h3><p>(a)IPSec 的 AH、ESP 作用 </p>
+<p>(b)画两种模式 AH 的位置 </p>
+<p>(c)画两种模式 AH 的认证范围</p>
+<blockquote>
 <p>(a) <strong>AH（Authentication Header）</strong>：提供数据包的完整性验证和来源身份认证，不提供加密。</p>
 <p><strong>ESP（Encapsulating Security Payload）</strong>：提供加密、完整性验证、和身份认证。</p>
 <p>(b) <strong>两种模式 AH 的位置</strong>：</p>
@@ -989,8 +1037,8 @@
 <li><strong>隧道模式</strong>：AH 认证整个 IP 数据包，包括包头和载荷。</li>
 </ul>
 </blockquote>
-<h3 id="9-PGP流程"><a href="#9-PGP流程" class="headerlink" title="9. PGP流程"></a>9. PGP流程</h3><p>(a) PGP 流程（指明使用的算法）。 </p>
-<p>(b)pgp 接收者拥有的自己的和其他人的密钥很多，怎么确定 bob 使用哪个密钥对签名哪个密钥对加密。 </p>
+<h3 id="9-PGP流程-1"><a href="#9-PGP流程-1" class="headerlink" title="9. PGP流程"></a>9. PGP流程</h3><p>(a)PGP 流程（指明使用的算法）。 </p>
+<p>(b)PGP 接收者拥有的自己的和其他人的密钥很多，怎么确定 bob 使用哪个密钥对签名哪个密钥对加密。 </p>
 <p>(c)Alice 该怎么保管自己的私钥防止泄露。</p>
 <blockquote>
 <p>(a) <strong>PGP 流程</strong>：</p>
@@ -999,10 +1047,12 @@
 <li>用接收方的公钥加密对称密钥。</li>
 <li>接收方用其私钥解密对称密钥，然后用该密钥解密消息。</li>
 </ol>
-<p>(b) <strong>确定 Bob 使用哪个密钥对签名哪个密钥对加密</strong>： PGP 使用公钥证书和密钥标识符来确定 Bob 的密钥。消息中包含公钥标识符，Bob 可以使用对应的私钥进行解密或签名验证。</p>
-<p>(c) <strong>Alice 保管私钥防止泄露</strong>：Alice 应该将私钥存储在安全的地方（如硬件安全模块或加密的密钥库）并设置强密码。</p>
+<p>(b) <strong>确定 Bob 使用哪个密钥对签名哪个密钥对加密</strong>： PGP 使用公钥证书和密钥标识符KeyID来确定 Bob 的密钥。消息中包含公钥标识符，Bob 可以使用对应的私钥进行解密或签名验证。</p>
+<p>(c) <strong>Alice 保管私钥防止泄露</strong>：Alice 应该将私钥存储在安全的地方（如硬件安全模块或加密的密钥库）并设置强密码&#x2F;强口令。</p>
 </blockquote>
-<h3 id="10-a-密钥派生及作用。-b-什么是会话重用，作用？会话重用用在什么协议"><a href="#10-a-密钥派生及作用。-b-什么是会话重用，作用？会话重用用在什么协议" class="headerlink" title="10. (a)密钥派生及作用。 (b)什么是会话重用，作用？会话重用用在什么协议"></a>10. (a)密钥派生及作用。 (b)什么是会话重用，作用？会话重用用在什么协议</h3><blockquote>
+<h3 id="10-TLS-x2F-SSL"><a href="#10-TLS-x2F-SSL" class="headerlink" title="10. TLS&#x2F;SSL"></a>10. TLS&#x2F;SSL</h3><p>(a)密钥派生及作用。 </p>
+<p>(b)什么是会话重用，作用？会话重用用在什么协议</p>
+<blockquote>
 <p>(a) <strong>密钥派生</strong>：从一个主密钥生成多个会话密钥或其他加密材料。用于提高安全性，防止长期密钥泄露导致所有加密内容被破解。</p>
 <p>(b) <strong>会话重用</strong>：在安全通信中，客户端和服务器可以在多个会话之间重用以前协商的会话密钥，避免重新进行完整的密钥协商过程，提升性能。会话重用通常用于 TLS 协议中。</p>
 </blockquote>
@@ -1195,7 +1245,8 @@
 <li>增强安全性</li>
 </ul>
 </blockquote>
-<h3 id="8-利用数字签名，设计一个”一个用户向另一个用户证明自己的身份”的流程。"><a href="#8-利用数字签名，设计一个”一个用户向另一个用户证明自己的身份”的流程。" class="headerlink" title="8. 利用数字签名，设计一个”一个用户向另一个用户证明自己的身份”的流程。"></a>8. 利用数字签名，设计一个”一个用户向另一个用户证明自己的身份”的流程。</h3><blockquote>
+<h3 id="8-数字签名设计"><a href="#8-数字签名设计" class="headerlink" title="8. 数字签名设计"></a>8. 数字签名设计</h3><p>利用数字签名，设计一个”一个用户向另一个用户证明自己的身份”的流程。</p>
+<blockquote>
 <ol>
 <li>用户 A 生成消息并对其计算哈希值。</li>
 <li>用户 A 用自己的私钥对哈希值进行签名，生成数字签名。</li>
@@ -1203,15 +1254,18 @@
 <li>用户 B 使用用户 A 的公钥验证签名，确认消息是由用户 A 发出的，且未被篡改。</li>
 </ol>
 </blockquote>
-<h3 id="9-ftp的主动模式为什么面对状态检测型防火墙往往不能成功进行数据连接？"><a href="#9-ftp的主动模式为什么面对状态检测型防火墙往往不能成功进行数据连接？" class="headerlink" title="9. ftp的主动模式为什么面对状态检测型防火墙往往不能成功进行数据连接？"></a>9. ftp的主动模式为什么面对状态检测型防火墙往往不能成功进行数据连接？</h3><blockquote>
+<h3 id="9-FTP与防火墙"><a href="#9-FTP与防火墙" class="headerlink" title="9. FTP与防火墙"></a>9. FTP与防火墙</h3><p>ftp的主动模式为什么面对状态检测型防火墙往往不能成功进行数据连接？</p>
+<blockquote>
 <p>在 FTP 主动模式下，服务器主动连接客户端的随机端口。</p>
 <p>状态检测型防火墙通常阻止服务器主动发起的连接，导致数据连接无法建立，因为防火墙只允许客户端发起的连接。</p>
 </blockquote>
-<h3 id="10-什么是会话重用？为什么会使用会话重用？"><a href="#10-什么是会话重用？为什么会使用会话重用？" class="headerlink" title="10. 什么是会话重用？为什么会使用会话重用？"></a>10. 什么是会话重用？为什么会使用会话重用？</h3><blockquote>
+<h3 id="10-TLS-x2F-SSL会话重用"><a href="#10-TLS-x2F-SSL会话重用" class="headerlink" title="10. TLS&#x2F;SSL会话重用"></a>10. TLS&#x2F;SSL会话重用</h3><p>什么是会话重用？为什么会使用会话重用？</p>
+<blockquote>
 <p><strong>定义</strong>：在 SSL&#x2F;TLS 协议中，客户端和服务器可以重用之前的会话状态，避免每次都重新进行完整的握手过程。</p>
 <p><strong>原因</strong>：会话重用减少了握手的时间和计算成本，特别是在高频次连接的场景下，有助于提高性能。</p>
 </blockquote>
-<h3 id="11-密钥派生的作用，密钥派生的流程。"><a href="#11-密钥派生的作用，密钥派生的流程。" class="headerlink" title="11. 密钥派生的作用，密钥派生的流程。"></a>11. 密钥派生的作用，密钥派生的流程。</h3><blockquote>
+<h3 id="11-密钥派生"><a href="#11-密钥派生" class="headerlink" title="11. 密钥派生"></a>11. 密钥派生</h3><p>密钥派生的作用，密钥派生的流程。</p>
+<blockquote>
 <p><strong>作用</strong>：从一个主密钥（如会话密钥或根密钥）生成多个子密钥，确保每次通信使用不同的密钥，增强安全性。</p>
 <p><strong>流程</strong>：</p>
 <ol>
@@ -1219,23 +1273,33 @@
 <li>通过密钥派生函数（如 HMAC 或 KDF）生成多个子密钥，用于不同的加密和认证操作。</li>
 </ol>
 </blockquote>
-<h1 id="2023年"><a href="#2023年" class="headerlink" title="2023年"></a>2023年</h1><h2 id="选择题-3"><a href="#选择题-3" class="headerlink" title="选择题"></a>选择题</h2><p><strong>不属于数据流的主动攻击的是</strong></p>
+<h1 id="2023年"><a href="#2023年" class="headerlink" title="2023年"></a>2023年</h1><h2 id="选择题-3"><a href="#选择题-3" class="headerlink" title="选择题"></a>选择题</h2><ol>
+<li><strong>不属于数据流的主动攻击的是</strong></li>
+</ol>
 <ul>
 <li>主动攻击通常是指篡改或伪造数据的攻击。常见的主动攻击包括中间人攻击、重放攻击、伪造数据包等。不属于主动攻击的则是被动攻击，如窃听、流量分析等。</li>
 </ul>
-<p><strong>Feistel密码结构描述正确的是</strong></p>
+<ol start="2">
+<li><strong>Feistel密码结构描述正确的是</strong></li>
+</ol>
 <ul>
 <li>Feistel结构是一种对称加密结构，其中的加密和解密过程非常相似，主要是对明文分组（如左右两半部分），然后进行若干轮的处理，每一轮通过一个复杂的函数（Feistel函数）对其中一半进行处理并与另一半进行交换，最后合并得到密文。解密时，只需要按反顺序进行同样的操作。典型的例子是DES算法。</li>
 </ul>
-<p><strong>Alice 获取证书包括RSA的公钥和私钥，并把公钥公开，然后谁可以计算模数?</strong></p>
+<ol start="3">
+<li><strong>Alice 获取证书包括RSA的公钥和私钥，并把公钥公开，然后谁可以计算模数?</strong></li>
+</ol>
 <ul>
 <li>如果Alice将她的RSA公钥公开，公钥通常包括模数（n）和公钥指数（e）。模数是公开的，任何人都可以通过查看公钥获得模数。公钥是供所有人使用的，任何需要加密或验证Alice的签名的人都可以访问模数。</li>
 </ul>
-<p><strong>会话密钥的使用正确的是(什么时候更新)</strong></p>
+<ol start="4">
+<li><strong>会话密钥的使用正确的是(什么时候更新)</strong></li>
+</ol>
 <ul>
 <li>会话密钥是一种临时的对称密钥，用于保护单次会话中的数据传输。会话密钥应该定期更新，特别是在长时间的通信过程中，或者当会话结束时。通常，新的会话开始或出现特定的事件（如用户身份验证、加密协议的重新协商）时会更新会话密钥。</li>
 </ul>
-<p><strong>D-H协议的解释，下来说法正确的是</strong></p>
+<ol start="5">
+<li><strong>D-H协议的解释，下来说法正确的是</strong></li>
+</ol>
 <ul>
 <li>Diffie-Hellman (D-H) 密钥交换协议允许两方在不安全的网络上安全地生成共享的会话密钥。双方分别生成各自的私钥和公钥，然后通过交换公钥并进行计算生成共享的密钥。正确的说法包括：<ul>
 <li>D-H 协议本身不提供身份认证，因此容易受到中间人攻击，除非结合其他机制（如数字签名）使用。</li>
@@ -1243,7 +1307,9 @@
 </ul>
 </li>
 </ul>
-<p><strong>WEP 说法正确的</strong></p>
+<ol start="6">
+<li><strong>WEP 说法正确的</strong></li>
+</ol>
 <ul>
 <li>WEP（Wired Equivalent Privacy）是一种早期的无线网络安全协议，设计目的是提供与有线网络类似的安全性。然而，WEP存在许多已知的漏洞，容易受到攻击，特别是密钥调度算法存在问题。常见的正确说法是：<ul>
 <li>WEP 使用的密钥相对较短（通常为40位或104位）。</li>
@@ -1252,7 +1318,9 @@
 </ul>
 </li>
 </ul>
-<p><strong>WLAN 安全接入协议</strong></p>
+<ol start="7">
+<li><strong>WLAN 安全接入协议</strong></li>
+</ol>
 <ul>
 <li>WLAN的安全接入协议包括WEP、WPA（Wi-Fi Protected Access）、WPA2和WPA3等：<ul>
 <li>WPA&#x2F;WPA2使用TKIP和AES加密。</li>
@@ -1392,20 +1460,23 @@
 <li><strong>强碰撞性要求</strong>：攻击者在已知 hash 函数的情况下，不能有效找到两组不同的输入得到相同的输出值。</li>
 <li><strong>安全性作用</strong>：强碰撞性保证了 hash 函数的完整性，可以防止恶意篡改数据，例如数字签名和文件完整性校验中需要此特性来避免伪造。</li>
 </ul>
-<h2 id="解答题-3"><a href="#解答题-3" class="headerlink" title="解答题"></a>解答题</h2><h3 id="1-DES-加密方法的抗选择明文攻击性能和代价"><a href="#1-DES-加密方法的抗选择明文攻击性能和代价" class="headerlink" title="1. DES 加密方法的抗选择明文攻击性能和代价"></a>1. DES 加密方法的抗选择明文攻击性能和代价</h3><p>题目描述了一种加密方法为：</p>
+<h2 id="解答题-3"><a href="#解答题-3" class="headerlink" title="解答题"></a>解答题</h2><h3 id="1-DES-加密方法的抗选择明文攻击性能和代价"><a href="#1-DES-加密方法的抗选择明文攻击性能和代价" class="headerlink" title="1. DES 加密方法的抗选择明文攻击性能和代价"></a>1. DES 加密方法的抗选择明文攻击性能和代价</h3><blockquote>
+<p>题目描述了一种加密方法为：</p>
 <p><img src="/../images/image-20241026000648592.png" alt="image-20241026000648592"></p>
 <p>其中 r 是随机数，M 是明文，k1 和 k2 是两个不同的密钥。我们需要评估这种加密方法对<strong>选择明文攻击</strong>的抗性和其代价。</p>
 <h4 id="性能评价："><a href="#性能评价：" class="headerlink" title="性能评价："></a>性能评价：</h4><ul>
 <li><strong>抗选择明文攻击能力</strong>： 这种双重加密方法通过使用两个密钥 k1 和 k2 增强了安全性。随机数 r 的引入增加了攻击者进行<strong>明文选择</strong>的难度，使得攻击者<strong>难以预知加密输出</strong>，尤其是通过修改明文来推测密钥的可能性显著降低。这种机制也类似于<strong>随机填充</strong>的策略，阻止了对相同明文多次加密得到相同密文的情况。因此，这种方法在理论上增强了对选择明文攻击的防护能力。</li>
-<li><strong>代价</strong>：代价主要体现在计算复杂度和密钥管理上：<ol>
+<li><strong>代价</strong>：代价主要体现在计算复杂度和密钥管理上：</li>
+</ul>
+<ol>
 <li><strong>计算复杂度</strong>：由于每个加密过程需要进行两次 DES 加密，整体计算代价翻倍（相比于普通的单轮 DES）。因此，效率较低。</li>
 <li><strong>密钥管理</strong>：使用了两个密钥 k1 和 k2，增加了密钥管理的复杂性。</li>
 </ol>
-</li>
-</ul>
 <h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>该方案增强了对选择明文攻击的抵抗能力，但增加了计算开销和密钥管理的复杂性。</p>
+</blockquote>
 <hr>
-<h3 id="2-Hash-函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力"><a href="#2-Hash-函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力" class="headerlink" title="2. Hash 函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力"></a>2. Hash 函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力</h3><p>题目给出了一种用公钥加密的 hash 函数结构，类似于<strong>基于分组加密的 hash 函数设计</strong>。这个结构可能类似于<strong>Merkle-Damgård</strong> 结构，使用了块 M1,M2,…并通过多个加密运算（包括公钥加密）来产生最终的 hash 值。</p>
+<h3 id="2-Hash-函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力"><a href="#2-Hash-函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力" class="headerlink" title="2. Hash 函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力"></a>2. Hash 函数的抗单向性攻击、抗弱碰撞和抗强碰撞能力</h3><blockquote>
+<p>题目给出了一种用公钥加密的 hash 函数结构，类似于<strong>基于分组加密的 hash 函数设计</strong>。这个结构可能类似于<strong>Merkle-Damgård</strong> 结构，使用了块 M1,M2,…并通过多个加密运算（包括公钥加密）来产生最终的 hash 值。</p>
 <h4 id="抗单向性攻击能力："><a href="#抗单向性攻击能力：" class="headerlink" title="抗单向性攻击能力："></a>抗单向性攻击能力：</h4><ul>
 <li><strong>单向性</strong>是 hash 函数的基本性质，要求攻击者在给定 hash 值的情况下，<strong>难以反推出相应的输入消息</strong>。</li>
 <li>由于这种设计中使用了公钥加密 E_k，<strong>公钥加密算法通常具有单向性和抗逆性特征</strong>，因此该设计有望具有良好的单向性保护。</li>
@@ -1418,9 +1489,21 @@
 <li><strong>强碰撞抗性</strong>要求难以找到任意<strong>两条不同的消息 M 和 M′</strong>，使得它们的 hash 值相同。</li>
 <li>在这种基于加密的 hash 函数中，如果每个加密步骤和块处理是不可逆且具有高随机性，那么抵抗强碰撞的能力会较强。不过，强碰撞抗性依赖于加密算法的内部安全性，特别是如果加密算法容易受到碰撞攻击，这种 hash 函数的强碰撞抗性会受到影响。</li>
 </ul>
-<h3 id="3-RSA-方案评价（消息加随机数后加密）"><a href="#3-RSA-方案评价（消息加随机数后加密）" class="headerlink" title="3. RSA 方案评价（消息加随机数后加密）"></a>3. RSA 方案评价（消息加随机数后加密）</h3><p>在描述的 RSA 加密方案中，把消息<strong>按字节</strong>分组，消息 m_i 被加上一个随机数 r，形成新消息 <code>x = m_i + r</code> 进行加密传输。这种设计是为了防止明文中包含 0 或 1，并增加随机性。</p>
+</blockquote>
+<h3 id="3-RSA-方案评价（消息加随机数后加密）"><a href="#3-RSA-方案评价（消息加随机数后加密）" class="headerlink" title="3. RSA 方案评价（消息加随机数后加密）"></a>3. RSA 方案评价（消息加随机数后加密）</h3><p>RSA把消息按字节分组，然后为了避免使明文中出现0或1，给明文加上一个随机数x&#x3D;mi+r，然后加密传输。从密码学的角度评价一下这种方案。</p>
 <blockquote>
-<p>RSA按字节分组的缺点：</p>
+<p>在描述的 RSA 加密方案中，把消息<strong>按字节</strong>分组，消息 m_i 被加上一个随机数 r，形成新消息 <code>x = m_i + r</code> 进行加密传输。这种设计是为了防止明文中包含 0 或 1，并增加随机性。</p>
+<p>从密码学角度来看：</p>
+<ul>
+<li><strong>优点</strong>：</li>
+<li><strong>增强随机性</strong>：加入随机数 r 能增加消息的随机性，减小因相同明文导致相同密文的可能性，防止简单的重放攻击和已知明文攻击。</li>
+<li><strong>缺点</strong>：</li>
+<li><strong>安全性风险</strong>：简单的加法对消息进行扰动并不足以提供额外的安全性。攻击者仍可能使用数学分析或模式识别来推断出明文。此外，随机数的选择和分发也可能成为一个安全漏洞。</li>
+<li><strong>增加开销</strong>：需要处理随机数的生成、分发和存储，也增加了加密前处理的复杂度。</li>
+</ul>
+<p><strong>改进建议</strong>：可以考虑使用更安全的<strong>填充方案</strong>（如 PKCS#1）来代替随机数扰动，确保消息随机化并能正确解密。</p>
+</blockquote>
+<h3 id="知识点：RSA按字节分组的安全性"><a href="#知识点：RSA按字节分组的安全性" class="headerlink" title="知识点：RSA按字节分组的安全性"></a>知识点：RSA按字节分组的安全性</h3><p>RSA按字节分组的缺点：</p>
 <p><strong>无随机性</strong>：</p>
 <ul>
 <li>如果直接按字节分组，RSA 的加密是<strong>确定性加密</strong>，即相同的明文总是会生成相同的密文，缺乏随机性。攻击者可以利用这一点进行<strong>已知明文攻击</strong>或<strong>重放攻击</strong>。</li>
@@ -1437,74 +1520,64 @@
 <ul>
 <li>RSA 加密是基于复杂的数学运算（大数的模幂运算），其处理速度较慢。直接对每个字节或小块明文进行 RSA 加密会导致性能低下，而这种做法完全不利用对称加密的高效性。</li>
 </ul>
-</blockquote>
-<p>从密码学角度来看：</p>
+<h3 id="4-DH-密钥交换计算"><a href="#4-DH-密钥交换计算" class="headerlink" title="4. DH 密钥交换计算"></a>4. DH 密钥交换计算</h3><blockquote>
+<p>Diffie-Hellman (DH) 密钥交换算法允许双方在不直接交换密钥的情况下，协商出一个共享的秘密密钥。假设 Alice 和 Bob 想通过 DH 协商一个共享密钥，他们会进行如下计算：</p>
 <ul>
-<li><strong>优点</strong>：<ul>
-<li><strong>增强随机性</strong>：加入随机数 r 能增加消息的随机性，减小因相同明文导致相同密文的可能性，防止简单的重放攻击和已知明文攻击。</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：<ul>
-<li><strong>安全性风险</strong>：简单的加法对消息进行扰动并不足以提供额外的安全性。攻击者仍可能使用数学分析或模式识别来推断出明文。此外，随机数的选择和分发也可能成为一个安全漏洞。</li>
-<li><strong>增加开销</strong>：需要处理随机数的生成、分发和存储，也增加了加密前处理的复杂度。</li>
-</ul>
-</li>
-</ul>
-<p><strong>改进建议</strong>：可以考虑使用更安全的<strong>填充方案</strong>（如 PKCS#1）来代替随机数扰动，确保消息随机化并能正确解密。</p>
-<h3 id="4-DH-密钥交换计算"><a href="#4-DH-密钥交换计算" class="headerlink" title="4. DH 密钥交换计算"></a>4. DH 密钥交换计算</h3><p>Diffie-Hellman (DH) 密钥交换算法允许双方在不直接交换密钥的情况下，协商出一个共享的秘密密钥。假设 Alice 和 Bob 想通过 DH 协商一个共享密钥，他们会进行如下计算：</p>
-<ul>
-<li><strong>公共信息</strong>：<ul>
+<li><strong>公共信息</strong>：</li>
 <li>选择一个大素数 p 和生成元 g，这些信息是公开的。</li>
-</ul>
-</li>
-<li><strong>双方的计算</strong>：<ul>
+<li><strong>双方的计算</strong>：</li>
 <li>Alice 选择一个私有密钥 a，计算 <code>A = g^a mod p</code>，并将 A 发送给 Bob。</li>
 <li>Bob 选择一个私有密钥 b，计算 <code>B = g^b mod p</code>，并将 B 发送给 Alice。</li>
-</ul>
-</li>
-<li><strong>生成共享密钥</strong>：<ul>
+<li><strong>生成共享密钥</strong>：</li>
 <li>Alice 计算 K &#x3D; B^a mod p。</li>
 <li>Bob 计算 K &#x3D; A^b mod p。</li>
 <li>最终，Alice 和 Bob 都计算出相同的共享密钥 K。</li>
 </ul>
-</li>
-</ul>
-<h3 id="5-数字信封的形成及作用"><a href="#5-数字信封的形成及作用" class="headerlink" title="5. 数字信封的形成及作用"></a>5. 数字信封的形成及作用</h3><p><strong>数字信封</strong>是一种结合对称加密和非对称加密的技术，用于<strong>安全传输数据</strong>。它的作用是通过加密来保护机密信息的传输，同时也能确保加密密钥的安全性。</p>
+</blockquote>
+<h3 id="5-数字信封的形成及作用"><a href="#5-数字信封的形成及作用" class="headerlink" title="5. 数字信封的形成及作用"></a>5. 数字信封的形成及作用</h3><p>数字信封如何形成，有什么作用?</p>
+<blockquote>
+<p><strong>数字信封</strong>是一种结合对称加密和非对称加密的技术，用于<strong>安全传输数据</strong>。它的作用是通过加密来保护机密信息的传输，同时也能确保加密密钥的安全性。</p>
 <ul>
-<li><strong>形成过程</strong>：<ol>
+<li><strong>形成过程</strong>：</li>
+</ul>
+<ol>
 <li>发送者选择一个对称密钥（如 AES 密钥）来加密消息，并用该密钥对消息进行加密。</li>
 <li>使用接收者的公钥对该对称密钥进行加密。</li>
 <li>发送加密的消息和加密的对称密钥给接收者。</li>
 </ol>
-</li>
-<li><strong>接收者解密过程</strong>：<ol>
+<ul>
+<li><strong>接收者解密过程</strong>：</li>
+</ul>
+<ol>
 <li>使用自己的私钥解密对称密钥。</li>
 <li>使用解密后的对称密钥来解密消息。</li>
 </ol>
-</li>
-</ul>
 <p><strong>作用</strong>：数字信封的优势在于结合了对称加密和非对称加密的优点，实现了高效的消息加密和安全的密钥传输。</p>
-<h3 id="6-密钥派生的作用与方法"><a href="#6-密钥派生的作用与方法" class="headerlink" title="6. 密钥派生的作用与方法"></a>6. 密钥派生的作用与方法</h3><p><strong>密钥派生</strong>用于从主密钥或初始密钥派生出多个密钥，以满足不同的加密需求。密钥派生的重要性在于减少密钥的重复使用，确保不同数据传输的安全性。</p>
+</blockquote>
+<h3 id="6-密钥派生的作用与方法"><a href="#6-密钥派生的作用与方法" class="headerlink" title="6. 密钥派生的作用与方法"></a>6. 密钥派生的作用与方法</h3><p>密钥派生在数据安全传输的作用，怎么进行秘钥派生？</p>
+<blockquote>
+<p><strong>密钥派生</strong>用于从主密钥或初始密钥派生出多个密钥，以满足不同的加密需求。密钥派生的重要性在于减少密钥的重复使用，确保不同数据传输的安全性。</p>
 <ul>
-<li><strong>作用</strong>：<ul>
+<li><strong>作用</strong>：</li>
 <li><strong>防止重放攻击</strong>。</li>
 <li>为不同的数据流或会话生成唯一密钥，保证安全。</li>
-</ul>
-</li>
-<li><strong>常见的派生方法</strong>：<ul>
+<li><strong>常见的派生方法</strong>：</li>
 <li>**KDF (Key Derivation Function)**：常用的 KDF 是基于 hash 函数或 HMAC（如 PBKDF2、HKDF）。KDF 通过输入主密钥和其他参数（如盐值、标签等）生成子密钥。</li>
 <li><strong>对称密钥扩展</strong>：从一个随机生成的密钥通过数学方式生成多个用于加密的密钥。</li>
 </ul>
-</li>
-</ul>
-<h3 id="7-身份认证：公钥密码和私钥签名的认证方案"><a href="#7-身份认证：公钥密码和私钥签名的认证方案" class="headerlink" title="7. 身份认证：公钥密码和私钥签名的认证方案"></a>7. 身份认证：公钥密码和私钥签名的认证方案</h3><p>使用公钥密码和数字签名的身份认证方案可用于让<strong>A 向 B 证明自己的身份</strong>：</p>
+</blockquote>
+<h3 id="7-身份认证：公钥密码和私钥签名的认证方案"><a href="#7-身份认证：公钥密码和私钥签名的认证方案" class="headerlink" title="7. 身份认证：公钥密码和私钥签名的认证方案"></a>7. 身份认证：公钥密码和私钥签名的认证方案</h3><p>使用公钥密码和非私钥签名的认证方案，使得A向B证明自己的身份。</p>
+<blockquote>
+<p>使用公钥密码和数字签名的身份认证方案可用于让<strong>A 向 B 证明自己的身份</strong>：</p>
 <ol>
 <li><strong>A 向 B 发送公钥证书</strong>：A 向 B 发送由可信 CA 签名的公钥证书，证书中包含 A 的公钥 K_A。</li>
 <li><strong>B 验证证书</strong>：B 使用 CA 的公钥验证 A 的公钥证书，确认证书的合法性。</li>
 <li><strong>A 使用私钥签名消息</strong>：A 使用自己的私钥 SK_A 对一条消息或挑战值 M 进行签名 S &#x3D; Sign(SK_A, M)。</li>
 <li><strong>B 验证签名</strong>：B 使用 A 的公钥 K_A 来验证签名 S，确认该签名来自 A，进而确认 A 的身份。</li>
 </ol>
-<h3 id="8-隧道模式下的-IPSEC-ESP-隧道入口流程"><a href="#8-隧道模式下的-IPSEC-ESP-隧道入口流程" class="headerlink" title="8. 隧道模式下的 IPSEC ESP 隧道入口流程"></a>8. 隧道模式下的 IPSEC ESP 隧道入口流程</h3><p>在隧道模式下的 IPSEC ESP（Encapsulating Security Payload）用于加密和认证整个 IP 包的载荷。在隧道入口，ESP 流程如下：</p>
+</blockquote>
+<h3 id="8-隧道模式下的-IPSEC-ESP-隧道入口流程"><a href="#8-隧道模式下的-IPSEC-ESP-隧道入口流程" class="headerlink" title="8. 隧道模式下的 IPSEC ESP 隧道入口流程"></a>8. 隧道模式下的 IPSEC ESP 隧道入口流程</h3><blockquote>
+<p>在隧道模式下的 IPSEC ESP（Encapsulating Security Payload）用于加密和认证整个 IP 包的载荷。在隧道入口，ESP 流程如下：</p>
 <ol>
 <li><strong>输入数据</strong>：将原始 IP 包作为载荷。</li>
 <li><strong>加密数据</strong>：ESP 对原始 IP 包的载荷部分进行加密（通常使用对称加密，如 AES）。</li>
@@ -1512,37 +1585,50 @@
 <li><strong>生成认证标签</strong>：对加密后的数据进行完整性检查，生成认证标签并附加到 ESP 包中。</li>
 <li><strong>封装</strong>：最终的 ESP 包将被封装并传送给接收者。</li>
 </ol>
-<h3 id="9-PGP-在发送端的操作及私钥保护"><a href="#9-PGP-在发送端的操作及私钥保护" class="headerlink" title="9. PGP 在发送端的操作及私钥保护"></a>9. PGP 在发送端的操作及私钥保护</h3><p>在 PGP（Pretty Good Privacy）中：</p>
+</blockquote>
+<h3 id="9-PGP-在发送端的操作及私钥保护"><a href="#9-PGP-在发送端的操作及私钥保护" class="headerlink" title="9. PGP 在发送端的操作及私钥保护"></a>9. PGP 在发送端的操作及私钥保护</h3><p>PGP在发送端的操作，如何保护本地的私钥，如何确定对方发送的消息使用的是哪个密钥对?</p>
+<blockquote>
+<p>在 PGP（Pretty Good Privacy）中：</p>
 <ul>
-<li><strong>发送端操作</strong>：<ol>
+<li><strong>发送端操作</strong>：</li>
+</ul>
+<ol>
 <li>发送端使用对称加密加密消息，并生成一个对称密钥。</li>
 <li>使用接收方的公钥对该对称密钥进行加密。</li>
 <li>将加密的消息和加密的对称密钥发送给接收方。</li>
 </ol>
-</li>
+<ul>
 <li><strong>私钥保护</strong>：PGP 私钥通常通过<strong>口令短语</strong>保护，确保只有正确的口令才能解锁和使用私钥。此外，私钥也可以存储在硬件安全模块（HSM）中，防止泄露。</li>
 <li><strong>确定使用的密钥对</strong>：PGP 使用接收方的公钥来加密会话密钥，发送方通过与接收方交换的公钥指纹来确定对方的密钥对。</li>
 </ul>
-<h3 id="10-16-人会议的会话密钥协商方案"><a href="#10-16-人会议的会话密钥协商方案" class="headerlink" title="10. 16 人会议的会话密钥协商方案"></a>10. 16 人会议的会话密钥协商方案</h3><p>在 16 人的会议中，协商会话密钥可以采用分层的 Diffie-Hellman 协议或通过中央服务器的方式。以下是一个简单方案：</p>
+</blockquote>
+<h3 id="10-16-人会议的会话密钥协商方案"><a href="#10-16-人会议的会话密钥协商方案" class="headerlink" title="10. 16 人会议的会话密钥协商方案"></a>10. 16 人会议的会话密钥协商方案</h3><p>设计一个方案，16人的会议，如何协商会话秘钥，以及有人加入和退出时的操作。</p>
+<blockquote>
+<p>在 16 人的会议中，协商会话密钥可以采用分层的 Diffie-Hellman 协议或通过中央服务器的方式。以下是一个简单方案：</p>
 <ul>
-<li><strong>初始协商</strong>：<ol>
+<li><strong>初始协商</strong>：</li>
+</ul>
+<ol>
 <li>每个人生成一个临时公私钥对，互相广播自己的公钥。</li>
 <li>每两个人执行 DH 密钥交换，生成共享密钥。</li>
 <li>将这些共享密钥通过中央节点整合，生成一个全局的会话密钥。</li>
 </ol>
-</li>
-<li><strong>新成员加入</strong>：<ol>
+<ul>
+<li><strong>新成员加入</strong>：</li>
+</ul>
+<ol>
 <li>新加入的成员广播自己的公钥。</li>
 <li>其他成员与新成员执行 DH 密钥交换，更新会话密钥。</li>
 </ol>
-</li>
-<li><strong>成员退出</strong>：<ol>
+<ul>
+<li><strong>成员退出</strong>：</li>
+</ul>
+<ol>
 <li>现有成员重新进行 DH 密钥交换，排除退出者的公钥。</li>
 <li>生成新的会话密钥，保证安全性。</li>
 </ol>
-</li>
-</ul>
 <p>这种方案可以通过多轮 DH 计算或利用专门的协议（如 Group Key Management）实现。</p>
+</blockquote>
 
         
       </div>
