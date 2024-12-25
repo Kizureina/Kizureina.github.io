@@ -396,7 +396,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            2k 词 
           </div>
         </div>
         
@@ -414,30 +414,17 @@ Burp抓包看不同发包返回的变化
 
 直接找请求头多余的参数
 
-php弱类型比较绕过：==会将字符串转换为数字比较
+PHP超全局变量，$GLOBALS是一个包含所有变量的数组
 
+绕过本地IP检测：在请求头加X-Forwarded-For:127.0.0.1
 
-PHP 的弱比较规则会根据具体的情况进行类型转换，主要包括以下几种：
+打开页面是一个游戏，看js源码发现用xmlhttp.get实现发起请求：
 
-数字和字符串比较：
-
-
-字符串会被尝试转换为数字（如果可能的话）。
-例如，&#39;123abc&#39; == 123 会返回 true，因为 &#39;123abc&#39; 会被转换为数字 123。
-
-
-布尔值和其他类型比较：
-
-
-false 会被转换为 0，true 会被转换为 1。
-例如，false == 0 和 true == 1 都为 true。
-
-
-空值（null）和其他类型比较：
-
-
-null 会被转换为 0 或空字符串 &#39;&#39;，这取决于比较的类型。
-例如，...  
+  xmlhttp.onreadystatechange=function()
+  &#123;
+      if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)
+      &#123;
+          document.getElementById(&quot;livesearch&quot;).innerHTML=xmlhttp...  
           </div>
         
       </div>
