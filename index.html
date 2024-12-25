@@ -178,6 +178,11 @@
       <h3 class="widget-title">归档</h3>
       
       
+        <a class="archive-link" href="/archives/2024/12 ">
+          十二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
         <a class="archive-link" href="/archives/2024/10 ">
           十月 2024 
           <div class="archive-count">3 </div>
@@ -330,6 +335,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/24/Note-of-CTF/">CTF笔记</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/29/Note-of-Cryptography/">密码学笔记</a>
           </li>
         
@@ -345,10 +354,6 @@
             <a href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论&amp;级数笔记</a>
           </li>
         
-          <li>
-            <a href="/2024/09/23/Log-of-interview-on-Sec/">2024秋招安全岗面经</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -359,6 +364,103 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Note-of-CTF" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/12/24/Note-of-CTF/">CTF笔记</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-12-24T13:01:07.000Z" itemprop="datePublished">2024-12-24</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            Intro看来考研是凶多吉少了，虽然很痛苦，但也没办法。
+一念之间，就错了这么多莫名其妙的简单题目，真吐血了。
+时间是没办法停止的，只能继续往下走了。
+Bugku各种Web思路
+GitHack：把&#x2F;.git用wget -r递归下载下来，再在本地用git show和git reflog查看提交日志
+
+Burp抓包看不同发包返回的变化
+
+直接找请求头多余的参数
+
+php弱类型比较绕过：==会将字符串转换为数字比较
+
+
+PHP 的弱比较规则会根据具体的情况进行类型转换，主要包括以下几种：
+
+数字和字符串比较：
+
+
+字符串会被尝试转换为数字（如果可能的话）。
+例如，&#39;123abc&#39; == 123 会返回 true，因为 &#39;123abc&#39; 会被转换为数字 123。
+
+
+布尔值和其他类型比较：
+
+
+false 会被转换为 0，true 会被转换为 1。
+例如，false == 0 和 true == 1 都为 true。
+
+
+空值（null）和其他类型比较：
+
+
+null 会被转换为 0 或空字符串 &#39;&#39;，这取决于比较的类型。
+例如，...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/12/24/Note-of-CTF/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Note-of-Cryptography" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -435,23 +537,10 @@ playfair密码（二维单表替代）
 
 课后题：
 某加密系统，明文&#x2F;密文字符集都是英文字母集合。加密算法首先对明文进行单表代换操作，再对代换结果进行置乱操作。该系统是不能抵抗选择明文攻击的。即，攻击者可以设计若干个明文，并得到它们对应的密文，根据这些明文-密文对来破译密钥。问，若每个明文&#x2F;密文的长度限制为15个字符，最少需要多少个选择明文就能保证破译？
-
-单表代换：
-
-
-对于一个长度为15的明文，单表代换会将每个字母替换为另一个字母。由于有26个字母，所以每个字符都有26种可能。
-
-
-所有可能的明文组合：
-
-
-一个长度为15的明文总共有 26^{15} 种可能的组合。
-
-
-破解单表代换：
-
-
-单表代换对于每个明文字...  
+3个选择明文串 
+设计方案需要确定26个明文字母与密文的对应关系以及15个字符位置的置乱关系。
+明文1：abbcccddddeeeee 通过数量确定a-e的明密文对应关系，确定位[0],位[1-2],位[3-5],位[6-9],位[10-14] 块对应的置乱关系 
+...  
           </div>
         
       </div>
@@ -1200,92 +1289,6 @@ IPC可以通过验证用户名和密码获得相应的权限，通常在远程�
     <a class="right-panel  non-pic  "
       
       href="/2024/06/11/Note-of-Local-Address-Net-Security2/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Note-of-Local-Address-Net-Security" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/06/10/Note-of-Local-Address-Net-Security/">内网安全攻防笔记(上)</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-06-10T06:50:14.000Z" itemprop="datePublished">2024-06-10</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            11k 词 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            第一章 内网渗透测试基础1.1 内网基础1) 工作组(WorkGroup)概念：最常见最简单最普通的资源管理模式 
-特点:
-
-与域相对 
-不多于10台计算机 
-计算机之间关系是对等的
-
-2) 域(Domain)概念：有安全边界的计算机集合
-域控(DC-Domain Controller)概念：负责每一台联入网络的电脑和用户的验证工作的服务器，类似管理服务器的计算机。
-域控特点：
-
-包含存储所有账户，密码，域内计算机等信息的数据库 
-所有的权限身份验证，网络访问管理在域控上进行 
-可以有多台
-
-域环境父域和子域关系：一个父域包含多个子域，父域子域是相对关系 
-特点：父域与子域的安全策略独立 
-域树概念：是多个域通过建立信任关系组成的集合。 
-格式：用【.】隔开，越靠后越高级，最靠后的成为最高级子域或一级域，每个【.】代表一个层次 
-特点：子域只能以父域的名字作为其域名的后缀，域的名字是连续的，名字越长级别越低 
-域森林概念：多个域树通过建立信任关系组成的集合
-3) 活动目录(Active Dictionary)概念：域环境中提供目录服务的组件 
-存储内容：用于存储有关网络对象（用户...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/06/10/Note-of-Local-Address-Net-Security/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

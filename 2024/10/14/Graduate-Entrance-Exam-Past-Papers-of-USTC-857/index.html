@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241016234121333.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241026000648592.png">
 <meta property="article:published_time" content="2024-10-13T16:21:16.000Z">
-<meta property="article:modified_time" content="2024-10-29T16:31:50.525Z">
+<meta property="article:modified_time" content="2024-11-20T16:11:58.941Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -190,6 +190,11 @@
     <div class="widget">
       <h3 class="widget-title">归档</h3>
       
+      
+        <a class="archive-link" href="/archives/2024/12 ">
+          十二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
       
         <a class="archive-link" href="/archives/2024/10 ">
           十月 2024 
@@ -343,6 +348,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/24/Note-of-CTF/">CTF笔记</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/29/Note-of-Cryptography/">密码学笔记</a>
           </li>
         
@@ -356,10 +365,6 @@
         
           <li>
             <a href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论&amp;级数笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/23/Log-of-interview-on-Sec/">2024秋招安全岗面经</a>
           </li>
         
       </ul>
@@ -650,6 +655,8 @@
 <h5 id="1-通讯方案"><a href="#1-通讯方案" class="headerlink" title="1. 通讯方案"></a>1. 通讯方案</h5><p>两人的牌可以随机分配，但彼此可以计算出对方的牌，因此可以实现密钥协商。</p>
 <p>Alice将自己的所有牌代表的数字相乘得到密钥，Bob用12!除以自己牌数字的乘积即可得到Alice的密钥。</p>
 <p>然后将协商出的密钥作为一次一密的密钥，与明文异或，再将异或后的密文大声告诉Bob即可。</p>
+<p>另一种解法：</p>
+<p>公开约定牌的顺序，对第i个消息比特，Alice大声说出第i张牌是否在自己手中，若i&#x3D;1，则说真话，即说是否真的在自己手中；反之i&#x3D;0，则说假话。Bob对照自己手中的牌，即可获取对应比特信息。</p>
 <h5 id="2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息"><a href="#2-证明-Alice-能安全地传递-9-比特的信息，但不可能完美安全地传递-10-比特的信息" class="headerlink" title="2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息"></a>2. 证明 Alice 能安全地传递 9 比特的信息，但不可能完美安全地传递 10 比特的信息</h5><p>Alice 和 Bob 的分牌方式决定了共享密钥的大小和信息量。总共有 C(12,6)&#x3D;924 种分牌方式，其中 Alice 和 Bob 各持有 6 张牌。对于每一种分牌方式，Alice 和 Bob 都可以协商出一个唯一的共享密钥。</p>
 <ul>
 <li>这 924 种可能性对应的密钥数是log⁡2(924)≈9.85比特的信息量。因此，这个密钥空间足够大，足以保证 9 比特消息的完美安全传递。</li>
@@ -1348,7 +1355,7 @@
 <ul>
 <li>对于分组长度 n&#x3D;3，一个可能的置乱顺序是将每个块的位置进行交换。</li>
 <li>通过实验或排列理论，可以验证分组长度为 3 的置乱周期为 <strong>2</strong>。</li>
-<li>因此，<strong>分组长度为 3 的分组密码经过 2 次置乱后会再次出现明文</strong>。</li>
+<li>因此，<strong>分组长度为 3 的分组密码经过 log6 ~ 3 次置乱后会再次出现明文</strong>。</li>
 </ul>
 <ol start="2">
 <li><strong>分组长度为 6 时</strong></li>
@@ -1356,7 +1363,7 @@
 <ul>
 <li>对于分组长度 n&#x3D;6，可以将每个块的位置进行交换。</li>
 <li>分组长度为 6 的置乱周期为 <strong>6</strong>。</li>
-<li>因此，<strong>分组长度为 6 的分组密码经过 6 次置乱后会再次出现明文</strong>。</li>
+<li>因此，<strong>分组长度为 6 的分组密码经过 9 次置乱后会再次出现明文</strong>。</li>
 </ul>
 <ol start="3">
 <li><strong>分组长度为 7 时</strong></li>
@@ -1364,7 +1371,7 @@
 <ul>
 <li>对于分组长度 n&#x3D;7，因其是质数，每个位置必须经历完整的循环才能恢复。</li>
 <li>分组长度为 7 的置乱周期为 <strong>7</strong>。</li>
-<li>因此，<strong>分组长度为 7 的分组密码经过 7 次置乱后会再次出现明文</strong>。</li>
+<li>因此，<strong>分组长度为 7 的分组密码经过 13 次置乱后会再次出现明文</strong>。</li>
 </ul>
 </blockquote>
 <ol start="3">

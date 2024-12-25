@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B0FHXMTYNC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B0FHXMTYNC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>CTF笔记 | Kizureina&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Intro看来考研是凶多吉少了，虽然很痛苦，但也没办法。 一念之间，就错了这么多莫名其妙的简单题目，真吐血了。 时间是没办法停止的，只能继续往下走了。 Bugku各种Web思路 GitHack：把&#x2F;.git用wget -r递归下载下来，再在本地用git show和git reflog查看提交日志  Burp抓包看不同发包返回的变化  直接找请求头多余的参数  php弱类型比较绕过：&#x3D;&#x3D;会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF笔记">
+<meta property="og:url" content="https://kizureina.github.io/2024/12/24/Note-of-CTF/index.html">
+<meta property="og:site_name" content="Kizureina&#39;s Blog">
+<meta property="og:description" content="Intro看来考研是凶多吉少了，虽然很痛苦，但也没办法。 一念之间，就错了这么多莫名其妙的简单题目，真吐血了。 时间是没办法停止的，只能继续往下走了。 Bugku各种Web思路 GitHack：把&#x2F;.git用wget -r递归下载下来，再在本地用git show和git reflog查看提交日志  Burp抓包看不同发包返回的变化  直接找请求头多余的参数  php弱类型比较绕过：&#x3D;&#x3D;会">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241225170359911.png">
+<meta property="article:published_time" content="2024-12-24T13:01:07.000Z">
+<meta property="article:modified_time" content="2024-12-25T09:04:03.336Z">
+<meta property="article:author" content="Kizurena">
+<meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20241225170359911.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Kizureina's Blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/links">Links</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/links">Links</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/avatar2.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Kizureina </div>
+      <div class="dot"></div>
+      <div class="subtitle">I know nothing except the fact of my ignorance. </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Kizureina" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Advanced-Mathematics/" rel="tag">Advanced Mathematics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Anime/" rel="tag">Anime</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Comic/" rel="tag">Comic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Galgame/" rel="tag">Galgame</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linear-Algebraic/" rel="tag">Linear Algebraic</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/RCE/" rel="tag">RCE</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Reverse-shell/" rel="tag">Reverse shell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag">嵌入式</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag">硬件</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/12 ">
+          十二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/10 ">
+          十月 2024 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          九月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/06 ">
+          六月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          五月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          四月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          三月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          一月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          十二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          七月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          六月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          三月 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          二月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/01 ">
+          一月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/12 ">
+          十二月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/11 ">
+          十一月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/09 ">
+          九月 2022 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/06 ">
+          六月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/04 ">
+          四月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/03 ">
+          三月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/02 ">
+          二月 2022 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022/01 ">
+          一月 2022 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021/12 ">
+          十二月 2021 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2024/12/24/Note-of-CTF/">CTF笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/29/Note-of-Cryptography/">密码学笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/20/Note-of-Internet-Security-Theory/">网络安全理论与协议笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/14/Graduate-Entrance-Exam-Past-Papers-of-USTC-857/">中国科学技术大学 密码学与网络安全真题</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/25/Note-of-Probability-Theory-and-Mathematical-Statistics/">概率论&amp;级数笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Note-of-CTF" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        CTF笔记
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-12-24T13:01:07.000Z" itemprop="datePublished">2024-12-24</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/WebSec/">WebSec</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>看来考研是凶多吉少了，虽然很痛苦，但也没办法。</p>
+<p>一念之间，就错了这么多莫名其妙的简单题目，真吐血了。</p>
+<p>时间是没办法停止的，只能继续往下走了。</p>
+<h1 id="Bugku"><a href="#Bugku" class="headerlink" title="Bugku"></a>Bugku</h1><h2 id="各种Web思路"><a href="#各种Web思路" class="headerlink" title="各种Web思路"></a>各种Web思路</h2><ul>
+<li><p>GitHack：把&#x2F;.git用<code>wget -r</code>递归下载下来，再在本地用<code>git show</code>和<code>git reflog</code>查看提交日志</p>
+</li>
+<li><p>Burp抓包看不同发包返回的变化</p>
+</li>
+<li><p>直接找请求头多余的参数</p>
+</li>
+<li><p>php弱类型比较绕过：<code>==</code>会将字符串转换为数字比较</p>
+<ul>
+<li><blockquote>
+<p>PHP 的弱比较规则会根据具体的情况进行类型转换，主要包括以下几种：</p>
+<ol>
+<li><strong>数字和字符串比较</strong>：</li>
+</ol>
+<ul>
+<li>字符串会被尝试转换为数字（如果可能的话）。</li>
+<li>例如，<code>&#39;123abc&#39; == 123</code> 会返回 <code>true</code>，因为 <code>&#39;123abc&#39;</code> 会被转换为数字 <code>123</code>。</li>
+</ul>
+<ol start="2">
+<li><strong>布尔值和其他类型比较</strong>：</li>
+</ol>
+<ul>
+<li><code>false</code> 会被转换为 <code>0</code>，<code>true</code> 会被转换为 <code>1</code>。</li>
+<li>例如，<code>false == 0</code> 和 <code>true == 1</code> 都为 <code>true</code>。</li>
+</ul>
+<ol start="3">
+<li><strong>空值（null）和其他类型比较</strong>：</li>
+</ol>
+<ul>
+<li><code>null</code> 会被转换为 <code>0</code> 或空字符串 <code>&#39;&#39;</code>，这取决于比较的类型。</li>
+<li>例如，<code>null == 0</code> 和 <code>null == &#39;&#39;</code> 都为 <code>true</code>。</li>
+</ul>
+<ol start="4">
+<li><strong>数组与其他类型比较</strong>：</li>
+</ol>
+<ul>
+<li>数组与标量值（如整数、字符串等）进行比较时，总是返回 <code>false</code>，即使数组是空的。</li>
+<li>例如，<code>[] == 0</code> 返回 <code>false</code>。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>例如<code>$num == 1</code>的比较可以用<code>1abc</code>绕过，注意为防止加引号被过滤，最好直接用<strong>1abc</strong></p>
+</li>
+</ul>
+</li>
+<li><p>PHP超全局变量，<code>$GLOBALS</code>是一个包含所有变量的数组</p>
+</li>
+<li><p>绕过<strong>本地IP</strong>检测：在请求头加<strong>X-Forwarded-For</strong>:127.0.0.1</p>
+</li>
+<li><p>打开页面是一个游戏，看js源码发现用<code>xmlhttp.get</code>实现发起请求：</p>
+<ul>
+<li>&#96;&#96;&#96;js<br>  xmlhttp.onreadystatechange&#x3D;function()<br>  {<br>  if (xmlhttp.readyState&#x3D;&#x3D;4 &amp;&amp; xmlhttp.status&#x3D;&#x3D;200)<br>  {<br>      document.getElementById(“livesearch”).innerHTML&#x3D;xmlhttp.responseText;<br>      document.getElementById(“livesearch”).style.border&#x3D;”1px solid #A5ACB2”;<br>  }<br>  }<br>  var ppp&#x3D;’182.150.122.47’;<br>  var sign &#x3D; Base64.encode(score.toString());<br>  xmlhttp.open(“GET”,”score.php?score&#x3D;”+score+”&amp;ip&#x3D;”+ppp+”&amp;sign&#x3D;”+sign,true);<br>  xmlhttp.send();  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	- 构造score和对应的base64，注意可能有空格</span><br><span class="line"></span><br><span class="line">- </span><br><span class="line"></span><br><span class="line">## 哈希碰撞</span><br><span class="line"></span><br><span class="line">#### 校验代码：</span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">include_once &quot;flag.php&quot;;</span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str = strstr($_SERVER[&#x27;REQUEST_URI&#x27;], &#x27;?&#x27;);</span><br><span class="line">/*</span><br><span class="line">通过 $_SERVER[&#x27;REQUEST_URI&#x27;] 获取当前请求的 URI（即网页的地址），然后使用 strstr 函数获取 URI 中从 ? 开始的部分。这个部分通常包含 URL 参数。例如，如果 URL 是 example.com/index.php?key=123, strstr 会返回 ?key=123。</span><br><span class="line">*/</span><br><span class="line">$str = substr($str,1);</span><br><span class="line">/*</span><br><span class="line">substr($str, 1) 从 $str 的第二个字符开始截取字符串，去掉了前面的问号 ?。在上面的例子中，$str 会变成 key=123。</span><br><span class="line">*/</span><br><span class="line">$str = str_replace(&#x27;key&#x27;,&#x27;&#x27;,$str);</span><br><span class="line">parse_str($str);</span><br><span class="line">/*</span><br><span class="line">实现的关键</span><br><span class="line">parse_str 函数会解析 $str 中的查询字符串并将结果存入变量。假设 $str 为 =123，那么会将 key1 赋值为 123，并且如果存在其他类似的参数，会相应地解析并赋值。</span><br><span class="line">*/</span><br><span class="line">echo md5($key1);</span><br><span class="line"></span><br><span class="line">echo md5($key2);</span><br><span class="line">if(md5($key1) == md5($key2) &amp;&amp; $key1 !== $key2)&#123;</span><br><span class="line">    echo $flag.&quot;取得flag&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>注意需要<strong>绕过key的过滤</strong>，双写kekeyy：<code>http://114.67.175.224:10301/index.php?kekeyy1=s878926199a&amp;kekeyy2=s155964671a</code></p>
+<h4 id="具体md5绕过原理"><a href="#具体md5绕过原理" class="headerlink" title="具体md5绕过原理"></a>具体md5绕过原理</h4><blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>] != <span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line"><span class="title function_ invoke__">MD5</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>]) == <span class="title function_ invoke__">MD5</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>满足上述规则时，可以使用以<strong>0E</strong>开头的hash值绕过，因为处理hash字符串时，PHP会将每一个以 <strong>0E</strong>开头的哈希值解释为0，那么只要传入的不同字符串经过哈希以后是以 <strong>0E</strong>开头的，那么PHP会认为它们相同</p>
+<p>因为处理hash字符串时，PHP会将每一个以 0E开头的哈希值解释为0，那么只要传入的不同字符串经过哈希以后是以 0E开头的，那么PHP会认为它们相同</p>
+</blockquote>
+<p>基本的原理是这样的，但更严谨的字符串格式是，<code>0e</code> 开头，同时后面都是数字，不能包含其他字符的字符串，md5 值才会相等（<code>==</code> 的结果为 True，但 <code>===</code> 的结果为 False）。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;s878926199a&quot;</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="string">&quot;s155964671a&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$a</span> . <span class="string">&quot;--&gt;&quot;</span> . <span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>) . <span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$b</span> . <span class="string">&quot;--&gt;&quot;</span> . <span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>) . <span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line"><span class="comment">// s878926199a--&gt;0e545993274517709034328855841020</span></span><br><span class="line"><span class="comment">// s155964671a--&gt;0e342768416822451524974117254469</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>) == <span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>)) . <span class="string">&quot;&lt;br&gt;&quot;</span>); <span class="comment">// bool(true)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数字 vs 数字</span></span><br><span class="line"><span class="variable">$a1</span> = <span class="string">&quot;0e33&quot;</span>;</span><br><span class="line"><span class="variable">$b1</span> = <span class="string">&quot;0e89&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">var_dump</span>(<span class="variable">$a1</span> == <span class="variable">$b1</span>) . <span class="string">&quot;&lt;br&gt;&quot;</span>); <span class="comment">// bool(true)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数字 vs 字母</span></span><br><span class="line"><span class="variable">$a3</span> = <span class="string">&quot;0eadd&quot;</span>;</span><br><span class="line"><span class="variable">$b3</span> = <span class="string">&quot;0e232&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">var_dump</span>(<span class="variable">$a3</span> == <span class="variable">$b3</span>) . <span class="string">&quot;&lt;br&gt;&quot;</span>); <span class="comment">// bool(false)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数字 vs 数字/字母</span></span><br><span class="line"><span class="variable">$a4</span> = <span class="string">&quot;0ea34343dd&quot;</span>;</span><br><span class="line"><span class="variable">$b4</span> = <span class="string">&quot;0e232&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">var_dump</span>(<span class="variable">$a4</span> == <span class="variable">$b4</span>) . <span class="string">&quot;&lt;br&gt;&quot;</span>); <span class="comment">// bool(false)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_POST</span>[<span class="string">&#x27;param1&#x27;</span>]!==<span class="variable">$_POST</span>[<span class="string">&#x27;param2&#x27;</span>] &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;param1&#x27;</span>])===<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;param2&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>当满足上面的条件时，由于PHP中MD5函数的特性，可以使用数组绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">md5</span>([<span class="number">1</span>,<span class="number">2</span>]) == <span class="title function_ invoke__">md5</span>([<span class="number">3</span>,<span class="number">4</span>]) == <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<p>故只要GET方法传入<code>a[]=1&amp;b[]=2</code>即可绕过</p>
+<h3 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">string</span>)<span class="variable">$_POST</span>[<span class="string">&#x27;param1&#x27;</span>]!==(<span class="keyword">string</span>)<span class="variable">$_POST</span>[<span class="string">&#x27;param2&#x27;</span>] &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;param1&#x27;</span>])===<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;param2&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>使用MD5碰撞生成 <a target="_blank" rel="noopener" href="https://marc-stevens.nl/research/software/download.php?file=fastcoll_v1.0.0.5-1_source.zip">工具</a> 得到hash值相同的不同字符串</p>
+<p>先建立两个空文件，然后</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\fastcoll_v1.0.0.5.exe -i .\a.txt .\b.txt -o c.txt d.txt</span><br></pre></td></tr></table></figure>
+
+<p>生成的c.txt 和 d.txt中的字符串就是hash值相等的字符串</p>
+<h2 id="Burp爆破-过滤"><a href="#Burp爆破-过滤" class="headerlink" title="Burp爆破+过滤"></a>Burp爆破+过滤</h2><p>当返回结果在登录成果与失败长度不同时，可直接按照length过滤出结果</p>
+<p>但均相同时，例如发生<strong>重定向</strong>使参数再发往另一个页面校验时，则需要过滤结果中特定的参数（例如如果成功就发请求，失败则不发）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = &#123;<span class="attr">code</span>: <span class="string">&#x27;bugku10000&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">if</span>(r.<span class="property">code</span> == <span class="string">&#x27;bugku10000&#x27;</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;d&#x27;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;Wrong account or password!&quot;</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&#x27;success.php?code=&#x27;</span>+r.<span class="property">code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当为else中的结果时，必然有<code>r.code != bugku10000</code>，故可过滤这个字符串。</p>
+<p>即出现<code>bugku10000</code>时必然爆破失败，用burp的<strong>Grep-Match</strong>即可</p>
+<p><img src="/../images/image-20241225170359911.png" alt="image-20241225170359911"></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/10/29/Note-of-Cryptography/"
+      title="密码学笔记"
+     >
+
+    <p class="title-text">
+      
+        密码学笔记
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({
+          el: '#vcomments',
+          appId: "j9YBSIHTlRyfuvPQqY50ARfV-gzGzoHsz",
+          appKey: "Q7s9zRzne9zaSVrroDR2wgO8"
+      })
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Kizureina<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
